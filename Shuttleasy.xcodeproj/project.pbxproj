@@ -10,6 +10,8 @@
 		6FD133BBE66D8F8751596AD2 /* Pods_Shuttleasy_ShuttleasyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D16047F3D4D6219772C15D /* Pods_Shuttleasy_ShuttleasyUITests.framework */; };
 		97D4C3F7B6680FB7ED81C793 /* Pods_Shuttleasy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */; };
 		D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261629200C5C00CD5B85 /* FontUtil.swift */; };
+		D44F261929200F8500CD5B85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261829200F8500CD5B85 /* Color.swift */; };
+		D44F261F292014CF00CD5B85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261E292014CF00CD5B85 /* Constants.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
 		D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F528F9210F0083C5EB /* SceneDelegate.swift */; };
 		D4F116F828F9210F0083C5EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F728F9210F0083C5EB /* ViewController.swift */; };
@@ -47,6 +49,8 @@
 		A3CF6BF6A273203A8483B44F /* Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Shuttleasy-ShuttleasyUITests/Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A719145D2A0E6933A799BF /* Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig"; path = "Target Support Files/Pods-Shuttleasy-ShuttleasyUITests/Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
+		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D44F261E292014CF00CD5B85 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F116F328F9210F0083C5EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4F116F528F9210F0083C5EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,8 +133,24 @@
 			isa = PBXGroup;
 			children = (
 				D44F261629200C5C00CD5B85 /* FontUtil.swift */,
+				D44F261829200F8500CD5B85 /* Color.swift */,
 			);
 			path = theme;
+			sourceTree = "<group>";
+		};
+		D44F261A2920149C00CD5B85 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		D44F261D292014C100CD5B85 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				D44F261E292014CF00CD5B85 /* Constants.swift */,
+			);
+			path = base;
 			sourceTree = "<group>";
 		};
 		D4F116E728F9210F0083C5EB = {
@@ -158,6 +178,8 @@
 		D4F116F228F9210F0083C5EB /* Shuttleasy */ = {
 			isa = PBXGroup;
 			children = (
+				D44F261D292014C100CD5B85 /* base */,
+				D44F261A2920149C00CD5B85 /* util */,
 				D44F26142920029C00CD5B85 /* ui */,
 				D4F116F328F9210F0083C5EB /* AppDelegate.swift */,
 				D4F116F528F9210F0083C5EB /* SceneDelegate.swift */,
@@ -446,7 +468,9 @@
 				D4F116F828F9210F0083C5EB /* ViewController.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
+				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
 				D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */,
+				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

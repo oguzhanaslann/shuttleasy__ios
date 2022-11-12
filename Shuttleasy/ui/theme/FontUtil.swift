@@ -12,8 +12,7 @@ extension UIFont {
     static func poppinsBlack(size: CGFloat) ->  UIFont? {
         return UIFont(name: "Poppins-Black", size: size)
     }
-    
-    
+
     static func poppinsBold(size: CGFloat) ->  UIFont? {
         return UIFont(name: "Poppins-Bold", size: size)
     }
