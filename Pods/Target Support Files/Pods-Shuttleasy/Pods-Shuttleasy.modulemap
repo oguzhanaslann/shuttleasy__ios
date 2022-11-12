@@ -1,0 +1,6 @@
+framework module Pods_Shuttleasy {
+  umbrella header "Pods-Shuttleasy-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_ShuttleasyTests {
+  umbrella header "Pods-ShuttleasyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
