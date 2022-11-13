@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
          */
         
-        let hasSeenOnboard = UserDefaults.standard.bool(forKey: "fittrack.ios.onboard.seen")
+        let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
+        print("hasSeenOnboard \(hasSeenOnboard)")
         //let rootViewController = hasSeenOnboard ? AuthenticationViewController() : OnBoardingViewContoller()
         let rootViewController = ViewController()
         let navController = UINavigationController(rootViewController: rootViewController)

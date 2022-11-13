@@ -14,3 +14,6 @@ let SHAPE_SMALL = 8
 let SHAPE_MEDIUM = 12
 let SHAPE_LARGE = 24
 let SHAPE_EXTRA_LARGE = 32
+
+
+let HAS_USER_SEEN_ONBOARD_KEY = "shuttleasy.ios.onboard.seen"

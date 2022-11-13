@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class ViewController: BaseViewController, UIScrollViewDelegate {
+    
+    private let onboardViewModel = Injector.shared.injectOnboardViewModel()
 
     lazy var placeholderView : UIView = {
         let view = UIView()
@@ -120,7 +122,7 @@ class ViewController: BaseViewController, UIScrollViewDelegate {
         let lastPageIndex = pageControll.numberOfPages - 1
         let isLastPage = currentPage ==  lastPageIndex
         if isLastPage   {
-            //viewModel.markOnboardAsSeen()
+            onboardViewModel.markOnboardAsSeen()
             //WindowDelegate.shared.setRootViewController( rootViewController: AuthenticationViewController())
         } else {
             scrollView.scrollTo(horizontalPage: currentPage + 1)

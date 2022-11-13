@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "DDFileLogger+Internal 2.h"
 #import "CLIColor.h"
 #import "DDAbstractDatabaseLogger.h"
 #import "DDASLLogCapture.h"
