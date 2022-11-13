@@ -11,6 +11,7 @@ target 'Shuttleasy' do
   pod 'Kingfisher', '~> 7.0'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'CocoaLumberjack/Swift'
+  pod 'Swinject'
   
   target 'ShuttleasyTests' do
     inherit! :search_paths
