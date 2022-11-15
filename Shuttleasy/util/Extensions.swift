@@ -70,3 +70,21 @@ extension UIControl {
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
     }
 }
+
+
+extension NSMutableAttributedString {
+    
+    func span(
+        _ value:String,
+        font :UIFont,
+        foregroundColor : UIColor
+    ) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font : font,
+            .foregroundColor : foregroundColor
+        ]
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+}

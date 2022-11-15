@@ -23,7 +23,7 @@
 		D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
 		D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F528F9210F0083C5EB /* SceneDelegate.swift */; };
-		D4F116F828F9210F0083C5EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F728F9210F0083C5EB /* ViewController.swift */; };
+		D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F728F9210F0083C5EB /* OnBoardingViewContoller.swift */; };
 		D4F116FD28F921100083C5EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4F116FC28F921100083C5EB /* Assets.xcassets */; };
 		D4F1170028F921100083C5EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F116FE28F921100083C5EB /* LaunchScreen.storyboard */; };
 		D4F1170B28F921110083C5EB /* ShuttleasyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1170A28F921110083C5EB /* ShuttleasyTests.swift */; };
@@ -32,6 +32,7 @@
 		D4F591D829212EE200125E90 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591D729212EE200125E90 /* Injector.swift */; };
 		D4F591E12921467C00125E90 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E02921467C00125E90 /* UserInfoRepository.swift */; };
 		D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */; };
+		D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E929214A2200125E90 /* SignInViewController.swift */; };
 		F3D21653E675205EE77D08E9 /* Pods_ShuttleasyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +75,7 @@
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F116F328F9210F0083C5EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4F116F528F9210F0083C5EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D4F116F728F9210F0083C5EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D4F116F728F9210F0083C5EB /* OnBoardingViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewContoller.swift; sourceTree = "<group>"; };
 		D4F116FC28F921100083C5EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4F116FF28F921100083C5EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4F1170128F921100083C5EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		D4F591D729212EE200125E90 /* Injector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
 		D4F591E02921467C00125E90 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoLocalSource.swift; sourceTree = "<group>"; };
+		D4F591E929214A2200125E90 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shuttleasy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD12927A2B9FDAF03904605B /* Pods-Shuttleasy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.release.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.release.xcconfig"; sourceTree = "<group>"; };
 		F69921EBE95B7D305D223354 /* Pods-ShuttleasyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShuttleasyTests.debug.xcconfig"; path = "Target Support Files/Pods-ShuttleasyTests/Pods-ShuttleasyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		D44F26142920029C00CD5B85 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				D4F591E8292149F900125E90 /* authentication */,
 				D4816DC02920FF2600ECB799 /* onboard */,
 				D44F2615292002A200CD5B85 /* theme */,
 			);
@@ -185,7 +188,7 @@
 		D4816DC02920FF2600ECB799 /* onboard */ = {
 			isa = PBXGroup;
 			children = (
-				D4F116F728F9210F0083C5EB /* ViewController.swift */,
+				D4F116F728F9210F0083C5EB /* OnBoardingViewContoller.swift */,
 				D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */,
 			);
 			path = onboard;
@@ -295,6 +298,14 @@
 				D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */,
 			);
 			path = local;
+			sourceTree = "<group>";
+		};
+		D4F591E8292149F900125E90 /* authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D4F591E929214A2200125E90 /* SignInViewController.swift */,
+			);
+			path = authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -554,7 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4816DB92920E6F400ECB799 /* Util.swift in Sources */,
-				D4F116F828F9210F0083C5EB /* ViewController.swift in Sources */,
+				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D4F591E12921467C00125E90 /* UserInfoRepository.swift in Sources */,
@@ -562,6 +573,7 @@
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
+				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,

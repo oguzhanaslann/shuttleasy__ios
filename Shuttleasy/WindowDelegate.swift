@@ -11,6 +11,7 @@ import UIKit
 class WindowDelegate {
     var window: UIWindow?
     static let shared = WindowDelegate()
+    private var navController : UINavigationController? = nil
     
     func setRootViewController(rootViewController : UIViewController?) {
         if window?.rootViewController != nil {
@@ -18,7 +19,26 @@ class WindowDelegate {
         } else {
             setWindowRootController(rootViewController: rootViewController)
         }
-       
+    }
+    
+    func setRootViewController(navController : UINavigationController?) {
+        self.navController = navController
+        if window?.rootViewController != nil {
+            setWindowRootContollerWithAnimation(rootViewController: navController)
+        } else {
+            setWindowRootController(rootViewController: navController)
+        }
+    }
+    
+    func popBackstack(animated : Bool = false) {
+        if navController == nil {
+            print("WindowDelegate - popBackstack - navcontroller is empty")
+        }
+        navController?.popViewController(animated: animated)
+    }
+    
+    func pushViewController(_ viewController: UIViewController, animated : Bool = false ) {
+        navController?.pushViewController(viewController, animated: animated)
     }
     
     private func setWindowRootContollerWithAnimation(rootViewController : UIViewController?) {

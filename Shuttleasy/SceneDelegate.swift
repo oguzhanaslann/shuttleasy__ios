@@ -29,10 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
         print("hasSeenOnboard \(hasSeenOnboard)")
-        //let rootViewController = hasSeenOnboard ? AuthenticationViewController() : OnBoardingViewContoller()
-        let rootViewController = ViewController()
+        let rootViewController = hasSeenOnboard ? SignInViewController() : OnBoardingViewContoller()
+//        let rootViewController = ViewController()
         let navController = UINavigationController(rootViewController: rootViewController)
-        WindowDelegate.shared.setRootViewController(rootViewController: navController)
+        WindowDelegate.shared.setRootViewController(navController: navController)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

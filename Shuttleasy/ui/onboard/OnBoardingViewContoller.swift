@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: BaseViewController, UIScrollViewDelegate {
+class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
     
     private let onboardViewModel = Injector.shared.injectOnboardViewModel()
 
