@@ -164,7 +164,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
         nextPageButton.snp.makeConstraints { make in
             make.bottom.lessThanOrEqualToSuperview().offset(-48)
             make.left.greaterThanOrEqualToSuperview().offset(24)
-            make.right.greaterThanOrEqualToSuperview().offset(-24)
+            make.right.lessThanOrEqualToSuperview().offset(-24)
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }

@@ -28,7 +28,7 @@ class SignInViewController: BaseViewController {
     }()
     
     
-    lazy var emailInput : UIStackView = {
+    lazy var emailInputSection : UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = backgroundColor
         stack.axis = .vertical
@@ -50,7 +50,7 @@ class SignInViewController: BaseViewController {
         )
         stack.addSubview(passwordSection)
         passwordSection.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(emailSection.snp.bottom).offset(24)
+            make.top.greaterThanOrEqualTo(emailSection.snp.bottom).offset(36)
             make.left.right.equalToSuperview()
             make.height.greaterThanOrEqualTo(56)
         }
@@ -59,12 +59,12 @@ class SignInViewController: BaseViewController {
         let forgotPasswordText = UILabel()
         forgotPasswordText.attributedText = NSMutableAttributedString()
             .span("Forgot your password ? ",font: BodySmallFont(), foregroundColor: onBackgroundColor)
-            .span("Reset password",font : BodySmallFont(),foregroundColor: primaryColor)
+            .span("Reset password", font : BodySmallFont(),foregroundColor: primaryColor)
         forgotPasswordText.textAlignment = .center
         
         stack.addSubview(forgotPasswordText)
         forgotPasswordText.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(passwordSection.snp.bottom).offset(24)
+            make.top.greaterThanOrEqualTo(passwordSection.snp.bottom).offset(48)
             make.left.right.equalToSuperview()
         }
         
@@ -87,23 +87,52 @@ class SignInViewController: BaseViewController {
         }
         
         let emailTextField = UITextField()
-        emailTextField.placeholder = inputHint
         emailTextField.font = TitleSmallFont()
         emailTextField.borderStyle = .roundedRect
         emailTextField.keyboardType = .emailAddress
         emailTextField.returnKeyType = .done
         emailTextField.textColor = onBackgroundColor
+        emailTextField.layer.cornerRadius = roundedMediumCornerRadius
+        emailTextField.layer.masksToBounds = true
+        emailTextField.layer.borderWidth = 0.1
+        emailTextField.layer.borderColor = outline.cgColor
+        emailTextField.clipsToBounds = true
+
+        let hint = NSAttributedString(string: inputHint, attributes: [NSAttributedString.Key.foregroundColor: outline])
+        emailTextField.attributedPlaceholder = hint
+        
         
         section.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.lessThanOrEqualTo(44)
+            make.height.greaterThanOrEqualTo(50)
             make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
         }
 
         return section
     }
+    
+    
+    lazy var signInButton : UIButton = {
+        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        button.setOnClickListener {
+            //self.buttonAction()
+            print("-click")
+        }
+        return button
+    }()
+    
+    lazy var signUpInsteadText : UILabel = {
+        let label = UILabel()
+        label.attributedText = NSMutableAttributedString()
+            .span("Do not have account ? ",font: BodySmallFont(), foregroundColor: onBackgroundColor)
+            .span("Sign up.", font : BodySmallFont(),foregroundColor: primaryColor)
+        label.textAlignment = .center
+        label.breakLineFromEndIfNeeded()
+        return label
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,11 +143,29 @@ class SignInViewController: BaseViewController {
         }
         
         
-        view.addSubview(emailInput)
-        emailInput.snp.makeConstraints { make in
+        view.addSubview(emailInputSection)
+        emailInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview()
             make.height.equalTo(72)
         }
+        
+        
+        view.addSubview(signUpInsteadText)
+        signUpInsteadText.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-32)
+            make.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(signInButton)
+        signInButton.snp.makeConstraints { make in
+            make.bottom.lessThanOrEqualTo(signUpInsteadText.snp.bottom).offset(-24)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(largeButtonHeight)
+            make.centerX.equalToSuperview()
+        }
     }
+    
+    
 }
