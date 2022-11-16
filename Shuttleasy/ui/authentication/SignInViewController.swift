@@ -32,27 +32,28 @@ class SignInViewController: BaseViewController {
         let stack = UIStackView()
         stack.backgroundColor = backgroundColor
         stack.axis = .vertical
-        stack.spacing = 24
+        stack.spacing = 36
         let emailSection: UIView = textInputSection(
             title: "Email",
             inputHint: "Email..."
         )
-        stack.addSubview(emailSection)
-        // stack.addArrangedSubview()
+
+        stack.addArrangedSubview(emailSection)
         emailSection.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(56)
+            make.height.equalTo(56)
         }
         
         let passwordSection: UIView = textInputSection(
             title: "Password",
             inputHint: "Password..."
         )
-        stack.addSubview(passwordSection)
+        
+        stack.addArrangedSubview(passwordSection)
+        
         passwordSection.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(emailSection.snp.bottom).offset(36)
             make.left.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(56)
+            make.height.equalTo(56)
         }
         
 
@@ -61,11 +62,12 @@ class SignInViewController: BaseViewController {
             .span("Forgot your password ? ",font: BodySmallFont(), foregroundColor: onBackgroundColor)
             .span("Reset password", font : BodySmallFont(),foregroundColor: primaryColor)
         forgotPasswordText.textAlignment = .center
+
+        stack.addArrangedSubview(forgotPasswordText)
         
-        stack.addSubview(forgotPasswordText)
         forgotPasswordText.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(passwordSection.snp.bottom).offset(48)
             make.left.right.equalToSuperview()
+            make.height.equalTo(48)
         }
         
         return stack
@@ -147,7 +149,6 @@ class SignInViewController: BaseViewController {
         emailInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalTo(72)
         }
         
         
