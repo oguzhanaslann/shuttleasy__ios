@@ -35,7 +35,9 @@ class SignInViewController: BaseViewController {
         stack.spacing = 36
         let emailSection: UIView = textInputSection(
             title: "Email",
-            inputHint: "Email..."
+            inputHint: "Email...",
+            keyboardInputType: .emailAddress,
+            textContentType: .emailAddress
         )
 
         stack.addArrangedSubview(emailSection)
@@ -46,7 +48,10 @@ class SignInViewController: BaseViewController {
         
         let passwordSection: UIView = textInputSection(
             title: "Password",
-            inputHint: "Password..."
+            inputHint: "Password...",
+            keyboardInputType: .default,
+            textContentType: .password,
+            isSecureEntry: true
         )
         
         stack.addArrangedSubview(passwordSection)
@@ -76,7 +81,10 @@ class SignInViewController: BaseViewController {
     
     func textInputSection(
         title : String,
-        inputHint: String
+        inputHint: String,
+        keyboardInputType : UIKeyboardType = .default,
+        textContentType: UITextContentType? = nil,
+        isSecureEntry : Bool = false
     ) -> UIView {
         let section = UIStackView()
         
@@ -88,24 +96,30 @@ class SignInViewController: BaseViewController {
             label.breakLineFromEndIfNeeded()
         }
         
-        let emailTextField = UITextField()
-        emailTextField.font = TitleSmallFont()
-        emailTextField.borderStyle = .roundedRect
-        emailTextField.keyboardType = .emailAddress
-        emailTextField.returnKeyType = .done
-        emailTextField.textColor = onBackgroundColor
-        emailTextField.layer.cornerRadius = roundedMediumCornerRadius
-        emailTextField.layer.masksToBounds = true
-        emailTextField.layer.borderWidth = 0.1
-        emailTextField.layer.borderColor = outline.cgColor
-        emailTextField.clipsToBounds = true
+        let textInputField = UITextField()
+        textInputField.font = TitleSmallFont()
+        textInputField.borderStyle = .roundedRect
+        textInputField.keyboardType = keyboardInputType
+        textInputField.returnKeyType = .done
+        textInputField.textColor = onBackgroundColor
+        textInputField.layer.cornerRadius = roundedMediumCornerRadius
+        textInputField.layer.masksToBounds = true
+        textInputField.layer.borderWidth = 0.1
+        textInputField.layer.borderColor = outline.cgColor
+        textInputField.clipsToBounds = true
+        textInputField.isSecureTextEntry = isSecureEntry
+        if let contentType = textContentType {
+            textInputField.textContentType = contentType
+        }
+        
+        
 
         let hint = NSAttributedString(string: inputHint, attributes: [NSAttributedString.Key.foregroundColor: outline])
-        emailTextField.attributedPlaceholder = hint
+        textInputField.attributedPlaceholder = hint
         
         
-        section.addSubview(emailTextField)
-        emailTextField.snp.makeConstraints { make in
+        section.addSubview(textInputField)
+        textInputField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.greaterThanOrEqualTo(50)
