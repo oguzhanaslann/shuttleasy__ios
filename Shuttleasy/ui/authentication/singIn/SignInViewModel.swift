@@ -8,23 +8,6 @@
 import Foundation
 import Combine
 
-protocol Authenticator {
-    func signInUser(email : String, password: String) async throws -> Bool
-}
-
-class AuthenticatorImpl : Authenticator {
-
-    let userInfoLocalDataSource : UserInfoLocalDataSource
-
-    init(userInfoLocalDataSource : UserInfoLocalDataSource) {
-        self.userInfoLocalDataSource = userInfoLocalDataSource
-    }
-
-    func signInUser(email: String, password: String) async throws -> Bool {
-        await userInfoLocalDataSource.setAsLoggedIn()
-        return true
-    }
-}
 
 class SignInViewModel : ViewModel {
     

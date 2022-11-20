@@ -14,14 +14,22 @@ class Injector {
     
     static let shared  = Injector()
     static let userLocalInfoDependency = "userInfoLocal"
+    static let userNetworkInfoDependency = "userInfoNetwork"
     
     private init() {
         registerUserInfoLocalDataSource()
+        registerUsserNetworkDataSource()
     }
     
     private func registerUserInfoLocalDataSource() {
         container.register(UserInfoLocalDataSource.self, name: Injector.userLocalInfoDependency) { resolver in
             return UserInfoLocalDataSourceImpl()
+        }
+    }
+
+    private func registerUsserNetworkDataSource() {
+        container.register(UserNetworkDataSource.self, name: Injector.userNetworkInfoDependency) { resolver in
+            return UserNetworkDataSourceImpl()
         }
     }
     
@@ -55,16 +63,8 @@ class Injector {
     }
     
     func injectUserInfoRepository() -> UserInfoRepository {
-        registerDependencyIfNotRegistered(
-            dependency: ShuttleasyUserInfoRepository.self,
-            onRegisterNeeded: { resolver in
-                ShuttleasyUserInfoRepository(
-                    userInfoLocalDataSource: self.injectUserInfoLocalDataSource()
-                )
-            }
-        )
-        
-        return container.resolve(ShuttleasyUserInfoRepository.self)!
+        registerShuttleasyUserRepository()
+        return container.resolve(ShuttleasyUserRepository.self)!
     }
     
     
@@ -72,6 +72,9 @@ class Injector {
         return container.resolve(UserInfoLocalDataSource.self, name: Injector.userLocalInfoDependency)!
     }
 
+    func injectUserNetworkDataSource() -> UserNetworkDataSource {
+        return container.resolve(UserNetworkDataSource.self, name: Injector.userNetworkInfoDependency)!
+    }
 
     func injectSignViewModel() -> SignInViewModel {
         registerDependencyIfNotRegistered(
@@ -87,15 +90,19 @@ class Injector {
     }
 
     func injectAuthenticator() -> Authenticator {
+        registerShuttleasyUserRepository()
+        return container.resolve(ShuttleasyUserRepository.self)!
+    }
+
+    func registerShuttleasyUserRepository() {
         registerDependencyIfNotRegistered(
-            dependency: Authenticator.self,
+            dependency: ShuttleasyUserRepository.self,
             onRegisterNeeded: { resolver in
-                AuthenticatorImpl(
-                    userInfoLocalDataSource: self.injectUserInfoLocalDataSource()
+                ShuttleasyUserRepository(
+                    userInfoLocalDataSource: self.injectUserInfoLocalDataSource(),
+                    userNetworkDataSource: self.injectUserNetworkDataSource()
                 )
             }
         )
-        
-        return container.resolve(Authenticator.self)!
     }
 }
