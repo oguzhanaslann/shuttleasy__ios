@@ -18,19 +18,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         WindowDelegate.shared.window = UIWindow(frame: windowScene.coordinateSpace.bounds )
-        WindowDelegate.shared.window?.windowScene = windowScene
-        /*
-        let rootViewController = UITabBarController()
-        initTabBarController(tabbarController: rootViewController)
-        navController.navigationBar.isHidden = true
-        window?.rootViewController = navController
-        window?.makeKeyAndVisible()
-         */
-        
+        WindowDelegate.shared.window?.windowScene = windowScene        
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
-        print("hasSeenOnboard \(hasSeenOnboard)")
-        let rootViewController = hasSeenOnboard ? SignInViewController() : OnBoardingViewContoller()
-//        let rootViewController = ViewController()
+        let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
+        let rootViewController : UIViewController
+
+        if(hasSeenOnboard && hasLoggedIn) {
+            rootViewController = MainViewController()
+        } else if(!hasSeenOnboard) {           
+             rootViewController = OnBoardingViewContoller()  
+        } else if (!hasLoggedIn) {
+            rootViewController = SignInViewController()
+        } else {
+            fatalError()
+        }
+
+        
         let navController = UINavigationController(rootViewController: rootViewController)
         WindowDelegate.shared.setRootViewController(navController: navController)
     }

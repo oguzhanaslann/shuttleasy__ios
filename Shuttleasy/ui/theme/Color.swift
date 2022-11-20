@@ -23,6 +23,8 @@ enum Color {
     case onSurface
     case error
     case onError
+    case errorContainer
+    case onErrorContainer
     case background
     case onBackground
     case outline
@@ -70,6 +72,11 @@ func getUIColor(color : Color) -> UIColor {
             return UIColor.init(named: "surfaceVariant")!
         case .onSurfaceVariant:
             return UIColor.init(named: "onSurfaceVariant")!
+        
+        case .errorContainer:
+            return UIColor.init(named: "errorContainer")!
+        case .onErrorContainer:
+            return UIColor.init(named: "onErrorContainer")!
     }
 }
 
@@ -90,3 +97,5 @@ let tertiary = getUIColor(color: .tertiary)
 let onTertiary = getUIColor(color: .onTertiary)
 let surfaceVariant = getUIColor(color: .surfaceVariant)
 let onSurfaceVariant = getUIColor(color: .onSurfaceVariant)
+let errorContainer = getUIColor(color: .errorContainer)
+let onErrorContainer = getUIColor(color: .onErrorContainer)

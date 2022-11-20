@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OnboardViewModel {
+class OnboardViewModel: ViewModel {
 
     let userInfoRepository : UserInfoRepository
     

@@ -123,7 +123,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
         let isLastPage = currentPage ==  lastPageIndex
         if isLastPage   {
             onboardViewModel.markOnboardAsSeen()
-            //WindowDelegate.shared.setRootViewController( rootViewController: AuthenticationViewController())
+            Navigator.shared.navigateToSignIn(clearBackStack : true)
         } else {
             scrollView.scrollTo(horizontalPage: currentPage + 1)
         }
@@ -162,9 +162,9 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
         }
         
         nextPageButton.snp.makeConstraints { make in
-            make.bottom.lessThanOrEqualToSuperview().offset(-48)
-            make.left.greaterThanOrEqualToSuperview().offset(24)
-            make.right.lessThanOrEqualToSuperview().offset(-24)
+            make.bottom.equalToSuperview().offset(-48)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }

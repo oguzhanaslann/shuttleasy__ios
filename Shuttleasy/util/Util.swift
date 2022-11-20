@@ -60,3 +60,28 @@ func resImage (
     
     return imageView
 }
+
+
+func isValidEmail(_ email : String) -> Bool{
+    let emailPattern = #"^\S+@\S+\.\S+$"#
+    
+    var result = email.range(
+        of: emailPattern,
+        options: .regularExpression
+    )
+
+    let validEmail = (result != nil)
+    return validEmail
+}
+
+func isValidPassword(_ password : String) -> Bool{
+    // let passwordPattern = #"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"#
+    
+    // var result = password.range(
+        // of: passwordPattern,
+        // options: .regularExpression
+    // )
+
+    // let validPassword = (result != nil)
+    return password.isEmpty.not()
+}

@@ -22,6 +22,8 @@ class ShuttleasyUserInfoRepository : UserInfoRepository {
     }
 
     func setOnboardingAsSeen() {
-        localDatasource.setAsSeenOnboard()
+        Task.init {
+            await localDatasource.setAsSeenOnboard()
+        }
     }
 }

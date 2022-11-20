@@ -40,7 +40,7 @@ extension UIView {
         self.isHidden = true
     }
     
-    func show() {
+    func present() {
         self.isHidden = false
     }
     
@@ -71,7 +71,6 @@ extension UIControl {
     }
 }
 
-
 extension NSMutableAttributedString {
     
     func span(
@@ -86,5 +85,20 @@ extension NSMutableAttributedString {
         ]
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
+    }
+}
+
+
+extension UIViewController {
+    func showErrorSnackbar(message : String, duration : SnackBar.Duration = .lengthShort ) {
+        SnackBar
+            .make(in: self.view, message: message, duration: duration, styleBuilder: {
+                var style = SnackBarStyle()
+                style.textColor = errorColor
+                style.background = errorContainer
+                style.font = BodySmallFont()
+                return style
+            })
+        .show()
     }
 }

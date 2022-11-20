@@ -71,4 +71,31 @@ class Injector {
     func injectUserInfoLocalDataSource() -> UserInfoLocalDataSource {
         return container.resolve(UserInfoLocalDataSource.self, name: Injector.userLocalInfoDependency)!
     }
+
+
+    func injectSignViewModel() -> SignInViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: SignInViewModel.self,
+            onRegisterNeeded: { resolver in
+                SignInViewModel(
+                    authenticatior: self.injectAuthenticator()
+                )
+            }
+        )
+        
+        return container.resolve(SignInViewModel.self)!
+    }
+
+    func injectAuthenticator() -> Authenticator {
+        registerDependencyIfNotRegistered(
+            dependency: Authenticator.self,
+            onRegisterNeeded: { resolver in
+                AuthenticatorImpl(
+                    userInfoLocalDataSource: self.injectUserInfoLocalDataSource()
+                )
+            }
+        )
+        
+        return container.resolve(Authenticator.self)!
+    }
 }

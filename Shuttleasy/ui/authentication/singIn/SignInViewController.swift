@@ -7,11 +7,16 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class SignInViewController: BaseViewController {
 
-    
-    lazy var logoContainer : UIView = {
+    private let signInViewModel = Injector.shared.injectSignViewModel()
+    private var cancellable : AnyCancellable? = nil
+
+    private static let INPUT_TEXT_FIELD_INDEX = 1
+
+    private lazy var logoContainer : UIView = {
         let view = UILabel()
         view.backgroundColor = primaryContainer
         let logo = resImage(name: "logo")
@@ -26,9 +31,9 @@ class SignInViewController: BaseViewController {
 
         return view
     }()
-    
-    
-    lazy var emailInputSection : UIStackView = {
+
+
+    lazy var emailAndPasswordInputSection : UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = backgroundColor
         stack.axis = .vertical
@@ -45,7 +50,7 @@ class SignInViewController: BaseViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(56)
         }
-        
+
         let passwordSection: UIView = textInputSection(
             title: "Password",
             inputHint: "Password...",
@@ -53,32 +58,44 @@ class SignInViewController: BaseViewController {
             textContentType: .password,
             isSecureEntry: true
         )
-        
+
         stack.addArrangedSubview(passwordSection)
-        
+
         passwordSection.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(56)
         }
-        
 
-        let forgotPasswordText = UILabel()
-        forgotPasswordText.attributedText = NSMutableAttributedString()
+
+        let forgotPasswordLabel = UILabel()
+        forgotPasswordLabel.attributedText =  NSMutableAttributedString()
             .span("Forgot your password ? ",font: BodySmallFont(), foregroundColor: onBackgroundColor)
-            .span("Reset password", font : BodySmallFont(),foregroundColor: primaryColor)
-        forgotPasswordText.textAlignment = .center
-
-        stack.addArrangedSubview(forgotPasswordText)
+            .span("Reset password", font : BodySmallFont(), foregroundColor: primaryColor)
+        forgotPasswordLabel.textAlignment = .center
         
-        forgotPasswordText.snp.makeConstraints { make in
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.navigateToResetPassword))
+        forgotPasswordLabel.isUserInteractionEnabled = true
+        forgotPasswordLabel.addGestureRecognizer(tap)
+        
+        stack.addArrangedSubview(forgotPasswordLabel)
+        
+        forgotPasswordLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(48)
         }
         
         return stack
     }()
-    
-    
+
+    func getEmailInput() -> UITextField {
+        return emailAndPasswordInputSection.arrangedSubviews[0].subviews[SignInViewController.INPUT_TEXT_FIELD_INDEX] as! UITextField
+    }
+
+    func getPasswordInput() -> UITextField {
+        return emailAndPasswordInputSection.arrangedSubviews[1].subviews[SignInViewController.INPUT_TEXT_FIELD_INDEX] as! UITextField
+    }
+
     func textInputSection(
         title : String,
         inputHint: String,
@@ -111,13 +128,10 @@ class SignInViewController: BaseViewController {
         if let contentType = textContentType {
             textInputField.textContentType = contentType
         }
-        
-        
 
         let hint = NSAttributedString(string: inputHint, attributes: [NSAttributedString.Key.foregroundColor: outline])
         textInputField.attributedPlaceholder = hint
-        
-        
+
         section.addSubview(textInputField)
         textInputField.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(24)
@@ -128,17 +142,15 @@ class SignInViewController: BaseViewController {
 
         return section
     }
-    
-    
+
     lazy var signInButton : UIButton = {
         let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
-            //self.buttonAction()
-            print("-click")
+           self.onSignInClicked()
         }
         return button
     }()
-    
+
     lazy var signUpInsteadText : UILabel = {
         let label = UILabel()
         label.attributedText = NSMutableAttributedString()
@@ -146,6 +158,11 @@ class SignInViewController: BaseViewController {
             .span("Sign up.", font : BodySmallFont(),foregroundColor: primaryColor)
         label.textAlignment = .center
         label.breakLineFromEndIfNeeded()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.navigateToSignUp))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+        
         return label
     }()
     
@@ -159,8 +176,8 @@ class SignInViewController: BaseViewController {
         }
         
         
-        view.addSubview(emailInputSection)
-        emailInputSection.snp.makeConstraints { make in
+        view.addSubview(emailAndPasswordInputSection)
+        emailAndPasswordInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview()
         }
@@ -180,7 +197,55 @@ class SignInViewController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }
+
+        subscribeObservers()
+    }
+
+    func subscribeObservers() {
+      cancellable = signInViewModel.signInResult
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+            switch completion {
+                case .finished:
+                    break 
+                case .failure(let error):
+                    self.showErrorSnackbar(message: error.localizedDescription)
+            }
+            
+        } receiveValue: { result in
+            self.navigateToMainpage()
+        }
     }
     
+    func navigateToMainpage() {
+        // TODO : navigate to main page 
+        Navigator.shared.navigateToMainpage(clearBackStack: true)
+    }
+
+    func onSignInClicked() {
+
+        let email = getEmailInput().text ?? ""
+        guard isValidEmail(email) else {
+            self.showErrorSnackbar(message: "Please enter a valid email")
+            return 
+        }
+
+        let password = getPasswordInput().text ?? ""
+        guard isValidPassword(password) else { 
+            self.showErrorSnackbar(message : "Please enter a valid password")
+            return
+        }
+
+        signInViewModel.signInUser(email: email, password: password)
+    }
     
+    @objc
+    func navigateToResetPassword() {
+        Navigator.shared.navigateToEmailPasswordReset()
+    }
+
+    @objc
+    func navigateToSignUp() {
+        Navigator.shared.navigateToSignUp()
+    }
 }

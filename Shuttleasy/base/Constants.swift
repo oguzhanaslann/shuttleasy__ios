@@ -17,3 +17,4 @@ let SHAPE_EXTRA_LARGE = 32
 
 
 let HAS_USER_SEEN_ONBOARD_KEY = "shuttleasy.ios.onboard.seen"
+let HAS_USER_LOGGED_IN_KEY = "shuttleasy.ios.logged.in"
