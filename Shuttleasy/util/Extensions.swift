@@ -101,4 +101,17 @@ extension UIViewController {
             })
         .show()
     }
+    
+    func showInformationSnackbar(message : String, duration : SnackBar.Duration = .lengthShort ) {
+        SnackBar
+            .make(in: self.view, message: message, duration: duration, styleBuilder: {
+                var style = SnackBarStyle()
+                style.textColor = onPrimaryColor
+                style.background = primaryColor
+                style.font = BodySmallFont()
+                return style
+            })
+        .show()
+    }
+    
 }

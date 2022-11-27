@@ -19,6 +19,7 @@
 		D41BE5C0292ABDE400826640 /* ProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5BF292ABDE400826640 /* ProfileType.swift */; };
 		D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */; };
 		D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C5292ABFCC00826640 /* NetworkMapperExtensions.swift */; };
+		D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C7292ACADA00826640 /* Checkbox.swift */; };
 		D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261629200C5C00CD5B85 /* FontUtil.swift */; };
 		D44F261929200F8500CD5B85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261829200F8500CD5B85 /* Color.swift */; };
 		D44F261F292014CF00CD5B85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261E292014CF00CD5B85 /* Constants.swift */; };
@@ -31,6 +32,7 @@
 		D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DBC2920FCA600ECB799 /* Buttons.swift */; };
 		D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DBE2920FDE500ECB799 /* Shape.swift */; };
 		D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */; };
+		D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */; };
 		D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650B29261431002991A1 /* SignInViewModel.swift */; };
 		D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650D2926143C002991A1 /* ViewModel.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
@@ -82,6 +84,7 @@
 		D41BE5BF292ABDE400826640 /* ProfileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileType.swift; sourceTree = "<group>"; };
 		D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationModel.swift; sourceTree = "<group>"; };
 		D41BE5C5292ABFCC00826640 /* NetworkMapperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMapperExtensions.swift; sourceTree = "<group>"; };
+		D41BE5C7292ACADA00826640 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D44F261E292014CF00CD5B85 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 		D4816DBC2920FCA600ECB799 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		D4816DBE2920FDE500ECB799 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewModel.swift; sourceTree = "<group>"; };
+		D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D4D0650B29261431002991A1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		D4D0650D2926143C002991A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				D40B27ED292A789500140612 /* SignUpViewController.swift */,
+				D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */,
 			);
 			path = signUp;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				D40B27F5292A8F2700140612 /* Snackbar.swift */,
+				D41BE5C7292ACADA00826640 /* Checkbox.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -696,6 +702,7 @@
 				D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */,
 				D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */,
 				D40B27F6292A8F2700140612 /* Snackbar.swift in Sources */,
+				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
@@ -710,6 +717,7 @@
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
+				D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */,
 				D41BE5C0292ABDE400826640 /* ProfileType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

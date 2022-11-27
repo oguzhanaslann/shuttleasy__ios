@@ -105,4 +105,17 @@ class Injector {
             }
         )
     }
+
+    func injectSignUpViewModel() -> SignUpViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: SignUpViewModel.self,
+            onRegisterNeeded: { resolver in
+                SignUpViewModel(
+                    authenticatior: self.injectAuthenticator()
+                )
+            }
+        )
+        
+        return container.resolve(SignUpViewModel.self)!
+    }
 }

@@ -15,6 +15,7 @@ struct UserAuthDTO {
 
 protocol  UserNetworkDataSource {
     func signInUser(email: String , password: String) async throws -> UserAuthDTO
+    func signUpUser(email: String , password: String) async throws -> UserAuthDTO
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
@@ -27,4 +28,14 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             profileType: .driver
         )
     }
+
+    func signUpUser(email: String, password: String) async throws -> UserAuthDTO {
+        print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password: \(password)")
+        return UserAuthDTO(
+            id : "123",
+            authenticationToken: "123",
+            profileType: .driver
+        )
+    }
+
 }

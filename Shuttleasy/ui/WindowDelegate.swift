@@ -37,7 +37,15 @@ class WindowDelegate {
         navController?.popViewController(animated: animated)
     }
     
-    func pushViewController(_ viewController: UIViewController, animated : Bool = false ) {
+    func pushViewController(_ viewController: UIViewController, animated : Bool = false, singleTop : Bool = false) {
+        if (singleTop) {
+            let isInBackStack  = navController?.viewControllers.filter({$0.isKind(of: type(of: viewController))}).count ?? 0 > 0
+            if (isInBackStack) {
+                // index of 
+                let index = navController?.viewControllers.firstIndex(where: {$0.isKind(of: type(of: viewController))})
+                navController?.viewControllers.remove(at: index!)
+            }
+        }
         navController?.pushViewController(viewController, animated: animated)
     }
     

@@ -16,21 +16,21 @@ class Navigator {
     
     func navigateToOnboard() {}
     
-    func navigateToSignIn(clearBackStack : Bool = false) {
+    func navigateToSignIn(clearBackStack : Bool = false, singleTop :Bool = false) {
         let SignInViewController = SignInViewController()
-        navigateAndClearBackStackIfNeeded(viewController: SignInViewController, clearBackStack: clearBackStack)
+        navigateAndClearBackStackIfNeeded(viewController: SignInViewController, clearBackStack: clearBackStack, singleTop: singleTop)
     }
 
-    func navigateAndClearBackStackIfNeeded(viewController : UIViewController,clearBackStack : Bool = false) {
+    func navigateAndClearBackStackIfNeeded(viewController : UIViewController,clearBackStack : Bool = false, singleTop :Bool = false) {
         if clearBackStack {
             navigateAndClearBackStack(to: viewController)
         } else {
-            navigate(to: viewController, animated: true)
+            navigate(to: viewController, animated: true, singleTop: singleTop)
         }        
     }
     
-    private func navigate(to viewController: UIViewController, animated : Bool = false) {
-        WindowDelegate.shared.pushViewController(viewController,animated : animated) 
+    private func navigate(to viewController: UIViewController, animated : Bool = false, singleTop : Bool = false) {
+        WindowDelegate.shared.pushViewController(viewController, animated : animated, singleTop: singleTop)
     } 
 
     private func navigateAndClearBackStack(to viewController: UIViewController) {

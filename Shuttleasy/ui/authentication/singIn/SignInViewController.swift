@@ -218,7 +218,6 @@ class SignInViewController: BaseViewController {
     }
     
     func navigateToMainpage() {
-        // TODO : navigate to main page 
         Navigator.shared.navigateToMainpage(clearBackStack: true)
     }
 
