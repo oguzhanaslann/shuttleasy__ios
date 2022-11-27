@@ -33,6 +33,7 @@
 		D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DBE2920FDE500ECB799 /* Shape.swift */; };
 		D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */; };
 		D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */; };
+		D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADE293409C700D02694 /* ViewGenerators.swift */; };
 		D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650B29261431002991A1 /* SignInViewModel.swift */; };
 		D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650D2926143C002991A1 /* ViewModel.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
@@ -98,6 +99,7 @@
 		D4816DBE2920FDE500ECB799 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewModel.swift; sourceTree = "<group>"; };
 		D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		D4A62ADE293409C700D02694 /* ViewGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGenerators.swift; sourceTree = "<group>"; };
 		D4D0650B29261431002991A1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		D4D0650D2926143C002991A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +196,7 @@
 			children = (
 				D40B27F5292A8F2700140612 /* Snackbar.swift */,
 				D41BE5C7292ACADA00826640 /* Checkbox.swift */,
+				D4A62ADE293409C700D02694 /* ViewGenerators.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
+				D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */,
 				D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */,
 				D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */,
 				D4F591E12921467C00125E90 /* UserInfoRepository.swift in Sources */,

@@ -9,30 +9,85 @@ import UIKit
 
 class EmailPasswordResetController: BaseViewController {
 
+    static let INPUT_TEXT_FIELD_INDEX = 1
+    
+    
+    private lazy var logoContainer : UIView = {
+        let view = UILabel()
+        view.backgroundColor = primaryContainer
+        let logo = resImage(name: "logo")
+        view.addSubview(logo)
+        logo.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.lessThanOrEqualTo(92)
+            make.width.lessThanOrEqualTo(56)
+            make.top.equalToSuperview().offset(64)
+            make.bottom.equalToSuperview().offset(-16)
+        }
+
+        return view
+    }()
+
+
+    lazy var emailAndPasswordInputSection : UIStackView = {
+        let stack = UIStackView()
+        stack.backgroundColor = backgroundColor
+        stack.axis = .vertical
+        stack.spacing = 36
+        let emailSection: UIView = textInputSection(
+            title: "Email",
+            inputHint: "Email...",
+            keyboardInputType: .emailAddress,
+            textContentType: .emailAddress
+        )
+
+        stack.addArrangedSubview(emailSection)
+        emailSection.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(56)
+        }
+        
+        return stack
+    }()
+
+    func getEmailInput() -> UITextField {
+        return emailAndPasswordInputSection.arrangedSubviews[0].subviews[EmailPasswordResetController.INPUT_TEXT_FIELD_INDEX] as! UITextField
+    }
+    
+    lazy var signInButton : UIButton = {
+        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        button.setOnClickListener {
+           //self.onSignInClicked()
+        }
+        return button
+    }()
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let label = UILabel()
-        label.text = "EmailPasswordResetController"
-        label.textColor = onBackgroundColor
-
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        view.addSubview(logoContainer)
+        logoContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
         }
-
-        // Do any additional setup after loading the view.
+        
+        
+        view.addSubview(emailAndPasswordInputSection)
+        emailAndPasswordInputSection.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.left.right.equalToSuperview()
+        }
+        
+                
+        view.addSubview(signInButton)
+        signInButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-24)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(largeButtonHeight)
+            make.centerX.equalToSuperview()
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
