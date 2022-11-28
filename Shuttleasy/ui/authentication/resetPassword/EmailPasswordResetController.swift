@@ -8,7 +8,8 @@
 import UIKit
 
 class EmailPasswordResetController: BaseViewController {
-
+    
+    let resetPasswordViewModel: EmailPasswordResetViewModel = Injector.shared.injectResetPasswordViewModel()
     static let INPUT_TEXT_FIELD_INDEX = 1
     
     
@@ -57,7 +58,7 @@ class EmailPasswordResetController: BaseViewController {
     lazy var signInButton : UIButton = {
         let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
-           //self.onSignInClicked()
+           self.onResetPasswordClicked()
         }
         return button
     }()
@@ -89,5 +90,35 @@ class EmailPasswordResetController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }
+        subscribeObservers()
+    }
+
+    func subscribeObservers()  {
+         resetPasswordViewModel.emailResetResult
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                
+                switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        self.showErrorSnackbar(message: error.localizedDescription)
+                }
+                           
+                
+            } receiveValue: { result in
+                
+            }
+
+    }
+
+    func onResetPasswordClicked() {
+        let email = getEmailInput().text!
+        if isValidEmail(email) {
+            self.showErrorSnackbar(message: "Email cannot be empty")
+            return
+        }
+     
+        resetPasswordViewModel.sendResetCodeTo(email: email)
     }
 }

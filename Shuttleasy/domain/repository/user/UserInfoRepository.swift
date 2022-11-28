@@ -40,4 +40,9 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
         await localDatasource.setAsLoggedIn()
         return true
     }
+
+    func sendResetCodeTo(email: String) async throws -> Bool {
+        let isSend = try await networkDatasource.sendResetCodeTo(email: email)
+        return isSend
+    }
 }
