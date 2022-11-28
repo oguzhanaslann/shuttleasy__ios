@@ -12,7 +12,6 @@ protocol UserInfoRepository {
 }
 
 class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
-
     
     private let localDatasource : UserInfoLocalDataSource
     private let networkDatasource : UserNetworkDataSource
@@ -49,7 +48,13 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
     }
     
     func sendResetCode(code: String, email:String) async throws -> Bool {
-        let isAcceptable = try await networkDatasource.sendResetCode(code: code, email : email)
-        return isAcceptable
+        let token = try await networkDatasource.sendResetCode(code: code, email : email)
+        await localDatasource.saveAuthToken(token: token)
+        return token.isEmpty.not()
+    }
+    
+    func resetPassword(password: String, passwordAgain: String) async throws -> Bool {
+        let isReset = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
+        return isReset
     }
 }

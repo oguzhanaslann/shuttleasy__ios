@@ -48,6 +48,7 @@
 		D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F3E18D2934D08200D10463 /* ResetCodeViewController.swift */; };
 		D4F3E1902934D09D00D10463 /* ResetCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F3E18F2934D09D00D10463 /* ResetCodeViewModel.swift */; };
 		D4F3E1952934E1D900D10463 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F3E1942934E1D900D10463 /* ResetPasswordViewController.swift */; };
+		D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F3E19629352C6C00D10463 /* ResetPasswordViewModel.swift */; };
 		D4F591D829212EE200125E90 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591D729212EE200125E90 /* Injector.swift */; };
 		D4F591E12921467C00125E90 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E02921467C00125E90 /* UserInfoRepository.swift */; };
 		D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */; };
@@ -122,6 +123,7 @@
 		D4F3E18D2934D08200D10463 /* ResetCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetCodeViewController.swift; sourceTree = "<group>"; };
 		D4F3E18F2934D09D00D10463 /* ResetCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetCodeViewModel.swift; sourceTree = "<group>"; };
 		D4F3E1942934E1D900D10463 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		D4F3E19629352C6C00D10463 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		D4F591D729212EE200125E90 /* Injector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
 		D4F591E02921467C00125E90 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoLocalSource.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				D4F3E1942934E1D900D10463 /* ResetPasswordViewController.swift */,
+				D4F3E19629352C6C00D10463 /* ResetPasswordViewModel.swift */,
 			);
 			path = resetPassword;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
+				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
 				D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */,
 				D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */,
 				D41BE5C0292ABDE400826640 /* ProfileType.swift in Sources */,

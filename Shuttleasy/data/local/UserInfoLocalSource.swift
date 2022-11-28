@@ -13,6 +13,7 @@ protocol UserInfoLocalDataSource {
     func setAsSeenOnboard() async
     func setAsLoggedIn() async
     func saveUserAuthData(model :  UserAuthenticationModel) async
+    func saveAuthToken(token : String) async
 }
 
 class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
@@ -34,10 +35,12 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     
     func saveUserAuthData(model: UserAuthenticationModel) async {
         UserDefaults.standard.set(model.id, forKey: UserInfoLocalDataSourceImpl.USER_ID_KEY)
-        UserDefaults.standard.set(model.authenticationToken, forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
         UserDefaults.standard.set(model.profileType.rawValue, forKey: UserInfoLocalDataSourceImpl.USER_PROFILE_TYPE_KEY)
+        await saveAuthToken(token: model.authenticationToken)
     }
 
+    func saveAuthToken(token: String) async {
+        UserDefaults.standard.set(token, forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
+    }
 
-    
 }

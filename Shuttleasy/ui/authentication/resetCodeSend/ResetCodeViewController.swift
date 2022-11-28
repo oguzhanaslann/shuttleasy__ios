@@ -53,6 +53,22 @@ class ResetCodeViewController : BaseViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(56)
         }
+
+
+         let label = LabelSmall(
+            text: "Enter the reset code we have send to your email",
+            color : onBackgroundColor.withAlphaComponent(0.5)
+        )
+        
+        label.textAlignment = .center
+
+
+        stack.addArrangedSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(36)
+        }
+        
         
         return stack
     }()
@@ -62,7 +78,7 @@ class ResetCodeViewController : BaseViewController {
     }
 
     lazy var resetButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Send Code", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(titleOnNormalState: "Confirm Code", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
             self.onResetCodeSendClicked()
         }
@@ -140,10 +156,10 @@ class ResetCodeViewController : BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
-                case .finished:
-                    break 
-                case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
+                    case .finished:
+                        break 
+                    case .failure(let error):
+                        self.showErrorSnackbar(message: error.localizedDescription)
                 }
             } receiveValue: { isSent in
                 if (isSent) {

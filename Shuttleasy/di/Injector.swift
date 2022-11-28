@@ -144,4 +144,18 @@ class Injector {
         
         return container.resolve(ResetCodeViewModel.self)!
     }
+
+
+    func injectResetPasswordViewModel() -> ResetPasswordViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: ResetPasswordViewModel.self,
+            onRegisterNeeded: { resolver in
+                ResetPasswordViewModel(
+                    authenticatior: self.injectAuthenticator()
+                )
+            }
+        )
+        
+        return container.resolve(ResetPasswordViewModel.self)!
+    }
 }

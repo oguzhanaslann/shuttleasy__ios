@@ -12,4 +12,6 @@ protocol Authenticator {
     func signUpUser(email : String, password: String) async throws -> Bool
     func sendResetCodeTo(email : String) async throws -> Bool
     func sendResetCode(code : String,email : String) async throws -> Bool
+    func resetPassword(password : String, passwordAgain: String) async throws -> Bool
+    
 }

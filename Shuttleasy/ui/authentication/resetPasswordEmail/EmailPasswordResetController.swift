@@ -49,6 +49,20 @@ class EmailPasswordResetController: BaseViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(56)
         }
+
+        let label = LabelSmall(
+            text: "Enter the email of the account you have forgotten its password",
+            color : onBackgroundColor.withAlphaComponent(0.5)
+        )
+        
+        label.textAlignment = .center
+
+
+        stack.addArrangedSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(36)
+        }
         
         return stack
     }()
@@ -88,7 +102,7 @@ class EmailPasswordResetController: BaseViewController {
                 
         view.addSubview(signInButton)
         signInButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-24)
+            make.bottom.equalToSuperview().offset(-36)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(largeButtonHeight)
