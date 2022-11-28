@@ -17,6 +17,7 @@ protocol  UserNetworkDataSource {
     func signInUser(email: String , password: String) async throws -> UserAuthDTO
     func signUpUser(email: String , password: String) async throws -> UserAuthDTO
     func sendResetCodeTo(email: String) async throws -> Bool
+    func sendResetCode(code: String, email : String) async throws -> Bool
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
@@ -41,6 +42,11 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
 
     func sendResetCodeTo(email: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - sendResetCodeTo - email: \(email)")
+        return true
+    }
+
+    func sendResetCode(code: String, email: String) async throws -> Bool {
+        print("UserNetworkDataSourceImpl - sendResetCode - code: \(code)")
         return true
     }
 }

@@ -56,5 +56,15 @@ class Navigator {
     func navigateToSignUp(clearBackStack : Bool = false) {
         let signUpViewController = SignUpViewController()
         navigateAndClearBackStackIfNeeded(viewController: signUpViewController, clearBackStack: clearBackStack)    
-    }       
+    }    
+
+    func navigateToResetCode(userEmail: String,clearBackStack : Bool = false) {
+        let resetCodeViewController = ResetCodeViewController(userEmail: userEmail)
+        navigateAndClearBackStackIfNeeded(viewController: resetCodeViewController, clearBackStack: clearBackStack)    
+    }   
+    
+    func navigateToResetPassword(userEmail: String,clearBackStack : Bool = false) {
+        let resetPasswordViewController = ResetPasswordViewController(userEmail: userEmail)
+        navigateAndClearBackStackIfNeeded(viewController: resetPasswordViewController, clearBackStack: clearBackStack)    
+    }
 }

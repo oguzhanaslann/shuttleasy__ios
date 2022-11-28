@@ -131,4 +131,17 @@ class Injector {
         
         return container.resolve(EmailPasswordResetViewModel.self)!
     }
+
+    func injectResetCodeViewModel() -> ResetCodeViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: ResetCodeViewModel.self,
+            onRegisterNeeded: { resolver in
+                ResetCodeViewModel(
+                    authenticatior: self.injectAuthenticator()
+                )
+            }
+        )
+        
+        return container.resolve(ResetCodeViewModel.self)!
+    }
 }

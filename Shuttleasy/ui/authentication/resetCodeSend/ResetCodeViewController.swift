@@ -5,7 +5,21 @@ import SnapKit
 
 class ResetCodeViewController : BaseViewController {
   
-   private lazy var logoContainer : UIView = {
+    private let viewModel : ResetCodeViewModel = Injector.shared.injectResetCodeViewModel()
+    private var resetCodeSentObserver : AnyCancellable? = nil
+    private var resetCodeVerifiedObserver : AnyCancellable? = nil
+    private let userEmail : String
+
+    init(userEmail: String){
+        self.userEmail  = userEmail
+        super.init(nibName: nil, bundle: nil)
+    }
+       
+    required init(coder : NSCoder){
+        fatalError()
+    }
+
+    private lazy var logoContainer : UIView = {
         let view = UILabel()
         view.backgroundColor = primaryContainer
         let logo = resImage(name: "logo")
@@ -22,7 +36,7 @@ class ResetCodeViewController : BaseViewController {
     }()
   
   
-    lazy var resetCodeInputSection : UIStackView = {
+   private lazy var resetCodeInputSection : UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = backgroundColor
         stack.axis = .vertical
@@ -42,12 +56,15 @@ class ResetCodeViewController : BaseViewController {
         
         return stack
     }()
-  
-  
+
+    private func getResetCodeInput() -> UITextField {
+        return resetCodeInputSection.arrangedSubviews[0].subviews[1] as! UITextField
+    }
+
     lazy var resetButton : UIButton = {
         let button = LargeButton(titleOnNormalState: "Send Code", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
-           self.sendResetCode()
+            self.onResetCodeSendClicked()
         }
         return button
     }()
@@ -97,11 +114,63 @@ class ResetCodeViewController : BaseViewController {
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }
+        
+        subscribeObservers()
+   }
+
+   func subscribeObservers() {
+       resetCodeVerifiedObserver =  viewModel.resetCodeResult
+           .receive(on: DispatchQueue.main)
+           .sink { completion in
+               switch completion {
+                case .finished:
+                    break 
+                case .failure(let error):
+                    self.showErrorSnackbar(message: error.localizedDescription)
+            }
+           } receiveValue: { isAccepted in
+               if (isAccepted) {
+                    self.navigateToResetPasswordPage()
+               } else {
+                   self.showErrorSnackbar(message: "Reset code is not accepted")
+               }
+           } 
+
+        resetCodeSentObserver = viewModel.resetCodeSendResult
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break 
+                case .failure(let error):
+                    self.showErrorSnackbar(message: error.localizedDescription)
+                }
+            } receiveValue: { isSent in
+                if (isSent) {
+                    self.showInformationSnackbar(message: "Reset code sent")
+                } else {
+                    self.showErrorSnackbar(message: "Something went wrong")
+                }
+            }
+   }
+
+   func navigateToResetPasswordPage() {
+       Navigator.shared.navigateToResetPassword(userEmail: userEmail)
    }
   
    @objc
     func sendResetCode() {
-        // TODO 
+        viewModel.sendResetCodeTo(email: userEmail)
+    }
+
+    func onResetCodeSendClicked() {
+        let resetCode = getResetCodeInput().text ?? ""
+        guard  resetCode.isEmpty.not() else {
+            showErrorSnackbar(message: "Reset code is required")
+            return
+        }
+
+        viewModel.sendResetCode(email: userEmail, code: resetCode)
     }
   
 }

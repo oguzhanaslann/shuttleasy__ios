@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class EmailPasswordResetController: BaseViewController {
     
-    let resetPasswordViewModel: EmailPasswordResetViewModel = Injector.shared.injectResetPasswordViewModel()
-    static let INPUT_TEXT_FIELD_INDEX = 1
+    private let resetPasswordViewModel: EmailPasswordResetViewModel = Injector.shared.injectResetPasswordViewModel()
+    private var codeSendResultObserver : AnyCancellable? = nil
     
+    static let INPUT_TEXT_FIELD_INDEX = 1
     
     private lazy var logoContainer : UIView = {
         let view = UILabel()
@@ -30,7 +32,7 @@ class EmailPasswordResetController: BaseViewController {
     }()
 
 
-    lazy var emailAndPasswordInputSection : UIStackView = {
+    private lazy var resetAccountEmailInputSection : UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = backgroundColor
         stack.axis = .vertical
@@ -52,7 +54,7 @@ class EmailPasswordResetController: BaseViewController {
     }()
 
     func getEmailInput() -> UITextField {
-        return emailAndPasswordInputSection.arrangedSubviews[0].subviews[EmailPasswordResetController.INPUT_TEXT_FIELD_INDEX] as! UITextField
+        return resetAccountEmailInputSection.arrangedSubviews[0].subviews[EmailPasswordResetController.INPUT_TEXT_FIELD_INDEX] as! UITextField
     }
     
     lazy var signInButton : UIButton = {
@@ -62,12 +64,14 @@ class EmailPasswordResetController: BaseViewController {
         }
         return button
     }()
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initUi()
+        subscribeObservers()
+    }
+    
+    private func initUi() {
         view.addSubview(logoContainer)
         logoContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -75,8 +79,8 @@ class EmailPasswordResetController: BaseViewController {
         }
         
         
-        view.addSubview(emailAndPasswordInputSection)
-        emailAndPasswordInputSection.snp.makeConstraints { make in
+        view.addSubview(resetAccountEmailInputSection)
+        resetAccountEmailInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview()
         }
@@ -90,32 +94,37 @@ class EmailPasswordResetController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }
-        subscribeObservers()
     }
 
     func subscribeObservers()  {
-         resetPasswordViewModel.emailResetResult
+        codeSendResultObserver =   resetPasswordViewModel.emailResetResult
             .receive(on: DispatchQueue.main)
             .sink { completion in
-                
                 switch completion {
                     case .finished:
                         break
                     case .failure(let error):
                         self.showErrorSnackbar(message: error.localizedDescription)
                 }
-                           
-                
             } receiveValue: { result in
-                
+                print("email \(result)")
+                if result {
+                    self.navigateToResetCodePage()
+                } else {
+                    // TODO - IMPLEMENT ERROR HANDLING
+                }
             }
+    }
 
+    func navigateToResetCodePage() {
+        let email = getEmailInput().text!
+        Navigator.shared.navigateToResetCode(userEmail: email)
     }
 
     func onResetPasswordClicked() {
-        let email = getEmailInput().text!
-        if isValidEmail(email) {
-            self.showErrorSnackbar(message: "Email cannot be empty")
+        let email = getEmailInput().text ?? ""
+        guard isValidEmail(email) else {
+            self.showErrorSnackbar(message: "Please enter a valid email")
             return
         }
      
