@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6FD133BBE66D8F8751596AD2 /* Pods_Shuttleasy_ShuttleasyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D16047F3D4D6219772C15D /* Pods_Shuttleasy_ShuttleasyUITests.framework */; };
 		97D4C3F7B6680FB7ED81C793 /* Pods_Shuttleasy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */; };
+		D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */; };
+		D406C0D02937CB2A00BC5F0C /* HomepageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406C0CF2937CB2A00BC5F0C /* HomepageViewContoller.swift */; };
+		D406C0D22937CB4B00BC5F0C /* SearchShuttleViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406C0D12937CB4B00BC5F0C /* SearchShuttleViewContoller.swift */; };
+		D406C0D42937CB5700BC5F0C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406C0D32937CB5700BC5F0C /* ProfileViewController.swift */; };
 		D40B27EE292A789500140612 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27ED292A789500140612 /* SignUpViewController.swift */; };
 		D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27EF292A78C500140612 /* EmailPasswordResetController.swift */; };
 		D40B27F2292A797100140612 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27F1292A797100140612 /* Navigator.swift */; };
@@ -80,6 +84,10 @@
 		88D16047F3D4D6219772C15D /* Pods_Shuttleasy_ShuttleasyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shuttleasy_ShuttleasyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CF6BF6A273203A8483B44F /* Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Shuttleasy-ShuttleasyUITests/Pods-Shuttleasy-ShuttleasyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B4A719145D2A0E6933A799BF /* Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig"; path = "Target Support Files/Pods-Shuttleasy-ShuttleasyUITests/Pods-Shuttleasy-ShuttleasyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabbarController.swift; sourceTree = "<group>"; };
+		D406C0CF2937CB2A00BC5F0C /* HomepageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageViewContoller.swift; sourceTree = "<group>"; };
+		D406C0D12937CB4B00BC5F0C /* SearchShuttleViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShuttleViewContoller.swift; sourceTree = "<group>"; };
+		D406C0D32937CB5700BC5F0C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D40B27ED292A789500140612 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D40B27EF292A78C500140612 /* EmailPasswordResetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordResetController.swift; sourceTree = "<group>"; };
 		D40B27F1292A797100140612 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -184,6 +192,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D406C0CC2937CAD400BC5F0C /* home */ = {
+			isa = PBXGroup;
+			children = (
+				D406C0CF2937CB2A00BC5F0C /* HomepageViewContoller.swift */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		D406C0CD2937CAD800BC5F0C /* seach */ = {
+			isa = PBXGroup;
+			children = (
+				D406C0D12937CB4B00BC5F0C /* SearchShuttleViewContoller.swift */,
+			);
+			path = seach;
+			sourceTree = "<group>";
+		};
+		D406C0CE2937CADF00BC5F0C /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				D406C0D32937CB5700BC5F0C /* ProfileViewController.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
 		D40B27EB292A786D00140612 /* resetPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +246,9 @@
 		D41BE5B1292AB18100826640 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				D406C0CC2937CAD400BC5F0C /* home */,
+				D406C0CD2937CAD800BC5F0C /* seach */,
+				D406C0CE2937CADF00BC5F0C /* profile */,
 				D41BE5B2292AB19300826640 /* MainViewController.swift */,
 			);
 			path = main;
@@ -301,6 +336,7 @@
 				D44F261E292014CF00CD5B85 /* Constants.swift */,
 				D4816DB22920D5C300ECB799 /* BaseViewController.swift */,
 				D4D0650D2926143C002991A1 /* ViewModel.swift */,
+				D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -736,6 +772,7 @@
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
+				D406C0D22937CB4B00BC5F0C /* SearchShuttleViewContoller.swift in Sources */,
 				D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */,
 				D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */,
 				D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */,
@@ -760,12 +797,15 @@
 				D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */,
 				D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */,
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
+				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
 				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
 				D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */,
 				D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */,
+				D406C0D42937CB5700BC5F0C /* ProfileViewController.swift in Sources */,
+				D406C0D02937CB2A00BC5F0C /* HomepageViewContoller.swift in Sources */,
 				D41BE5C0292ABDE400826640 /* ProfileType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

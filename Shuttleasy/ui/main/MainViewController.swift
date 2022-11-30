@@ -7,32 +7,27 @@
 
 import UIKit
 
-class MainViewController: BaseViewController {
+class MainViewController: BaseTabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let label = UILabel()
-        label.text = "MainViewController"
-        label.textColor = onBackgroundColor
-
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-
-        // Do any additional setup after loading the view.
+        initTabBar()
     }
+
+    func initTabBar() {
+        let homepageVC = HomepageViewContoller()
+        let searchVC = SearchShuttleViewContoller()
+        let profileVC = ProfileViewController()
+
+        viewControllers = [homepageVC, searchVC, profileVC]
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        tabBar.items?[0].title = "Home"
+        tabBar.items?[0].image = UIImage(systemName: "house")
+      
+        tabBar.items?[1].title = "Search"
+        tabBar.items?[1].image = UIImage(systemName: "magnifyingglass")
+    
+        tabBar.items?[2].title = "Profile"
+        tabBar.items?[2].image = UIImage(systemName: "person.fill")
     }
-    */
-
 }

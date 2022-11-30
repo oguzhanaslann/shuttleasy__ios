@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
         let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
         let rootViewController : UIViewController
-
         if(hasSeenOnboard && hasLoggedIn) {
             rootViewController = MainViewController()
         } else if(!hasSeenOnboard) {           
