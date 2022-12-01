@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.6.2)
+  - Alamofire (5.6.4)
   - CocoaLumberjack/Core (3.8.0)
   - CocoaLumberjack/Swift (3.8.0):
     - CocoaLumberjack/Core
@@ -26,7 +26,7 @@ SPEC REPOS:
     - Swinject
 
 SPEC CHECKSUMS:
-  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25

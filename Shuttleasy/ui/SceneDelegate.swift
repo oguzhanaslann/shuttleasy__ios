@@ -32,6 +32,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError()
         }
 
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
         
         let navController = UINavigationController(rootViewController: rootViewController)
         WindowDelegate.shared.setRootViewController(navController: navController)
