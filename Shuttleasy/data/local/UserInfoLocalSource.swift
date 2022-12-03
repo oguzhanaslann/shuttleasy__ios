@@ -14,9 +14,11 @@ protocol UserInfoLocalDataSource {
     func setAsLoggedIn() async
     func saveUserAuthData(model :  UserAuthenticationModel) async
     func saveAuthToken(token : String) async
+    func isDarkMode() async -> Bool
 }
 
 class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
+
     static let onboardSeenKey = HAS_USER_SEEN_ONBOARD_KEY
     static let loggedInKey = HAS_USER_LOGGED_IN_KEY
 
@@ -42,5 +44,9 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     func saveAuthToken(token: String) async {
         UserDefaults.standard.set(token, forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
     }
-
+    
+    func isDarkMode() async -> Bool {
+        // TODO()
+        return false
+    }
 }

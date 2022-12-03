@@ -18,7 +18,7 @@ class ResetCodeViewModel : ViewModel {
        if (resetCodeSendTask?.isCancelled == false) {
           resetCodeSendTask?.cancel()
        }
-       
+    
        resetCodeSendTask = Task.init{
             do {
                 let result = try await self.authenticator.sendResetCodeTo(email: email)

@@ -35,6 +35,7 @@ class Navigator {
 
     private func navigateAndClearBackStack(to viewController: UIViewController) {
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.setNavigationBarHidden(true, animated: false)
         WindowDelegate.shared.setRootViewController(navController: navigationController)
     } 
 

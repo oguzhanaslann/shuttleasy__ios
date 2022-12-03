@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 extension UIScrollView {
     func scrollTo(horizontalPage : Int = 0, verticalPage: Int = 0, animated : Bool = true) {
@@ -114,4 +115,13 @@ extension UIViewController {
         .show()
     }
     
+}
+
+
+
+extension UIImageView {
+    func load(url: String) {
+        let url = URL(string: url)
+        self.kf.setImage(with: url)
+    }
 }

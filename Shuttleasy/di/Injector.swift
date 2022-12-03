@@ -158,4 +158,18 @@ class Injector {
         
         return container.resolve(ResetPasswordViewModel.self)!
     }
+
+
+    func injectProfileViewModel() -> ProfileViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: ProfileViewModel.self,
+            onRegisterNeeded: { resolver in
+                ProfileViewModel(
+                    userInfoRepository: self.injectUserInfoRepository()
+                )
+            }
+        )
+        
+        return container.resolve(ProfileViewModel.self)!
+    }
 }

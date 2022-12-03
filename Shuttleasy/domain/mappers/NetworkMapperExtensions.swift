@@ -9,12 +9,25 @@ import Foundation
 
 
 extension UserAuthDTO {
-    //UserAuthenticationModel
     func toUserAuthenticationModel() -> UserAuthenticationModel {
         return UserAuthenticationModel(
             id: self.id,
             authenticationToken: self.authenticationToken,
             profileType: self.profileType
+        )
+    }
+}
+
+
+extension UserProfileDTO {
+    func toUserProfile(isDarkMode : Bool) -> UserProfile {
+        return UserProfile(
+            profileType: self.profileType,
+            profileImageUrl: self.profileImageUrl,
+            profileName: self.profileName,
+            profileEmail: self.profileEmail,
+            profilePhone: self.profilePhone,
+            darkMode: false
         )
     }
 }
