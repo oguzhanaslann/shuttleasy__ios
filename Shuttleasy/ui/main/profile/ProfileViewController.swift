@@ -39,6 +39,19 @@ class ProfileViewController: BaseViewController {
         let label = TitleMedium(text: "Profile")
         return label
     }()
+    
+    private lazy var penIcon: UIImageView = {
+        let penIcon : UIImageView =  systemImage(systemName : "pencil")
+        penIcon.tintColor = onPrimaryContainer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onEditProfileClicked))
+        penIcon.addGestureRecognizer(tapGesture)
+        penIcon.isUserInteractionEnabled = true
+        return penIcon
+    }()
+
+    @objc func onEditProfileClicked() {
+        print("edit profile")
+    } 
 
     private let profileName : UILabel = {
         let label = HeadlineSmall(text: "")
@@ -50,29 +63,7 @@ class ProfileViewController: BaseViewController {
         view.backgroundColor = onBackgroundColor
         return view
     }
-        
-    func sectionHeader(
-        title : String
-    ) -> UIView {
-        let view = UIView()
-        let label = LabelLarge(text: title)
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
 
-        let line = lineView()
-        view.addSubview(line)
-        line.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
-            make.height.equalTo(1)
-        }
-        return view
-    }
-    
     private lazy var contactSectionView: UIView = {
         let stackView  = UIView()
         
@@ -129,52 +120,6 @@ class ProfileViewController: BaseViewController {
     @objc func onQrCodeClicked(_ sender: UITapGestureRecognizer) {
         print("onQrCodeClicked")
     }
-    
-    private func sectionRowView(
-        resImageName : String,
-        value : String,
-        valueTag: Int? = nil
-    ) -> UIView {
-        let view = UIView()
-        let image = resImage(name: resImageName)
-        view.addSubview(image)
-        image.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        let label = BodyMedium(text: value)
-        if let tag = valueTag {
-            label.tag = tag
-        }
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right)
-            
-        }
-        return view
-    }
-
-    func sectionRow(
-        title : String,
-        value : String
-    ) -> UIView {
-        let view = UIView()
-        let label = BodyMedium(text: title)
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        let valueLabel = BodyMedium(text: value)
-        view.addSubview(valueLabel)
-        valueLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-        return view
-    }
 
     private lazy var preferencesSectionView: UIView = {
          let stackView  = UIView()
@@ -217,63 +162,6 @@ class ProfileViewController: BaseViewController {
         print("onDeleteAccountClicked")
     }
 
-    func sectionRowIconLabelView(
-        resImageName : String,
-        description : String
-    ) -> UIView {
-        let view = UIView()
-        let image = resImage(name: resImageName)
-        view.addSubview(image)
-        image.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        let description = LabelMedium(text: description)
-        view.addSubview(description)
-        description.snp.makeConstraints { make in
-            make.left.greaterThanOrEqualTo(image.snp.right).offset(8)
-            make.top.equalTo(image.snp.top)
-            make.bottom.equalTo(image.snp.bottom)
-        }
-        
-        let arrow = systemImage(systemName: "chevron.right", tint: onBackgroundColor)
-        view.addSubview(arrow)
-        arrow.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }        
-
-        return view
-    }
-
-    func sectionWithEnterIcon(
-        title : String 
-    ) -> UIView {
-        return sectionEndIcon(title: title, iconView: systemImage(systemName: "chevron.right", tint: onBackgroundColor))
-    }
-
-    func sectionWithSwitchRow() -> UIView{
-        let view = UIView()
-        let label = LabelMedium(text: "Dark Mode")
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        let switchView = UISwitch()
-        switchView.tintColor = onPrimaryColor
-        switchView.onTintColor = primaryColor
-        view.addSubview(switchView)
-        switchView.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-
-        return view
-    }
-    
     lazy var generalSettingsSectionView  : UIView = {
         let uiView  = UIView()
 
@@ -331,29 +219,6 @@ class ProfileViewController: BaseViewController {
         logOutRow.isUserInteractionEnabled = true        
         return uiView
     }()
-
-    func sectionEndIcon(
-        title : String,
-        iconView : UIImageView
-    ) -> UIView {
-        let view = UIView()
-        let label = LabelMedium(text: title)
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-        }
-
-        let arrow = iconView
-        view.addSubview(arrow)
-        arrow.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-
-        return view
-    }
-
 
     @objc func onPrivacyClicked(_ sender: UITapGestureRecognizer) {
         print("onPrivacyClicked")
@@ -428,9 +293,7 @@ class ProfileViewController: BaseViewController {
         }
 
         view.bringSubviewToFront(profileImageView)
-        
-        let penIcon : UIImageView =  systemImage(systemName : "pencil")
-        penIcon.tintColor = .black
+    
         view.addSubview(penIcon)
         penIcon.snp.makeConstraints { make in
             make.top.equalTo(profileBackgroundView.snp.top).offset(40)
@@ -438,6 +301,7 @@ class ProfileViewController: BaseViewController {
             make.width.equalTo(24)
             make.height.equalTo(24)
         }
+        
         
         view.addSubview(profileTitle)
         profileTitle.snp.makeConstraints { make in
@@ -489,5 +353,156 @@ class ProfileViewController: BaseViewController {
                 self.getPhoneNumberLabel().text = profile.profilePhone
             }
         })
+    }
+}
+
+
+extension ProfileViewController {
+    func sectionHeader(
+        title : String
+    ) -> UIView {
+        let view = UIView()
+        let label = LabelLarge(text: title)
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let line = lineView()
+        view.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
+            make.height.equalTo(1)
+        }
+        return view
+    }
+    
+    func sectionRowView(
+        resImageName : String,
+        value : String,
+        valueTag: Int? = nil
+    ) -> UIView {
+        let view = UIView()
+        let image = resImage(name: resImageName)
+        view.addSubview(image)
+        image.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let label = BodyMedium(text: value)
+        if let tag = valueTag {
+            label.tag = tag
+        }
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.right.equalTo(view.snp.right)
+            
+        }
+        return view
+    }
+
+    func sectionRow(
+        title : String,
+        value : String
+    ) -> UIView {
+        let view = UIView()
+        let label = BodyMedium(text: title)
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let valueLabel = BodyMedium(text: value)
+        view.addSubview(valueLabel)
+        valueLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        return view
+    }
+
+    
+    func sectionRowIconLabelView(
+        resImageName : String,
+        description : String
+    ) -> UIView {
+        let view = UIView()
+        let image = resImage(name: resImageName)
+        view.addSubview(image)
+        image.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let description = LabelMedium(text: description)
+        view.addSubview(description)
+        description.snp.makeConstraints { make in
+            make.left.greaterThanOrEqualTo(image.snp.right).offset(8)
+            make.top.equalTo(image.snp.top)
+            make.bottom.equalTo(image.snp.bottom)
+        }
+        
+        let arrow = systemImage(systemName: "chevron.right", tint: onBackgroundColor)
+        view.addSubview(arrow)
+        arrow.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+
+        return view
+    }
+
+    func sectionWithEnterIcon(
+        title : String
+    ) -> UIView {
+        return sectionEndIcon(title: title, iconView: systemImage(systemName: "chevron.right", tint: onBackgroundColor))
+    }
+
+    func sectionWithSwitchRow() -> UIView{
+        let view = UIView()
+        let label = LabelMedium(text: "Dark Mode")
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let switchView = UISwitch()
+        switchView.tintColor = onPrimaryColor
+        switchView.onTintColor = primaryColor
+        view.addSubview(switchView)
+        switchView.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+
+        return view
+    }
+    
+    func sectionEndIcon(
+        title : String,
+        iconView : UIImageView
+    ) -> UIView {
+        let view = UIView()
+        let label = LabelMedium(text: title)
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        let arrow = iconView
+        view.addSubview(arrow)
+        arrow.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+
+        return view
     }
 }
