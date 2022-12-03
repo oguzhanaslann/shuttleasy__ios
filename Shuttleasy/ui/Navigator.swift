@@ -68,4 +68,10 @@ class Navigator {
         let resetPasswordViewController = ResetPasswordViewController(userEmail: userEmail)
         navigateAndClearBackStackIfNeeded(viewController: resetPasswordViewController, clearBackStack: clearBackStack)    
     }
+    
+    
+    func navigateToProfileEdit(clearBackStack : Bool = false) {
+        let profileEditViewController = ProfileEditViewController()
+        navigateAndClearBackStackIfNeeded(viewController: profileEditViewController, clearBackStack: clearBackStack)    
+    }
 }

@@ -50,7 +50,7 @@ class ProfileViewController: BaseViewController {
     }()
 
     @objc func onEditProfileClicked() {
-        print("edit profile")
+        Navigator.shared.navigateToProfileEdit()
     } 
 
     private let profileName : UILabel = {
