@@ -172,4 +172,17 @@ class Injector {
         
         return container.resolve(ProfileViewModel.self)!
     }
+
+    func injectProfileEditViewModel() -> ProfileEditViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: ProfileEditViewModel.self,
+            onRegisterNeeded: { resolver in
+                ProfileEditViewModel(
+                    userInfoRepository: self.injectUserInfoRepository()
+                )
+            }
+        )
+        
+        return container.resolve(ProfileEditViewModel.self)!
+    }
 }

@@ -11,8 +11,16 @@ struct UserProfile {
     let profileType: ProfileType
     let profileImageUrl: String
     let profileName: String
+    let profileSurname: String
     let profileEmail: String
     let profilePhone: String
     let qrSeed: String? = nil
     let darkMode: Bool
+}
+
+extension UserProfile {
+    // fullname
+    var fullName: String {
+        return "\(profileName) \(profileSurname)"
+    }
 }

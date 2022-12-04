@@ -14,9 +14,11 @@ protocol  UserNetworkDataSource {
     func sendResetCode(code: String, email : String) async throws -> String
     func resetPassword(password: String, passwordAgain: String) async throws -> Bool
     func getUserProfile() async throws -> UserProfileDTO
+    func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
+
 
     
     func signInUser(email: String, password: String) async throws -> UserAuthDTO {
@@ -58,10 +60,26 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         return UserProfileDTO(
             profileType : .passenger,
             profileImageUrl : "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
-            profileName : "Oğuzhan Aslan",
+            profileName : "Oğuzhan",
+            profileSurname: "Aslan",
             profileEmail : "sample@sample.com",
             profilePhone : "+905554443322",
             qrSeed : "1234567890"
         )       
     }
+    
+    
+    func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
+        print("UserNetworkDataSourceImpl - editProfile")
+        return UserProfileDTO(
+            profileType : .passenger,
+            profileImageUrl : "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
+            profileName : "Oğuzhan",
+            profileSurname: "Aslan",
+            profileEmail : "sample@sample.com",
+            profilePhone : "+905554443322",
+            qrSeed : "1234567890"
+        )       
+    }
+
 }

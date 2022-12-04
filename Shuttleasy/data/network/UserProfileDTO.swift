@@ -11,6 +11,7 @@ struct UserProfileDTO {
     let profileType: ProfileType
     let profileImageUrl: String
     let profileName: String
+    let profileSurname : String
     let profileEmail: String
     let profilePhone: String
     let qrSeed: String?

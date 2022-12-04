@@ -56,6 +56,8 @@
 		D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DBC2920FCA600ECB799 /* Buttons.swift */; };
 		D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DBE2920FDE500ECB799 /* Shape.swift */; };
 		D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */; };
+		D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */; };
+		D48D8CEA293CE5E400E72C0F /* ProfileEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */; };
 		D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */; };
 		D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADE293409C700D02694 /* ViewGenerators.swift */; };
 		D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */; };
@@ -157,6 +159,8 @@
 		D4816DBC2920FCA600ECB799 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		D4816DBE2920FDE500ECB799 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewModel.swift; sourceTree = "<group>"; };
+		D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEdit.swift; sourceTree = "<group>"; };
 		D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D4A62ADE293409C700D02694 /* ViewGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGenerators.swift; sourceTree = "<group>"; };
 		D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordResetViewModel.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				D41BE5BF292ABDE400826640 /* ProfileType.swift */,
 				D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */,
 				D4C10262293B8C91004812C1 /* UserProfile.swift */,
+				D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				D4C10267293BA6C3004812C1 /* ProfileEditViewController.swift */,
+				D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */,
 			);
 			path = profileEdit;
 			sourceTree = "<group>";
@@ -882,6 +888,7 @@
 				D4816DB92920E6F400ECB799 /* Util.swift in Sources */,
 				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
+				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
@@ -891,6 +898,7 @@
 				D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */,
 				D4C1025F293B8C4C004812C1 /* UserAuthDTO.swift in Sources */,
 				D4F591E12921467C00125E90 /* UserInfoRepository.swift in Sources */,
+				D48D8CEA293CE5E400E72C0F /* ProfileEdit.swift in Sources */,
 				D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */,
 				D4F3E1952934E1D900D10463 /* ResetPasswordViewController.swift in Sources */,
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,

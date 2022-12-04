@@ -25,6 +25,7 @@ extension UserProfileDTO {
             profileType: self.profileType,
             profileImageUrl: self.profileImageUrl,
             profileName: self.profileName,
+            profileSurname: self.profileSurname,
             profileEmail: self.profileEmail,
             profilePhone: self.profilePhone,
             darkMode: false

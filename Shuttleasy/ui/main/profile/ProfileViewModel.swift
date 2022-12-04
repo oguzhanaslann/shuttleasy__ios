@@ -22,17 +22,20 @@ class ProfileViewModel: ViewModel {
         self.userInfoRepository  = userInfoRepository
     }
     
-
     func getUserProfile() {
         subject.send(UiDataState.Loading)
         Task.init {
-            do {
-                let userProfile = try await userInfoRepository.getUserProfile()
-                subject.send(UiDataState.Success(
-                    DataContent.createFrom(data: userProfile)
-                ))
-            } catch {
-                subject.send(completion: .failure(error))
+            let userProfile =  await userInfoRepository.getUserProfile()
+            
+            switch userProfile  {
+                case (.success(let userProfile) ):
+                    subject.send(
+                        UiDataState.Success(
+                            DataContent.createFrom(data: userProfile)
+                        )
+                    )
+                case .failure(let error):
+                    subject.send(completion: .failure(error))
             }
         }
     }

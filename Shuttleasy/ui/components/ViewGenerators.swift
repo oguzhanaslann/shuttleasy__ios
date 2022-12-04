@@ -14,15 +14,16 @@ func textInputSection(
     inputHint: String,
     keyboardInputType : UIKeyboardType = .default,
     textContentType: UITextContentType? = nil,
-    isSecureEntry : Bool = false
+    isSecureEntry : Bool = false,
+    inputFieldTag : Int? = nil
 ) -> UIView {
     let section = UIStackView()
     
     let label = TitleSmall(text: title,color: onBackgroundColor)
     section.addSubview(label)
     label.snp.makeConstraints { make in
-        make.top.greaterThanOrEqualToSuperview().offset(16)
-        make.left.equalToSuperview().offset(24)
+        make.top.greaterThanOrEqualToSuperview()
+        make.left.equalToSuperview()
         label.breakLineFromEndIfNeeded()
     }
     
@@ -47,10 +48,14 @@ func textInputSection(
 
     section.addSubview(textInputField)
     textInputField.snp.makeConstraints { make in
-        make.left.equalToSuperview().offset(24)
-        make.right.equalToSuperview().offset(-24)
+        make.left.equalToSuperview()
+        make.right.equalToSuperview()
         make.height.greaterThanOrEqualTo(50)
         make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
+    }
+
+    if let tag = inputFieldTag {
+        textInputField.tag = tag
     }
 
     return section
