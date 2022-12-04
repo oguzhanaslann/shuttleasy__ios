@@ -63,7 +63,7 @@ class ProfileEditViewModel {
     }
 
     func editProfile(
-        profilePhotoData: Data,
+        profilePhotoData: Data?,
         name: String,
         surname: String,
         email: String,
@@ -73,6 +73,11 @@ class ProfileEditViewModel {
             editProfileSubject.send(.proccessing)
             return 
         }
+        
+        if (profilePhotoData == nil) {
+            editProfileSubject.send(.error)
+            return
+        }
 
         task =  Task.init {
             let result = await userInfoRepository.editProfile(
@@ -81,7 +86,7 @@ class ProfileEditViewModel {
                   surname: surname,
                   email: email,
                   phoneNumber: phone,
-                  profileImage: profilePhotoData
+                  profileImage: profilePhotoData!
               )
             )
 

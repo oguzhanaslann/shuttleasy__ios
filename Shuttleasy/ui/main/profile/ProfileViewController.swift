@@ -353,6 +353,13 @@ class ProfileViewController: BaseViewController {
                 self.getPhoneNumberLabel().text = profile.profilePhone
             }
         })
+ 
+        NotificationCenter.default.addObserver(self, selector: #selector(onProfileUpdated), name: Notification.Name(NotificationEvents.profileUpdated.rawValue), object: nil)
+    }
+
+    @objc func onProfileUpdated() {
+        print("ProfileUpdated - event received")
+        profileViewModel.getUserProfile()
     }
 }
 

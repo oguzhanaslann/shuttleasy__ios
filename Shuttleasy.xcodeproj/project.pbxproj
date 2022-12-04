@@ -58,6 +58,7 @@
 		D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */; };
 		D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */; };
 		D48D8CEA293CE5E400E72C0F /* ProfileEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */; };
+		D48D8CED293D097300E72C0F /* NotificationEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D8CEC293D097300E72C0F /* NotificationEvents.swift */; };
 		D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */; };
 		D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADE293409C700D02694 /* ViewGenerators.swift */; };
 		D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */; };
@@ -161,6 +162,7 @@
 		D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewModel.swift; sourceTree = "<group>"; };
 		D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEdit.swift; sourceTree = "<group>"; };
+		D48D8CEC293D097300E72C0F /* NotificationEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEvents.swift; sourceTree = "<group>"; };
 		D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D4A62ADE293409C700D02694 /* ViewGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGenerators.swift; sourceTree = "<group>"; };
 		D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordResetViewModel.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 		D44F26142920029C00CD5B85 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				D48D8CEB293D096100E72C0F /* events */,
 				D4F116F528F9210F0083C5EB /* SceneDelegate.swift */,
 				D4816DB02920D40700ECB799 /* WindowDelegate.swift */,
 				D4F591E8292149F900125E90 /* authentication */,
@@ -438,6 +441,14 @@
 				D4816DC12920FF4000ECB799 /* OnboardViewModel.swift */,
 			);
 			path = onboard;
+			sourceTree = "<group>";
+		};
+		D48D8CEB293D096100E72C0F /* events */ = {
+			isa = PBXGroup;
+			children = (
+				D48D8CEC293D097300E72C0F /* NotificationEvents.swift */,
+			);
+			path = events;
 			sourceTree = "<group>";
 		};
 		D4C10266293BA6AF004812C1 /* profileEdit */ = {
@@ -904,6 +915,7 @@
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,
 				D4F3E1902934D09D00D10463 /* ResetCodeViewModel.swift in Sources */,
 				D4217A06293B622F004E4744 /* UiDataState.swift in Sources */,
+				D48D8CED293D097300E72C0F /* NotificationEvents.swift in Sources */,
 				D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */,
 				D4C10261293B8C71004812C1 /* UserProfileDTO.swift in Sources */,
 				D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */,

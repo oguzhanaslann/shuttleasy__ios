@@ -10,6 +10,8 @@ import Foundation
 import Combine
 import SnapKit
 import Kingfisher
+import Photos
+import PhotosUI
 
 class ProfileEditViewController: BaseViewController {
 
@@ -70,8 +72,20 @@ class ProfileEditViewController: BaseViewController {
             make.center.equalToSuperview()
         }
 
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto))
+        view.addGestureRecognizer(tapGesture)
+
         return view
     }()
+
+    @objc func addNewPhoto() {
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 1
+        config.filter = .images
+        let pickerVC = PHPickerViewController(configuration: config)
+        pickerVC.delegate = self
+        present(pickerVC, animated: true)
+    }
     
     private lazy var nameInputSection : UIView = {
         let inputSection = textInputSection(
@@ -144,7 +158,34 @@ class ProfileEditViewController: BaseViewController {
     }()  
     
     func onUpdateClicked() {
-        // TODO: Implement" 
+        let profileImageData = profileImageView.image?.pngData()
+        let name = findNameInput()?.text ?? ""
+        guard name.isEmpty.not() else {
+            self.showErrorSnackbar(message: "Name cannot be empty")
+            return
+        }
+
+        let surname = findSurnameInput()?.text ?? ""
+        guard surname.isEmpty.not() else {
+            self.showErrorSnackbar(message: "Surname cannot be empty")
+            return
+        }
+
+
+        let email = findEmailInput()?.text ?? ""
+        guard isValidEmail(email) else {
+            self.showErrorSnackbar(message: "Email is not valid")
+            return
+        }
+
+
+        let phone = findPhoneInput()?.text ?? ""
+        guard phone.count > 1 else {
+            self.showErrorSnackbar(message: "Phone cannot be empty")
+            return
+        }
+
+        profileEditViewModel.editProfile(profilePhotoData: profileImageData , name: name, surname: surname, email: email, phone: phone)
     }
     
     override func viewDidLoad() {
@@ -181,8 +222,7 @@ class ProfileEditViewController: BaseViewController {
         }
 
         view.bringSubviewToFront(profileImageView)
-         view.bringSubviewToFront(addNewPhotoView)
-
+        view.bringSubviewToFront(addNewPhotoView)
         view.addSubview(profileTitle)
         profileTitle.snp.makeConstraints { make in
             make.top.equalTo(profileBackgroundView.snp.top).offset(56)
@@ -205,6 +245,10 @@ class ProfileEditViewController: BaseViewController {
             make.height.equalTo(56)
         }
 
+        
+        let nameInput = findNameInput()
+        nameInput?.addTarget(self, action: #selector(nameInputChanged), for: .editingChanged)
+
         view.addSubview(surnameInputSection)
         surnameInputSection.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(profileImageView.snp.bottom).offset(24)
@@ -212,6 +256,10 @@ class ProfileEditViewController: BaseViewController {
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
         }
+
+        
+        let surnameInput = findSurnameInput()
+        surnameInput?.addTarget(self, action: #selector(surnameInputChanged), for: .editingChanged)
 
         view.addSubview(emailInputSection)
         emailInputSection.snp.makeConstraints { make in
@@ -221,6 +269,10 @@ class ProfileEditViewController: BaseViewController {
             make.height.equalTo(56)
         }
 
+        
+        let emailInput = findEmailInput()
+        emailInput?.addTarget(self, action: #selector(emailInputChanged), for: .editingChanged)
+
         view.addSubview(phoneInputSection)
         phoneInputSection.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(emailInputSection.snp.bottom).offset(36)
@@ -228,6 +280,10 @@ class ProfileEditViewController: BaseViewController {
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
         }
+
+        
+        let phoneInput = findPhoneInput()
+        phoneInput?.addTarget(self, action: #selector(phoneInputChanged), for: .editingChanged)
 
 
         view.addSubview(updateProfileInformationButton)
@@ -238,7 +294,26 @@ class ProfileEditViewController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
         }
     }
-    
+
+    @objc func nameInputChanged() {
+        // No-op
+    }
+
+    @objc func surnameInputChanged() {
+        // No-op
+    }
+
+    @objc func emailInputChanged() {
+        // No-op
+    }
+
+    @objc func phoneInputChanged() {
+        let phoneInput = findPhoneInput()
+        if phoneInput?.text?.isEmpty ?? true {
+            phoneInput?.text = "+"
+        }
+    }
+
     func subcribeObservers() {
         userProfileObserver = profileEditViewModel.userProfilePublisher
             .receive(on: DispatchQueue.main)
@@ -261,6 +336,45 @@ class ProfileEditViewController: BaseViewController {
                         }
                     }
             )
+        
+        editProfileObserver = profileEditViewModel.editProfilePublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { completion in
+                    switch completion {
+                        case .finished:
+                            break
+                        case .failure(let error):
+                            self.showErrorSnackbar(message: error.localizedDescription)
+                    }
+                }, receiveValue: { editProfileState in
+                    switch editProfileState {
+                        case .proccessing:
+                            break
+                        case .success:
+                            NotificationCenter.default.post(
+                                name: NSNotification.Name(NotificationEvents.profileUpdated.rawValue),
+                                object: nil
+                            )
+                            Navigator.shared.popBack()
+                        case .error:
+                            self.showErrorSnackbar(message: "Error updating profile")
+                    }
+                }
+            )
     }
+}
 
+extension ProfileEditViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true,completion: nil)
+        results.forEach { imageResult in
+            imageResult.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+                guard let image = reading as? UIImage, error == nil else { return }
+                DispatchQueue.main.async {
+                    self.profileImageView.image = image
+                }
+            }
+        }
+    }
 }
