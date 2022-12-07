@@ -44,6 +44,7 @@
 		D4422EA329386E8C00342B29 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4422E9029386E8B00342B29 /* Poppins-SemiBold.ttf */; };
 		D4422EA429386E8C00342B29 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4422E9129386E8B00342B29 /* Poppins-MediumItalic.ttf */; };
 		D4422EA529386E8C00342B29 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D4422E9229386E8C00342B29 /* OFL.txt */; };
+		D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D4D7329411CA90024D0AC /* ApiService.swift */; };
 		D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261629200C5C00CD5B85 /* FontUtil.swift */; };
 		D44F261929200F8500CD5B85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261829200F8500CD5B85 /* Color.swift */; };
 		D44F261F292014CF00CD5B85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261E292014CF00CD5B85 /* Constants.swift */; };
@@ -148,6 +149,7 @@
 		D4422E9029386E8B00342B29 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		D4422E9129386E8B00342B29 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		D4422E9229386E8C00342B29 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		D44D4D7329411CA90024D0AC /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D44F261E292014CF00CD5B85 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */,
 				D4C1025E293B8C4C004812C1 /* UserAuthDTO.swift */,
 				D4C10260293B8C71004812C1 /* UserProfileDTO.swift */,
+				D44D4D7329411CA90024D0AC /* ApiService.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -926,6 +929,7 @@
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
+				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
