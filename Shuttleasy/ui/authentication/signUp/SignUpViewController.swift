@@ -182,10 +182,6 @@ class SignUpViewController: BaseViewController {
         }
     }
 
-    func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(clearBackStack: true)
-    }
-
     func onSignUpButtonClicked() {
         let isPrivacyAgreementChecked = self.isPrivacyAgreementChecked()
 

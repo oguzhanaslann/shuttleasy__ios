@@ -107,7 +107,8 @@ class ResetPasswordViewController: BaseViewController {
         view.addSubview(passwordInputSection)
         passwordInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
         }
         
         view.addSubview(resetButton)
@@ -143,7 +144,7 @@ class ResetPasswordViewController: BaseViewController {
     }
 
     func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(clearBackStack: true)
+        Navigator.shared.navigateToMainpage(clearBackStack: true, hideNavBar: true)
     }
 
     @objc

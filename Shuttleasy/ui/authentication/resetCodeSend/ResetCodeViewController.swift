@@ -112,7 +112,8 @@ class ResetCodeViewController : BaseViewController {
         view.addSubview(resetCodeInputSection)
         resetCodeInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
         }
       
       

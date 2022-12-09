@@ -18,7 +18,7 @@ protocol  UserNetworkDataSource {
     ) async throws -> UserAuthDTO
     func sendResetCodeTo(email: String) async throws -> Bool
     func sendResetCode(code: String, email : String) async throws -> String
-    func resetPassword(password: String, passwordAgain: String) async throws -> Bool
+    func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO
     func getUserProfile() async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO
 }
@@ -65,9 +65,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         return "some token"
     }
 
-    func resetPassword(password: String, passwordAgain: String) async throws -> Bool {
+    func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - resetPassword - password: \(password)")
-        return true
+        return UserAuthDTO(
+            id : "123",
+            authenticationToken: "123",
+            profileType: .driver
+        )
     }
 
     func getUserProfile() async throws -> UserProfileDTO {

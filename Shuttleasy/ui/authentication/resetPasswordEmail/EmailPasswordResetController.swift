@@ -92,14 +92,13 @@ class EmailPasswordResetController: BaseViewController {
             make.left.right.equalToSuperview()
         }
         
-        
         view.addSubview(resetAccountEmailInputSection)
         resetAccountEmailInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
         }
-        
-                
+
         view.addSubview(signInButton)
         signInButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-36)

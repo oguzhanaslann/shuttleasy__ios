@@ -61,8 +61,10 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
     }
     
     func resetPassword(password: String, passwordAgain: String) async throws -> Bool {
-        let isReset = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
-        return isReset
+        let authDTO = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
+        await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+        await localDatasource.setAsLoggedIn()
+        return true
     }
         
     func getUserProfile() async -> Result<UserProfile, Error> {

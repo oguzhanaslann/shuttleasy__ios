@@ -172,7 +172,7 @@ class SignInViewController: BaseViewController {
     }
     
     func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(clearBackStack: true)
+        Navigator.shared.navigateToMainpage(clearBackStack: true,hideNavBar: true)
     }
 
     func onSignInClicked() {
