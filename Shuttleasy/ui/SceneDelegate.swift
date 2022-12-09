@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
         let rootViewController : UIViewController
         if(hasSeenOnboard && hasLoggedIn) {
-            rootViewController = MainViewController()
+            rootViewController = SignInViewController()
         } else if(!hasSeenOnboard) {           
              rootViewController = OnBoardingViewContoller()  
         } else if (!hasLoggedIn) {
@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let navController = UINavigationController(rootViewController: rootViewController)
-        navController.setNavigationBarHidden(true, animated: false)
+        //navController.setNavigationBarHidden(true, animated: false)
         WindowDelegate.shared.setRootViewController(navController: navController)
     }
 

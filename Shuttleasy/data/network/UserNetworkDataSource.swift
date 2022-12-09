@@ -9,7 +9,13 @@ import Foundation
 
 protocol  UserNetworkDataSource {
     func signInUser(email: String , password: String) async throws -> UserAuthDTO
-    func signUpUser(email: String , password: String) async throws -> UserAuthDTO
+    func signUpUser(
+        email: String,
+        password: String,
+        name :String,
+        surname: String,
+        phone : String
+    ) async throws -> UserAuthDTO
     func sendResetCodeTo(email: String) async throws -> Bool
     func sendResetCode(code: String, email : String) async throws -> String
     func resetPassword(password: String, passwordAgain: String) async throws -> Bool
@@ -34,7 +40,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         )
     }
 
-    func signUpUser(email: String, password: String) async throws -> UserAuthDTO {
+    func signUpUser(
+        email: String,
+        password: String,
+        name :String,
+        surname: String,
+        phone : String
+    ) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password: \(password)")
         return UserAuthDTO(
             id : "123",

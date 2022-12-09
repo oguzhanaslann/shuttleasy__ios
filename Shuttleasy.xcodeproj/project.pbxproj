@@ -50,6 +50,7 @@
 		D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261629200C5C00CD5B85 /* FontUtil.swift */; };
 		D44F261929200F8500CD5B85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261829200F8500CD5B85 /* Color.swift */; };
 		D44F261F292014CF00CD5B85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261E292014CF00CD5B85 /* Constants.swift */; };
+		D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47217062942D2C800216931 /* ProfileSetupViewController.swift */; };
 		D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DB02920D40700ECB799 /* WindowDelegate.swift */; };
 		D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DB22920D5C300ECB799 /* BaseViewController.swift */; };
 		D4816DB52920E64900ECB799 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4816DB42920E64900ECB799 /* Extensions.swift */; };
@@ -157,6 +158,7 @@
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D44F261E292014CF00CD5B85 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D47217062942D2C800216931 /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
 		D4816DB02920D40700ECB799 /* WindowDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowDelegate.swift; sourceTree = "<group>"; };
 		D4816DB22920D5C300ECB799 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D4816DB42920E64900ECB799 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -294,7 +296,8 @@
 		D40B27EC292A787300140612 /* signUp */ = {
 			isa = PBXGroup;
 			children = (
-				D4F3E1922934DF1100D10463 /* reserPasswordEmail */,
+				D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */,
+				D40B27ED292A789500140612 /* SignUpViewController.swift */,
 			);
 			path = signUp;
 			sourceTree = "<group>";
@@ -443,6 +446,14 @@
 			path = base;
 			sourceTree = "<group>";
 		};
+		D47217082942D2CD00216931 /* profileSetup */ = {
+			isa = PBXGroup;
+			children = (
+				D47217062942D2C800216931 /* ProfileSetupViewController.swift */,
+			);
+			path = profileSetup;
+			sourceTree = "<group>";
+		};
 		D4816DC02920FF2600ECB799 /* onboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,15 +554,6 @@
 			path = resetCodeSend;
 			sourceTree = "<group>";
 		};
-		D4F3E1922934DF1100D10463 /* reserPasswordEmail */ = {
-			isa = PBXGroup;
-			children = (
-				D40B27ED292A789500140612 /* SignUpViewController.swift */,
-				D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */,
-			);
-			path = reserPasswordEmail;
-			sourceTree = "<group>";
-		};
 		D4F3E1932934E1A600D10463 /* resetPasswordEmail */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +621,7 @@
 		D4F591E8292149F900125E90 /* authentication */ = {
 			isa = PBXGroup;
 			children = (
+				D47217082942D2CD00216931 /* profileSetup */,
 				D4F3E1932934E1A600D10463 /* resetPasswordEmail */,
 				D4F3E1912934DEF100D10463 /* resetCodeSend */,
 				D40B27EC292A787300140612 /* signUp */,
@@ -937,6 +940,7 @@
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
+				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,

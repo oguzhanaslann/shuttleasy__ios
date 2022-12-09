@@ -39,7 +39,6 @@ class Navigator {
         WindowDelegate.shared.setRootViewController(navController: navigationController)
     } 
 
-
     func popBack(_ animated : Bool = true) {
         WindowDelegate.shared.popBackstack(animated: animated)
     }
@@ -73,5 +72,10 @@ class Navigator {
     func navigateToProfileEdit(clearBackStack : Bool = false) {
         let profileEditViewController = ProfileEditViewController()
         navigateAndClearBackStackIfNeeded(viewController: profileEditViewController, clearBackStack: clearBackStack)    
+    }
+
+    func navigateToProfileSetup(clearBackStack : Bool = false, signUpModelShort : SignUpModelShort) {
+        let profileSetupViewController = ProfileSetupViewController(signUpModelShort: signUpModelShort)
+        navigateAndClearBackStackIfNeeded(viewController: profileSetupViewController, clearBackStack: clearBackStack)    
     }
 }

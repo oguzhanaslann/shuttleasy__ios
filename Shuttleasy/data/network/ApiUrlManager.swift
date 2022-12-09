@@ -83,6 +83,6 @@ class ApiUrlManager {
     }
     
     func rejectDriverTripRequest() -> String {
-        return
+        return ""
     }
 }

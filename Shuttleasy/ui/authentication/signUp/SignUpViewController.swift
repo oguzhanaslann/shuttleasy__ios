@@ -10,9 +10,6 @@ import Combine
 
 class SignUpViewController: BaseViewController {
 
-    private let signUpViewModel = Injector.shared.injectSignUpViewModel()
-    private var cancellable : AnyCancellable? = nil
-
     private static let INPUT_TEXT_FIELD_INDEX = 1
 
     private lazy var logoContainer : UIView = {
@@ -87,7 +84,7 @@ class SignUpViewController: BaseViewController {
         let checkbox = privacyAgreementCheckbox
         view.addSubview(checkbox)
         checkbox.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(24)
+            make.left.equalToSuperview()
         }
 
         checkbox.setOnClickListener {
@@ -100,7 +97,7 @@ class SignUpViewController: BaseViewController {
         privacyText.breakLineFromEndIfNeeded()
         view.addSubview(privacyText)
         privacyText.snp.makeConstraints { make in
-            make.left.greaterThanOrEqualTo(checkbox.snp.right).offset(8)
+            make.left.greaterThanOrEqualTo(checkbox.snp.right)
             make.centerY.equalToSuperview()
             make.height.equalTo(24)
         }
@@ -128,7 +125,7 @@ class SignUpViewController: BaseViewController {
     lazy var signUpButton : UIButton = {
         let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
-            self.onSignInButtonClicked()
+            self.onSignUpButtonClicked()
         }
         return button
     }()
@@ -164,7 +161,8 @@ class SignUpViewController: BaseViewController {
         view.addSubview(emailAndPasswordInputSection)
         emailAndPasswordInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
         }
         
         
@@ -182,31 +180,13 @@ class SignUpViewController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
             make.centerX.equalToSuperview()
         }
-
-        subscribeObservers()
-    }
-
-     func subscribeObservers() {
-      cancellable = signUpViewModel.signUpResult
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-            switch completion {
-                case .finished:
-                    break 
-                case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
-            }
-            
-        } receiveValue: { result in
-            self.navigateToMainpage()
-        }
     }
 
     func navigateToMainpage() {
         Navigator.shared.navigateToMainpage(clearBackStack: true)
     }
 
-    func onSignInButtonClicked() {
+    func onSignUpButtonClicked() {
         let isPrivacyAgreementChecked = self.isPrivacyAgreementChecked()
 
         guard isPrivacyAgreementChecked else {
@@ -225,8 +205,10 @@ class SignUpViewController: BaseViewController {
         guard isValidPassword(password) else { 
             self.showErrorSnackbar(message : "Please enter a valid password")
             return
-        }    
-
-        signUpViewModel.signInUser(email: email, password: password)
+        }
+        
+        let signUpModelShort = SignUpModelShort(email: email, password: password)
+        Navigator.shared.navigateToProfileSetup(signUpModelShort: signUpModelShort)
+        
     }
 }

@@ -25,6 +25,7 @@ class SignInViewModel : ViewModel {
                let result = try await self.authenticator.signInUser(email: email, password: password)
                 self.signInResult.send(result)
             } catch {
+                print("error")
                 self.signInResult.send(completion: .failure(error))
             }
         }
