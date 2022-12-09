@@ -7,31 +7,47 @@
 
 import Foundation
 
-let baseApiUrl = "https://api.shuttleasy.com/v1/"
+let baseApiUrl = "http://192.168.1.11:7129/api/" //"https://api.shuttleasy.com/v1/"
 
 class ApiUrlManager {
     static let shared = ApiUrlManager()
     
     private init() {}
     
-    func signInUser() -> String {
-        return baseApiUrl + "auth/signin"
-    }
-    
-    func signUpUser() -> String {
-        return baseApiUrl + "passenger/auth/signup"
-    }
-    
-    func sendResetCodeTo() -> String {
-        return baseApiUrl + "auth/forgot-password"
+    func signInPassenger()) -> String {
+        return baseApiUrl + "Passenger/Login"
     }
 
-    func otpConfirm() -> String {
-        return baseApiUrl + "auth/forgot-password/otp-confirm"
+    func signInDriver() -> String {
+        return baseApiUrl + "Driver/Login"
     }
     
-    func resetPassword() -> String {
-        return baseApiUrl + "auth/reset-password"
+    func signUpPassenger() -> String {
+        return baseApiUrl + "Passenger/SignUp"
+    }
+
+    func sendResetCodeDriver() -> String {
+        return baseApiUrl + "Driver/SendOTPEmail"
+    }
+
+    func sendResetCodePassenger() -> String {
+        return baseApiUrl + "Passenger/SendOTPEmail"
+    }
+
+    func otpConfirmDriver() -> String {
+        return baseApiUrl + "Driver/ValidateOTPEmail"
+    }
+
+    func otpConfirmPassenger() -> String {
+        return baseApiUrl + "Passenger/ValidateOTPEmail"
+    }
+    
+    func resetPasswordPassenger() -> String {
+        return baseApiUrl + "Passenger/ResetPassword "
+    }
+
+    func resetPasswordDriver() -> String {
+        return baseApiUrl + "Driver/ResetPassword "
     }
     
     func getUserProfile() -> String {
@@ -39,50 +55,10 @@ class ApiUrlManager {
     }
     
     func editProfile() -> String {
-        return baseApiUrl + "profile"
+        return baseApiUrl + "Passenger/UpdatePassenger"
     }
 
     func deleteProfile() -> String {
-        return baseApiUrl + "profile"
-    }
-    
-    func getDriverVehicles() -> String {
-        return baseApiUrl + "driver/vehicles"
-    }
-    
-    func addDriverVehicle() -> String {
-        return baseApiUrl + "driver/vehicles"
-    }
-    
-    func editDriverVehicle() -> String {
-        return baseApiUrl + "driver/vehicles"
-    }
-
-    func getDriverTrips() -> String {
-        return baseApiUrl + "driver/trips"
-    }
-    
-    func addDriverTrip() -> String {
-        return baseApiUrl + "driver/trips"
-    }
-    
-    func editDriverTrip() -> String {
-        return baseApiUrl + "driver/trips"
-    }
-    
-    func getDriverTripRequests() -> String {
-        return baseApiUrl + "driver/trip-requests"
-    }
-    
-    func getDriverTripRequest() -> String {
-        return baseApiUrl + "driver/trip-requests"
-    }
-    
-    func acceptDriverTripRequest() -> String {
-        return baseApiUrl + "driver/trip-requests/accept"
-    }
-    
-    func rejectDriverTripRequest() -> String {
-        return ""
+        return baseApiUrl + "Passenger/Delete"
     }
 }
