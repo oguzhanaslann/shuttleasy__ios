@@ -18,19 +18,36 @@ class Injector {
     
     private init() {
         registerUserInfoLocalDataSource()
-        registerUsserNetworkDataSource()
+        registerNetworkingDependencies()
     }
     
     private func registerUserInfoLocalDataSource() {
         container.register(UserInfoLocalDataSource.self, name: Injector.userLocalInfoDependency) { resolver in
-            return UserInfoLocalDataSourceImpl()
+            return UserInfoLocalDataSourceImpl(memoryDataSource: MemoryDataSource.shared)
         }
     }
 
-    private func registerUsserNetworkDataSource() {
+    func registerNetworkingDependencies() {
+        registerAPIService()
+        registerUserNetworkDataSource()
+    }
+    
+    private func registerUserNetworkDataSource() {
         container.register(UserNetworkDataSource.self, name: Injector.userNetworkInfoDependency) { resolver in
-            return UserNetworkDataSourceImpl()
+            return UserNetworkDataSourceImpl(
+                apiService: self.injectApiService()
+            )
         }
+    }
+
+    private func registerAPIService() {
+        container.register(ApiService.self) { resolver in
+            return ApiService(tokenProvider: MemoryDataSource.shared)
+        }.inObjectScope(.container)
+    }
+    
+    func injectApiService() -> ApiService {
+        return container.resolve(ApiService.self)!
     }
     
     private func registerDependencyIfNotRegistered<T>(dependency : T.Type,objectScope: ObjectScope? = nil, onRegisterNeeded : @escaping ( Resolver ) -> T ) {

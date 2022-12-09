@@ -25,6 +25,12 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     private static let USER_ID_KEY = "USER_ID"
     private static let USER_AUTH_TOKEN_KEY = "USER_AUTH_TOKEN_KEY"
     private static let USER_PROFILE_TYPE_KEY = "USER_PROFILE_TYPE_KEY"
+
+    let memoryDataSource : MemoryDataSource
+
+    init(memoryDataSource : MemoryDataSource) {
+        self.memoryDataSource = memoryDataSource
+    }
     
     func setAsSeenOnboard() async {
         UserDefaults.standard.set(true, forKey: UserInfoLocalDataSourceImpl.onboardSeenKey)
@@ -43,6 +49,7 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
 
     func saveAuthToken(token: String) async {
         UserDefaults.standard.set(token, forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
+        memoryDataSource.setAuthToken(token: token)
     }
     
     func isDarkMode() async -> Bool {

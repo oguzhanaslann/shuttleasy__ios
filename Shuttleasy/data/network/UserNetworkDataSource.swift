@@ -18,8 +18,11 @@ protocol  UserNetworkDataSource {
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
-
-
+    
+    let apiService: ApiService
+    init(apiService: ApiService) {
+        self.apiService = apiService
+    }
     
     func signInUser(email: String, password: String) async throws -> UserAuthDTO {
         // TODO: Implement this method with real network call
