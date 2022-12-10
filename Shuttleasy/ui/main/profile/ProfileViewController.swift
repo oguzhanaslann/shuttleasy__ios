@@ -160,6 +160,17 @@ class ProfileViewController: BaseViewController {
 
     @objc func onDeleteAccountClicked(_ sender: UITapGestureRecognizer) {
         print("onDeleteAccountClicked")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            print("delete account")
+        })
+
+        showAlertDialog(
+            title: "Delete Account",
+            message: "Are you sure you want to delete your account?",
+            actions: [cancelAction, deleteAction]
+        )
     }
 
     lazy var generalSettingsSectionView  : UIView = {
