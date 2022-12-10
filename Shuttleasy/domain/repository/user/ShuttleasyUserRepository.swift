@@ -23,8 +23,8 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
     }
     
     
-    func signInUser(email: String, password: String) async throws -> Bool {
-        let authDTO = try await networkDatasource.signInUser(email: email, password: password)
+    func signInUser(email: String, password: String, isDriver: Bool) async throws -> Bool {
+        let authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
         await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
         await localDatasource.setAsLoggedIn()
         return true

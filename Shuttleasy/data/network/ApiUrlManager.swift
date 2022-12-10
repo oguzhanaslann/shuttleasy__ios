@@ -14,7 +14,7 @@ class ApiUrlManager {
     
     private init() {}
     
-    func signInPassenger()) -> String {
+    func signInPassenger() -> String {
         return baseApiUrl + "Passenger/Login"
     }
 

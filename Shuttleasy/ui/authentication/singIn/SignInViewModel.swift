@@ -19,10 +19,14 @@ class SignInViewModel : ViewModel {
         self.authenticator = authenticatior
     }
     
-    func signInUser(email: String , password: String) {
+    func signInUser(email: String , password: String, isDriver: Bool = false) {
         Task.init {
             do {
-               let result = try await self.authenticator.signInUser(email: email, password: password)
+               let result = try await self.authenticator.signInUser(
+                    email: email,
+                    password: password,
+                    isDriver: isDriver
+                )
                 self.signInResult.send(result)
             } catch {
                 print("error")

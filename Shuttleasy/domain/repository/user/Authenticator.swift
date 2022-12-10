@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Authenticator {
-    func signInUser(email : String, password: String) async throws -> Bool
+    func signInUser(email : String, password: String, isDriver : Bool) async throws -> Bool
     func signUpUser(
         email : String,
         password: String,

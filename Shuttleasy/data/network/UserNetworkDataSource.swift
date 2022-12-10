@@ -8,7 +8,7 @@
 import Foundation
 
 protocol  UserNetworkDataSource {
-    func signInUser(email: String , password: String) async throws -> UserAuthDTO
+    func signInUser(email: String , password: String, isDriver : Bool) async throws -> UserAuthDTO
     func signUpUser(
         email: String,
         password: String,
@@ -30,9 +30,9 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         self.apiService = apiService
     }
     
-    func signInUser(email: String, password: String) async throws -> UserAuthDTO {
+    func signInUser(email: String, password: String,isDriver : Bool) async throws -> UserAuthDTO {
         // TODO: Implement this method with real network call
-        print("UserNetworkDataSourceImpl - signInUser - email: \(email) - password: \(password)")
+        print("UserNetworkDataSourceImpl - signInUser - email: \(email) - password: \(password) - isDriver: \(isDriver)")
         return UserAuthDTO(
             id : "123",
             authenticationToken: "123",

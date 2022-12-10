@@ -50,7 +50,8 @@ class ResetPasswordViewController: BaseViewController {
             title: "Password",
             inputHint: "Password...",
             keyboardInputType: .default,
-            textContentType: .password
+            textContentType: .password,
+            isSecureEntry: true
         )
 
         stack.addArrangedSubview(passwordSection)

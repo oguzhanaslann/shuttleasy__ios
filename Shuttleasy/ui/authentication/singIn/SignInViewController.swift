@@ -15,6 +15,7 @@ class SignInViewController: BaseViewController {
     private var cancellable : AnyCancellable? = nil
 
     private static let INPUT_TEXT_FIELD_INDEX = 1
+    private static let driverFlagSwitchTag = 2
 
     private lazy var logoContainer : UIView = {
         let view = UILabel()
@@ -66,6 +67,12 @@ class SignInViewController: BaseViewController {
             make.height.equalTo(56)
         }
 
+        let driverFlagSection = driverFlagSection()
+        stack.addArrangedSubview(driverFlagSection)
+        driverFlagSection.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(56)
+        }
 
         let forgotPasswordLabel = UILabel()
         forgotPasswordLabel.attributedText =  NSMutableAttributedString()
@@ -82,7 +89,7 @@ class SignInViewController: BaseViewController {
         
         forgotPasswordLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.height.equalTo(48)
+            make.height.equalTo(24)
         }
         
         return stack
@@ -118,8 +125,44 @@ class SignInViewController: BaseViewController {
         
         return label
     }()
+
+    func driverFlagSection() -> UIView {
+        let view = UIView()
+        view.backgroundColor = backgroundColor
+        let label = BodySmall(text: "I am a driver", color: onBackgroundColor)
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(8)
+            make.centerY.equalToSuperview()
+        }
+
+        let switchButton = UISwitch()
+        switchButton.tintColor = onPrimaryColor
+        switchButton.onTintColor = primaryColor
+        switchButton.tag =  SignInViewController.driverFlagSwitchTag
+        switchButton.addTarget(self, action: #selector(SignInViewController.onDriverFlagSwitched), for: .valueChanged)
+        view.addSubview(switchButton)
+        switchButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-8)
+            make.centerY.equalToSuperview()
+        }
+
+        view.layer.borderColor = outline.cgColor
+        view.layer.borderWidth = 0.1
+        view.layer.cornerRadius = roundedMediumCornerRadius
+        view.layer.masksToBounds = true
     
+        return view
+    }
+
+    @objc func onDriverFlagSwitched(sender: UISwitch) {}
+
+    // get the driver flag switch by tag
+    func getDriverFlagSwitch() -> UISwitch {
+          return view.viewWithTag(SignInViewController.driverFlagSwitchTag) as! UISwitch
+    }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(logoContainer)
@@ -128,14 +171,12 @@ class SignInViewController: BaseViewController {
             make.left.right.equalToSuperview()
         }
         
-        
         view.addSubview(emailAndPasswordInputSection)
         emailAndPasswordInputSection.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
         }
-        
         
         view.addSubview(signUpInsteadText)
         signUpInsteadText.snp.makeConstraints { make in
@@ -189,7 +230,9 @@ class SignInViewController: BaseViewController {
             return
         }
 
-        signInViewModel.signInUser(email: email, password: password)
+        let isDriver = getDriverFlagSwitch().isOn
+        
+        signInViewModel.signInUser(email: email, password: password, isDriver: isDriver)
     }
     
     @objc
