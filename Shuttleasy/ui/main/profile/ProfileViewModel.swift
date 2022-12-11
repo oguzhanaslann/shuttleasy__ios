@@ -13,19 +13,23 @@ class ProfileViewModel: ViewModel {
     private let subject = CurrentValueSubject<UiDataState<UserProfile>, Error>(UiDataState.getDefaultCase())
     let publisher: AnyPublisher<UiDataState<UserProfile>, Error>
 
-    private let userInfoRepository: UserRepository
+    private let userLogoutResultSubject = PassthroughSubject<Void, Error>()
+    let userLogoutResultPublisher: AnyPublisher<Void, Error>
+
+    private let userRepository: UserRepository
     
     init(
-        userInfoRepository : UserRepository
+        userRepository : UserRepository
     ) {
         publisher = subject.eraseToAnyPublisher()
-        self.userInfoRepository  = userInfoRepository
+        userLogoutResultPublisher = userLogoutResultSubject.eraseToAnyPublisher()
+        self.userRepository  = userRepository
     }
     
     func getUserProfile() {
         subject.send(UiDataState.Loading)
         Task.init {
-            let userProfile =  await userInfoRepository.getUserProfile()
+            let userProfile =  await userRepository.getUserProfile()
             
             switch userProfile  {
                 case (.success(let userProfile) ):
@@ -49,6 +53,18 @@ class ProfileViewModel: ViewModel {
             return data?.qrSeed ?? ""
         } else {
             return ""
+        }
+    }
+
+    func logOut() {
+        Task.init {
+            let result = await userRepository.logOut()
+            switch result {
+                case .success(_):
+                    userLogoutResultSubject.send(())
+                case .failure(let error):
+                    userLogoutResultSubject.send(completion: .failure(error))
+            }
         }
     }
 }

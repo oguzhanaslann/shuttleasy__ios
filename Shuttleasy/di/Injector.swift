@@ -182,7 +182,7 @@ class Injector {
             dependency: ProfileViewModel.self,
             onRegisterNeeded: { resolver in
                 ProfileViewModel(
-                    userInfoRepository: self.injectUserRepository()
+                    userRepository: self.injectUserRepository()
                 )
             }
         )

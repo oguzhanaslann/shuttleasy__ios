@@ -12,4 +12,5 @@ protocol UserRepository {
     func getUserProfile() async -> Result<UserProfile, Error>
     func editProfile(profileEdit: ProfileEdit) async -> Result<UserProfile, Error>
     func deleteAccount(email: String, password: String) async -> Result<Bool, Error>
+    func logOut() async -> Result<Void, Error>
 }

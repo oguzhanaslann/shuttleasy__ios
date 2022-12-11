@@ -101,4 +101,10 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
             return .failure(error)
         }
     }
+    
+    
+    func logOut() async -> Result<Void, Error> {
+        await localDatasource.setAsLoggedOut(clearWholeData: false)
+        return .success(())
+    }
 }

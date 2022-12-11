@@ -15,6 +15,7 @@ class ProfileViewController: BaseViewController {
     
     private let profileViewModel : ProfileViewModel = Injector.shared.injectProfileViewModel()
     private var userProfileObserver : AnyCancellable? = nil 
+    private var userLogoutObserver : AnyCancellable? = nil
 
     private static let phoneNumberTag: Int = 1
     private static let emailTag: Int = 2
@@ -211,23 +212,23 @@ class ProfileViewController: BaseViewController {
         termsRow.addGestureRecognizer(tapGestureTerms)
         termsRow.isUserInteractionEnabled = true
 
-        
         let logOutRow = sectionEndIcon(
             title: "Log Out",
             iconView : resImage(name: "icLogout")
         )
-
-        uiView.addSubview(logOutRow)
-        logOutRow.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.top.greaterThanOrEqualTo(termsRow.snp.bottom).offset(24)
-            make.height.greaterThanOrEqualTo(24)
-        }
         
         let tapGestureLogOut = UITapGestureRecognizer(target: self, action: #selector(onLogOutClicked(_:)))
         logOutRow.addGestureRecognizer(tapGestureLogOut)
-        logOutRow.isUserInteractionEnabled = true        
+        logOutRow.isUserInteractionEnabled = true
+
+        uiView.addSubview(logOutRow)
+        logOutRow.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(termsRow.snp.bottom).offset(24)
+            make.height.greaterThanOrEqualTo(24)
+        }
+        
+         
         return uiView
     }()
 
@@ -241,6 +242,17 @@ class ProfileViewController: BaseViewController {
 
     @objc func onLogOutClicked(_ sender: UITapGestureRecognizer) {
         print("onLogOutClicked")
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { action in
+            self.profileViewModel.logOut()
+        })
+
+        showAlertDialog(
+            title:"Log Out",
+            message: "Are you sure you want to log out?",
+            actions: [cancelAction, logOutAction]
+        )
     }
 
     override func viewDidLoad() {
@@ -341,36 +353,61 @@ class ProfileViewController: BaseViewController {
             make.top.equalTo(preferencesSectionView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.greaterThanOrEqualTo(168)
+            make.height.greaterThanOrEqualTo(getGeneralSettingsSectionViewHeight())
         }
     }
 
+    func getGeneralSettingsSectionViewHeight() -> Int {
+        return 192
+    }
+
     func subcribeObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onProfileUpdated), name: Notification.Name(NotificationEvents.profileUpdated.rawValue), object: nil)
+
         userProfileObserver = profileViewModel.publisher
             .receive(on: DispatchQueue.main)
             .sink( receiveCompletion: { completion in
-            switch completion {
-                case .finished:
-                    break 
-                case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
-            }
-        }, receiveValue: { profileState in
-            profileState.onSuccess { profileData in
-                let profile = profileData.data
-                self.profileName.text = profile.profileName
-                self.profileImageView.load(url: profile.profileImageUrl)
-                self.getEmailLabel().text = profile.profileEmail
-                self.getPhoneNumberLabel().text = profile.profilePhone
-            }
-        })
- 
-        NotificationCenter.default.addObserver(self, selector: #selector(onProfileUpdated), name: Notification.Name(NotificationEvents.profileUpdated.rawValue), object: nil)
+                switch completion {
+                    case .finished:
+                        break 
+                    case .failure(let error):
+                        self.showErrorSnackbar(message: error.localizedDescription)
+                }
+             }, receiveValue: { profileState in
+                    profileState.onSuccess { profileData in
+                        let profile = profileData.data
+                        self.profileName.text = profile.profileName
+                        self.profileImageView.load(url: profile.profileImageUrl)
+                        self.getEmailLabel().text = profile.profileEmail
+                        self.getPhoneNumberLabel().text = profile.profilePhone
+                    }
+                }
+            )
+
+        userLogoutObserver = profileViewModel.userLogoutResultPublisher
+            .receive(on: DispatchQueue.main)
+            .sink( receiveCompletion: { completion in
+                    switch completion {
+                        case .finished:
+                            break 
+                        case .failure(let error):
+                            self.showErrorSnackbar(message: error.localizedDescription)
+                    }
+                }, receiveValue: { _ in
+                    self.onUserLogout()
+                }
+            )
+
     }
 
     @objc func onProfileUpdated() {
         print("ProfileUpdated - event received")
         profileViewModel.getUserProfile()
+    }
+
+    func onUserLogout() {
+          Navigator.shared.navigateToSignIn(clearBackStack: true)
     }
 }
 
@@ -520,6 +557,8 @@ extension ProfileViewController {
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+        
+        iconView.isUserInteractionEnabled = true
 
         return view
     }
