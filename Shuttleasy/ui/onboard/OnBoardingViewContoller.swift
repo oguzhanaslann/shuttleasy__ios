@@ -14,7 +14,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
 
     lazy var placeholderView : UIView = {
         let view = UIView()
-        view.backgroundColor = primaryColor
+        view.backgroundColor = primaryContainer
         return view
     }()
     
@@ -128,9 +128,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
             scrollView.scrollTo(horizontalPage: currentPage + 1)
         }
     }
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -149,7 +147,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
                 
         scrollView.snp.makeConstraints { make in
             view.bringSubviewToFront(scrollView)
-            make.top.equalToSuperview().offset(64)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.width.equalTo(view.snp.width)

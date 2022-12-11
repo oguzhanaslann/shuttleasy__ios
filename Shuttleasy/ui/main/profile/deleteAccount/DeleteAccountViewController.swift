@@ -117,12 +117,12 @@ class DeleteAccountViewController:  BaseViewController {
             return
         }
 
-        print("delete")
         deleteViewModel.deleteAccount(email: email, password: password)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Account Deletion"
         initViews()
         subscribeObservers()
     }
