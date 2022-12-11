@@ -363,7 +363,12 @@ class ProfileViewController: BaseViewController {
 
     func subcribeObservers() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onProfileUpdated), name: Notification.Name(NotificationEvents.profileUpdated.rawValue), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onProfileUpdated),
+            name: Notification.Name(NotificationEvents.profileUpdated.rawValue),
+            object: nil
+        )
 
         userProfileObserver = profileViewModel.publisher
             .receive(on: DispatchQueue.main)

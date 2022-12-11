@@ -33,8 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let navController = UINavigationController(rootViewController: rootViewController)
-        // UINavigationBar.appearance().backgroundColor = primaryContainer
-        // UINavigationBar.appearance().tintColor = onPrimaryContainer
+        UINavigationBar.appearance().backgroundColor = primaryContainer
+        UINavigationBar.appearance().tintColor = onPrimaryContainer
         WindowDelegate.shared.setRootViewController(navController: navController)
     }
 

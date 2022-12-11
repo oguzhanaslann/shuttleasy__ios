@@ -176,7 +176,7 @@ class DeleteAccountViewController:  BaseViewController {
     }
     
     override func getStatusBarColor() -> UIColor {
-        return errorContainer
+        return primaryContainer
     }
 }
 
