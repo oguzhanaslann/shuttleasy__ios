@@ -23,12 +23,12 @@ class ProfileEditViewModel {
     let editProfilePublisher : AnyPublisher<EditState,Never>
     
     
-    private let userInfoRepository: UserInfoRepository
+    private let userInfoRepository: UserRepository
     
     private var task : Task<(), Error>? = nil
 
     init(
-        userInfoRepository : UserInfoRepository
+        userInfoRepository : UserRepository
     ) {
         userProfilePublisher = userProfileSubject.eraseToAnyPublisher()
         editProfilePublisher = editProfileSubject.eraseToAnyPublisher()

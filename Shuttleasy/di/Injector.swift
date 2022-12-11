@@ -71,7 +71,7 @@ class Injector {
             dependency: OnboardViewModel.self,
             onRegisterNeeded: { resolver in
                 OnboardViewModel(
-                    userInfoRepository: self.injectUserInfoRepository()
+                    userInfoRepository: self.injectUserRepository()
                 )
             }
         )
@@ -79,7 +79,7 @@ class Injector {
         return container.resolve(OnboardViewModel.self)!
     }
     
-    func injectUserInfoRepository() -> UserInfoRepository {
+    func injectUserRepository() -> UserRepository {
         registerShuttleasyUserRepository()
         return container.resolve(ShuttleasyUserRepository.self)!
     }
@@ -182,7 +182,7 @@ class Injector {
             dependency: ProfileViewModel.self,
             onRegisterNeeded: { resolver in
                 ProfileViewModel(
-                    userInfoRepository: self.injectUserInfoRepository()
+                    userInfoRepository: self.injectUserRepository()
                 )
             }
         )
@@ -195,11 +195,25 @@ class Injector {
             dependency: ProfileEditViewModel.self,
             onRegisterNeeded: { resolver in
                 ProfileEditViewModel(
-                    userInfoRepository: self.injectUserInfoRepository()
+                    userInfoRepository: self.injectUserRepository()
                 )
             }
         )
         
         return container.resolve(ProfileEditViewModel.self)!
+    }
+
+
+    func injectDeleteAccountViewModel() -> DeleteAccountViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: DeleteAccountViewModel.self,
+            onRegisterNeeded: { resolver in
+                DeleteAccountViewModel(
+                    userRepository: self.injectUserRepository()
+                )
+            }
+        )
+        
+        return container.resolve(DeleteAccountViewModel.self)!
     }
 }

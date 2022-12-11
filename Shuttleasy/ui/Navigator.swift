@@ -45,7 +45,7 @@ class Navigator {
 
     private func navigateAndClearBackStack(to viewController: UIViewController, hideNavBar : Bool = false) {
         let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.setNavigationBarHidden(hideNavBar, animated: true)
+        //navigationController.setNavigationBarHidden(hideNavBar, animated: true)
         WindowDelegate.shared.setRootViewController(navController: navigationController)
     } 
 
@@ -118,6 +118,17 @@ class Navigator {
         let profileSetupViewController = ProfileSetupViewController(signUpModelShort: signUpModelShort)
         navigateAndClearBackStackIfNeeded(
             viewController: profileSetupViewController, 
+            clearBackStack: clearBackStack,
+            singleTop: singleTop,
+            hideNavBar: hideNavBar
+        )    
+    }
+
+    // delete account view controller
+    func navigateToDeleteAccount(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
+        let deleteAccountViewController = DeleteAccountViewController()
+        navigateAndClearBackStackIfNeeded(
+            viewController: deleteAccountViewController, 
             clearBackStack: clearBackStack,
             singleTop: singleTop,
             hideNavBar: hideNavBar

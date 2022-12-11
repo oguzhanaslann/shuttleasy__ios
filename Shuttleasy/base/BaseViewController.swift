@@ -8,9 +8,33 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController {    
+class BaseViewController: UIViewController {
+    
+    private var statusBarView : UIView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
+        setStatusBarColorIfNotSet()
+    }
+    
+    final func setStatusBarColorIfNotSet() {
+          if statusBarView == nil  {
+              statusBarView = UIView(frame: getStatusbarHeight())
+              statusBarView!.backgroundColor = getStatusBarColor()
+          }
+
+          if view.subviews.contains(statusBarView!).not() {
+              view.addSubview(statusBarView!)
+          }
+      }
+    
+    
+    func getStatusBarColor() -> UIColor {
+        return primaryColor
+    }
+    
+    func getStatusbarHeight() -> CGRect {
+        return UIApplication.shared.statusBarFrame
     }
 }

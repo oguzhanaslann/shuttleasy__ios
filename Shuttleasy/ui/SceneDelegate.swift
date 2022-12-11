@@ -33,11 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let navController = UINavigationController(rootViewController: rootViewController)
-        
-        if hasSeenOnboard && hasLoggedIn {
-            navController.setNavigationBarHidden(true, animated: false)
-        }
-
+        // UINavigationBar.appearance().backgroundColor = primaryContainer
+        // UINavigationBar.appearance().tintColor = onPrimaryContainer
         WindowDelegate.shared.setRootViewController(navController: navController)
     }
 

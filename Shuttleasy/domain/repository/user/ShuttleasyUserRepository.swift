@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
+class ShuttleasyUserRepository : UserRepository, Authenticator {
     private let localDatasource : UserInfoLocalDataSource
     private let networkDatasource : UserNetworkDataSource
 
@@ -21,8 +21,7 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
             await localDatasource.setAsSeenOnboard()
         }
     }
-    
-    
+
     func signInUser(email: String, password: String, isDriver: Bool) async throws -> Bool {
         let authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
         await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
@@ -91,4 +90,15 @@ class ShuttleasyUserRepository : UserInfoRepository, Authenticator {
         }
     }
 
+    func deleteAccount(email: String, password: String) async -> Result<Bool, Error> {
+        do {
+            let isDeleted = try await networkDatasource.deleteAccount(email: email, password: password)
+            if isDeleted {
+                await localDatasource.setAsLoggedOut(clearWholeData: true)
+            }
+            return .success(isDeleted)
+        } catch {
+            return .failure(error)
+        }
+    }
 }

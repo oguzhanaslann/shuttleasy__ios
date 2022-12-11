@@ -9,10 +9,10 @@ import Foundation
 
 class OnboardViewModel: ViewModel {
 
-    let userInfoRepository : UserInfoRepository
+    let userInfoRepository : UserRepository
     
     init(
-        userInfoRepository : UserInfoRepository
+        userInfoRepository : UserRepository
     ) {
         self.userInfoRepository = userInfoRepository
     }

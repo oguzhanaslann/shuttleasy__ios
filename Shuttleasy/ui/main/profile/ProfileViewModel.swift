@@ -13,10 +13,10 @@ class ProfileViewModel: ViewModel {
     private let subject = CurrentValueSubject<UiDataState<UserProfile>, Error>(UiDataState.getDefaultCase())
     let publisher: AnyPublisher<UiDataState<UserProfile>, Error>
 
-    private let userInfoRepository: UserInfoRepository
+    private let userInfoRepository: UserRepository
     
     init(
-        userInfoRepository : UserInfoRepository
+        userInfoRepository : UserRepository
     ) {
         publisher = subject.eraseToAnyPublisher()
         self.userInfoRepository  = userInfoRepository

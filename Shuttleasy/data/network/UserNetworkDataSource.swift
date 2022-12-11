@@ -21,10 +21,10 @@ protocol  UserNetworkDataSource {
     func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO
     func getUserProfile() async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO
+    func deleteAccount(email: String, password: String) async throws -> Bool
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
-    
     let apiService: ApiService
     init(apiService: ApiService) {
         self.apiService = apiService
@@ -100,5 +100,10 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             qrSeed : "1234567890"
         )       
     }
-
+    
+    
+    func deleteAccount(email: String, password: String) async throws -> Bool {
+        print("UserNetworkDataSourceImpl - deleteAccount")
+        return true
+    }
 }

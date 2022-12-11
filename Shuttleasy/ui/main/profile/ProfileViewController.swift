@@ -163,7 +163,7 @@ class ProfileViewController: BaseViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
-            print("delete account")
+             Navigator.shared.navigateToDeleteAccount()
         })
 
         showAlertDialog(

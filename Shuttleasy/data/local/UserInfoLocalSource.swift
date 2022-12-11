@@ -15,6 +15,7 @@ protocol UserInfoLocalDataSource {
     func saveUserAuthData(model :  UserAuthenticationModel) async
     func saveAuthToken(token : String) async
     func isDarkMode() async -> Bool
+    func setAsLoggedOut(clearWholeData: Bool) async
 }
 
 class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
@@ -55,5 +56,14 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     func isDarkMode() async -> Bool {
         // TODO()
         return false
+    }
+    
+    func setAsLoggedOut(clearWholeData: Bool) async {
+        UserDefaults.standard.set(false, forKey: UserInfoLocalDataSourceImpl.loggedInKey)
+        if clearWholeData {
+            UserDefaults.standard.removeObject(forKey: UserInfoLocalDataSourceImpl.USER_ID_KEY)
+            UserDefaults.standard.removeObject(forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
+            UserDefaults.standard.removeObject(forKey: UserInfoLocalDataSourceImpl.USER_PROFILE_TYPE_KEY)
+        }
     }
 }
