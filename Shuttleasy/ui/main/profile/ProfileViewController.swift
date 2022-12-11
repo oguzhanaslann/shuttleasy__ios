@@ -14,11 +14,12 @@ import Kingfisher
 class ProfileViewController: BaseViewController {
     
     private let profileViewModel : ProfileViewModel = Injector.shared.injectProfileViewModel()
-    private var userProfileObserver : AnyCancellable? = nil 
+    private var userProfileObserver : AnyCancellable? = nil
     private var userLogoutObserver : AnyCancellable? = nil
 
     private static let phoneNumberTag: Int = 1
     private static let emailTag: Int = 2
+    private static let darkModeSwitchTag: Int = 3
 
     private let profileBackgroundView : UIView = {
         let stackView  = UIView()
@@ -26,7 +27,7 @@ class ProfileViewController: BaseViewController {
         return stackView
     }()
 
-    private let profileImageView : UIImageView = {
+    private lazy var profileImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.borderWidth = 4
         imageView.layer.borderColor = backgroundColor.cgColor
@@ -36,8 +37,8 @@ class ProfileViewController: BaseViewController {
         return imageView
     }()
     
-    private let profileTitle : UILabel = {
-        let label = TitleMedium(text: "Profile")
+    private lazy var profileTitle : UILabel = {
+        let label = TitleMedium(text: "Profile", color : onPrimaryContainer)
         return label
     }()
     
@@ -52,18 +53,13 @@ class ProfileViewController: BaseViewController {
 
     @objc func onEditProfileClicked() {
         Navigator.shared.navigateToProfileEdit()
-    } 
+    }
 
     private let profileName : UILabel = {
         let label = HeadlineSmall(text: "")
         return label
     }()
     
-    private func lineView() -> UIView {
-        let view = UIView()
-        view.backgroundColor = onBackgroundColor
-        return view
-    }
 
     private lazy var contactSectionView: UIView = {
         let stackView  = UIView()
@@ -134,7 +130,11 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(48)
         }
 
-        let darkModeRow = sectionWithSwitchRow()
+        let darkModeRow = sectionWithSwitchRow(
+            switchTag: ProfileViewController.darkModeSwitchTag,
+            title : "Dark Mode"
+        )
+
         stackView.addSubview(darkModeRow)
         darkModeRow.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -143,6 +143,7 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(24)
         }
 
+    
         let deleteAccount = sectionRowIconLabelView(resImageName: "icTrash",description : "Delete Account")
         stackView.addSubview(deleteAccount)
         deleteAccount.snp.makeConstraints { make in
@@ -158,6 +159,10 @@ class ProfileViewController: BaseViewController {
 
         return stackView
     }()
+
+    func getDarkModeSwitch() -> UISwitch {
+        return preferencesSectionView.viewWithTag(ProfileViewController.darkModeSwitchTag) as! UISwitch
+    }
 
     @objc func onDeleteAccountClicked(_ sender: UITapGestureRecognizer) {
         print("onDeleteAccountClicked")
@@ -231,6 +236,10 @@ class ProfileViewController: BaseViewController {
          
         return uiView
     }()
+    
+    private func getGeneralSettingsSectionViewHeight() -> Int {
+        return 192
+    }
 
     @objc func onPrivacyClicked(_ sender: UITapGestureRecognizer) {
         print("onPrivacyClicked")
@@ -338,7 +347,7 @@ class ProfileViewController: BaseViewController {
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.greaterThanOrEqualTo(168)
-        }   
+        }
 
         view.addSubview(preferencesSectionView)
         preferencesSectionView.snp.makeConstraints { make in
@@ -347,6 +356,10 @@ class ProfileViewController: BaseViewController {
             make.right.equalToSuperview().offset(-24)
             make.height.greaterThanOrEqualTo(124)
         }
+        
+        let darkModeSwitch = getDarkModeSwitch()
+        darkModeSwitch.addTarget(self, action: #selector(onDarkModeSwitchChanged(_:)), for: .valueChanged)
+
 
         view.addSubview(generalSettingsSectionView)
         generalSettingsSectionView.snp.makeConstraints { make in
@@ -356,9 +369,18 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(getGeneralSettingsSectionViewHeight())
         }
     }
-
-    func getGeneralSettingsSectionViewHeight() -> Int {
-        return 192
+    
+    @objc func onDarkModeSwitchChanged(_ sender: UISwitch) {
+        print("onDarkModeSwitchChanged")
+        if sender.isOn {
+            print("Dark mode is on")
+            // UserDefaults.standard.set(true, forKey: "darkMode")
+            overrideUserInterfaceStyle = .dark
+        } else {
+            print("Dark mode is off")
+           // UserDefaults.standard.set(false, forKey: "darkMode")
+            overrideUserInterfaceStyle = .light
+        }
     }
 
     func subcribeObservers() {
@@ -375,7 +397,7 @@ class ProfileViewController: BaseViewController {
             .sink( receiveCompletion: { completion in
                 switch completion {
                     case .finished:
-                        break 
+                        break
                     case .failure(let error):
                         self.showErrorSnackbar(message: error.localizedDescription)
                 }
@@ -395,7 +417,7 @@ class ProfileViewController: BaseViewController {
             .sink( receiveCompletion: { completion in
                     switch completion {
                         case .finished:
-                            break 
+                            break
                         case .failure(let error):
                             self.showErrorSnackbar(message: error.localizedDescription)
                     }
@@ -419,17 +441,18 @@ class ProfileViewController: BaseViewController {
 
 extension ProfileViewController {
     func sectionHeader(
-        title : String
+        title : String,
+        contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let view = UIView()
-        let label = LabelLarge(text: title)
+        let label = LabelLarge(text: title, color : contentColor)
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
 
-        let line = lineView()
+        let line = lineView(color : contentColor)
         view.addSubview(line)
         line.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -440,20 +463,28 @@ extension ProfileViewController {
         return view
     }
     
+    private func lineView(color : UIColor) -> UIView {
+        let view = UIView()
+        view.backgroundColor = color
+        return view
+    }
+    
     func sectionRowView(
         resImageName : String,
         value : String,
-        valueTag: Int? = nil
+        valueTag: Int? = nil,
+        contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let view = UIView()
         let image = resImage(name: resImageName)
+        image.tintColor = contentColor
         view.addSubview(image)
         image.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
 
-        let label = BodyMedium(text: value)
+        let label = BodyMedium(text: value, color : contentColor)
         if let tag = valueTag {
             label.tag = tag
         }
@@ -467,17 +498,18 @@ extension ProfileViewController {
 
     func sectionRow(
         title : String,
-        value : String
+        value : String,
+        contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let view = UIView()
-        let label = BodyMedium(text: title)
+        let label = BodyMedium(text: title, color : contentColor)
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
 
-        let valueLabel = BodyMedium(text: value)
+        let valueLabel = BodyMedium(text: value,color: contentColor)
         view.addSubview(valueLabel)
         valueLabel.snp.makeConstraints { make in
             make.right.equalToSuperview()
@@ -489,7 +521,8 @@ extension ProfileViewController {
     
     func sectionRowIconLabelView(
         resImageName : String,
-        description : String
+        description : String,
+        contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let view = UIView()
         let image = resImage(name: resImageName)
@@ -499,7 +532,7 @@ extension ProfileViewController {
             make.top.equalToSuperview()
         }
 
-        let description = LabelMedium(text: description)
+        let description = LabelMedium(text: description, color : contentColor)
         view.addSubview(description)
         description.snp.makeConstraints { make in
             make.left.greaterThanOrEqualTo(image.snp.right).offset(8)
@@ -507,7 +540,7 @@ extension ProfileViewController {
             make.bottom.equalTo(image.snp.bottom)
         }
         
-        let arrow = systemImage(systemName: "chevron.right", tint: onBackgroundColor)
+        let arrow = systemImage(systemName: "chevron.right", tint: contentColor)
         view.addSubview(arrow)
         arrow.snp.makeConstraints { make in
             make.right.equalToSuperview()
@@ -523,9 +556,13 @@ extension ProfileViewController {
         return sectionEndIcon(title: title, iconView: systemImage(systemName: "chevron.right", tint: onBackgroundColor))
     }
 
-    func sectionWithSwitchRow() -> UIView{
+    func sectionWithSwitchRow(
+        switchTag : Int,
+        title : String,
+        titleColor : UIColor = onBackgroundColor
+    ) -> UIView{
         let view = UIView()
-        let label = LabelMedium(text: "Dark Mode")
+        let label = LabelMedium(text: title, color: titleColor)
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -535,6 +572,8 @@ extension ProfileViewController {
         let switchView = UISwitch()
         switchView.tintColor = onPrimaryColor
         switchView.onTintColor = primaryColor
+        switchView.tag = switchTag
+
         view.addSubview(switchView)
         switchView.snp.makeConstraints { make in
             make.right.equalToSuperview()
@@ -546,10 +585,11 @@ extension ProfileViewController {
     
     func sectionEndIcon(
         title : String,
-        iconView : UIImageView
+        iconView : UIImageView,
+        contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let view = UIView()
-        let label = LabelMedium(text: title)
+        let label = LabelMedium(text: title, color: contentColor)
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -557,6 +597,7 @@ extension ProfileViewController {
         }
 
         let arrow = iconView
+        iconView.tintColor = contentColor
         view.addSubview(arrow)
         arrow.snp.makeConstraints { make in
             make.right.equalToSuperview()
