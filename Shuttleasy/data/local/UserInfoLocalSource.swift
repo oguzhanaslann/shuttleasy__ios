@@ -17,6 +17,7 @@ protocol UserInfoLocalDataSource {
     func isDarkMode() async -> Bool
     func getUserProfileType(defaultValue: ProfileType) async -> ProfileType
     func setAsLoggedOut(clearWholeData: Bool) async
+    func saveUserProfile(userProfile : UserProfile) async
 }
 
 class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
@@ -75,5 +76,9 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
             return ProfileType(rawValue: profileType) ?? defaultValue
         }
         return defaultValue
+    }
+    
+    func saveUserProfile(userProfile: UserProfile) async {
+        // TODO:
     }
 }

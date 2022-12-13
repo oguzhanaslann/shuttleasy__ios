@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShuttleasyUserRepository : UserRepository, Authenticator {
+class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     private let localDatasource : UserInfoLocalDataSource
     private let networkDatasource : UserNetworkDataSource
 
@@ -23,10 +23,29 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
     }
 
     func signInUser(email: String, password: String, isDriver: Bool) async throws -> Bool {
-        let authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
+        let authDTO: UserAuthDTO
+        
+        if shouldUseDummyData() {
+            authDTO = dummyUserAuthDto(isDriver : isDriver)
+        } else {
+            authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
+        }
+        
         await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
         await localDatasource.setAsLoggedIn()
         return true
+    }
+    
+    private func dummyUserAuthDto(isDriver:Bool) -> UserAuthDTO {
+        let profileType: ProfileType
+        
+        if isDriver {
+            profileType = .driver
+        } else {
+            profileType = .passenger
+        }
+        
+        return UserAuthDTO(id: 1, authenticationToken: "", profileType: profileType)
     }
     
     func signUpUser(
@@ -36,31 +55,60 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
         surname: String,
         phone : String
     ) async throws -> Bool {
-        let authDTO = try await networkDatasource.signUpUser(
-            email: email,
-            password: password,
-            name: name,
-            surname: surname,
-            phone: phone
-        )
+        let authDTO: UserAuthDTO
+
+        if shouldUseDummyData() {
+            authDTO = dummyUserAuthDto(isDriver : false)
+        } else {
+            authDTO = try await networkDatasource.signUpUser(
+                email: email,
+                password: password,
+                name: name,
+                surname: surname,
+                phone: phone
+            )
+        }
+
         await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
         await localDatasource.setAsLoggedIn()
         return true
     }
 
     func sendResetCodeTo(email: String) async throws -> Bool {
-        let isSend = try await networkDatasource.sendResetCodeTo(email: email)
+        let isSend : Bool
+
+        if shouldUseDummyData() {
+            isSend = true
+        } else {
+            isSend = try await networkDatasource.sendResetCodeTo(email: email)
+        }
+
         return isSend
     }
     
     func sendResetCode(code: String, email:String) async throws -> Bool {
-        let token = try await networkDatasource.sendResetCode(code: code, email : email)
+        let token : String
+
+        if shouldUseDummyData() {
+            token = ""
+        } else {
+            token = try await networkDatasource.sendResetCode(code: code, email : email)
+        }
+
         await localDatasource.saveAuthToken(token: token)
+
         return token.isEmpty.not()
     }
     
     func resetPassword(password: String, passwordAgain: String) async throws -> Bool {
-        let authDTO = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
+        let authDTO : UserAuthDTO
+
+        if shouldUseDummyData() {
+            authDTO = dummyUserAuthDto(isDriver : false)
+        } else {
+            authDTO = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
+        }
+
         await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
         await localDatasource.setAsLoggedIn()
         return true
@@ -68,7 +116,14 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
         
     func getUserProfile() async -> Result<UserProfile, Error> {
         do {
-            let userProfileDTO = try await networkDatasource.getUserProfile()
+            let userProfileDTO : UserProfileDTO
+
+            if shouldUseDummyData() {
+                userProfileDTO = dummyUserProfileDto()
+            } else {
+                userProfileDTO = try await networkDatasource.getUserProfile()
+            }
+
             let isDarkMode = await localDatasource.isDarkMode()
             //await localDatasource.saveUserProfile(userProfile: userProfile)
             let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
@@ -77,6 +132,19 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
             return .failure(error)
         }
     }
+    
+    func dummyUserProfileDto() -> UserProfileDTO {
+        return UserProfileDTO(
+            profileType: .passenger,
+            profileImageUrl: "",
+            profileName: "Adam",
+            profileSurname: "Smith",
+            profileEmail:"sample@sample.com",
+            profilePhone: "+905554443322",
+            qrSeed: nil
+         )
+    }
+
 
     func editProfile(profileEdit: ProfileEdit) async -> Result<UserProfile, Error> {
         do {
@@ -84,12 +152,14 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
             let userProfileDTO = try await networkDatasource.editProfile(profileEdit: profileEdit, isDriver: userType == .driver)
             let isDarkMode = await localDatasource.isDarkMode()
             let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
-            //await localDatasource.saveUserProfile(userProfile: userProfile)
+            await localDatasource.saveUserProfile(userProfile: userProfile)
             return .success(userProfile)
         } catch {
             return .failure(error)
         }
     }
+    
+    
 
     func deleteAccount(email: String, password: String) async -> Result<Bool, Error> {
         do {

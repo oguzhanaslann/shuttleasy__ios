@@ -381,6 +381,8 @@ class ProfileViewController: BaseViewController {
            // UserDefaults.standard.set(false, forKey: "darkMode")
             overrideUserInterfaceStyle = .light
         }
+        
+        view.layoutIfNeeded()
     }
 
     func subcribeObservers() {
@@ -531,6 +533,8 @@ extension ProfileViewController {
             make.left.equalToSuperview()
             make.top.equalToSuperview()
         }
+        
+        image.tintColor = contentColor
 
         let description = LabelMedium(text: description, color : contentColor)
         view.addSubview(description)

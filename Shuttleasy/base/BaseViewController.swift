@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     private var statusBarView : UIView? = nil
     
@@ -16,6 +16,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
         setStatusBarColorIfNotSet()
+        //navigationController?.interactivePopGestureRecognizer?.delegate = self 
     }
     
     final func setStatusBarColorIfNotSet() {

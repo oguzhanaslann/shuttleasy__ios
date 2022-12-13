@@ -94,6 +94,7 @@
 		D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E929214A2200125E90 /* SignInViewController.swift */; };
 		D4FD012729481822004F149E /* PassengerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD012629481822004F149E /* PassengerDto.swift */; };
 		D4FD012929481B47004F149E /* DriverDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD012829481B47004F149E /* DriverDto.swift */; };
+		D4FD012B29483ACD004F149E /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD012A29483ACD004F149E /* BaseRepository.swift */; };
 		F3D21653E675205EE77D08E9 /* Pods_ShuttleasyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -210,6 +211,7 @@
 		D4F591E929214A2200125E90 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D4FD012629481822004F149E /* PassengerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerDto.swift; sourceTree = "<group>"; };
 		D4FD012829481B47004F149E /* DriverDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDto.swift; sourceTree = "<group>"; };
+		D4FD012A29483ACD004F149E /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shuttleasy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD12927A2B9FDAF03904605B /* Pods-Shuttleasy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.release.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.release.xcconfig"; sourceTree = "<group>"; };
 		F69921EBE95B7D305D223354 /* Pods-ShuttleasyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShuttleasyTests.debug.xcconfig"; path = "Target Support Files/Pods-ShuttleasyTests/Pods-ShuttleasyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				D4F591DE2921466800125E90 /* user */,
+				D4FD012A29483ACD004F149E /* BaseRepository.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -982,6 +985,7 @@
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
 				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
+				D4FD012B29483ACD004F149E /* BaseRepository.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
 				D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */,
