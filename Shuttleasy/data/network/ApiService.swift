@@ -31,11 +31,12 @@ class ApiService {
     }
 
     func getRequest<T: Decodable>(
+        type: T.Type,
         url: String,
         parameters: Parameters? = nil,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, of: T.self, parameters: parameters)
+        prepareRequest(url: url, parameters: parameters)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -46,9 +47,8 @@ class ApiService {
             }
     }
 
-    private func  prepareRequest<T:Decodable>(
+    private func  prepareRequest(
         url: String,
-        of type: T.Type,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil
     ) -> DataRequest {
@@ -65,22 +65,11 @@ class ApiService {
     
     
     func getRequestAsync<T : Decodable>(
+        type: T.Type,
         url: String,
         parameters: Parameters? = nil
     ) async throws -> T  {
-        let responseT: T = try await withCheckedThrowingContinuation({continuation in
-            prepareRequest(url: url, of: T.self, parameters: parameters)
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case .success(let value):
-                        continuation.resume(returning: value)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        })
-
-        return responseT
+        return try await prepareRequest(url: url, parameters: parameters).serializingDecodable(T.self).value
     }
 
     func postRequest<T: Decodable>(
@@ -88,7 +77,7 @@ class ApiService {
         parameters: Parameters? = nil,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-       prepareRequest(url: url, of: T.self, method: .post, parameters: parameters)
+       prepareRequest(url: url, method: .post, parameters: parameters)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -99,23 +88,12 @@ class ApiService {
             }
     }
 
-    func postRequestAsync<T : Decodable>(
+   func postRequestAsync<T : Decodable>(
+        type: T.Type,
         url: String,
         parameters: Parameters? = nil
     ) async throws -> T  {
-        let responseT: T = try await withCheckedThrowingContinuation({continuation in
-            prepareRequest(url: url, of: T.self, method: .post, parameters: parameters)
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case .success(let value):
-                        continuation.resume(returning: value)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        })
-
-        return responseT
+        return try await prepareRequest(url: url, method: .post, parameters: parameters).serializingDecodable(T.self).value
     }
 
     func putRequest<T: Decodable>(
@@ -123,7 +101,7 @@ class ApiService {
         parameters: Parameters? = nil,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, of: T.self, method: .put, parameters: parameters)
+        prepareRequest(url: url, method: .put, parameters: parameters)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -135,22 +113,11 @@ class ApiService {
     }
 
     func putRequestAsync<T : Decodable>(
+        type: T.Type,
         url: String,
         parameters: Parameters? = nil
     ) async throws -> T  {
-        let responseT: T = try await withCheckedThrowingContinuation({continuation in
-            prepareRequest(url: url, of: T.self, method: .put, parameters: parameters)
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case .success(let value):
-                        continuation.resume(returning: value)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        })
-
-        return responseT
+        return try await prepareRequest(url: url, method: .put, parameters: parameters).serializingDecodable(T.self).value
     }
 
     func deleteRequest<T: Decodable>(
@@ -158,7 +125,7 @@ class ApiService {
         parameters: Parameters? = nil,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, of: T.self, method: .delete, parameters: parameters)
+        prepareRequest(url: url, method: .delete, parameters: parameters)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -169,26 +136,13 @@ class ApiService {
             }
     }
 
-    
     func deleteRequestAsync<T : Decodable>(
+        type: T.Type,
         url: String,
         parameters: Parameters? = nil
     ) async throws -> T  {
-        let responseT: T = try await withCheckedThrowingContinuation({continuation in
-            prepareRequest(url: url, of: T.self, method: .delete, parameters: parameters)
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case .success(let value):
-                        continuation.resume(returning: value)
-                    case .failure(let error):
-                        continuation.resume(throwing: error)
-                    }
-                }
-        })
-
-        return responseT
+        return try await prepareRequest(url: url, method: .delete, parameters: parameters).serializingDecodable(T.self).value
     }
-
 
     func prepareUpload(
         url: String,

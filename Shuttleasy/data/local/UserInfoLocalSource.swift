@@ -15,6 +15,7 @@ protocol UserInfoLocalDataSource {
     func saveUserAuthData(model :  UserAuthenticationModel) async
     func saveAuthToken(token : String) async
     func isDarkMode() async -> Bool
+    func getUserProfileType(defaultValue: ProfileType) async -> ProfileType
     func setAsLoggedOut(clearWholeData: Bool) async
 }
 
@@ -65,5 +66,14 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
             UserDefaults.standard.removeObject(forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
             UserDefaults.standard.removeObject(forKey: UserInfoLocalDataSourceImpl.USER_PROFILE_TYPE_KEY)
         }
+    }
+
+    
+    func getUserProfileType(defaultValue: ProfileType) async -> ProfileType {
+        let profileType = UserDefaults.standard.string(forKey: UserInfoLocalDataSourceImpl.USER_PROFILE_TYPE_KEY)
+        if let profileType = profileType {
+            return ProfileType(rawValue: profileType) ?? defaultValue
+        }
+        return defaultValue
     }
 }

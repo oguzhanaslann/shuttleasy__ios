@@ -6,6 +6,16 @@
 //
 
 import Foundation
+import Alamofire
+
+
+struct FallibleEventResponse: Decodable {
+    let result: Bool
+
+    private enum CodingKeys: String, CodingKey {
+        case result = "result"
+    }
+}
 
 protocol  UserNetworkDataSource {
     func signInUser(email: String , password: String, isDriver : Bool) async throws -> UserAuthDTO
@@ -20,7 +30,7 @@ protocol  UserNetworkDataSource {
     func sendResetCode(code: String, email : String) async throws -> String
     func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO
     func getUserProfile() async throws -> UserProfileDTO
-    func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO
+    func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO
     func deleteAccount(email: String, password: String) async throws -> Bool
 }
 
@@ -30,16 +40,44 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         self.apiService = apiService
     }
     
-    func signInUser(email: String, password: String,isDriver : Bool) async throws -> UserAuthDTO {
-        // TODO: Implement this method with real network call
-        print("UserNetworkDataSourceImpl - signInUser - email: \(email) - password: \(password) - isDriver: \(isDriver)")
-        return UserAuthDTO(
-            id : "123",
-            authenticationToken: "123",
-            profileType: .driver
-        )
+    func signInUser(email: String, password: String, isDriver : Bool) async throws -> UserAuthDTO {
+        if isDriver {
+            return try await driverSignIn(email: email, password: password)
+        } else  {
+            return try await passengerSignIn(email: email, password: password)
+        }
     }
 
+    private func driverSignIn(email: String, password: String) async throws -> UserAuthDTO {
+        print("UserNetworkDataSourceImpl - driverSignIn - email: \(email) - password")
+        let driverDTO =  try await apiService.postRequestAsync(
+            type: DriverDto.self,
+            url: ApiUrlManager.shared.signInPassenger(),
+            parameters: [
+                "email": email,
+                "password": password
+            ]
+        )
+        
+        return driverDTO.toUserAuthDTO()
+    }
+
+    private func passengerSignIn(email: String, password: String) async throws -> UserAuthDTO {
+        print("UserNetworkDataSourceImpl - passengerSignIn - email: \(email) - password")
+        let passengerDTO =  try await apiService.postRequestAsync(
+            type: PassengerDto.self,
+            url: ApiUrlManager.shared.signInPassenger(),
+            parameters: [
+                "email": email,
+                "password": password
+            ]
+        )
+        
+        return passengerDTO.toUserAuthDTO()
+    }
+
+
+    // only sign up for passenger allowed in the app
     func signUpUser(
         email: String,
         password: String,
@@ -47,12 +85,20 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         surname: String,
         phone : String
     ) async throws -> UserAuthDTO {
-        print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password: \(password)")
-        return UserAuthDTO(
-            id : "123",
-            authenticationToken: "123",
-            profileType: .driver
+        print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password")
+        let passengerDTO =  try await apiService.postRequestAsync(
+            type: PassengerDto.self,
+            url: ApiUrlManager.shared.signUpPassenger(),
+            parameters: [
+                "email": email,
+                "password": password,
+                "name": name,
+                "surname": surname,
+                "phoneNumber": phone,
+                "city": "", // TODO: get city 
+            ]
         )
+        return passengerDTO.toUserAuthDTO()
     }
 
     func sendResetCodeTo(email: String) async throws -> Bool {
@@ -68,7 +114,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
     func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - resetPassword - password: \(password)")
         return UserAuthDTO(
-            id : "123",
+            id : 123,
             authenticationToken: "123",
             profileType: .driver
         )
@@ -88,22 +134,55 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
     }
     
     
-    func editProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
+    func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO {
         print("UserNetworkDataSourceImpl - editProfile")
-        return UserProfileDTO(
-            profileType : .passenger,
-            profileImageUrl : "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
-            profileName : "Oğuzhan",
-            profileSurname: "Aslan",
-            profileEmail : "sample@sample.com",
-            profilePhone : "+905554443322",
-            qrSeed : "1234567890"
-        )       
+        if isDriver {
+            return try await editDriverProfile(profileEdit: profileEdit)
+        } else {
+            return try await editPassengerProfile(profileEdit: profileEdit)
+        }    
     }
+
+    private func editDriverProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
+        print("UserNetworkDataSourceImpl - editDriverProfile")
+        let driverDTO =  try await apiService.putRequestAsync(
+            type: DriverDto.self,
+            url: ApiUrlManager.shared.editProfile(),
+            parameters: [
+                "profilePic": "", // TODO: verify how to send
+                "name": profileEdit.name,
+                "surname": profileEdit.surname,
+                "phoneNumber": profileEdit.phoneNumber,
+            ]
+        )
+        
+        return driverDTO.toUserProfileDTO()
+    }
+
+    private func editPassengerProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
+        print("UserNetworkDataSourceImpl - editPassengerProfile")
+        let passengerDTO =  try await apiService.putRequestAsync(
+            type: PassengerDto.self,
+            url: ApiUrlManager.shared.editProfile(),
+            parameters: [
+                "profilePic": "", // TODO: verify how to send
+                "name": profileEdit.name,
+                "surname": profileEdit.surname,
+                "phoneNumber": profileEdit.phoneNumber,
+                "city":""  // TODO:  profileEdit.city,
+            ]
+        )
+        
+        return passengerDTO.toUserProfileDTO()
+    }
+
+    // is driver 
+    // passenger/driver to UserProfileDTO
     
     
     func deleteAccount(email: String, password: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - deleteAccount")
-        return true
+        let fallible = try await apiService.deleteRequestAsync(type: FallibleEventResponse.self, url: ApiUrlManager.shared.deleteProfile())
+        return fallible.result
     }
 }

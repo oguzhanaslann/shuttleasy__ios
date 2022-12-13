@@ -92,6 +92,8 @@
 		D4F591E12921467C00125E90 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E02921467C00125E90 /* UserRepository.swift */; };
 		D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */; };
 		D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F591E929214A2200125E90 /* SignInViewController.swift */; };
+		D4FD012729481822004F149E /* PassengerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD012629481822004F149E /* PassengerDto.swift */; };
+		D4FD012929481B47004F149E /* DriverDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FD012829481B47004F149E /* DriverDto.swift */; };
 		F3D21653E675205EE77D08E9 /* Pods_ShuttleasyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +208,8 @@
 		D4F591E02921467C00125E90 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoLocalSource.swift; sourceTree = "<group>"; };
 		D4F591E929214A2200125E90 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		D4FD012629481822004F149E /* PassengerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerDto.swift; sourceTree = "<group>"; };
+		D4FD012829481B47004F149E /* DriverDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDto.swift; sourceTree = "<group>"; };
 		D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shuttleasy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD12927A2B9FDAF03904605B /* Pods-Shuttleasy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.release.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.release.xcconfig"; sourceTree = "<group>"; };
 		F69921EBE95B7D305D223354 /* Pods-ShuttleasyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShuttleasyTests.debug.xcconfig"; path = "Target Support Files/Pods-ShuttleasyTests/Pods-ShuttleasyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 		D41BE5B4292AB53600826640 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				D4FD012529481814004F149E /* dto */,
 				D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */,
 				D4C1025E293B8C4C004812C1 /* UserAuthDTO.swift */,
 				D4C10260293B8C71004812C1 /* UserProfileDTO.swift */,
@@ -653,6 +658,15 @@
 			path = authentication;
 			sourceTree = "<group>";
 		};
+		D4FD012529481814004F149E /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				D4FD012629481822004F149E /* PassengerDto.swift */,
+				D4FD012829481B47004F149E /* DriverDto.swift */,
+			);
+			path = dto;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -962,8 +976,10 @@
 				D44D4D78294133DC0024D0AC /* MemoryDataSource.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
+				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
+				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
 				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,

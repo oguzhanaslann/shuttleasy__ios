@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserAuthenticationModel {
-    let id : String
+    let id : Int
     let authenticationToken : String
     let profileType : ProfileType
 } 

@@ -80,7 +80,8 @@ class ShuttleasyUserRepository : UserRepository, Authenticator {
 
     func editProfile(profileEdit: ProfileEdit) async -> Result<UserProfile, Error> {
         do {
-            let userProfileDTO = try await networkDatasource.editProfile(profileEdit: profileEdit)
+            let userType = await localDatasource.getUserProfileType(defaultValue: ProfileType.passenger)
+            let userProfileDTO = try await networkDatasource.editProfile(profileEdit: profileEdit, isDriver: userType == .driver)
             let isDarkMode = await localDatasource.isDarkMode()
             let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
             //await localDatasource.saveUserProfile(userProfile: userProfile)
