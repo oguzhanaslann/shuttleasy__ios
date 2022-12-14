@@ -124,7 +124,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
                 userProfileDTO = try await networkDatasource.getUserProfile()
             }
 
-            let isDarkMode = await localDatasource.isDarkMode()
+            let isDarkMode = localDatasource.isDarkMode()
             //await localDatasource.saveUserProfile(userProfile: userProfile)
             let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
             return .success(userProfile)
@@ -177,5 +177,11 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     func logOut() async -> Result<Void, Error> {
         await localDatasource.setAsLoggedOut(clearWholeData: false)
         return .success(())
+    }
+
+    
+    func updateDarkModePreference(isDarkMode: Bool) async -> Result<Bool, Error> {
+        await localDatasource.saveDarkModePreference(isDarkMode: isDarkMode)
+        return .success(true)
     }
 }

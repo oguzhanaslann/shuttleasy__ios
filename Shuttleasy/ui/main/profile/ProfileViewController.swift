@@ -357,9 +357,8 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(124)
         }
         
-        let darkModeSwitch = getDarkModeSwitch()
-        darkModeSwitch.addTarget(self, action: #selector(onDarkModeSwitchChanged(_:)), for: .valueChanged)
 
+        setOnValueChangedSelectorToDarkModeSwitch()
 
         view.addSubview(generalSettingsSectionView)
         generalSettingsSectionView.snp.makeConstraints { make in
@@ -370,19 +369,33 @@ class ProfileViewController: BaseViewController {
         }
     }
     
+    private func setOnValueChangedSelectorToDarkModeSwitch() {
+        let darkModeSwitch = getDarkModeSwitch()
+        darkModeSwitch.addTarget(self, action: #selector(onDarkModeSwitchChanged(_:)), for: .valueChanged)
+    }
+
+    private func removeOnValueChangedSelectorFromDarkModeSwitch() {
+        let darkModeSwitch = getDarkModeSwitch()
+        darkModeSwitch.removeTarget(self, action: #selector(onDarkModeSwitchChanged(_:)), for: .valueChanged)
+    }
+    
     @objc func onDarkModeSwitchChanged(_ sender: UISwitch) {
         print("onDarkModeSwitchChanged")
+       
+        let selectedStyle : UIUserInterfaceStyle
         if sender.isOn {
             print("Dark mode is on")
             // UserDefaults.standard.set(true, forKey: "darkMode")
-            overrideUserInterfaceStyle = .dark
+            selectedStyle = .dark
         } else {
             print("Dark mode is off")
            // UserDefaults.standard.set(false, forKey: "darkMode")
-            overrideUserInterfaceStyle = .light
+            selectedStyle = .light
         }
+                
         
-        view.layoutIfNeeded()
+        WindowDelegate.shared.setApplicationUIStyle(style: selectedStyle)
+        profileViewModel.updateDarkModePreference(isDarkMode: sender.isOn)
     }
 
     func subcribeObservers() {
@@ -404,12 +417,18 @@ class ProfileViewController: BaseViewController {
                         self.showErrorSnackbar(message: error.localizedDescription)
                 }
              }, receiveValue: { profileState in
-                    profileState.onSuccess { profileData in
+                    profileState.onSuccess { [weak self] profileData in
                         let profile = profileData.data
-                        self.profileName.text = profile.profileName
-                        self.profileImageView.load(url: profile.profileImageUrl)
-                        self.getEmailLabel().text = profile.profileEmail
-                        self.getPhoneNumberLabel().text = profile.profilePhone
+                        self?.profileName.text = profile.profileName
+                        self?.profileImageView.load(url: profile.profileImageUrl)
+                        self?.getEmailLabel().text = profile.profileEmail
+                        self?.getPhoneNumberLabel().text = profile.profilePhone
+
+                        let darkMode = profileData.data.darkMode
+                        self?.removeOnValueChangedSelectorFromDarkModeSwitch()
+                        self?.getDarkModeSwitch().isOn = darkMode
+                        self?.setOnValueChangedSelectorToDarkModeSwitch()
+
                     }
                 }
             )

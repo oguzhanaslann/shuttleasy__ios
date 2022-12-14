@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         WindowDelegate.shared.window = UIWindow(frame: windowScene.coordinateSpace.bounds )
         WindowDelegate.shared.window?.windowScene = windowScene
+
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
         let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
         let rootViewController : UIViewController
@@ -36,6 +37,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().backgroundColor = primaryContainer
         UINavigationBar.appearance().tintColor = onPrimaryContainer
         WindowDelegate.shared.setRootViewController(navController: navController)
+        
+        let userInfoLocalSource = Injector.shared.injectUserInfoLocalDataSource()
+        print("isDark mode ? " + String(userInfoLocalSource.isDarkMode()))
+        let darkMode: UIUserInterfaceStyle = userInfoLocalSource.isDarkMode() ? .dark : .light
+        UIApplication.shared.windows.forEach { window in
+            if #available(iOS 13.0, *) {
+                window.overrideUserInterfaceStyle = darkMode
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -14,20 +14,21 @@ protocol UserInfoLocalDataSource {
     func setAsLoggedIn() async
     func saveUserAuthData(model :  UserAuthenticationModel) async
     func saveAuthToken(token : String) async
-    func isDarkMode() async -> Bool
     func getUserProfileType(defaultValue: ProfileType) async -> ProfileType
     func setAsLoggedOut(clearWholeData: Bool) async
     func saveUserProfile(userProfile : UserProfile) async
+    func saveDarkModePreference(isDarkMode: Bool) async
+    func isDarkMode() -> Bool
 }
 
 class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
 
-    static let onboardSeenKey = HAS_USER_SEEN_ONBOARD_KEY
-    static let loggedInKey = HAS_USER_LOGGED_IN_KEY
-
+    private static let onboardSeenKey = HAS_USER_SEEN_ONBOARD_KEY
+    private static let loggedInKey = HAS_USER_LOGGED_IN_KEY
     private static let USER_ID_KEY = "USER_ID"
     private static let USER_AUTH_TOKEN_KEY = "USER_AUTH_TOKEN_KEY"
     private static let USER_PROFILE_TYPE_KEY = "USER_PROFILE_TYPE_KEY"
+    private static let DARK_MODE_KEY = IS_DARK_MODE_KEY
 
     let memoryDataSource : MemoryDataSource
 
@@ -54,12 +55,7 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
         UserDefaults.standard.set(token, forKey: UserInfoLocalDataSourceImpl.USER_AUTH_TOKEN_KEY)
         memoryDataSource.setAuthToken(token: token)
     }
-    
-    func isDarkMode() async -> Bool {
-        // TODO()
-        return false
-    }
-    
+
     func setAsLoggedOut(clearWholeData: Bool) async {
         UserDefaults.standard.set(false, forKey: UserInfoLocalDataSourceImpl.loggedInKey)
         if clearWholeData {
@@ -69,7 +65,6 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
         }
     }
 
-    
     func getUserProfileType(defaultValue: ProfileType) async -> ProfileType {
         let profileType = UserDefaults.standard.string(forKey: UserInfoLocalDataSourceImpl.USER_PROFILE_TYPE_KEY)
         if let profileType = profileType {
@@ -80,5 +75,13 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     
     func saveUserProfile(userProfile: UserProfile) async {
         // TODO:
+    }
+
+    func saveDarkModePreference(isDarkMode: Bool) async {
+        UserDefaults.standard.set(isDarkMode, forKey: UserInfoLocalDataSourceImpl.DARK_MODE_KEY)
+    }
+
+    func isDarkMode() -> Bool {
+        return UserDefaults.standard.bool(forKey: UserInfoLocalDataSourceImpl.DARK_MODE_KEY)
     }
 }

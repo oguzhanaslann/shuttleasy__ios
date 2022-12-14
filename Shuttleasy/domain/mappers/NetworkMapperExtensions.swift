@@ -28,7 +28,7 @@ extension UserProfileDTO {
             profileSurname: self.profileSurname,
             profileEmail: self.profileEmail,
             profilePhone: self.profilePhone,
-            darkMode: false
+            darkMode: isDarkMode
         )
     }
 }

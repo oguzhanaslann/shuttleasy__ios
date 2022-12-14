@@ -41,7 +41,7 @@ class BaseTabBarController: UITabBarController {
         }
     }
 
-    private func setNavigationBar() {
+    func setNavigationBar() {
         let appearance = UITabBar.appearance()
         appearance.barTintColor = primaryContainer
         tabBar.layer.backgroundColor = primaryContainer.cgColor

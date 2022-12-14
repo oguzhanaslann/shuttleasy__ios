@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// quicktype.io
 class PassengerDto: Decodable {
   let id: Int
   let profilePic: String

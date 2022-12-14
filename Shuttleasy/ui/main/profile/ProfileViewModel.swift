@@ -67,4 +67,17 @@ class ProfileViewModel: ViewModel {
             }
         }
     }
+
+    //updateDarkModePreference
+    func updateDarkModePreference(isDarkMode: Bool) {
+        Task.init {
+            let result = await userRepository.updateDarkModePreference(isDarkMode: isDarkMode)
+            switch result {
+                case .success(_):
+                    print("Dark mode preference updated")
+                case .failure(let error):
+                    print("Dark mode preference update failed")
+            }
+        }
+    }
 }
