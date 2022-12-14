@@ -172,17 +172,17 @@ class ProfileSetupViewController: BaseViewController {
     func subscribeObservers() {
         cancellable = signUpViewModel.resultPublisher
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
             switch completion {
                 case .finished:
                     break 
                 case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
+                    self?.showErrorSnackbar(message: error.localizedDescription)
             }
             
-        } receiveValue: { result in
+        } receiveValue: { [weak self] result in
             print("sign up result: \(result)")
-            self.navigateToMainpage()
+            self?.navigateToMainpage()
         }
     }
 

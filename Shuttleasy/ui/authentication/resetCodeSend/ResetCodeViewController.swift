@@ -138,35 +138,35 @@ class ResetCodeViewController : BaseViewController {
    func subscribeObservers() {
        resetCodeVerifiedObserver =  viewModel.resetCodeResult
            .receive(on: DispatchQueue.main)
-           .sink { completion in
+           .sink { [weak self] completion in
                switch completion {
                 case .finished:
                     break 
                 case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
+                    self?.showErrorSnackbar(message: error.localizedDescription)
             }
-           } receiveValue: { isAccepted in
+           } receiveValue: { [weak self] isAccepted in
                if (isAccepted) {
-                    self.navigateToResetPasswordPage()
+                    self?.navigateToResetPasswordPage()
                } else {
-                   self.showErrorSnackbar(message: "Reset code is not accepted")
+                   self?.showErrorSnackbar(message: "Reset code is not accepted")
                }
            } 
 
         resetCodeSentObserver = viewModel.resetCodeSendResult
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                     case .finished:
                         break 
                     case .failure(let error):
-                        self.showErrorSnackbar(message: error.localizedDescription)
+                        self?.showErrorSnackbar(message: error.localizedDescription)
                 }
-            } receiveValue: { isSent in
+            } receiveValue: { [weak self] isSent in
                 if (isSent) {
-                    self.showInformationSnackbar(message: "Reset code sent")
+                    self?.showInformationSnackbar(message: "Reset code sent")
                 } else {
-                    self.showErrorSnackbar(message: "Something went wrong")
+                    self?.showErrorSnackbar(message: "Something went wrong")
                 }
             }
    }

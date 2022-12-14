@@ -199,16 +199,16 @@ class SignInViewController: BaseViewController {
     func subscribeObservers() {
       cancellable = signInViewModel.signInResult
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
             switch completion {
                 case .finished:
                     break 
                 case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
+                    self?.showErrorSnackbar(message: error.localizedDescription)
             }
             
-        } receiveValue: { result in
-            self.navigateToMainpage()
+        } receiveValue: { [weak self] result in
+            self?.navigateToMainpage()
         }
     }
     

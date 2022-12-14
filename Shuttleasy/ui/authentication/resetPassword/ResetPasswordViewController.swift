@@ -127,19 +127,19 @@ class ResetPasswordViewController: BaseViewController {
     func subscribeObservers() {
        resetPasswordObserve =  resetPasswordViewModel.resetPasswordResult
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                     case .finished:
                         break 
                     case .failure(let error):
-                        self.showErrorSnackbar(message: error.localizedDescription)
+                        self?.showErrorSnackbar(message: error.localizedDescription)
                 }
-            } receiveValue: { resetted in
+            } receiveValue: { [weak self] resetted in
                 if resetted {
-                    self.showInformationSnackbar(message: "Password resetted successfully")
-                    self.navigateToMainpage()
+                    self?.showInformationSnackbar(message: "Password resetted successfully")
+                    self?.navigateToMainpage()
                 } else {
-                    self.showErrorSnackbar(message: "Password reset failed")
+                    self?.showErrorSnackbar(message: "Password reset failed")
                 }
             }
     }

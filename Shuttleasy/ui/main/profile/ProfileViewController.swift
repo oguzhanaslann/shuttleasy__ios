@@ -435,12 +435,12 @@ class ProfileViewController: BaseViewController {
 
         userLogoutObserver = profileViewModel.userLogoutResultPublisher
             .receive(on: DispatchQueue.main)
-            .sink( receiveCompletion: { completion in
+            .sink( receiveCompletion: { [weak self] completion in
                     switch completion {
                         case .finished:
                             break
                         case .failure(let error):
-                            self.showErrorSnackbar(message: error.localizedDescription)
+                            self?.showErrorSnackbar(message: error.localizedDescription)
                     }
                 }, receiveValue: { _ in
                     self.onUserLogout()

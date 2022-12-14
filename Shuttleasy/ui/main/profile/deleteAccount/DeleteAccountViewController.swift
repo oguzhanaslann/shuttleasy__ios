@@ -154,16 +154,16 @@ class DeleteAccountViewController:  BaseViewController {
     private func subscribeObservers() {
         deleteResultObserver = deleteViewModel.deleteAccountPublisher
             .receive(on: DispatchQueue.main)
-            .sink( receiveCompletion: { completion in
+            .sink( receiveCompletion: {[weak self] completion in
             switch completion {
                 case .finished:
                     break 
                 case .failure(let error):
-                    self.showErrorSnackbar(message: error.localizedDescription)
+                    self?.showErrorSnackbar(message: error.localizedDescription)
             }
-            }, receiveValue: { resultBool in
+            }, receiveValue: { [weak self] resultBool in
                 print("result \(resultBool)")
-                self.onAccountDeletionResult(resultBool)
+                self?.onAccountDeletionResult(resultBool)
             })
     }
 
