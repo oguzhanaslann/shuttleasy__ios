@@ -149,7 +149,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             type: DriverDto.self,
             url: ApiUrlManager.shared.editProfile(),
             parameters: [
-                "profilePic": "", // TODO: verify how to send
+                "profilePic": profileEdit.profileImage.base64EncodedString(),
                 "name": profileEdit.name,
                 "surname": profileEdit.surname,
                 "phoneNumber": profileEdit.phoneNumber,
@@ -165,7 +165,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             type: PassengerDto.self,
             url: ApiUrlManager.shared.editProfile(),
             parameters: [
-                "profilePic": "", // TODO: verify how to send
+                "profilePic": profileEdit.profileImage.base64EncodedString(),
                 "name": profileEdit.name,
                 "surname": profileEdit.surname,
                 "phoneNumber": profileEdit.phoneNumber,
@@ -175,11 +175,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         
         return passengerDTO.toUserProfileDTO()
     }
-
-    // is driver 
-    // passenger/driver to UserProfileDTO
-    
-    
+        
     func deleteAccount(email: String, password: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - deleteAccount")
         let fallible = try await apiService.deleteRequestAsync(type: FallibleEventResponse.self, url: ApiUrlManager.shared.deleteProfile())
