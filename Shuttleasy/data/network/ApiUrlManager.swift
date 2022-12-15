@@ -7,7 +7,7 @@
 
 import Foundation
 
-let baseApiUrl = "http://192.168.1.11:7129/api/" //"https://api.shuttleasy.com/v1/"
+let baseApiUrl = "https://192.168.56.1:7129/api/" //"https://api.shuttleasy.com/v1/"
 
 class ApiUrlManager {
     static let shared = ApiUrlManager()

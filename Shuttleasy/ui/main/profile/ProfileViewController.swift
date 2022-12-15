@@ -316,7 +316,7 @@ class ProfileViewController: BaseViewController {
         let view = stackView
         view.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(48)
+            make.top.equalToSuperview().offset(72)
             make.centerX.equalToSuperview()
             let dimensions = 122
             make.width.equalTo(dimensions)
@@ -332,7 +332,7 @@ class ProfileViewController: BaseViewController {
         
         view.addSubview(profileBackgroundView)
         profileBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(-44)
+            make.top.equalToSuperview().offset(-8)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.width.equalToSuperview()

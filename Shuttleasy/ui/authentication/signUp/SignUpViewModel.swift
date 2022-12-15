@@ -36,6 +36,7 @@ class SignUpViewModel : ViewModel {
                     surname: surname,
                     phone: phone
                 )
+                
                 self.signUpResult.send(result)
             } catch {
                 self.signUpResult.send(completion: .failure(error))

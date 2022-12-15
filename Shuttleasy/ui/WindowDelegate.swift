@@ -38,15 +38,19 @@ class WindowDelegate {
     }
     
     func pushViewController(_ viewController: UIViewController, animated : Bool = false, singleTop : Bool = false) {
+        self.pushViewControllerOn(navController!, viewController, animated: animated, singleTop: singleTop)
+    }
+
+    private func pushViewControllerOn(_ navController: UINavigationController, _ viewController: UIViewController, animated : Bool = false, singleTop : Bool = false) {
         if (singleTop) {
-            let isInBackStack  = navController?.viewControllers.filter({$0.isKind(of: type(of: viewController))}).count ?? 0 > 0
+            let isInBackStack  = navController.viewControllers.filter({$0.isKind(of: type(of: viewController))}).count > 0
             if (isInBackStack) {
-                // index of 
-                let index = navController?.viewControllers.firstIndex(where: {$0.isKind(of: type(of: viewController))})
-                navController?.viewControllers.remove(at: index!)
+                // index of
+                let index = navController.viewControllers.firstIndex(where: {$0.isKind(of: type(of: viewController))})
+                navController.viewControllers.remove(at: index!)
             }
         }
-        navController?.pushViewController(viewController, animated: animated)
+        navController.pushViewController(viewController, animated: animated)
     }
     
     private func setWindowRootContollerWithAnimation(rootViewController : UIViewController?) {

@@ -22,21 +22,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
         let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
-        let rootViewController : UIViewController
+        let rootNavController : UINavigationController
         if(hasSeenOnboard && hasLoggedIn) {
-            rootViewController = MainViewController()
+            let navController  = UINavigationController(rootViewController: MainViewController())
+            navController.navigationBar.isHidden = true
+            rootNavController = navController
         } else if(!hasSeenOnboard) {           
-             rootViewController = OnBoardingViewContoller()  
+            let navcontroller = UINavigationController(rootViewController: OnBoardingViewContoller())
+            navcontroller.navigationBar.isHidden = true
+            rootNavController = navcontroller
         } else if (!hasLoggedIn) {
-            rootViewController = SignInViewController()
+            let navController = UINavigationController(rootViewController: SignInViewController())
+            navController.navigationBar.isHidden = false
+            rootNavController = navController
         } else {
             fatalError()
         }
         
-        let navController = UINavigationController(rootViewController: rootViewController)
-        UINavigationBar.appearance().backgroundColor = primaryContainer
-        UINavigationBar.appearance().tintColor = onPrimaryContainer
-        WindowDelegate.shared.setRootViewController(navController: navController)
+        WindowDelegate.shared.setRootViewController(navController: rootNavController)
         
         let userInfoLocalSource = Injector.shared.injectUserInfoLocalDataSource()
         print("isDark mode ? " + String(userInfoLocalSource.isDarkMode()))

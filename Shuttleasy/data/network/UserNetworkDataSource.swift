@@ -86,6 +86,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         phone : String
     ) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password")
+        let newPhone = phone.dropFirst(3)
         let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
             url: ApiUrlManager.shared.signUpPassenger(),
@@ -94,7 +95,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
                 "password": password,
                 "name": name,
                 "surname": surname,
-                "phoneNumber": phone,
+                "phoneNumber": newPhone,
                 "city": "", // TODO: get city 
             ]
         )

@@ -56,6 +56,7 @@ class ApiService {
             url,
             method: method,
             parameters: parameters,
+            encoding: JSONEncoding.default,
             headers: headers()
         )
         .validate()
