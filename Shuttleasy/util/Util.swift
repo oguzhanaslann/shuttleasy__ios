@@ -85,3 +85,14 @@ func isValidPassword(_ password : String) -> Bool{
     // let validPassword = (result != nil)
     return password.isEmpty.not()
 }
+
+
+func generateQRCode(from string: String) -> UIImage? {
+    let data = string.data(using: String.Encoding.ascii)
+    if let QRFilter = CIFilter(name: "CIQRCodeGenerator") {
+        QRFilter.setValue(data, forKey: "inputMessage")
+        guard let QRImage = QRFilter.outputImage else {return nil}
+        return UIImage(ciImage: QRImage)
+    }
+    return nil
+}

@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SnapKit
 import Kingfisher
+import PopupDialog
 
 class ProfileViewController: BaseViewController {
     
@@ -116,6 +117,11 @@ class ProfileViewController: BaseViewController {
 
     @objc func onQrCodeClicked(_ sender: UITapGestureRecognizer) {
         print("onQrCodeClicked")
+        let qrSeed = profileViewModel.getQrSeedOrEmpty()
+        let qrCode = generateQRCode(from: qrSeed)
+        
+        let popup = PopupDialog(title: "Your Profile QR", message: "Swipe bottom to dismiss", image: qrCode)
+        self.present(popup, animated: true, completion: nil )
     }
 
     private lazy var preferencesSectionView: UIView = {

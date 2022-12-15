@@ -6,13 +6,33 @@
 //
 
 import UIKit
+import PopupDialog
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        setUpPopupDialogAppereance()
+
         return true
+    }
+    
+    func setUpPopupDialogAppereance() {
+        let containerAppearance = PopupDialogContainerView.appearance()
+
+        containerAppearance.backgroundColor = backgroundColor
+        containerAppearance.cornerRadius = Float(SHAPE_MEDIUM)
+        
+        let dialogAppearance = PopupDialogDefaultView.appearance()
+        dialogAppearance.backgroundColor = backgroundColor
+        dialogAppearance.titleFont = TitleMediumFont()
+        dialogAppearance.titleColor = onBackgroundColor
+        dialogAppearance.titleTextAlignment = .center
+        dialogAppearance.messageFont = BodyMediumFont()
+        dialogAppearance.messageColor = onBackgroundColor.withAlphaComponent(0.6)
+        dialogAppearance.messageTextAlignment = .center
     }
 
     // MARK: UISceneSession Lifecycle

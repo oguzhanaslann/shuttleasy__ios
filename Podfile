@@ -10,6 +10,7 @@ target 'Shuttleasy' do
   pod 'Alamofire'
   pod 'Kingfisher', '~> 7.0'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'PopupDialog', '~> 1.1'
   pod 'CocoaLumberjack/Swift'
   pod 'Swinject'
   

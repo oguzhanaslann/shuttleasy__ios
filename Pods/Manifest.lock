@@ -3,7 +3,10 @@ PODS:
   - CocoaLumberjack/Core (3.8.0)
   - CocoaLumberjack/Swift (3.8.0):
     - CocoaLumberjack/Core
+  - DynamicBlurView (4.1.0)
   - Kingfisher (7.4.1)
+  - PopupDialog (1.1.1):
+    - DynamicBlurView (~> 4.0)
   - SnapKit (5.6.0)
   - SwiftyJSON (4.3.0)
   - Swinject (2.8.2)
@@ -12,6 +15,7 @@ DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
   - Kingfisher (~> 7.0)
+  - PopupDialog (~> 1.1)
   - SnapKit (~> 5.6.0)
   - SwiftyJSON (~> 4.0)
   - Swinject
@@ -20,7 +24,9 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - CocoaLumberjack
+    - DynamicBlurView
     - Kingfisher
+    - PopupDialog
     - SnapKit
     - SwiftyJSON
     - Swinject
@@ -28,11 +34,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
+  DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
 
-PODFILE CHECKSUM: 50722ce2809615f89f45fce5a53334276a5ad621
+PODFILE CHECKSUM: 7f751be783b598a457ad1353fe1112afce3f3b67
 
 COCOAPODS: 1.11.3

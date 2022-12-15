@@ -99,13 +99,17 @@ func TitleLarge(
 func TitleMedium(
     text : String,
     color : UIColor = .black,
-    font : UIFont  = UIFont.poppinsSemiBold(size: 16) ?? UIFont.systemFont(ofSize: 16)
+    font : UIFont = TitleMediumFont()
 ) -> UILabel {
     let label = UILabel()
     label.text = text
     label.textColor = color
     label.font = font
     return label
+}
+
+func TitleMediumFont() -> UIFont {
+    return UIFont.poppinsSemiBold(size: 16) ?? UIFont.systemFont(ofSize: 16)
 }
 
 func TitleSmall(
@@ -181,13 +185,17 @@ func BodyLarge(
 func BodyMedium(
     text : String,
     color : UIColor = .black,
-    font : UIFont  = UIFont.poppinsRegular(size: 14) ?? UIFont.systemFont(ofSize: 14)
+    font : UIFont = BodyMediumFont()
 ) -> UILabel {
     let label = UILabel()
     label.text = text
     label.textColor = color
     label.font = font
     return label
+}
+
+func BodyMediumFont() -> UIFont {
+    return UIFont.poppinsRegular(size: 14) ?? UIFont.systemFont(ofSize: 14)
 }
 
 func BodySmall(
