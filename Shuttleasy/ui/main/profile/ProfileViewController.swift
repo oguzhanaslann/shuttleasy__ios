@@ -21,6 +21,7 @@ class ProfileViewController: BaseViewController {
     private static let phoneNumberTag: Int = 1
     private static let emailTag: Int = 2
     private static let darkModeSwitchTag: Int = 3
+    private static let qrCodeTag: Int = 4
 
     private let profileBackgroundView : UIView = {
         let stackView  = UIView()
@@ -93,6 +94,7 @@ class ProfileViewController: BaseViewController {
         }
 
         let qrRow = sectionRowIconLabelView(resImageName: "icQRCode",description : "QR Code")
+        qrRow.tag = ProfileViewController.qrCodeTag
         stackView.addSubview(qrRow)
         qrRow.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -115,11 +117,18 @@ class ProfileViewController: BaseViewController {
         return contactSectionView.viewWithTag(ProfileViewController.phoneNumberTag) as! UILabel
     }
 
+    func getQrCodeSection() -> UIView {
+        return contactSectionView.viewWithTag(ProfileViewController.qrCodeTag)!
+    }
+
     @objc func onQrCodeClicked(_ sender: UITapGestureRecognizer) {
         print("onQrCodeClicked")
+        self.openQrCodeDialog()
+    }
+
+    private func openQrCodeDialog() {
         let qrSeed = profileViewModel.getQrSeedOrEmpty()
         let qrCode = generateQRCode(from: qrSeed)
-        
         let popup = PopupDialog(title: "Your Profile QR", message: "Swipe bottom to dismiss", image: qrCode)
         self.present(popup, animated: true, completion: nil )
     }
@@ -435,6 +444,9 @@ class ProfileViewController: BaseViewController {
                         self?.getDarkModeSwitch().isOn = darkMode
                         self?.setOnValueChangedSelectorToDarkModeSwitch()
 
+                        if profileData.data.profileType != .passenger {
+                            self?.getQrCodeSection().removeFromSuperview()
+                        }
                     }
                 }
             )

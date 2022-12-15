@@ -56,6 +56,11 @@ class ProfileViewModel: ViewModel {
         }
     }
 
+    func getUserRole() -> ProfileType {
+        let data = subject.value.getDataContent()?.data
+        return data?.profileType ?? .passenger
+    }
+
     func logOut() {
         Task.init {
             let result = await userRepository.logOut()

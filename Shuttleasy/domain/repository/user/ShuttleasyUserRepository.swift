@@ -135,7 +135,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     
     func dummyUserProfileDto() -> UserProfileDTO {
         return UserProfileDTO(
-            profileType: .passenger,
+            profileType: .driver,
             profileImageUrl: "",
             profileName: "Adam",
             profileSurname: "Smith",

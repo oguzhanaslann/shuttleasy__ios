@@ -5,6 +5,7 @@ PODS:
     - CocoaLumberjack/Core
   - DynamicBlurView (4.1.0)
   - Kingfisher (7.4.1)
+  - MobilliumQRCodeReader (1.1.0)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - SnapKit (5.6.0)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
   - Kingfisher (~> 7.0)
+  - MobilliumQRCodeReader
   - PopupDialog (~> 1.1)
   - SnapKit (~> 5.6.0)
   - SwiftyJSON (~> 4.0)
@@ -26,6 +28,7 @@ SPEC REPOS:
     - CocoaLumberjack
     - DynamicBlurView
     - Kingfisher
+    - MobilliumQRCodeReader
     - PopupDialog
     - SnapKit
     - SwiftyJSON
@@ -36,11 +39,12 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  MobilliumQRCodeReader: f39910a38563f41ab0941ff24ae48395d6316687
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
 
-PODFILE CHECKSUM: 7f751be783b598a457ad1353fe1112afce3f3b67
+PODFILE CHECKSUM: 26169270d903a9fadf6c75241264c7bd1672dfd5
 
 COCOAPODS: 1.11.3

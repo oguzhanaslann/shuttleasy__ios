@@ -11,6 +11,7 @@ target 'Shuttleasy' do
   pod 'Kingfisher', '~> 7.0'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'PopupDialog', '~> 1.1'
+  pod 'MobilliumQRCodeReader'
   pod 'CocoaLumberjack/Swift'
   pod 'Swinject'
   
