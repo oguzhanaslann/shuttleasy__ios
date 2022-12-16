@@ -75,6 +75,7 @@ class ProfileEditViewModel {
         }
         
         if (profilePhotoData == nil) {
+            print("profile data nil")
             editProfileSubject.send(.error)
             return
         }
@@ -98,7 +99,8 @@ class ProfileEditViewModel {
                         )
                     )
                     editProfileSubject.send(.success)
-                case .failure(_):
+                case .failure(let error):
+                    print("Error while editing profile \(error.localizedDescription)")
                     editProfileSubject.send(.error)
             }
         }

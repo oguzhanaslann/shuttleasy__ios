@@ -168,8 +168,8 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             let userType = await localDatasource.getUserProfileType(defaultValue: ProfileType.passenger)
             let userProfileDTO = try await networkDatasource.editProfile(profileEdit: profileEdit, isDriver: userType == .driver)
             let isDarkMode = localDatasource.isDarkMode()
-            let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
-            await localDatasource.saveUserProfile(userProfile: userProfile)
+            await localDatasource.saveUserProfile(userProfile: userProfileDTO.toUserProfile(isDarkMode: isDarkMode))
+            let userProfile = try await localDatasource.getUserProfile()
             return .success(userProfile)
         } catch {
             return .failure(error)

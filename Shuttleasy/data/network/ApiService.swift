@@ -12,6 +12,27 @@ protocol UserTokenProvider {
     var token: String? { get }
 }
 
+final class Logger: EventMonitor {
+
+    
+    // Event called whenever a DataRequest has parsed a response.
+    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
+        debugPrint("Finished:response \(response)")
+        debugPrint("Headers:response \(response.response?.allHeaderFields ?? [:])")
+        debugPrint("Body:response \(response.data?.debugDescription ?? "nil")")
+        debugPrint("Error:response \(response.error?.localizedDescription ?? "nil")")
+        debugPrint("Result:response \(response.result)")
+    }
+
+    // Event called when any type of Request is resumed.
+    func requestDidResume(_ request: Request) {
+        print("Resuming:request \(request)")
+        debugPrint("Headers:request \(request.request?.allHTTPHeaderFields ?? [:])")
+        debugPrint("Body:request \(request.request?.httpBody?.debugDescription ?? "nil")")
+    }
+}
+
+
 class ApiService {  
 
     let tokenProvider: UserTokenProvider
@@ -27,8 +48,9 @@ class ApiService {
             headers.add(
                 .authorization("bearer \(currentToken)")
             )
+            print("token added to headers \(currentToken.contains("\n"))")
         }
-        
+
         return headers
     }
 
@@ -56,7 +78,7 @@ class ApiService {
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = JSONEncoding.default
     ) -> DataRequest {
-        return AF.request(
+        return Alamofire.AF.request(
             url,
             method: method,
             parameters: parameters,
@@ -66,6 +88,7 @@ class ApiService {
         .validate()
         .validate(statusCode: 200..<300)
         .validate(contentType: ["application/json"])
+        
     }
     
     
@@ -79,15 +102,18 @@ class ApiService {
             url: url, 
             parameters: parameters,
             encoding: encoding
-        ).serializingDecodable(T.self).value
+        )
+        .responseDebugLog()
+        .serializingDecodable(T.self)
+        .value
     }
 
     func postRequest<T: Decodable>(
         url: String,
         parameters: Parameters? = nil,
         encoding: ParameterEncoding = JSONEncoding.default,
-        completion: @escaping (Result<T, Error>
-    ) -> Void) {
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
        prepareRequest(
             url: url, 
             method: .post, 
@@ -114,7 +140,11 @@ class ApiService {
             method: .post, 
             parameters: parameters,
             encoding: encoding
-        ).serializingDecodable(T.self).value
+        )
+        .requestDebugLog()
+        .responseDebugLog()
+        .serializingDecodable(T.self)
+        .value
     }
 
     func putRequest<T: Decodable>(
@@ -239,4 +269,35 @@ class ApiService {
 
         return responseT
     }
+}
+
+extension DataRequest {
+    func responseDebugLog() -> Self {
+        return responseString(completionHandler: { response in
+            debugPrint("")
+            debugPrint("---------Response-------")
+            debugPrint("Finished:response \(response)")
+            debugPrint("Headers:response \(response.response?.allHeaderFields ?? [:])")
+            debugPrint("Body:response \(response.data?.debugDescription ?? "nil")")
+            debugPrint("Error:response \(response.error?.localizedDescription ?? "nil")")
+            debugPrint("Error:response \(response.error?.failureReason ?? "nil")")
+            debugPrint("Result:response \(response.result)")
+            debugPrint("----------------")
+            debugPrint("")
+        })
+    }
+
+    
+    func requestDebugLog() -> Self {
+        return onURLRequestCreation(perform: { urlRequest  in
+            debugPrint("")
+            debugPrint("--------Request--------")
+            debugPrint("Request: \(urlRequest)")
+            debugPrint("Headers: \(urlRequest.allHTTPHeaderFields ?? [:])")
+            debugPrint("Body: \(urlRequest.httpBody?.debugDescription ?? "nil")")
+            debugPrint("----------------")
+            debugPrint("")
+        })
+    }
+    
 }

@@ -358,7 +358,7 @@ class ProfileEditViewController: BaseViewController {
                             )
                             Navigator.shared.popBack()
                         case .error:
-                            self.showErrorSnackbar(message: "Error updating profile")
+                            self.showErrorSnackbar(message: "Error updating profile ")
                     }
                 }
             )

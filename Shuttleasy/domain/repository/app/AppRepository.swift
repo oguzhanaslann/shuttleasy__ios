@@ -21,5 +21,6 @@ class AppRepository {
         // get auth token from local storage if exists
         let token = shuttleasyUserDefaults.getAuthToken()
         // if token exists send it to memory source
+        memoryDataSource.setAuthToken(token: token)
     }
 }

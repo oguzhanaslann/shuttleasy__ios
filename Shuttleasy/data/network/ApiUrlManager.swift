@@ -54,11 +54,16 @@ class ApiUrlManager {
         return baseApiUrl + "profile"
     }
     
-    func editProfile() -> String {
+    func editProfilePassenger() -> String {
         return baseApiUrl + "Passenger/UpdatePassenger"
+    }
+    
+    
+    func editProfileDriver() -> String {
+        return baseApiUrl + "Driver/UpdateDriver"
     }
 
     func deleteProfile() -> String {
-        return baseApiUrl + "Passenger/Delete"
+        return baseApiUrl + "Passenger/DeletePassenger"
     }
 }

@@ -86,7 +86,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         phone : String
     ) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - signUpUser - email: \(email) - password")
-        let newPhone = phone.dropFirst(3)
+       
         let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
             url: ApiUrlManager.shared.signUpPassenger(),
@@ -95,11 +95,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
                 "password": password,
                 "name": name,
                 "surname": surname,
-                "phoneNumber": newPhone
+                "phoneNumber": phone.withoutRegionCode()
             ]
         )
         return passengerDTO.toUserAuthDTO()
     }
+    
+    
 
     func sendResetCodeTo(email: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - sendResetCodeTo - email: \(email)")
@@ -151,14 +153,15 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
 
     private func editDriverProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
         print("UserNetworkDataSourceImpl - editDriverProfile")
-        let driverDTO =  try await apiService.putRequestAsync(
+        let driverDTO =  try await apiService.postRequestAsync(
             type: DriverDto.self,
-            url: ApiUrlManager.shared.editProfile(),
+            url: ApiUrlManager.shared.editProfileDriver(),
             parameters: [
-                "profilePic": profileEdit.profileImage.base64EncodedString(),
+                "profilePic":"" ,//profileEdit.profileImage.base64EncodedString(),//TODO: too large it gets
                 "name": profileEdit.name,
                 "surname": profileEdit.surname,
-                "phoneNumber": profileEdit.phoneNumber,
+                "phoneNumber": profileEdit.phoneNumber.withoutRegionCode(),
+                "email": profileEdit.email
             ]
         )
         
@@ -167,14 +170,16 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
 
     private func editPassengerProfile(profileEdit: ProfileEdit) async throws -> UserProfileDTO {
         print("UserNetworkDataSourceImpl - editPassengerProfile")
-        let passengerDTO =  try await apiService.putRequestAsync(
+        let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
-            url: ApiUrlManager.shared.editProfile(),
+            url: ApiUrlManager.shared.editProfilePassenger(),
             parameters: [
-                "profilePic": profileEdit.profileImage.base64EncodedString(),
+                "profilePic": "", //profileEdit.profileImage.base64EncodedString(), //TODO: too large it gets
                 "name": profileEdit.name,
                 "surname": profileEdit.surname,
-                "phoneNumber": profileEdit.phoneNumber,
+                "phoneNumber": profileEdit.phoneNumber.withoutRegionCode(),
+                "email": profileEdit.email,
+                "city": ""
             ]
         )
         
@@ -193,5 +198,11 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         )
         return fallible
         
+    }
+}
+
+extension String {
+    func withoutRegionCode() -> String {
+        return String(dropFirst(3))
     }
 }

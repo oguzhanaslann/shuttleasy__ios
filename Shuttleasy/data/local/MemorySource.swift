@@ -16,12 +16,17 @@ class MemoryDataSource : UserTokenProvider {
 
     var token: String? {
         get {
+            if _token != nil {
+                print("token get from memory source")
+            }
             return _token
         }
     }
 
     func setAuthToken(token: String?) {
-        print("token set to memory source")
+        if token != nil {
+            print("token set to memory source : \(token!)")
+        }
         _token = token
     }
         
