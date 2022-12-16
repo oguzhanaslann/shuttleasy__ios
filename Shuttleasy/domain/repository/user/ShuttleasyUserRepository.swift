@@ -44,8 +44,18 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         } else {
             profileType = .passenger
         }
-        
-        return UserAuthDTO(id: 1, authenticationToken: "", profileType: profileType)
+
+        return UserAuthDTO(
+            id: 1,
+            authenticationToken: "",
+            profileType : profileType,
+            profilePic: "",
+            name: "Oguzhan",
+            surname: "Aslan",
+            phoneNumber: "5398775750",
+            qrString: "",
+            email: "sample@gmail.com"
+        )
     }
     
     func signUpUser(
@@ -116,21 +126,28 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         
     func getUserProfile() async -> Result<UserProfile, Error> {
         do {
-            let userProfileDTO : UserProfileDTO
-
-            if shouldUseDummyData() {
-                userProfileDTO = dummyUserProfileDto()
-            } else {
-                userProfileDTO = try await networkDatasource.getUserProfile()
-            }
-
-            let isDarkMode = localDatasource.isDarkMode()
-            //await localDatasource.saveUserProfile(userProfile: userProfile)
-            let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
+            // try await getAndSaveProfileFromNetwork()
+            let userProfile = try await localDatasource.getUserProfile()
             return .success(userProfile)
         } catch {
             return .failure(error)
         }
+    }
+    
+    private func getAndSaveProfileFromNetwork() async throws{
+        let userProfileDTO : UserProfileDTO
+
+        if shouldUseDummyData() {
+            userProfileDTO = dummyUserProfileDto()
+        } else {
+            userProfileDTO = try await networkDatasource.getUserProfile()
+        }
+        
+      
+        let isDarkMode = localDatasource.isDarkMode()
+        let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
+        
+        await localDatasource.saveUserProfile(userProfile: userProfile)
     }
     
     func dummyUserProfileDto() -> UserProfileDTO {

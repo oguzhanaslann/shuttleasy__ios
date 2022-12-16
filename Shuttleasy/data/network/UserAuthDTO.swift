@@ -11,4 +11,10 @@ struct UserAuthDTO {
     let id : Int
     let authenticationToken : String
     let profileType : ProfileType
+    let profilePic:  String
+    let name: String
+    let surname: String
+    let phoneNumber: String
+    let qrString: String
+    let email:String
 }

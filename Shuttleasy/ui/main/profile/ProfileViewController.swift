@@ -434,7 +434,7 @@ class ProfileViewController: BaseViewController {
              }, receiveValue: { profileState in
                     profileState.onSuccess { [weak self] profileData in
                         let profile = profileData.data
-                        self?.profileName.text = profile.profileName
+                        self?.profileName.text = profile.fullName
                         self?.profileImageView.load(url: profile.profileImageUrl)
                         self?.getEmailLabel().text = profile.profileEmail
                         self?.getPhoneNumberLabel().text = profile.profilePhone

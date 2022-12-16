@@ -39,6 +39,7 @@ class SignUpViewModel : ViewModel {
                 
                 self.signUpResult.send(result)
             } catch {
+                print( "Error occured while signing up user  \(error.localizedDescription)")
                 self.signUpResult.send(completion: .failure(error))
             }
         }

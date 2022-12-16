@@ -118,7 +118,8 @@ class ApiService {
         url: String,
         parameters: Parameters? = nil
     ) async throws -> T  {
-        return try await prepareRequest(url: url, method: .put, parameters: parameters).serializingDecodable(T.self).value
+        return try await prepareRequest(url: url, method: .put, parameters: parameters)
+            .serializingDecodable(T.self).value
     }
 
     func deleteRequest<T: Decodable>(

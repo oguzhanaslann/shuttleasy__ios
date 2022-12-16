@@ -13,6 +13,12 @@ extension UserAuthDTO {
         return UserAuthenticationModel(
             id: self.id,
             authenticationToken: self.authenticationToken,
+            profilePic: self.profilePic,
+            name: self.name, 
+            surname: self.surname, 
+            phoneNumber: self.phoneNumber, 
+            qrString: self.qrString,
+            email: self.email,
             profileType: self.profileType
         )
     }
@@ -28,6 +34,7 @@ extension UserProfileDTO {
             profileSurname: self.profileSurname,
             profileEmail: self.profileEmail,
             profilePhone: self.profilePhone,
+            qrSeed: qrSeed,
             darkMode: isDarkMode
         )
     }

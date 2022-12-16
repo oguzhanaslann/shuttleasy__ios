@@ -14,7 +14,7 @@ struct UserProfile {
     let profileSurname: String
     let profileEmail: String
     let profilePhone: String
-    let qrSeed: String? = nil
+    let qrSeed: String?
     let darkMode: Bool
 }
 

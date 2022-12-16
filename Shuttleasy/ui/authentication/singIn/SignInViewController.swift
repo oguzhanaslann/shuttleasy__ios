@@ -242,6 +242,11 @@ class SignInViewController: BaseViewController {
 
     @objc
     func navigateToSignUp() {
-        Navigator.shared.navigateToSignUp()
+        if !getDriverFlagSwitch().isOn {
+           Navigator.shared.navigateToSignUp()
+        } else {
+            showErrorSnackbar(message: "Driver sign up is not allowed")
+        }
+        
     }
 }

@@ -95,8 +95,7 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
                 "password": password,
                 "name": name,
                 "surname": surname,
-                "phoneNumber": newPhone,
-                "city": "", // TODO: get city 
+                "phoneNumber": newPhone
             ]
         )
         return passengerDTO.toUserAuthDTO()
@@ -115,9 +114,15 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
     func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO {
         print("UserNetworkDataSourceImpl - resetPassword - password: \(password)")
         return UserAuthDTO(
-            id : 123,
-            authenticationToken: "123",
-            profileType: .driver
+            id: 1,
+            authenticationToken: "",
+            profileType : .passenger,
+            profilePic: "",
+            name: "Oguzhan",
+            surname: "Aslan",
+            phoneNumber: "5398775750",
+            qrString: "",
+            email: "sample@gmail.com"
         )
     }
 
@@ -170,7 +175,6 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
                 "name": profileEdit.name,
                 "surname": profileEdit.surname,
                 "phoneNumber": profileEdit.phoneNumber,
-                "city":""  // TODO:  profileEdit.city,
             ]
         )
         

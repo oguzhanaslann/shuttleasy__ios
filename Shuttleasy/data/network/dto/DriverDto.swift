@@ -37,7 +37,13 @@ extension DriverDto {
         return UserAuthDTO(
             id: id,
             authenticationToken: token,
-            profileType: .driver
+            profileType: .driver,
+            profilePic: profilePic,
+            name: name,
+            surname: surname,
+            phoneNumber: phoneNumber,
+            qrString: "",
+            email: email
         )
     }
     
