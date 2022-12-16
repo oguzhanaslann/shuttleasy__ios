@@ -50,7 +50,9 @@ class ShuttleasyUserDefaults {
     }
     
     //getAuthToken
-    
+    func getAuthToken() -> String? {
+        return UserDefaults.standard.string(forKey: ShuttleasyUserDefaults.USER_AUTH_TOKEN_KEY)
+    }
 
     func setAsLoggedOut(clearWholeData: Bool) async {
         UserDefaults.standard.set(false, forKey: ShuttleasyUserDefaults.loggedInKey)

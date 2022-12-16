@@ -10,11 +10,16 @@ import PopupDialog
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    let injector = Injector.shared
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         setUpPopupDialogAppereance()
+        
+        let appRepository = injector.injectAppRepository()
+        appRepository.initApplication()
 
         return true
     }

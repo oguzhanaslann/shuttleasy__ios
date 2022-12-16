@@ -183,7 +183,15 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         
     func deleteAccount(email: String, password: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - deleteAccount")
-        let fallible = try await apiService.deleteRequestAsync(type: FallibleEventResponse.self, url: ApiUrlManager.shared.deleteProfile())
-        return fallible.result
+        let fallible = try await apiService.postRequestAsync(
+            type: Bool.self,
+            url: ApiUrlManager.shared.deleteProfile(),
+            parameters: [
+                "email": email,
+                "password": password
+            ]
+        )
+        return fallible
+        
     }
 }

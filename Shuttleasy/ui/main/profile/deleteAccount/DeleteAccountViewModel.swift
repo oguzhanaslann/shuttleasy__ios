@@ -26,6 +26,7 @@ class DeleteAccountViewModel {
                 case (.success(let isSuccess) ):
                     deleteAccountResult.send(isSuccess)
                 case .failure(let error):
+                    print("DeleteAccountViewModel - deleteAccount - error: \(error) - message : \(error.localizedDescription)")
                     deleteAccountResult.send(completion: .failure(error))
             }
         }

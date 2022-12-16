@@ -23,7 +23,7 @@ class Injector {
     
     private func registerUserInfoLocalDataSource() {
         container.register(UserInfoLocalDataSource.self, name: Injector.userLocalInfoDependency) { resolver in
-            return UserInfoLocalDataSourceImpl(memoryDataSource: MemoryDataSource.shared)
+            return UserInfoLocalDataSourceImpl(memoryDataSource: MemoryDataSource.shared, shuttleasyUserDefaults: ShuttleasyUserDefaults.shared)
         }
     }
 
@@ -215,5 +215,20 @@ class Injector {
         )
         
         return container.resolve(DeleteAccountViewModel.self)!
+    }
+
+    
+    func injectAppRepository() -> AppRepository {
+        registerDependencyIfNotRegistered(
+            dependency: AppRepository.self,
+            onRegisterNeeded: { resolver in
+                AppRepository(
+                    memoryDataSource: MemoryDataSource.shared,
+                    shuttleasyUserDefaults: ShuttleasyUserDefaults.shared
+                )
+            }
+        )
+        
+        return container.resolve(AppRepository.self)!
     }
 }

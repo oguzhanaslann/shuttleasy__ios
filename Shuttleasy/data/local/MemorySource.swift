@@ -6,3 +6,23 @@
 //
 
 import Foundation
+
+class MemoryDataSource : UserTokenProvider {
+    
+    static let shared = MemoryDataSource()
+    private init() {}    
+    
+    private var  _token: String? = nil
+
+    var token: String? {
+        get {
+            return _token
+        }
+    }
+
+    func setAuthToken(token: String?) {
+        print("token set to memory source")
+        _token = token
+    }
+        
+}

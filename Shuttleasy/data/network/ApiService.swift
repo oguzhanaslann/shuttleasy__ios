@@ -24,7 +24,9 @@ class ApiService {
         var headers: HTTPHeaders = []
 
         if let currentToken = tokenProvider.token  {
-            headers.add(.authorization(bearerToken: currentToken))
+            headers.add(
+                .authorization("bearer \(currentToken)")
+            )
         }
         
         return headers
@@ -34,9 +36,10 @@ class ApiService {
         type: T.Type,
         url: String,
         parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, parameters: parameters)
+        prepareRequest(url: url, parameters: parameters, encoding: encoding)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -50,13 +53,14 @@ class ApiService {
     private func  prepareRequest(
         url: String,
         method: HTTPMethod = .get,
-        parameters: Parameters? = nil
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
     ) -> DataRequest {
         return AF.request(
             url,
             method: method,
             parameters: parameters,
-            encoding: JSONEncoding.default,
+            encoding: encoding,
             headers: headers()
         )
         .validate()
@@ -68,18 +72,28 @@ class ApiService {
     func getRequestAsync<T : Decodable>(
         type: T.Type,
         url: String,
-        parameters: Parameters? = nil
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
     ) async throws -> T  {
-        return try await prepareRequest(url: url, parameters: parameters).serializingDecodable(T.self).value
+        return try await prepareRequest(
+            url: url, 
+            parameters: parameters,
+            encoding: encoding
+        ).serializingDecodable(T.self).value
     }
 
     func postRequest<T: Decodable>(
         url: String,
         parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-       prepareRequest(url: url, method: .post, parameters: parameters)
-            .responseDecodable(of: T.self) { response in
+       prepareRequest(
+            url: url, 
+            method: .post, 
+            parameters: parameters, 
+            encoding: encoding
+        ).responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
                     completion(.success(value))
@@ -92,17 +106,24 @@ class ApiService {
    func postRequestAsync<T : Decodable>(
         type: T.Type,
         url: String,
-        parameters: Parameters? = nil
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
     ) async throws -> T  {
-        return try await prepareRequest(url: url, method: .post, parameters: parameters).serializingDecodable(T.self).value
+        return try await prepareRequest(
+            url: url, 
+            method: .post, 
+            parameters: parameters,
+            encoding: encoding
+        ).serializingDecodable(T.self).value
     }
 
     func putRequest<T: Decodable>(
         url: String,
         parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, method: .put, parameters: parameters)
+        prepareRequest(url: url, method: .put, parameters: parameters, encoding: encoding)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -125,9 +146,10 @@ class ApiService {
     func deleteRequest<T: Decodable>(
         url: String,
         parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default,
         completion: @escaping (Result<T, Error>
     ) -> Void) {
-        prepareRequest(url: url, method: .delete, parameters: parameters)
+        prepareRequest(url: url, method: .delete, parameters: parameters , encoding: encoding)
             .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
@@ -141,9 +163,15 @@ class ApiService {
     func deleteRequestAsync<T : Decodable>(
         type: T.Type,
         url: String,
-        parameters: Parameters? = nil
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
     ) async throws -> T  {
-        return try await prepareRequest(url: url, method: .delete, parameters: parameters).serializingDecodable(T.self).value
+        return try await prepareRequest(
+            url: url, 
+            method: .delete,
+            parameters: parameters,
+            encoding: encoding
+        ).serializingDecodable(T.self).value
     }
 
     func prepareUpload(

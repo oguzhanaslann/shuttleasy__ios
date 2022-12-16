@@ -181,6 +181,17 @@ class ProfileViewController: BaseViewController {
 
     @objc func onDeleteAccountClicked(_ sender: UITapGestureRecognizer) {
         print("onDeleteAccountClicked")
+
+        let profileType = profileViewModel.getUserRole()
+        
+        if profileType == .passenger {
+            self.openDeleteAccountDialog()
+        } else {
+            showErrorSnackbar(message: "Only passengers can delete their account, please contact with your Manager.")
+        }
+     }
+
+    private func openDeleteAccountDialog() {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in

@@ -47,7 +47,6 @@
 		D4422EA429386E8C00342B29 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4422E9129386E8B00342B29 /* Poppins-MediumItalic.ttf */; };
 		D4422EA529386E8C00342B29 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D4422E9229386E8C00342B29 /* OFL.txt */; };
 		D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D4D7329411CA90024D0AC /* ApiService.swift */; };
-		D44D4D78294133DC0024D0AC /* MemoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D4D77294133DC0024D0AC /* MemoryDataSource.swift */; };
 		D44D4D7A29413CC50024D0AC /* ApiUrlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D4D7929413CC50024D0AC /* ApiUrlManager.swift */; };
 		D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261629200C5C00CD5B85 /* FontUtil.swift */; };
 		D44F261929200F8500CD5B85 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F261829200F8500CD5B85 /* Color.swift */; };
@@ -68,12 +67,15 @@
 		D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */; };
 		D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62ADE293409C700D02694 /* ViewGenerators.swift */; };
 		D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */; };
+		D4A94E81294CE6EB0070416F /* ShuttleasyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A94E80294CE6EB0070416F /* ShuttleasyUserDefaults.swift */; };
+		D4A94E83294CE91D0070416F /* MemorySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A94E82294CE91D0070416F /* MemorySource.swift */; };
 		D4C1025D293B8AC8004812C1 /* ShuttleasyUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C1025C293B8AC8004812C1 /* ShuttleasyUserRepository.swift */; };
 		D4C1025F293B8C4C004812C1 /* UserAuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C1025E293B8C4C004812C1 /* UserAuthDTO.swift */; };
 		D4C10261293B8C71004812C1 /* UserProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10260293B8C71004812C1 /* UserProfileDTO.swift */; };
 		D4C10263293B8C91004812C1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10262293B8C91004812C1 /* UserProfile.swift */; };
 		D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10264293B9348004812C1 /* ProfileViewModel.swift */; };
 		D4C10268293BA6C3004812C1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10267293BA6C3004812C1 /* ProfileEditViewController.swift */; };
+		D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFA0C3294CB26B00C0F47E /* AppRepository.swift */; };
 		D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650B29261431002991A1 /* SignInViewModel.swift */; };
 		D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650D2926143C002991A1 /* ViewModel.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
@@ -160,7 +162,6 @@
 		D4422E9129386E8B00342B29 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		D4422E9229386E8C00342B29 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		D44D4D7329411CA90024D0AC /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
-		D44D4D77294133DC0024D0AC /* MemoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryDataSource.swift; path = Shuttleasy/data/network/MemoryDataSource.swift; sourceTree = SOURCE_ROOT; };
 		D44D4D7929413CC50024D0AC /* ApiUrlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrlManager.swift; sourceTree = "<group>"; };
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -181,12 +182,15 @@
 		D4A62ADC2933F46400D02694 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D4A62ADE293409C700D02694 /* ViewGenerators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGenerators.swift; sourceTree = "<group>"; };
 		D4A62AE029340AFE00D02694 /* EmailPasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordResetViewModel.swift; sourceTree = "<group>"; };
+		D4A94E80294CE6EB0070416F /* ShuttleasyUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShuttleasyUserDefaults.swift; path = Shuttleasy/data/local/ShuttleasyUserDefaults.swift; sourceTree = SOURCE_ROOT; };
+		D4A94E82294CE91D0070416F /* MemorySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySource.swift; sourceTree = "<group>"; };
 		D4C1025C293B8AC8004812C1 /* ShuttleasyUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleasyUserRepository.swift; sourceTree = "<group>"; };
 		D4C1025E293B8C4C004812C1 /* UserAuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthDTO.swift; sourceTree = "<group>"; };
 		D4C10260293B8C71004812C1 /* UserProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDTO.swift; sourceTree = "<group>"; };
 		D4C10262293B8C91004812C1 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D4C10264293B9348004812C1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D4C10267293BA6C3004812C1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		D4CFA0C3294CB26B00C0F47E /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		D4D0650B29261431002991A1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		D4D0650D2926143C002991A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -347,21 +351,6 @@
 			path = network;
 			sourceTree = "<group>";
 		};
-		D41BE5B6292AB57A00826640 /* memory */ = {
-			isa = PBXGroup;
-			children = (
-				D44D4D77294133DC0024D0AC /* MemoryDataSource.swift */,
-			);
-			path = memory;
-			sourceTree = "<group>";
-		};
-		D41BE5B7292AB58000826640 /* persistent */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = persistent;
-			sourceTree = "<group>";
-		};
 		D41BE5BE292ABDD500826640 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +497,14 @@
 			path = profileEdit;
 			sourceTree = "<group>";
 		};
+		D4CFA0C2294CB25900C0F47E /* app */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFA0C3294CB26B00C0F47E /* AppRepository.swift */,
+			);
+			path = app;
+			sourceTree = "<group>";
+		};
 		D4D0650A2926141C002991A1 /* singIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,6 +610,7 @@
 		D4F591DC2921465900125E90 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				D4CFA0C2294CB25900C0F47E /* app */,
 				D4F591DE2921466800125E90 /* user */,
 				D4FD012A29483ACD004F149E /* BaseRepository.swift */,
 			);
@@ -641,9 +639,9 @@
 		D4F591E5292146AE00125E90 /* local */ = {
 			isa = PBXGroup;
 			children = (
-				D41BE5B7292AB58000826640 /* persistent */,
-				D41BE5B6292AB57A00826640 /* memory */,
+				D4A94E80294CE6EB0070416F /* ShuttleasyUserDefaults.swift */,
 				D4F591E6292146C000125E90 /* UserInfoLocalSource.swift */,
+				D4A94E82294CE91D0070416F /* MemorySource.swift */,
 			);
 			path = local;
 			sourceTree = "<group>";
@@ -949,9 +947,11 @@
 				D41BE5B3292AB19300826640 /* MainViewController.swift in Sources */,
 				D4816DB92920E6F400ECB799 /* Util.swift in Sources */,
 				D42D0E902944790B00F3DA91 /* DeleteAccountViewController.swift in Sources */,
+				D4A94E81294CE6EB0070416F /* ShuttleasyUserDefaults.swift in Sources */,
 				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
+				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
@@ -966,6 +966,7 @@
 				D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */,
 				D4F3E1952934E1D900D10463 /* ResetPasswordViewController.swift in Sources */,
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,
+				D4A94E83294CE91D0070416F /* MemorySource.swift in Sources */,
 				D4F3E1902934D09D00D10463 /* ResetCodeViewModel.swift in Sources */,
 				D4217A06293B622F004E4744 /* UiDataState.swift in Sources */,
 				D48D8CED293D097300E72C0F /* NotificationEvents.swift in Sources */,
@@ -976,7 +977,6 @@
 				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
-				D44D4D78294133DC0024D0AC /* MemoryDataSource.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
