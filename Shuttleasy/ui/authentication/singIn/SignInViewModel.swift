@@ -13,24 +13,30 @@ class SignInViewModel : ViewModel {
     
     let authenticator : Authenticator
 
-    let signInResult = PassthroughSubject<Bool, Error>()
+    private let subject = PassthroughSubject<UiDataState<Bool>, Error>()
+    let signInResult : AnyPublisher<UiDataState<Bool>, Error>
 
     init( authenticatior : Authenticator) {
         self.authenticator = authenticatior
+        self.signInResult = subject.eraseToAnyPublisher()
     }
     
     func signInUser(email: String , password: String, isDriver: Bool = false) {
         Task.init {
-            do {
-               let result = try await self.authenticator.signInUser(
-                    email: email,
-                    password: password,
-                    isDriver: isDriver
-                )
-                self.signInResult.send(result)
-            } catch {
-                print("error")
-                self.signInResult.send(completion: .failure(error))
+            let result = try await self.authenticator.signInUser(
+                email: email,
+                password: password,
+                isDriver: isDriver
+            )
+
+            switch result {
+                case .success(let isSuccess):
+                    print("SignInViewModel - signInUser - isSuccess: \(isSuccess)")
+                    subject.send(UiDataState.Success(DataContent.createFrom(data: isSuccess)))
+
+                case .failure(let error):
+                    print("SignInViewModel - signInUser - error: \(error) - message : \(error.localizedDescription)")
+                    subject.send(UiDataState.Error(error.localizedDescription))
             }
         }
     }

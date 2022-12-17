@@ -208,7 +208,17 @@ class SignInViewController: BaseViewController {
             }
             
         } receiveValue: { [weak self] result in
-            self?.navigateToMainpage()
+            result.onSuccess { data in
+                let isSuccess =  data.data
+
+                if isSuccess {
+                    self?.navigateToMainpage()
+                } else {
+                    self?.showErrorSnackbar(message: "Sign in failed")
+                }
+            }.onError { errorMessage in
+                self?.showErrorSnackbar(message: errorMessage)
+            }
         }
     }
     

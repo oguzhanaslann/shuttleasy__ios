@@ -22,18 +22,23 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         }
     }
 
-    func signInUser(email: String, password: String, isDriver: Bool) async throws -> Bool {
-        let authDTO: UserAuthDTO
+    func signInUser(email: String, password: String, isDriver: Bool) async -> Result<Bool,Error> {
+        do {
+            let authDTO: UserAuthDTO
         
-        if shouldUseDummyData() {
-            authDTO = dummyUserAuthDto(isDriver : isDriver)
-        } else {
-            authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
+            if shouldUseDummyData() {
+                authDTO = dummyUserAuthDto(isDriver : isDriver)
+            } else {
+                authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
+            }
+            
+            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+            await localDatasource.setAsLoggedIn()
+            
+            return .success(true)
+        } catch {
+            return .failure(error)
         }
-        
-        await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
-        await localDatasource.setAsLoggedIn()
-        return true
     }
     
     private func dummyUserAuthDto(isDriver:Bool) -> UserAuthDTO {

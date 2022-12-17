@@ -293,6 +293,7 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
+        profileViewModel.getUserProfile()
         subcribeObservers()
     }
 
@@ -484,7 +485,7 @@ class ProfileViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        profileViewModel.getUserProfile()
+        
     }
 }
 
