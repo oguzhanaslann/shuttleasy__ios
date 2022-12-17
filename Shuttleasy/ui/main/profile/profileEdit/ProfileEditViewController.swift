@@ -122,15 +122,14 @@ class ProfileEditViewController: BaseViewController {
 
 
     private lazy var phoneInputSection : UIView = {
-        let inputSection = textInputSection(
+        let inputSection = Shuttleasy.phoneInputSection(
             title: "Phone",
             inputHint: "Phone...",
-            keyboardInputType: .phonePad,
-            textContentType: .telephoneNumber,
             inputFieldTag: ProfileEditViewController.phoneInputTag
         )
         return inputSection
     }()
+    
 
     func findNameInput() -> UITextField? {
         return view.viewWithTag(ProfileEditViewController.nameInputTag) as? UITextField
@@ -309,12 +308,16 @@ class ProfileEditViewController: BaseViewController {
 
     @objc func phoneInputChanged() {
         let phoneInput = findPhoneInput()
-        if phoneInput?.text?.isEmpty ?? true {
-            phoneInput?.text = "+"
-        }
+        let currentText: String = (phoneInput?.text?.count ?? 0) < 3 ? "" : (phoneInput?.text ?? "")
+        phoneInput?.text = currentText.withPrefix(prefix: DEFAULT_PHONE_REGION, checkExistence: true)
     }
 
     func subcribeObservers() {
+        setObserverToProfileInformation()
+        setObserverToProfileEditEvent()
+    }
+    
+    func setObserverToProfileInformation() {
         userProfileObserver = profileEditViewModel.userProfilePublisher
             .receive(on: DispatchQueue.main)
             .sink(
@@ -326,17 +329,19 @@ class ProfileEditViewController: BaseViewController {
                             self.showErrorSnackbar(message: error.localizedDescription)
                     }
                 }, receiveValue: { profileState in
-                        profileState.onSuccess { profileData in
+                        profileState.onSuccess { [weak self] profileData in
                             let profile = profileData.data
-                            self.findNameInput()?.text = profile.profileName
-                            self.findSurnameInput()?.text = profile.profileSurname
-                            self.findEmailInput()?.text = profile.profileEmail
-                            self.findPhoneInput()?.text = profile.profilePhone
-                            self.profileImageView.load(url: profile.profileImageUrl)
+                            self?.findNameInput()?.text = profile.profileName
+                            self?.findSurnameInput()?.text = profile.profileSurname
+                            self?.findEmailInput()?.text = profile.profileEmail
+                            self?.findPhoneInput()?.text = profile.profilePhone.withPrefix(prefix: DEFAULT_PHONE_REGION, checkExistence: true)
+                            self?.profileImageView.load(url: profile.profileImageUrl)
                         }
                     }
             )
-        
+    }
+    
+    func setObserverToProfileEditEvent() {
         editProfileObserver = profileEditViewModel.editProfilePublisher
             .receive(on: DispatchQueue.main)
             .sink(
@@ -347,21 +352,25 @@ class ProfileEditViewController: BaseViewController {
                         case .failure(let error):
                             self.showErrorSnackbar(message: error.localizedDescription)
                     }
-                }, receiveValue: { editProfileState in
+                }, receiveValue: { [weak self] editProfileState in
                     switch editProfileState {
                         case .proccessing:
                             break
                         case .success:
-                            NotificationCenter.default.post(
-                                name: NSNotification.Name(NotificationEvents.profileUpdated.rawValue),
-                                object: nil
-                            )
+                            self?.postNotificationAsProfileUpdated()
                             Navigator.shared.popBack()
                         case .error:
-                            self.showErrorSnackbar(message: "Error updating profile ")
+                            self?.showErrorSnackbar(message: "Error updating profile ")
                     }
                 }
             )
+    }
+
+    func postNotificationAsProfileUpdated() {
+         NotificationCenter.default.post(
+            name: NSNotification.Name(NotificationEvents.profileUpdated.rawValue),
+            object: nil
+        )
     }
 }
 

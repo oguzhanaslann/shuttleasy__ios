@@ -84,12 +84,10 @@ class ProfileSetupViewController: BaseViewController {
             make.height.equalTo(56)
         }        
 
-        let phoneInputSection = textInputSection(
-             title: "Phone",
-             inputHint: "Phone...",
-             keyboardInputType: .phonePad,
-             textContentType: .telephoneNumber,
-             inputFieldTag: ProfileSetupViewController.phoneInputTag
+        let phoneInputSection = Shuttleasy.phoneInputSection(
+            title: "Phone",
+            inputHint: "Phone...",
+            inputFieldTag: ProfileSetupViewController.phoneInputTag
         )
 
         view.addSubview(phoneInputSection)
@@ -161,12 +159,9 @@ class ProfileSetupViewController: BaseViewController {
     }
 
     func setPhoneInputText() {
-        let phoneInput = findPhoneInput()
-        if phoneInput?.text?.isEmpty ?? true {
-            phoneInput?.text = "+"
-        } else if phoneInput?.text?.first != "+" {
-            phoneInput?.text = "+" + (phoneInput?.text ?? "")
-        }
+        let phoneInput = findPhoneInput()        
+        let currentText: String = (phoneInput?.text?.count ?? 0) < 3 ? "" : (phoneInput?.text ?? "")
+        phoneInput?.text = currentText.withPrefix(prefix: DEFAULT_PHONE_REGION, checkExistence: true)
     }
 
     func subscribeObservers() {

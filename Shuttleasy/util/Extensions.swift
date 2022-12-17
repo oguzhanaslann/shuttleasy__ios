@@ -63,6 +63,14 @@ extension String {
     func localize(_ key : String? = nil) -> String {
       return NSLocalizedString( key ?? self , comment: "")
     }
+    
+    func withPrefix(prefix: String, checkExistence ofPrefix : Bool) -> String {
+        if ofPrefix && self.hasPrefix(prefix).not() {
+            return prefix + self
+        } else {
+            return self
+        }
+    }
 }
 
 extension UIControl {

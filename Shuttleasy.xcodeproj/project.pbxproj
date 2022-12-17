@@ -166,6 +166,7 @@
 		D44F261629200C5C00CD5B85 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		D44F261829200F8500CD5B85 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D44F261E292014CF00CD5B85 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D46D7EC5294DB8DC005CF8DB /* Shuttleasy.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Shuttleasy.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D47217062942D2C800216931 /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
 		D4816DB02920D40700ECB799 /* WindowDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowDelegate.swift; sourceTree = "<group>"; };
 		D4816DB22920D5C300ECB799 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -518,6 +519,7 @@
 		D4F116E728F9210F0083C5EB = {
 			isa = PBXGroup;
 			children = (
+				D46D7EC5294DB8DC005CF8DB /* Shuttleasy.playground */,
 				D4F116F228F9210F0083C5EB /* Shuttleasy */,
 				D4F1170928F921110083C5EB /* ShuttleasyTests */,
 				D4F1171328F921110083C5EB /* ShuttleasyUITests */,

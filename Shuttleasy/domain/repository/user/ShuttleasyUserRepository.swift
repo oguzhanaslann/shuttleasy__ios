@@ -157,7 +157,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             profileName: "Adam",
             profileSurname: "Smith",
             profileEmail:"sample@sample.com",
-            profilePhone: "+905554443322",
+            profilePhone: "5554443322",
             qrSeed: nil
          )
     }

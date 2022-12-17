@@ -60,3 +60,28 @@ func textInputSection(
 
     return section
 }
+
+
+func phoneInputSection(
+    title: String,
+    inputHint: String,
+    inputFieldTag: Int,
+    fieldDefaultValue: String? = DEFAULT_PHONE_REGION
+) -> UIView {
+
+    let inputSection = textInputSection(
+        title: title,
+        inputHint: inputHint,
+        keyboardInputType: .phonePad,
+        textContentType: .telephoneNumber,
+        inputFieldTag: inputFieldTag
+    )
+
+        // input field
+    if let defaultValue = fieldDefaultValue {
+        let inputField = inputSection.viewWithTag(inputFieldTag) as! UITextField
+        inputField.text = defaultValue
+    }
+
+    return  inputSection
+}
