@@ -176,8 +176,18 @@ class ProfileSetupViewController: BaseViewController {
             }
             
         } receiveValue: { [weak self] result in
-            print("sign up result: \(result)")
-            self?.navigateToMainpage()
+            result.onSuccess { [weak self] data in
+                let isSuccess = data.data
+                if isSuccess {
+                    print("sign up result: \(result)")
+                    self?.navigateToMainpage()
+                } else {
+                    self?.showErrorSnackbar(message: "Sign up failed")
+                }
+                
+            }.onError { [weak self] errorMessage in
+                self?.showErrorSnackbar(message: errorMessage)
+            }
         }
     }
 

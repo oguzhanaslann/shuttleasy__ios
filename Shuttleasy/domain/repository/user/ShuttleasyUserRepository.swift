@@ -69,24 +69,29 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         name :String,
         surname: String,
         phone : String
-    ) async throws -> Bool {
-        let authDTO: UserAuthDTO
+    )  async -> Result<Bool,Error> {
+        do {
+            let authDTO: UserAuthDTO
 
-        if shouldUseDummyData() {
-            authDTO = dummyUserAuthDto(isDriver : false)
-        } else {
-            authDTO = try await networkDatasource.signUpUser(
-                email: email,
-                password: password,
-                name: name,
-                surname: surname,
-                phone: phone
-            )
+            if shouldUseDummyData() {
+              authDTO = dummyUserAuthDto(isDriver : false)
+            } else {
+             authDTO = try await networkDatasource.signUpUser(
+                    email: email,
+                    password: password,
+                    name: name,
+                    surname: surname,
+                    phone: phone
+                )
+            }
+
+            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+            await localDatasource.setAsLoggedIn()
+            
+            return .success(true)
+        } catch {
+            return .failure(error)
         }
-
-        await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
-        await localDatasource.setAsLoggedIn()
-        return true
     }
 
     func sendResetCodeTo(email: String) async throws -> Bool {
