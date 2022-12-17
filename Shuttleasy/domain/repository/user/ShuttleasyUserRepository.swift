@@ -7,6 +7,8 @@
 
 import Foundation
 
+let USER_ID_NOT_FOUND = 1001
+
 class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     private let localDatasource : UserInfoLocalDataSource
     private let networkDatasource : UserNetworkDataSource
@@ -144,7 +146,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         
     func getUserProfile() async -> Result<UserProfile, Error> {
         do {
-            // try await getAndSaveProfileFromNetwork()
+            await getAndSaveProfileFromNetwork()
             let userProfile = try await localDatasource.getUserProfile()
             return .success(userProfile)
         } catch {
@@ -152,22 +154,30 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         }
     }
     
-    private func getAndSaveProfileFromNetwork() async throws{
-        let userProfileDTO : UserProfileDTO
+    private func getAndSaveProfileFromNetwork() async {
+        do {
+            let userProfileDTO : UserProfileDTO
 
-        if shouldUseDummyData() {
-            userProfileDTO = dummyUserProfileDto()
-        } else {
-            userProfileDTO = try await networkDatasource.getUserProfile()
+            let userId = localDatasource.getUserId()
+            if shouldUseDummyData() {
+                userProfileDTO = dummyUserProfileDto()
+            } else if let currentId = userId {
+                let userProfileType =  await localDatasource.getUserProfileType(defaultValue: .passenger)
+                userProfileDTO = try await networkDatasource.getUserProfile(userId: currentId, isDriver: userProfileType == .driver)
+            } else {
+                throw NSError(domain: "User not found", code: USER_ID_NOT_FOUND)
+            }
+            
+          
+            let isDarkMode = localDatasource.isDarkMode()
+            let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
+            
+            await localDatasource.saveUserProfile(userProfile: userProfile)
+        } catch {
+            debugPrint("Error getting user profile -> \(error.localizedDescription)")
         }
-        
-      
-        let isDarkMode = localDatasource.isDarkMode()
-        let userProfile = userProfileDTO.toUserProfile(isDarkMode: isDarkMode)
-        
-        await localDatasource.saveUserProfile(userProfile: userProfile)
     }
-    
+
     func dummyUserProfileDto() -> UserProfileDTO {
         return UserProfileDTO(
             profileType: .passenger,

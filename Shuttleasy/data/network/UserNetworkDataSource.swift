@@ -29,7 +29,7 @@ protocol  UserNetworkDataSource {
     func sendResetCodeTo(email: String) async throws -> Bool
     func sendResetCode(code: String, email : String) async throws -> String
     func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO
-    func getUserProfile() async throws -> UserProfileDTO
+    func getUserProfile(userId: Int,isDriver: Bool) async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO
     func deleteAccount(email: String, password: String) async throws -> Bool
 }
@@ -53,10 +53,10 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let driverDTO =  try await apiService.postRequestAsync(
             type: DriverDto.self,
             url: ApiUrlManager.shared.signInPassenger(),
-            parameters: [
-                "email": email,
-                "password": password
-            ]
+            parameters: ApiParameters()
+                .email(email)
+                .password(password)
+                .build()
         )
         
         return driverDTO.toUserAuthDTO()
@@ -67,10 +67,10 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
             url: ApiUrlManager.shared.signInPassenger(),
-            parameters: [
-                "email": email,
-                "password": password
-            ]
+            parameters: ApiParameters()
+                .email(email)
+                .password(password)
+                .build()
         )
         
         return passengerDTO.toUserAuthDTO()
@@ -90,13 +90,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
             url: ApiUrlManager.shared.signUpPassenger(),
-            parameters: [
-                "email": email,
-                "password": password,
-                "name": name,
-                "surname": surname,
-                "phoneNumber": phone.withoutRegionCode()
-            ]
+            parameters: ApiParameters()
+                .email(email)
+                .password(password)
+                .name(name)
+                .surname(surname)
+                .phoneNumber(phone.withoutRegionCode())
+                .build()
         )
         return passengerDTO.toUserAuthDTO()
     }
@@ -128,17 +128,32 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         )
     }
 
-    func getUserProfile() async throws -> UserProfileDTO {
-        print("UserNetworkDataSourceImpl - getUserProfile")
-        return UserProfileDTO(
-            profileType : .passenger,
-            profileImageUrl : "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
-            profileName : "Oğuzhan",
-            profileSurname: "Aslan",
-            profileEmail : "sample@sample.com",
-            profilePhone : "5554443322",
-            qrSeed : "1234567890"
-        )       
+    func getUserProfile(userId : Int, isDriver : Bool) async throws -> UserProfileDTO {
+        if isDriver {
+            return try await getDriverProfile(userId: userId)
+        } else {
+            return try await getPassengerProfile(userId: userId)
+        }
+    }
+
+    private func getDriverProfile(userId: Int) async throws -> UserProfileDTO {
+        let driverDTO = try await apiService.postRequestAsync(
+            type: DriverDto.self,
+            url: ApiUrlManager.shared.getDriverProfile(),
+            parameters: ApiParameters().id(userId).build()
+        )
+    
+        return driverDTO.toUserProfileDTO()
+    }
+
+    private func getPassengerProfile(userId: Int) async throws -> UserProfileDTO {
+         let passengerDTO = try await apiService.postRequestAsync(
+            type: PassengerDto.self,
+            url: ApiUrlManager.shared.getPassengerProfile(),
+            parameters: ApiParameters().id(userId).build()
+        )
+    
+        return passengerDTO.toUserProfileDTO()
     }
     
     
@@ -156,13 +171,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let driverDTO =  try await apiService.postRequestAsync(
             type: DriverDto.self,
             url: ApiUrlManager.shared.editProfileDriver(),
-            parameters: [
-                "profilePic":"" ,//profileEdit.profileImage.base64EncodedString(),//TODO: too large it gets
-                "name": profileEdit.name,
-                "surname": profileEdit.surname,
-                "phoneNumber": profileEdit.phoneNumber.withoutRegionCode(),
-                "email": profileEdit.email
-            ]
+            parameters: ApiParameters()
+                .name(profileEdit.name)
+                .surname(profileEdit.surname)
+                .phoneNumber(profileEdit.phoneNumber.withoutRegionCode())
+                .email(profileEdit.email)
+                .profilePic("")
+                .build()
         )
         
         return driverDTO.toUserProfileDTO()
@@ -173,14 +188,14 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let passengerDTO =  try await apiService.postRequestAsync(
             type: PassengerDto.self,
             url: ApiUrlManager.shared.editProfilePassenger(),
-            parameters: [
-                "profilePic": "", //profileEdit.profileImage.base64EncodedString(), //TODO: too large it gets
-                "name": profileEdit.name,
-                "surname": profileEdit.surname,
-                "phoneNumber": profileEdit.phoneNumber.withoutRegionCode(),
-                "email": profileEdit.email,
-                "city": ""
-            ]
+            parameters: ApiParameters()
+                .name(profileEdit.name)
+                .surname(profileEdit.surname)
+                .phoneNumber(profileEdit.phoneNumber.withoutRegionCode())
+                .email(profileEdit.email)
+                .city("")
+                .profilePic("")
+                .build()
         )
         
         return passengerDTO.toUserProfileDTO()
@@ -191,55 +206,10 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
         let fallible = try await apiService.postRequestAsync(
             type: Bool.self,
             url: ApiUrlManager.shared.deleteProfile(),
-            parameters: [
-                "email": email,
-                "password": password
-            ]
+            parameters: ApiParameters().email(email).password(password).build()
         )
         return fallible
-        
     }
 }
 
-enum PhoneRegionFormatError: Error {
-    case invalidPhoneNumber(reason: String)
-}
 
-
-extension String {
-    func withoutRegionCode(checkFirst: Bool = false) throws -> String {
-        if checkFirst {
-            let normalizedPhone: String
-            if starts(with: "+") {
-                normalizedPhone = String(dropFirst(3))
-            } else if starts(with: "0") {
-                normalizedPhone = String(dropFirst(1))
-            } else {
-                normalizedPhone = self
-            }
-
-            if normalizedPhone.count == 10 {
-                return normalizedPhone
-            } else {
-                let errorMessage: String
-                if normalizedPhone.count < 10 {
-                    errorMessage = "Phone number is too short"
-                } else {
-                    errorMessage = "Phone number is too long"
-                }
-                throw PhoneRegionFormatError.invalidPhoneNumber(reason: errorMessage)
-            }
-
-        } else {
-            return String(dropFirst(3))
-        }
-    }
-
-    func withoutRegionCodeOrEmpty(checkFirst : Bool = false) -> String {
-        do {
-            return try withoutRegionCode(checkFirst: checkFirst)
-        } catch {
-            return ""
-        }
-    }
-}

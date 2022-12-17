@@ -50,14 +50,17 @@ class ApiUrlManager {
         return baseApiUrl + "Driver/ResetPassword "
     }
     
-    func getUserProfile() -> String {
-        return baseApiUrl + "profile"
+    func getDriverProfile() -> String {
+        return baseApiUrl + "Driver/GetDriver"
+    }
+    
+    func getPassengerProfile() -> String {
+        return baseApiUrl + "Passenger/GetPassenger"
     }
     
     func editProfilePassenger() -> String {
         return baseApiUrl + "Passenger/UpdatePassenger"
     }
-    
     
     func editProfileDriver() -> String {
         return baseApiUrl + "Driver/UpdateDriver"

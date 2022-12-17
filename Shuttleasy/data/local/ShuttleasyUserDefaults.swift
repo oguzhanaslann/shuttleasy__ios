@@ -107,4 +107,9 @@ class ShuttleasyUserDefaults {
     func isDarkMode() -> Bool {
         return UserDefaults.standard.bool(forKey: ShuttleasyUserDefaults.DARK_MODE_KEY)
     }
+
+    func getUserId() -> Int? {
+        return UserDefaults.standard.integer(forKey: ShuttleasyUserDefaults.USER_ID_KEY)
+    }
+
 }

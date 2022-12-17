@@ -1,7 +1,12 @@
+//
+//  ApiParameters.swift
+//  Shuttleasy
+//
+//  Created by Oğuzhan Aslan on 17.12.2022.
+//
 
-
-typealias Parameters = [String: Any]
-
+import Foundation
+import Alamofire
 
 class ApiParameters {
     var params : Parameters = [:]
@@ -45,16 +50,13 @@ class ApiParameters {
         params["id"] = id
         return self
     }
+    
+    func city(_ city: String) -> ApiParameters {
+        params["city"] = city
+        return self
+    }
 
     func build() -> Parameters {
         return params
     }
 }
-
-
-let api = ApiParameters()
-    .id(1)
-    .email("sadasd")
-    .build()
-
-print(api)

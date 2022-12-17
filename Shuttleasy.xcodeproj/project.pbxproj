@@ -24,6 +24,7 @@
 		D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */; };
 		D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C5292ABFCC00826640 /* NetworkMapperExtensions.swift */; };
 		D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5C7292ACADA00826640 /* Checkbox.swift */; };
+		D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F9C3D294E0D650079D2A6 /* ApiParameters.swift */; };
 		D4217A06293B622F004E4744 /* UiDataState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4217A05293B622F004E4744 /* UiDataState.swift */; };
 		D42D0E902944790B00F3DA91 /* DeleteAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42D0E8F2944790B00F3DA91 /* DeleteAccountViewController.swift */; };
 		D42D0E922944793C00F3DA91 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42D0E912944793C00F3DA91 /* DeleteAccountViewModel.swift */; };
@@ -139,6 +140,7 @@
 		D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationModel.swift; sourceTree = "<group>"; };
 		D41BE5C5292ABFCC00826640 /* NetworkMapperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMapperExtensions.swift; sourceTree = "<group>"; };
 		D41BE5C7292ACADA00826640 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		D41F9C3D294E0D650079D2A6 /* ApiParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiParameters.swift; sourceTree = "<group>"; };
 		D4217A05293B622F004E4744 /* UiDataState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiDataState.swift; sourceTree = "<group>"; };
 		D42D0E8F2944790B00F3DA91 /* DeleteAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewController.swift; sourceTree = "<group>"; };
 		D42D0E912944793C00F3DA91 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				D4C10260293B8C71004812C1 /* UserProfileDTO.swift */,
 				D44D4D7329411CA90024D0AC /* ApiService.swift */,
 				D44D4D7929413CC50024D0AC /* ApiUrlManager.swift */,
+				D41F9C3D294E0D650079D2A6 /* ApiParameters.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
 				D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */,
 				D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */,
+				D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */,
 				D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */,
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
 				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,

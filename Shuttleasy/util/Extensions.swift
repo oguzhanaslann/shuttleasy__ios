@@ -153,3 +153,46 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
 }
+
+
+enum PhoneRegionFormatError: Error {
+    case invalidPhoneNumber(reason: String)
+}
+
+extension String {
+    func withoutRegionCode(checkFirst: Bool = false) throws -> String {
+        if checkFirst {
+            let normalizedPhone: String
+            if starts(with: "+") {
+                normalizedPhone = String(dropFirst(3))
+            } else if starts(with: "0") {
+                normalizedPhone = String(dropFirst(1))
+            } else {
+                normalizedPhone = self
+            }
+
+            if normalizedPhone.count == 10 {
+                return normalizedPhone
+            } else {
+                let errorMessage: String
+                if normalizedPhone.count < 10 {
+                    errorMessage = "Phone number is too short"
+                } else {
+                    errorMessage = "Phone number is too long"
+                }
+                throw PhoneRegionFormatError.invalidPhoneNumber(reason: errorMessage)
+            }
+
+        } else {
+            return String(dropFirst(3))
+        }
+    }
+
+    func withoutRegionCodeOrEmpty(checkFirst : Bool = false) -> String {
+        do {
+            return try withoutRegionCode(checkFirst: checkFirst)
+        } catch {
+            return ""
+        }
+    }
+}

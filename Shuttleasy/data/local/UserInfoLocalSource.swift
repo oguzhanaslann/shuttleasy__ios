@@ -17,6 +17,7 @@ protocol UserInfoLocalDataSource {
     func saveUserProfile(userProfile : UserProfile) async
     func getUserProfile() async throws -> UserProfile
     func saveDarkModePreference(isDarkMode: Bool) async
+    func getUserId() -> Int?
     func isDarkMode() -> Bool
 }
 
@@ -67,7 +68,10 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
         return  try await shuttleasyUserDefaults.getUserProfile()
     }
     
-
+    func getUserId() -> Int? {
+        return shuttleasyUserDefaults.getUserId()
+    }
+    
     func saveDarkModePreference(isDarkMode: Bool) async {
         await shuttleasyUserDefaults.saveDarkModePreference(isDarkMode: isDarkMode)
     }
