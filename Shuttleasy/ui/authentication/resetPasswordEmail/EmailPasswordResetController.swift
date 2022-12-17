@@ -120,11 +120,17 @@ class EmailPasswordResetController: BaseViewController {
                         self?.showErrorSnackbar(message: error.localizedDescription)
                 }
             } receiveValue: { [weak self] result in
-                print("email \(result)")
-                if result {
-                    self?.navigateToResetCodePage()
-                } else {
-                    // TODO - IMPLEMENT ERROR HANDLING
+                result.onSuccess { [weak self] data in 
+                    let isSuccess = data.data 
+
+                   print("email \(result)")
+                     if isSuccess {
+                        self?.navigateToResetCodePage()
+                    } else {
+                        self?.showErrorSnackbar(message: "Email not found")
+                    }
+                }.onError { [weak self] errorMessage in
+                    self?.showErrorSnackbar(message: errorMessage)
                 }
             }
     }

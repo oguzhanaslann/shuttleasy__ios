@@ -94,30 +94,38 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         }
     }
 
-    func sendResetCodeTo(email: String) async throws -> Bool {
-        let isSend : Bool
+    func sendResetCodeTo(email: String) async -> Result<Bool,Error>  {
+        do {
+            let isSend : Bool
 
-        if shouldUseDummyData() {
-            isSend = true
-        } else {
-            isSend = try await networkDatasource.sendResetCodeTo(email: email)
+            if shouldUseDummyData() {
+                isSend = true
+            } else {
+                isSend = try await networkDatasource.sendResetCodeTo(email: email)
+            }
+
+            return .success(isSend)
+        } catch {
+            return .failure(error)
         }
-
-        return isSend
     }
     
-    func sendResetCode(code: String, email:String) async throws -> Bool {
-        let token : String
+    func sendResetCode(code: String, email:String) async -> Result<Bool,Error>  {
+        do {
+            let token : String
 
-        if shouldUseDummyData() {
-            token = ""
-        } else {
-            token = try await networkDatasource.sendResetCode(code: code, email : email)
+            if shouldUseDummyData() {
+                token = ""
+            } else {
+                token = try await networkDatasource.sendResetCode(code: code, email : email)
+            }
+
+            await localDatasource.saveAuthToken(token: token)
+
+            return .success(token.isEmpty.not())
+        } catch {
+            return .failure(error)
         }
-
-        await localDatasource.saveAuthToken(token: token)
-
-        return token.isEmpty.not()
     }
     
     func resetPassword(password: String, passwordAgain: String) async throws -> Bool {

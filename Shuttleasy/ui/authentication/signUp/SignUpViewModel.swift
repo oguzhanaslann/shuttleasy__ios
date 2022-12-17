@@ -44,7 +44,7 @@ class SignUpViewModel : ViewModel {
                 case .failure(let error):
                     print("SignInViewModel - signInUser - error: \(error) - message : \(error.localizedDescription)")
                     signUpResult.send(UiDataState.Error(error.localizedDescription))
-                }
+            }
         }
     }    
 }

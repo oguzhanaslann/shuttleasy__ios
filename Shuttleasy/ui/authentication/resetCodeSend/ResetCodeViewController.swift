@@ -145,12 +145,17 @@ class ResetCodeViewController : BaseViewController {
                 case .failure(let error):
                     self?.showErrorSnackbar(message: error.localizedDescription)
             }
-           } receiveValue: { [weak self] isAccepted in
-               if (isAccepted) {
-                    self?.navigateToResetPasswordPage()
-               } else {
-                   self?.showErrorSnackbar(message: "Reset code is not accepted")
-               }
+           } receiveValue: { [weak self] result in
+                result.onSuccess { [weak self] data in 
+                    let isAccepted = data.data
+                    if (isAccepted) {
+                        self?.navigateToResetPasswordPage()
+                    } else {
+                        self?.showErrorSnackbar(message: "Reset code is not accepted")
+                    }
+                }.onError { [weak self] errorMessage in
+                    self?.showErrorSnackbar(message: errorMessage)
+                }
            } 
 
         resetCodeSentObserver = viewModel.resetCodeSendResult
@@ -162,11 +167,16 @@ class ResetCodeViewController : BaseViewController {
                     case .failure(let error):
                         self?.showErrorSnackbar(message: error.localizedDescription)
                 }
-            } receiveValue: { [weak self] isSent in
-                if (isSent) {
-                    self?.showInformationSnackbar(message: "Reset code sent")
-                } else {
-                    self?.showErrorSnackbar(message: "Something went wrong")
+            } receiveValue: { [weak self] result in
+                result.onSuccess { [weak self] data in 
+                    let isSent = data.data
+                    if (isSent) {
+                        self?.showInformationSnackbar(message: "Reset code sent")
+                    } else {
+                        self?.showErrorSnackbar(message: "Something went wrong")
+                    }
+                }.onError { [weak self] errorMessage in
+                    self?.showErrorSnackbar(message: errorMessage)
                 }
             }
    }
