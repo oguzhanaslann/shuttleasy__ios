@@ -13,8 +13,8 @@ class ProfileViewModel: ViewModel {
     private let subject = CurrentValueSubject<UiDataState<UserProfile>, Error>(UiDataState.getDefaultCase())
     let publisher: AnyPublisher<UiDataState<UserProfile>, Error>
 
-    private let userLogoutResultSubject = PassthroughSubject<Void, Error>()
-    let userLogoutResultPublisher: AnyPublisher<Void, Error>
+    private let userLogoutResultSubject = PassthroughSubject<UiDataState<Void>, Error>()
+    let userLogoutResultPublisher: AnyPublisher<UiDataState<Void>, Error>
 
     private let userRepository: UserRepository
     
@@ -39,7 +39,7 @@ class ProfileViewModel: ViewModel {
                         )
                     )
                 case .failure(let error):
-                    subject.send(completion: .failure(error))
+                    subject.send(UiDataState.Error(error.localizedDescription))
             }
         }
     }
@@ -66,9 +66,9 @@ class ProfileViewModel: ViewModel {
             let result = await userRepository.logOut()
             switch result {
                 case .success(_):
-                    userLogoutResultSubject.send(())
+                userLogoutResultSubject.send(UiDataState.Success(DataContent.createFrom(data: ())))
                 case .failure(let error):
-                    userLogoutResultSubject.send(completion: .failure(error))
+                userLogoutResultSubject.send(UiDataState.Error(error.localizedDescription))
             }
         }
     }

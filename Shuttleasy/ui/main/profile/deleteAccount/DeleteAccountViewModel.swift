@@ -10,8 +10,8 @@ import Combine
 
 class DeleteAccountViewModel {
         
-    private let deleteAccountResult = PassthroughSubject<Bool, Error>()
-    let deleteAccountPublisher : AnyPublisher<Bool, Error>
+    private let deleteAccountResult = PassthroughSubject<UiDataState<Bool>, Error>()
+    let deleteAccountPublisher : AnyPublisher<UiDataState<Bool>, Error>
     private let userRepository : UserRepository
 
     init(userRepository: UserRepository) {
@@ -20,14 +20,15 @@ class DeleteAccountViewModel {
     }
         
     func deleteAccount(email: String, password: String) {
+        deleteAccountResult.send(UiDataState.Loading)
         Task.init {
             let result = try await self.userRepository.deleteAccount(email: email, password: password)
             switch result  {
                 case (.success(let isSuccess) ):
-                    deleteAccountResult.send(isSuccess)
+                    deleteAccountResult.send(UiDataState.Success(DataContent.createFrom(data: isSuccess)))
                 case .failure(let error):
                     print("DeleteAccountViewModel - deleteAccount - error: \(error) - message : \(error.localizedDescription)")
-                    deleteAccountResult.send(completion: .failure(error))
+                    deleteAccountResult.send(UiDataState.Error(error.localizedDescription))
             }
         }
     }

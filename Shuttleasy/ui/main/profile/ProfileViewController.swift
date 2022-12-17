@@ -293,7 +293,6 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
-        profileViewModel.getUserProfile()
         subcribeObservers()
     }
 
@@ -453,6 +452,8 @@ class ProfileViewController: BaseViewController {
                         if profileData.data.profileType != .passenger {
                             self?.getQrCodeSection().removeFromSuperview()
                         }
+                    }.onError { [weak self] errorMessage in
+                        self?.showErrorSnackbar(message: errorMessage)
                     }
                 }
             )
@@ -480,6 +481,10 @@ class ProfileViewController: BaseViewController {
 
     func onUserLogout() {
           Navigator.shared.navigateToSignIn(clearBackStack: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        profileViewModel.getUserProfile()
     }
 }
 

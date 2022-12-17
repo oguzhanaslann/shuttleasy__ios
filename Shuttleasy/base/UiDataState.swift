@@ -39,13 +39,50 @@ enum UiDataState<T> {
     }
 
     // onSuccess 
-    func onSuccess(onSuccess: (DataContent<T>) -> Void) {
+    func onSuccess(onSuccess: (DataContent<T>) -> Void) -> UiDataState {
         switch self {
         case .Success(let dataContent):
             onSuccess(dataContent)
         default:
             break
         }
+        
+        return self
+    }
+
+    // onError
+    func onError(onError: (String) -> Void) -> UiDataState {
+        switch self {
+        case .Error(let message):
+            onError(message)
+        default:
+            break
+        }
+        
+        return self    }
+
+    // onLoading
+    func onLoading(onLoading: () -> Void) -> UiDataState {
+        switch self {
+        case .Loading:
+            onLoading()
+        default:
+            break
+        }
+        
+        return self
+    }
+
+    // onInitial
+    func onInitial(onInitial: () -> Void) -> UiDataState {
+        switch self {
+        case .Initial:
+            onInitial()
+        default:
+            break
+        }
+        
+        return self
     }
 }
  
