@@ -406,20 +406,15 @@ class ProfileViewController: BaseViewController {
     }
     
     @objc func onDarkModeSwitchChanged(_ sender: UISwitch) {
-        print("onDarkModeSwitchChanged")
-       
         let selectedStyle : UIUserInterfaceStyle
         if sender.isOn {
-            print("Dark mode is on")
-            // UserDefaults.standard.set(true, forKey: "darkMode")
+            debugPrint("Dark mode is on")
             selectedStyle = .dark
         } else {
-            print("Dark mode is off")
-           // UserDefaults.standard.set(false, forKey: "darkMode")
+            debugPrint("Dark mode is off")
             selectedStyle = .light
         }
-                
-        
+
         WindowDelegate.shared.setApplicationUIStyle(style: selectedStyle)
         profileViewModel.updateDarkModePreference(isDarkMode: sender.isOn)
     }
@@ -448,7 +443,7 @@ class ProfileViewController: BaseViewController {
                         self?.profileName.text = profile.fullName
                         self?.profileImageView.load(url: profile.profileImageUrl)
                         self?.getEmailLabel().text = profile.profileEmail
-                        self?.getPhoneNumberLabel().text = profile.profilePhone
+                        self?.getPhoneNumberLabel().text = profile.profilePhone.withPrefix(prefix: DEFAULT_PHONE_REGION, checkExistence: true)
 
                         let darkMode = profileData.data.darkMode
                         self?.removeOnValueChangedSelectorFromDarkModeSwitch()
