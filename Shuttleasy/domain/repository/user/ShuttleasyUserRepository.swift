@@ -8,6 +8,7 @@
 import Foundation
 
 let USER_ID_NOT_FOUND = 1001
+let RESET_PASSWORD_TOKEN_NIL = 1002
 
 class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     private let localDatasource : UserInfoLocalDataSource
@@ -119,29 +120,37 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             if shouldUseDummyData() {
                 token = ""
             } else {
-                token = try await networkDatasource.sendResetCode(code: code, email : email)
+                if let newToken = try await networkDatasource.sendResetCode(code: code, email : email) {
+                    token = newToken
+                } else {
+                    return.failure(NSError(domain: "Invalid code", code: RESET_PASSWORD_TOKEN_NIL))
+                }
             }
 
             await localDatasource.saveAuthToken(token: token)
-
             return .success(token.isEmpty.not())
         } catch {
             return .failure(error)
         }
     }
     
-    func resetPassword(password: String, passwordAgain: String) async throws -> Bool {
-        let authDTO : UserAuthDTO
+    func resetPassword(email : String, password: String) async -> Result<Bool,Error> {
+        do {
+            let authDTO : UserAuthDTO
 
-        if shouldUseDummyData() {
-            authDTO = dummyUserAuthDto(isDriver : false)
-        } else {
-            authDTO = try await networkDatasource.resetPassword(password: password, passwordAgain: passwordAgain)
+            if shouldUseDummyData() {
+                authDTO = dummyUserAuthDto(isDriver : false)
+            } else {
+                try await networkDatasource.resetPassword(email: email, password: password)
+                authDTO = dummyUserAuthDto(isDriver : false) //TODO: implement here log in user 
+            }
+
+            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+            await localDatasource.setAsLoggedIn()
+            return .success(true)
+        } catch {
+            return .failure(error)
         }
-
-        await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
-        await localDatasource.setAsLoggedIn()
-        return true
     }
         
     func getUserProfile() async -> Result<UserProfile, Error> {

@@ -34,20 +34,12 @@ class ApiUrlManager {
         return baseApiUrl + "Passenger/SendOTPEmail"
     }
 
-    func otpConfirmDriver() -> String {
-        return baseApiUrl + "Driver/ValidateOTPEmail"
+    func otpConfirm() -> String {
+        return baseApiUrl + "User/ValidateOTP"
     }
 
-    func otpConfirmPassenger() -> String {
-        return baseApiUrl + "Passenger/ValidateOTPEmail"
-    }
-    
-    func resetPasswordPassenger() -> String {
-        return baseApiUrl + "Passenger/ResetPassword "
-    }
-
-    func resetPasswordDriver() -> String {
-        return baseApiUrl + "Driver/ResetPassword "
+    func resetPassword() -> String {
+        return baseApiUrl + "User/SendOTPEmail"
     }
     
     func getDriverProfile() -> String {

@@ -17,6 +17,8 @@
 		D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27EF292A78C500140612 /* EmailPasswordResetController.swift */; };
 		D40B27F2292A797100140612 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27F1292A797100140612 /* Navigator.swift */; };
 		D40B27F6292A8F2700140612 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B27F5292A8F2700140612 /* Snackbar.swift */; };
+		D415A2CE294E35CC00564E53 /* SendOtpEmailDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D415A2CD294E35CC00564E53 /* SendOtpEmailDto.swift */; };
+		D415A2D0294E412E00564E53 /* OtpConfirmDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */; };
 		D41BE5B3292AB19300826640 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5B2292AB19300826640 /* MainViewController.swift */; };
 		D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5BA292AB68000826640 /* Authenticator.swift */; };
 		D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */; };
@@ -133,6 +135,8 @@
 		D40B27EF292A78C500140612 /* EmailPasswordResetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordResetController.swift; sourceTree = "<group>"; };
 		D40B27F1292A797100140612 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		D40B27F5292A8F2700140612 /* Snackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snackbar.swift; sourceTree = "<group>"; };
+		D415A2CD294E35CC00564E53 /* SendOtpEmailDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOtpEmailDto.swift; sourceTree = "<group>"; };
+		D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpConfirmDto.swift; sourceTree = "<group>"; };
 		D41BE5B2292AB19300826640 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D41BE5BA292AB68000826640 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkDataSource.swift; sourceTree = "<group>"; };
@@ -669,6 +673,8 @@
 			children = (
 				D4FD012629481822004F149E /* PassengerDto.swift */,
 				D4FD012829481B47004F149E /* DriverDto.swift */,
+				D415A2CD294E35CC00564E53 /* SendOtpEmailDto.swift */,
+				D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -957,6 +963,7 @@
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,
+				D415A2D0294E412E00564E53 /* OtpConfirmDto.swift in Sources */,
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
@@ -1010,6 +1017,7 @@
 				D4C10263293B8C91004812C1 /* UserProfile.swift in Sources */,
 				D4C10268293BA6C3004812C1 /* ProfileEditViewController.swift in Sources */,
 				D406C0D42937CB5700BC5F0C /* ProfileViewController.swift in Sources */,
+				D415A2CE294E35CC00564E53 /* SendOtpEmailDto.swift in Sources */,
 				D406C0D02937CB2A00BC5F0C /* HomepageViewContoller.swift in Sources */,
 				D44D4D7A29413CC50024D0AC /* ApiUrlManager.swift in Sources */,
 				D41BE5C0292ABDE400826640 /* ProfileType.swift in Sources */,

@@ -9,7 +9,8 @@ import Foundation
 import Alamofire
 
 class ApiParameters {
-    var params : Parameters = [:]
+
+    private var params : Parameters = [:]
     
     func email(_ email: String) -> ApiParameters {
         params["email"] = email
@@ -53,6 +54,11 @@ class ApiParameters {
     
     func city(_ city: String) -> ApiParameters {
         params["city"] = city
+        return self
+    }
+    
+    func otp(_ otp: String) -> ApiParameters {
+        params["otp"] = otp
         return self
     }
 

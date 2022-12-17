@@ -123,8 +123,8 @@ class EmailPasswordResetController: BaseViewController {
                 result.onSuccess { [weak self] data in 
                     let isSuccess = data.data 
 
-                   print("email \(result)")
-                     if isSuccess {
+                    print("email \(result)")
+                    if isSuccess {
                         self?.navigateToResetCodePage()
                     } else {
                         self?.showErrorSnackbar(message: "Email not found")

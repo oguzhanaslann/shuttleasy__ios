@@ -134,12 +134,16 @@ class ResetPasswordViewController: BaseViewController {
                     case .failure(let error):
                         self?.showErrorSnackbar(message: error.localizedDescription)
                 }
-            } receiveValue: { [weak self] resetted in
-                if resetted {
-                    self?.showInformationSnackbar(message: "Password resetted successfully")
-                    self?.navigateToMainpage()
-                } else {
-                    self?.showErrorSnackbar(message: "Password reset failed")
+            } receiveValue: { [weak self] result in
+                result.onSuccess { resetted in
+                    if resetted.data {
+                        self?.showInformationSnackbar(message: "Password resetted successfully")
+                        self?.navigateToMainpage()
+                    } else {
+                        self?.showErrorSnackbar(message: "Password reset failed")
+                    }
+                }.onError { errorMessage in
+                    self?.showErrorSnackbar(message: errorMessage)
                 }
             }
     }
@@ -163,6 +167,6 @@ class ResetPasswordViewController: BaseViewController {
             return
         }
         
-        resetPasswordViewModel.resetPasswordOfUser(password: password, passwordAgain: passwordAgain)
+        resetPasswordViewModel.resetPasswordOfUser(email: userEmail, password: password)
     }
 }

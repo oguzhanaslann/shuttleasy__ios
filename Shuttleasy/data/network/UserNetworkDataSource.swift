@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+typealias Token = String
 
 struct FallibleEventResponse: Decodable {
     let result: Bool
@@ -27,8 +28,8 @@ protocol  UserNetworkDataSource {
         phone : String
     ) async throws -> UserAuthDTO
     func sendResetCodeTo(email: String) async throws -> Bool
-    func sendResetCode(code: String, email : String) async throws -> String
-    func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO
+    func sendResetCode(code: String, email : String) async throws -> Token?
+    func resetPassword(email :String, password: String) async throws
     func getUserProfile(userId: Int,isDriver: Bool) async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO
     func deleteAccount(email: String, password: String) async throws -> Bool
@@ -36,6 +37,7 @@ protocol  UserNetworkDataSource {
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
     let apiService: ApiService
+
     init(apiService: ApiService) {
         self.apiService = apiService
     }
@@ -105,26 +107,39 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
 
     func sendResetCodeTo(email: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - sendResetCodeTo - email: \(email)")
-        return true
+        
+        let sendOtpEmailDto =  try await apiService.postRequestAsync(
+            type: SendOtpEmailDto.self,
+            url: ApiUrlManager.shared.resetPassword(),
+            parameters: ApiParameters()
+                .email(email)
+                .build()
+        )
+        
+        return sendOtpEmailDto.date != nil
     }
 
-    func sendResetCode(code: String, email: String) async throws -> String {
+    func sendResetCode(code: String, email: String) async throws -> Token? {
         print("UserNetworkDataSourceImpl - sendResetCode - code: \(code)")
-        return "some token"
+        let otpConfirmDto = try await apiService.postRequestAsync(
+            type: OtpConfirmDto.self,
+            url: ApiUrlManager.shared.otpConfirm(),
+            parameters: ApiParameters()
+                .email(email)
+                .otp(code)
+                .build()
+        )
+        return otpConfirmDto.token
     }
 
-    func resetPassword(password: String, passwordAgain: String) async throws -> UserAuthDTO {
+    func resetPassword(email: String, password:String) async throws {
         print("UserNetworkDataSourceImpl - resetPassword - password: \(password)")
-        return UserAuthDTO(
-            id: 1,
-            authenticationToken: "",
-            profileType : .passenger,
-            profilePic: "",
-            name: "Oguzhan",
-            surname: "Aslan",
-            phoneNumber: "5398775750",
-            qrString: "",
-            email: "sample@gmail.com"
+        await apiService.postRequestAsyncUnit(
+            url: ApiUrlManager.shared.resetPassword(),
+            parameters: ApiParameters()
+                .email(email)
+                .password(password)
+                .build()
         )
     }
 

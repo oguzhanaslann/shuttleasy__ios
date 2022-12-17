@@ -147,6 +147,26 @@ class ApiService {
         .value
     }
 
+    func postRequestAsyncUnit(
+        url: String,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
+    ) async -> HTTPURLResponse? {
+        return await withCheckedContinuation({ continuation in
+            prepareRequest(
+                url: url,
+                method: .post,
+                parameters: parameters,
+                encoding: encoding
+            ).requestDebugLog()
+                .responseDebugLog()
+                .responseData { data in
+                    continuation.resume(returning: data.response)
+                }
+        })
+    }
+    
+
     func putRequest<T: Decodable>(
         url: String,
         parameters: Parameters? = nil,
@@ -170,7 +190,29 @@ class ApiService {
         parameters: Parameters? = nil
     ) async throws -> T  {
         return try await prepareRequest(url: url, method: .put, parameters: parameters)
-            .serializingDecodable(T.self).value
+            .requestDebugLog()
+            .responseDebugLog()
+            .serializingDecodable(T.self)
+            .value
+    }
+
+    func putRequestAsyncUnit(
+        url: String,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = JSONEncoding.default
+    ) async -> HTTPURLResponse? {
+        return await withCheckedContinuation({ continuation in
+            prepareRequest(
+                url: url,
+                method: .put,
+                parameters: parameters,
+                encoding: encoding
+            ).requestDebugLog()
+                .responseDebugLog()
+                .responseData { data in
+                    continuation.resume(returning: data.response)
+                }
+        })
     }
 
     func deleteRequest<T: Decodable>(

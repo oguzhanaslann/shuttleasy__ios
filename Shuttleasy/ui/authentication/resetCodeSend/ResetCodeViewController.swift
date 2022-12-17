@@ -84,7 +84,17 @@ class ResetCodeViewController : BaseViewController {
         }
         return button
     }()
-  
+    
+    func onResetCodeSendClicked() {
+        let resetCode = getResetCodeInput().text ?? ""
+        guard  resetCode.isEmpty.not() else {
+            showErrorSnackbar(message: "Reset code is required")
+            return
+        }
+
+        viewModel.sendResetCode(email: userEmail, code: resetCode)
+    }
+
      lazy var sendCodeAgainText : UILabel = {
         let label = UILabel()
         label.attributedText = NSMutableAttributedString()
@@ -99,7 +109,12 @@ class ResetCodeViewController : BaseViewController {
         
         return label
     }()
- 
+    
+    @objc
+    func sendResetCode() {
+         viewModel.sendResetCodeTo(email: userEmail)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -184,20 +199,4 @@ class ResetCodeViewController : BaseViewController {
    func navigateToResetPasswordPage() {
        Navigator.shared.navigateToResetPassword(userEmail: userEmail)
    }
-  
-   @objc
-    func sendResetCode() {
-        viewModel.sendResetCodeTo(email: userEmail)
-    }
-
-    func onResetCodeSendClicked() {
-        let resetCode = getResetCodeInput().text ?? ""
-        guard  resetCode.isEmpty.not() else {
-            showErrorSnackbar(message: "Reset code is required")
-            return
-        }
-
-        viewModel.sendResetCode(email: userEmail, code: resetCode)
-    }
-  
 }
