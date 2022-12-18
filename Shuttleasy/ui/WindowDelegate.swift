@@ -72,16 +72,16 @@ class WindowDelegate {
     
     func setApplicationUIStyle(style selected: UIUserInterfaceStyle) {
         UIApplication.shared.windows.forEach { window in
-                if #available(iOS 13.0, *) {
-                    window.overrideUserInterfaceStyle = selected
-                    DispatchQueue.main.async {
-                        window.layoutIfNeeded()
-                    }
-                } else {
-                    // Fallback on earlier versions
-                    // Earlier versions of iOS don't support dark mode, so we don't need to do anything here.
-                    // if needed you need to implement it manually
+            if #available(iOS 13.0, *) {
+                window.overrideUserInterfaceStyle = selected
+                DispatchQueue.main.async {
+                    window.layoutIfNeeded()
                 }
+            } else {
+                // Fallback on earlier versions
+                // Earlier versions of iOS don't support dark mode, so we don't need to do anything here.
+                // if needed you need to implement it manually
             }
+        }
     }
 }
