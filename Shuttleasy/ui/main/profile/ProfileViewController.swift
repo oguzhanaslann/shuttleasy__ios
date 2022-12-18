@@ -39,23 +39,6 @@ class ProfileViewController: BaseViewController {
         return imageView
     }()
     
-    private lazy var profileTitle : UILabel = {
-        let label = TitleMedium(text: "Profile", color : onPrimaryContainer)
-        return label
-    }()
-    
-    private lazy var penIcon: UIImageView = {
-        let penIcon : UIImageView =  systemImage(systemName : "pencil")
-        penIcon.tintColor = onPrimaryContainer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onEditProfileClicked))
-        penIcon.addGestureRecognizer(tapGesture)
-        penIcon.isUserInteractionEnabled = true
-        return penIcon
-    }()
-
-    @objc func onEditProfileClicked() {
-        Navigator.shared.navigateToProfileEdit(from : self)
-    }
 
     private let profileName : UILabel = {
         let label = HeadlineSmall(text: "")
@@ -293,6 +276,22 @@ class ProfileViewController: BaseViewController {
             actions: [cancelAction, logOutAction]
         )
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let penIcon = UIImageView(image: UIImage(systemName: "pencil"))
+        penIcon.tintColor = onPrimaryContainer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onEditProfileClicked))
+        penIcon.isUserInteractionEnabled = true
+        penIcon.addGestureRecognizer(tapGesture)
+
+        let editButton = UIBarButtonItem(customView: penIcon)
+        navigationItem.rightBarButtonItem = editButton
+    }
+    
+    @objc func onEditProfileClicked() {
+        Navigator.shared.navigateToProfileEdit(from : self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -332,7 +331,7 @@ class ProfileViewController: BaseViewController {
         let view = stackView
         view.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(72)
+            make.top.equalToSuperview().offset(16)
             make.centerX.equalToSuperview()
             let dimensions = 122
             make.width.equalTo(dimensions)
@@ -348,7 +347,7 @@ class ProfileViewController: BaseViewController {
         
         view.addSubview(profileBackgroundView)
         profileBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(-8)
+            make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.width.equalToSuperview()
@@ -357,20 +356,6 @@ class ProfileViewController: BaseViewController {
 
         view.bringSubviewToFront(profileImageView)
     
-        view.addSubview(penIcon)
-        penIcon.snp.makeConstraints { make in
-            make.top.equalTo(profileBackgroundView.snp.top).offset(40)
-            make.right.equalTo(profileBackgroundView.snp.right).offset(-16)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        
-        
-        view.addSubview(profileTitle)
-        profileTitle.snp.makeConstraints { make in
-            make.top.equalTo(profileBackgroundView.snp.top).offset(40)
-            make.centerX.equalToSuperview()
-        }
 
         view.addSubview(contactSectionView)
         contactSectionView.snp.makeConstraints { make in
