@@ -124,8 +124,12 @@ class DeleteAccountViewController:  BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.backgroundColor = errorContainer
         navigationController?.navigationBar.tintColor = onErrorContainer
-        // add left button for dismiss
-        let dismissButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(dismissView))
+        let dismissButton = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.left"),
+            style: .plain,
+            target: self,
+            action: #selector(dismissView)
+        )
         navigationItem.leftBarButtonItem = dismissButton
     }
     
