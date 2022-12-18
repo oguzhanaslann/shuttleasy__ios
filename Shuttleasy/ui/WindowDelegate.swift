@@ -14,36 +14,6 @@ class WindowDelegate {
     
     var window: UIWindow?
 
-    func popBackstack(from: UIViewController, isPresented: Bool, animated : Bool = false) {
-        if isPresented {
-            from.dismiss(animated: true, completion: nil)
-        } else {
-            from.navigationController?.popViewController(animated: animated)
-        }
-    }
-    
-    func pushViewController(from : UIViewController , to viewController: UIViewController, animated : Bool = true, singleTop : Bool = false) {
-        if let navController = from.navigationController {
-            pushViewControllerOn(navController, viewController)
-        } else {
-            viewController.modalPresentationStyle = .fullScreen
-            from.present(viewController, animated: animated)
-        }
-    }
-
-    private func pushViewControllerOn(_ navController: UINavigationController, _ viewController: UIViewController, animated : Bool = true, singleTop : Bool = false) {
-        if (singleTop) {
-            let isInBackStack  = navController.viewControllers.filter({$0.isKind(of: type(of: viewController))}).count > 0
-            if (isInBackStack) {
-                // index of
-                let index = navController.viewControllers.firstIndex(where: {$0.isKind(of: type(of: viewController))})
-                navController.viewControllers.remove(at: index!)
-            }
-        }
-        navController.pushViewController(viewController, animated: animated)
-    }
-    
-   
     func changeWindow(controller: UIViewController) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             UIApplication.shared.windows.first?.rootViewController = controller

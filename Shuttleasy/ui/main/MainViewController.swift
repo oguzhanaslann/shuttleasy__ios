@@ -19,8 +19,6 @@ class MainViewController: BaseTabBarController {
         let searchVC = UINavigationController(rootViewController:  SearchShuttleViewContoller())
         let profileVC = UINavigationController(rootViewController: ProfileViewController())
         
-        profileVC.navigationBar.barTintColor = primaryColor
-
         viewControllers = [homepageVC, searchVC, profileVC]
     
         tabBar.items?[0].title = "Home"

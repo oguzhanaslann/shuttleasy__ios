@@ -194,9 +194,13 @@ class ProfileViewController: BaseViewController {
     private func openDeleteAccountDialog() {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
-             Navigator.shared.navigateToDeleteAccount(from : self)
-        })
+        let deleteAction = UIAlertAction(
+            title: "Delete", 
+            style: .destructive, 
+            handler: { action in
+                Navigator.shared.navigate(from: self, to: .deleteAccount, clearBackStack: false, wrappedInNavigationController: true)
+            }
+        )
 
         showAlertDialog(
             title: "Delete Account",
@@ -292,6 +296,7 @@ class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Profile"
         initViews()
         profileViewModel.getUserProfile()
         subcribeObservers()
@@ -481,11 +486,7 @@ class ProfileViewController: BaseViewController {
     }
 
     func onUserLogout() {
-          Navigator.shared.navigateToSignIn(from : self,clearBackStack: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
+        Navigator.shared.navigateToSignIn(from : self,clearBackStack: true)
     }
 }
 

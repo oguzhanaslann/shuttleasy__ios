@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchShuttleViewContoller: UIViewController {
+class SearchShuttleViewContoller: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

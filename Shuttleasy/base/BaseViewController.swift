@@ -16,7 +16,8 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
         setStatusBarColorByDeviceOrientation()
-        //navigationController?.interactivePopGestureRecognizer?.delegate = self 
+        //navigationController?.interactivePopGestureRecognizer?.delegate = self
+        setNavigationBarTheme()
     }
     
     private func setStatusBarColorByDeviceOrientation() {
@@ -50,6 +51,19 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     func getStatusbarHeight() -> CGRect {
         return UIApplication.shared.statusBarFrame
+    }
+    
+    final func setNavigationBarTheme() {
+        navigationController?.navigationBar.backgroundColor = getNavigationBarBackgroundColor()
+        navigationController?.navigationBar.tintColor = getNavigationBarTitleColor()
+    }
+    
+    func getNavigationBarBackgroundColor() -> UIColor {
+        return primaryContainer
+    }
+
+    func getNavigationBarTitleColor() -> UIColor {
+        return onPrimaryContainer
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let appRepository = injector.injectAppRepository()
         appRepository.initApplication()
-
         return true
     }
     

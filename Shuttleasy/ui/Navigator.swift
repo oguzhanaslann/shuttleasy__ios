@@ -38,7 +38,7 @@ class Navigator {
     }
     
     func popBack(from controller: UIViewController, _ animated : Bool = true) {
-        WindowDelegate.shared.popBackstack(from: controller, isPresented: false, animated: animated)
+        popBackstack(from: controller, isPresented: false, animated: animated)
     }
         
     func navigateToMainpage(from controller: UIViewController, clearBackStack : Bool = false, singleTop :Bool = false) {
@@ -71,7 +71,11 @@ class Navigator {
     
     
     func navigate(from controller: UIViewController, to destination : Destination) {
-        WindowDelegate.shared.pushViewController(from: controller, to : destination.controller())
+        pushViewController(from: controller, to : destination.controller())
+    }
+
+    func navigate(from controller: UIViewController, to : UIViewController) {
+        pushViewController(from: controller, to : to)
     }
     
     func navigate(from controller: UIViewController, to destination : Destination, clearBackStack: Bool) {
@@ -81,6 +85,78 @@ class Navigator {
             navigate(from: controller, to: destination)
         }
     }
+
+    func navigate(from controller: UIViewController, to: UIViewController, clearBackStack: Bool) {
+        if clearBackStack {
+            WindowDelegate.shared.changeWindow(controller: to)
+        } else {
+            navigate(from: controller, to: to)
+        }
+    }
+    
+    func navigate(
+        from controller: UIViewController, 
+        to destination : Destination, 
+        clearBackStack: Bool,
+        wrappedInNavigationController: Bool,
+        initNavControllerBlock: ((UINavigationController) -> Void)? = nil
+    ) {
+        var destinationController = destination.controller()
+
+        if wrappedInNavigationController {
+            let navigationController = UINavigationController(rootViewController: destinationController)
+            if let initNavControllerBlock = initNavControllerBlock {
+                initNavControllerBlock(navigationController)
+            }
+            
+            destinationController = navigationController
+        }
+    
+        // change window or present 
+        if clearBackStack {
+            WindowDelegate.shared.changeWindow(controller: destinationController)
+        } else {
+            presentViewController(from: controller, to: destinationController, presentedStyle: .fullScreen)
+        }
+    }
+    
+    func popBackstack(from: UIViewController, isPresented: Bool, animated : Bool = false) {
+        if isPresented {
+            from.dismiss(animated: true, completion: nil)
+        } else {
+            from.navigationController?.popViewController(animated: animated)
+        }
+    }
+    
+    func pushViewController(from : UIViewController , to viewController: UIViewController, animated : Bool = true, singleTop : Bool = false) {
+        if let navController = from.navigationController {
+            pushViewControllerOn(navController, viewController)
+        } else {
+            viewController.modalPresentationStyle = .fullScreen
+            from.present(viewController, animated: animated)
+        }
+    }
+
+    private func pushViewControllerOn(_ navController: UINavigationController, _ viewController: UIViewController, animated : Bool = true, singleTop : Bool = false) {
+        if (singleTop) {
+            let isInBackStack  = navController.viewControllers.filter({$0.isKind(of: type(of: viewController))}).count > 0
+            if (isInBackStack) {
+                // index of
+                let index = navController.viewControllers.firstIndex(where: {$0.isKind(of: type(of: viewController))})
+                navController.viewControllers.remove(at: index!)
+            }
+        }
+        navController.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentViewController(
+        from: UIViewController, to: UIViewController, presentedStyle: UIModalPresentationStyle
+    ) {
+        to.modalPresentationStyle = presentedStyle
+        from.present(to, animated: true)
+    }
+    
+    
 }
 
 extension Destination {
