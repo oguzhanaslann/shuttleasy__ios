@@ -197,6 +197,6 @@ class ResetCodeViewController : BaseViewController {
    }
 
    func navigateToResetPasswordPage() {
-       Navigator.shared.navigateToResetPassword(userEmail: userEmail)
+       Navigator.shared.navigateToResetPassword(from: self,userEmail: userEmail)
    }
 }

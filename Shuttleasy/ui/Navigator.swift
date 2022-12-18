@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+enum Destination {
+    case signIn
+    case signUp
+    case onboard
+    case mainPage
+    case emailPasswordReset
+    case resetCode(userEmail: String)
+    case resetPassword(userEmail: String)
+    case profileEdit
+    case profileSetup(signUpModelShort: SignUpModelShort)
+    case deleteAccount
+}
+
 class Navigator {
         
     static let shared = Navigator()
@@ -16,122 +29,89 @@ class Navigator {
     
     func navigateToOnboard() {}
     
-    func navigateToSignIn(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let SignInViewController = SignInViewController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: SignInViewController,
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )
-    }
-
-    func navigateAndClearBackStackIfNeeded(
-        viewController : UIViewController,
-        clearBackStack : Bool = false,
-        singleTop :Bool = false,
-        hideNavBar : Bool = false
-    ) {
-        if clearBackStack {
-            navigateAndClearBackStack(to: viewController, hideNavBar: hideNavBar)
-        } else {
-            navigate(to: viewController, animated: true, singleTop: singleTop)
-        }        
+    func navigateToSignIn(from controller: UIViewController, clearBackStack : Bool = false) {
+        navigate(from: controller, to: Destination.signIn, clearBackStack: clearBackStack)
     }
     
-    private func navigate(to viewController: UIViewController, animated : Bool = false, singleTop : Bool = false) {
-        WindowDelegate.shared.pushViewController(viewController, animated : animated, singleTop: singleTop)
-    } 
-
-    private func navigateAndClearBackStack(to viewController: UIViewController, hideNavBar : Bool = false) {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        //navigationController.setNavigationBarHidden(hideNavBar, animated: true)
-        WindowDelegate.shared.setRootViewController(navController: navigationController)
-    } 
-
-    func popBack(_ animated : Bool = true) {
-        WindowDelegate.shared.popBackstack(animated: animated)
+    func navigateToSignUp(from controller: UIViewController, clearBackStack : Bool = false) {
+        navigate(from: controller, to: Destination.signUp, clearBackStack: clearBackStack)
+    }
+    
+    func popBack(from controller: UIViewController, _ animated : Bool = true) {
+        WindowDelegate.shared.popBackstack(from: controller, isPresented: false, animated: animated)
+    }
+        
+    func navigateToMainpage(from controller: UIViewController, clearBackStack : Bool = false, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.mainPage, clearBackStack: clearBackStack)
     }
 
-    func navigateToMainpage(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let mainPageViewController = MainViewController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: mainPageViewController,
-            clearBackStack: clearBackStack ,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )
+    func navigateToEmailPasswordReset(from controller: UIViewController,clearBackStack : Bool = false, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.emailPasswordReset, clearBackStack: clearBackStack)
     }
 
-    func navigateToEmailPasswordReset(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let emailPasswordResetViewController = EmailPasswordResetController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: emailPasswordResetViewController,
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )
-    }
-
-    func navigateToSignUp(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let signUpViewController = SignUpViewController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: signUpViewController, 
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
-    }    
-
-    func navigateToResetCode(userEmail: String,clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let resetCodeViewController = ResetCodeViewController(userEmail: userEmail)
-        navigateAndClearBackStackIfNeeded(
-            viewController: resetCodeViewController, 
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
+    func navigateToResetCode(from controller: UIViewController,userEmail: String,clearBackStack : Bool = false, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.resetCode(userEmail: userEmail), clearBackStack: clearBackStack)
     }   
     
-    func navigateToResetPassword(userEmail: String,clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let resetPasswordViewController = ResetPasswordViewController(userEmail: userEmail)
-        navigateAndClearBackStackIfNeeded(
-            viewController: resetPasswordViewController, 
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
+    func navigateToResetPassword(from controller: UIViewController,userEmail: String,clearBackStack : Bool = false, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.resetPassword(userEmail: userEmail), clearBackStack: clearBackStack)
+    }
+    
+    func navigateToProfileEdit(from controller: UIViewController,clearBackStack : Bool = false, singleTop :Bool = false) {
+         navigate(from: controller, to: Destination.profileEdit, clearBackStack: clearBackStack)
+    }
+
+    func navigateToProfileSetup(from controller: UIViewController,clearBackStack : Bool = false, signUpModelShort : SignUpModelShort, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.profileSetup(signUpModelShort: signUpModelShort), clearBackStack: clearBackStack)
+    }
+
+    func navigateToDeleteAccount(from controller: UIViewController,clearBackStack : Bool = false, singleTop :Bool = false) {
+        navigate(from: controller, to: Destination.deleteAccount, clearBackStack: clearBackStack)
     }
     
     
-    func navigateToProfileEdit(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let profileEditViewController = ProfileEditViewController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: profileEditViewController,
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
+    func navigate(from controller: UIViewController, to destination : Destination) {
+        WindowDelegate.shared.pushViewController(from: controller, to : destination.controller())
     }
-
-    func navigateToProfileSetup(clearBackStack : Bool = false, signUpModelShort : SignUpModelShort, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let profileSetupViewController = ProfileSetupViewController(signUpModelShort: signUpModelShort)
-        navigateAndClearBackStackIfNeeded(
-            viewController: profileSetupViewController, 
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
-    }
-
-    // delete account view controller
-    func navigateToDeleteAccount(clearBackStack : Bool = false, singleTop :Bool = false, hideNavBar : Bool = false) {
-        let deleteAccountViewController = DeleteAccountViewController()
-        navigateAndClearBackStackIfNeeded(
-            viewController: deleteAccountViewController, 
-            clearBackStack: clearBackStack,
-            singleTop: singleTop,
-            hideNavBar: hideNavBar
-        )    
+    
+    func navigate(from controller: UIViewController, to destination : Destination, clearBackStack: Bool) {
+        if clearBackStack {
+            WindowDelegate.shared.changeWindow(controller: destination.controller())
+        } else {
+            navigate(from: controller, to: destination)
+        }
     }
 }
+
+extension Destination {
+    func controller() -> UIViewController {
+        switch self {
+            case .signIn:
+                return SignInViewController()
+            case .signUp:
+                return SignUpViewController()
+            case .onboard:
+                return OnBoardingViewContoller()
+            case .mainPage:
+                return MainViewController()
+            case .emailPasswordReset:
+                return EmailPasswordResetController()
+            case .resetCode(let userEmail):
+                return ResetCodeViewController(userEmail: userEmail)
+            case .resetPassword(let userEmail):
+                return ResetPasswordViewController(userEmail: userEmail)
+            case .profileEdit:
+                return ProfileEditViewController()
+            case .profileSetup(let signUpModelShort):
+                return ProfileSetupViewController(signUpModelShort: signUpModelShort)
+            case .deleteAccount:
+                return DeleteAccountViewController()
+            default: 
+                debugPrint("Destination not found")
+                return UIViewController()
+        }
+    }    
+}
+
+
+

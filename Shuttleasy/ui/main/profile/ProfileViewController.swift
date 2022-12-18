@@ -54,7 +54,7 @@ class ProfileViewController: BaseViewController {
     }()
 
     @objc func onEditProfileClicked() {
-        Navigator.shared.navigateToProfileEdit()
+        Navigator.shared.navigateToProfileEdit(from : self)
     }
 
     private let profileName : UILabel = {
@@ -195,7 +195,7 @@ class ProfileViewController: BaseViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
-             Navigator.shared.navigateToDeleteAccount()
+             Navigator.shared.navigateToDeleteAccount(from : self)
         })
 
         showAlertDialog(
@@ -481,7 +481,7 @@ class ProfileViewController: BaseViewController {
     }
 
     func onUserLogout() {
-          Navigator.shared.navigateToSignIn(clearBackStack: true)
+          Navigator.shared.navigateToSignIn(from : self,clearBackStack: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

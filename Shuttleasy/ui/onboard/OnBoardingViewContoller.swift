@@ -123,7 +123,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
         let isLastPage = currentPage ==  lastPageIndex
         if isLastPage   {
             onboardViewModel.markOnboardAsSeen()
-            Navigator.shared.navigateToSignIn(clearBackStack : true)
+            Navigator.shared.navigateToSignIn(from : self, clearBackStack : true)
         } else {
             scrollView.scrollTo(horizontalPage: currentPage + 1)
         }

@@ -192,7 +192,7 @@ class ProfileSetupViewController: BaseViewController {
     }
 
     func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(clearBackStack: true)
+        Navigator.shared.navigateToMainpage(from : self,clearBackStack: true)
     }
 
     func onSignUpButtonClicked() {

@@ -223,7 +223,7 @@ class SignInViewController: BaseViewController {
     }
     
     func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(clearBackStack: true,hideNavBar: true)
+        Navigator.shared.navigateToMainpage(from: self,clearBackStack: true)
     }
 
     func onSignInClicked() {
@@ -247,13 +247,13 @@ class SignInViewController: BaseViewController {
     
     @objc
     func navigateToResetPassword() {
-        Navigator.shared.navigateToEmailPasswordReset()
+        Navigator.shared.navigateToEmailPasswordReset(from: self)
     }
 
     @objc
     func navigateToSignUp() {
         if !getDriverFlagSwitch().isOn {
-           Navigator.shared.navigateToSignUp()
+            Navigator.shared.navigateToSignUp(from : self)
         } else {
             showErrorSnackbar(message: "Driver sign up is not allowed")
         }

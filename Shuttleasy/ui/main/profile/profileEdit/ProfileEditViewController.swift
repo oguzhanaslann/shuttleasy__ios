@@ -50,7 +50,7 @@ class ProfileEditViewController: BaseViewController {
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         button.tintColor = onBackgroundColor
         button.setOnClickListener {
-            Navigator.shared.popBack()
+            Navigator.shared.popBack(from : self)
         }
         return button
     }()
@@ -357,8 +357,10 @@ class ProfileEditViewController: BaseViewController {
                         case .proccessing:
                             break
                         case .success:
-                            self?.postNotificationAsProfileUpdated()
-                            Navigator.shared.popBack()
+                            if let vc = self {
+                                vc.postNotificationAsProfileUpdated()
+                                Navigator.shared.popBack(from : vc)
+                            }
                         case .error:
                             self?.showErrorSnackbar(message: "Error updating profile ")
                     }

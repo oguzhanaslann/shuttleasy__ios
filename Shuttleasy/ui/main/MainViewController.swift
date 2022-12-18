@@ -15,9 +15,11 @@ class MainViewController: BaseTabBarController {
     }
 
     func initTabBar() {
-        let homepageVC = HomepageViewContoller()
-        let searchVC = SearchShuttleViewContoller()
-        let profileVC = ProfileViewController()
+        let homepageVC = UINavigationController(rootViewController:  HomepageViewContoller())
+        let searchVC = UINavigationController(rootViewController:  SearchShuttleViewContoller())
+        let profileVC = UINavigationController(rootViewController: ProfileViewController())
+        
+        profileVC.navigationBar.barTintColor = primaryColor
 
         viewControllers = [homepageVC, searchVC, profileVC]
     

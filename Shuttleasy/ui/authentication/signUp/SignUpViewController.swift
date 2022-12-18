@@ -146,7 +146,7 @@ class SignUpViewController: BaseViewController {
     }()
     
     @objc func navigateToSignIn() {
-        Navigator.shared.popBack()
+        Navigator.shared.popBack(from: self)
     }
     
     override func viewDidLoad() {
@@ -204,7 +204,6 @@ class SignUpViewController: BaseViewController {
         }
         
         let signUpModelShort = SignUpModelShort(email: email, password: password)
-        Navigator.shared.navigateToProfileSetup(signUpModelShort: signUpModelShort)
-        
+        Navigator.shared.navigateToProfileSetup(from : self, signUpModelShort: signUpModelShort)
     }
 }

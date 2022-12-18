@@ -137,7 +137,7 @@ class EmailPasswordResetController: BaseViewController {
 
     func navigateToResetCodePage() {
         let email = getEmailInput().text!
-        Navigator.shared.navigateToResetCode(userEmail: email)
+        Navigator.shared.navigateToResetCode(from:self,userEmail: email)
     }
 
     func onResetPasswordClicked() {

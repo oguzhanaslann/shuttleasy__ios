@@ -15,9 +15,22 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        setStatusBarColorIfNotSet()
+        setStatusBarColorByDeviceOrientation()
         //navigationController?.interactivePopGestureRecognizer?.delegate = self 
     }
+    
+    private func setStatusBarColorByDeviceOrientation() {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            if statusBarView != nil && view.subviews.contains(statusBarView!) {
+                statusBarView!.removeFromSuperview()
+            }
+        } else {
+            print("Portrait")
+            setStatusBarColorIfNotSet()
+        }
+    }
+    
     
     final func setStatusBarColorIfNotSet() {
           if statusBarView == nil  {
@@ -32,10 +45,19 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     
     func getStatusBarColor() -> UIColor {
-        return primaryColor
+        return primaryContainer
     }
     
     func getStatusbarHeight() -> CGRect {
         return UIApplication.shared.statusBarFrame
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setStatusBarColorByDeviceOrientation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        statusBarView = nil
+    }   
 }

@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         WindowDelegate.shared.window?.windowScene = windowScene
 
         let hasSeenOnboard = UserDefaults.standard.bool(forKey: HAS_USER_SEEN_ONBOARD_KEY)
-        let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY)
+        let hasLoggedIn = UserDefaults.standard.bool(forKey: HAS_USER_LOGGED_IN_KEY) 
         let rootNavController : UINavigationController
         if(hasSeenOnboard && hasLoggedIn) {
             let navController  = UINavigationController(rootViewController: MainViewController())
@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError()
         }
         
-        WindowDelegate.shared.setRootViewController(navController: rootNavController)
+        WindowDelegate.shared.changeWindow(controller: rootNavController)
         
         let userInfoLocalSource = Injector.shared.injectUserInfoLocalDataSource()
         print("isDark mode ? " + String(userInfoLocalSource.isDarkMode()))
