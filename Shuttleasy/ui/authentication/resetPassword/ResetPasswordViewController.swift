@@ -149,7 +149,12 @@ class ResetPasswordViewController: BaseViewController {
     }
 
     func navigateToMainpage() {
-        Navigator.shared.navigateToMainpage(from : self, clearBackStack: true)
+        Navigator.shared.navigate(
+            from: self,
+            to: .signIn,
+            clearBackStack: true,
+            wrappedInNavigationController: true
+        )
     }
 
     @objc

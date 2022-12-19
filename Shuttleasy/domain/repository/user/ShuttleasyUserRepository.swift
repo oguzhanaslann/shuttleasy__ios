@@ -118,7 +118,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             let token : String
 
             if shouldUseDummyData() {
-                token = ""
+                token = "123456"
             } else {
                 if let newToken = try await networkDatasource.sendResetCode(code: code, email : email) {
                     token = newToken
@@ -217,7 +217,14 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
 
     func deleteAccount(email: String, password: String) async -> Result<Bool, Error> {
         do {
-            let isDeleted = try await networkDatasource.deleteAccount(email: email, password: password)
+            let isDeleted : Bool
+            
+            if shouldUseDummyData() {
+                isDeleted = true
+            } else {
+                isDeleted = try await networkDatasource.deleteAccount(email: email, password: password)
+            }
+            
             if isDeleted {
                 await localDatasource.setAsLoggedOut(clearWholeData: true)
             }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-let baseApiUrl = "https://shuttleasydatabase.azurewebsites.net/api/" //"https://api.shuttleasy.com/v1/"
-
+let baseApiUrl = "https://shuttleasydatabase.azurewebsites.net/api/"
 class ApiUrlManager {
     static let shared = ApiUrlManager()
     

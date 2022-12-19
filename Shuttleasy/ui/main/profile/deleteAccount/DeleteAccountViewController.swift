@@ -192,7 +192,12 @@ class DeleteAccountViewController:  BaseViewController {
 
     private func onAccountDeletionResult(_ result: Bool) {
         if result {
-            Navigator.shared.navigateToSignIn(from: self,clearBackStack: true)
+            Navigator.shared.navigate(
+                from: self,
+                to: .signIn,
+                clearBackStack: true,
+                wrappedInNavigationController: true
+            )
         } else {
             self.showErrorSnackbar(message: "Account deletion failed")
         }
