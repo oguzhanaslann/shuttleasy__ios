@@ -16,7 +16,6 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
         setStatusBarColorByDeviceOrientation()
-        //navigationController?.interactivePopGestureRecognizer?.delegate = self
         setNavigationBarTheme()
     }
     

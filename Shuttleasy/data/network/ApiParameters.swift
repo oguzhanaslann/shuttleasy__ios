@@ -62,6 +62,17 @@ class ApiParameters {
         return self
     }
 
+    func beginningDestination(_ beginningDestination: String) -> ApiParameters {
+        params["beginningDestination"] = beginningDestination
+        return self
+    }
+
+    func lastDestination(_ lastDestination: String) -> ApiParameters {
+        params["lastDestination"] = lastDestination
+        return self
+    }
+
+
     func build() -> Parameters {
         return params
     }

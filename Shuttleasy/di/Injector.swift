@@ -15,6 +15,7 @@ class Injector {
     static let shared  = Injector()
     static let userLocalInfoDependency = "userInfoLocal"
     static let userNetworkInfoDependency = "userInfoNetwork"
+    static let shuttleNetworkSourceDependency = "shuttleNetworkSource"
     
     private init() {
         registerUserInfoLocalDataSource()
@@ -30,6 +31,13 @@ class Injector {
     func registerNetworkingDependencies() {
         registerAPIService()
         registerUserNetworkDataSource()
+        registerShuttleNetworkDataSource()
+    }
+    
+    private func registerAPIService() {
+        container.register(ApiService.self) { resolver in
+            return ApiService(tokenProvider: MemoryDataSource.shared)
+        }.inObjectScope(.container)
     }
     
     private func registerUserNetworkDataSource() {
@@ -40,11 +48,14 @@ class Injector {
         }
     }
 
-    private func registerAPIService() {
-        container.register(ApiService.self) { resolver in
-            return ApiService(tokenProvider: MemoryDataSource.shared)
-        }.inObjectScope(.container)
+    private func registerShuttleNetworkDataSource() {
+        container.register(ShuttleNetworkSource.self, name: Injector.shuttleNetworkSourceDependency) { resolver in
+            return ShuttleNetworkSourceImpl(
+                apiService: self.injectApiService()
+            )
+        }
     }
+
     
     func injectApiService() -> ApiService {
         return container.resolve(ApiService.self)!
@@ -230,5 +241,38 @@ class Injector {
         )
         
         return container.resolve(AppRepository.self)!
+    }
+
+
+    func injectSearchShuttleRepository() -> SearchShuttleRepository {
+        registerDependencyIfNotRegistered(
+            dependency: SearchShuttleRepository.self,
+            onRegisterNeeded: { resolver in
+                SearchShuttleRepositoryImpl(
+                    shuttleNetworkSource: self.injectShuttleNetworkDataSource()
+                )
+            }
+        )
+        
+        return container.resolve(SearchShuttleRepository.self)!
+    }
+
+
+    func injectShuttleNetworkDataSource() -> ShuttleNetworkSource {
+        return container.resolve(ShuttleNetworkSource.self, name: Injector.shuttleNetworkSourceDependency)!
+    }
+
+
+    func injectSearchShuttleViewModel() -> SearchShuttleViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: SearchShuttleViewModel.self,
+            onRegisterNeeded: { resolver in
+                SearchShuttleViewModel(
+                    searchRepository: self.injectSearchShuttleRepository()
+                )
+            }
+        )
+        
+        return container.resolve(SearchShuttleViewModel.self)!
     }
 }

@@ -61,4 +61,8 @@ class ApiUrlManager {
     func deleteProfile() -> String {
         return baseApiUrl + "Passenger/DeletePassenger"
     }
+
+    func searchShuttle() -> String {
+        return baseApiUrl + "ShuttleSession/SearchShuttle"
+    }
 }

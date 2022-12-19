@@ -15,6 +15,31 @@ class BaseTabBarController: UITabBarController {
     override func viewDidLoad() {
         view.backgroundColor = backgroundColor
         setNavigationBar()
+        setStatusBarColorByDeviceOrientation()
+    }
+    
+    
+    private func setStatusBarColorByDeviceOrientation() {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            if statusBarView != nil && view.subviews.contains(statusBarView!) {
+                statusBarView!.removeFromSuperview()
+            }
+        } else {
+            print("Portrait")
+            setStatusBarColorIfNotSet()
+        }
+    }
+
+    func setStatusBarColorIfNotSet() {
+        if statusBarView == nil  {
+            statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+            statusBarView!.backgroundColor = primaryContainer
+        }
+
+        if view.subviews.contains(statusBarView!).not() {
+            view.addSubview(statusBarView!)
+        }
     }
     
     private func setNavigationBar() {
@@ -38,6 +63,15 @@ class BaseTabBarController: UITabBarController {
             ],
             for: .selected
         )
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setStatusBarColorByDeviceOrientation()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        statusBarView = nil
     }
     
 }

@@ -39,3 +39,18 @@ extension UserProfileDTO {
         )
     }
 }
+
+
+extension ShuttleSearchResultDTO{
+    func toSearchResults() -> [SearchResult] {
+        return self.map { shuttleSearchResultDTOElement in
+            SearchResult(
+                title: shuttleSearchResultDTOElement.companyName ?? "",
+                imageUrl: "", // TODO: implement when images added
+                startDateText: ShuttleasyDateFormatter.shared.convertDateString(dateString: shuttleSearchResultDTOElement.startTime ?? ""),
+                shutlleBusPlateNumber: shuttleSearchResultDTOElement.busLicensePlate ?? ""
+            )
+        }
+    }
+}
+

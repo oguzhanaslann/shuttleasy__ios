@@ -14,6 +14,7 @@ target 'Shuttleasy' do
   pod 'MobilliumQRCodeReader'
   pod 'CocoaLumberjack/Swift'
   pod 'Swinject'
+  pod 'FloatingPanel'
   
   target 'ShuttleasyTests' do
     inherit! :search_paths

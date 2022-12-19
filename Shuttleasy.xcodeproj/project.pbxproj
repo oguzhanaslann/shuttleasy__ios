@@ -78,9 +78,17 @@
 		D4C10263293B8C91004812C1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10262293B8C91004812C1 /* UserProfile.swift */; };
 		D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10264293B9348004812C1 /* ProfileViewModel.swift */; };
 		D4C10268293BA6C3004812C1 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C10267293BA6C3004812C1 /* ProfileEditViewController.swift */; };
+		D4C6F96C29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C6F96B29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift */; };
+		D4C6F96F29503FA000DAA1E7 /* SearchShuttleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C6F96E29503FA000DAA1E7 /* SearchShuttleRepository.swift */; };
+		D4C6F97229503FDB00DAA1E7 /* ShuttleNetworkSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C6F97129503FDB00DAA1E7 /* ShuttleNetworkSource.swift */; };
 		D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFA0C3294CB26B00C0F47E /* AppRepository.swift */; };
 		D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650B29261431002991A1 /* SignInViewModel.swift */; };
 		D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D0650D2926143C002991A1 /* ViewModel.swift */; };
+		D4F0B79629502B6A00716FE3 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0B79529502B6A00716FE3 /* SearchResultCell.swift */; };
+		D4F0B79A29502BE900716FE3 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0B79929502BE900716FE3 /* SearchResultViewController.swift */; };
+		D4F0B79C29502C4900716FE3 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0B79B29502C4900716FE3 /* SearchResult.swift */; };
+		D4F0B79E29502E8900716FE3 /* SearchShuttleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0B79D29502E8900716FE3 /* SearchShuttleViewModel.swift */; };
+		D4F0B7A02950327200716FE3 /* ShuttleSearchResultDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0B79F2950327200716FE3 /* ShuttleSearchResultDto.swift */; };
 		D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F328F9210F0083C5EB /* AppDelegate.swift */; };
 		D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F528F9210F0083C5EB /* SceneDelegate.swift */; };
 		D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F116F728F9210F0083C5EB /* OnBoardingViewContoller.swift */; };
@@ -197,9 +205,17 @@
 		D4C10262293B8C91004812C1 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D4C10264293B9348004812C1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D4C10267293BA6C3004812C1 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		D4C6F96B29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleasyDateFormatter.swift; sourceTree = "<group>"; };
+		D4C6F96E29503FA000DAA1E7 /* SearchShuttleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShuttleRepository.swift; sourceTree = "<group>"; };
+		D4C6F97129503FDB00DAA1E7 /* ShuttleNetworkSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleNetworkSource.swift; sourceTree = "<group>"; };
 		D4CFA0C3294CB26B00C0F47E /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		D4D0650B29261431002991A1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		D4D0650D2926143C002991A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		D4F0B79529502B6A00716FE3 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		D4F0B79929502BE900716FE3 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		D4F0B79B29502C4900716FE3 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		D4F0B79D29502E8900716FE3 /* SearchShuttleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShuttleViewModel.swift; sourceTree = "<group>"; };
+		D4F0B79F2950327200716FE3 /* ShuttleSearchResultDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuttleSearchResultDto.swift; sourceTree = "<group>"; };
 		D4F116F028F9210F0083C5EB /* Shuttleasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuttleasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F116F328F9210F0083C5EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4F116F528F9210F0083C5EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -291,6 +307,9 @@
 			isa = PBXGroup;
 			children = (
 				D406C0D12937CB4B00BC5F0C /* SearchShuttleViewContoller.swift */,
+				D4F0B79529502B6A00716FE3 /* SearchResultCell.swift */,
+				D4F0B79929502BE900716FE3 /* SearchResultViewController.swift */,
+				D4F0B79D29502E8900716FE3 /* SearchShuttleViewModel.swift */,
 			);
 			path = seach;
 			sourceTree = "<group>";
@@ -348,6 +367,7 @@
 		D41BE5B4292AB53600826640 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				D4C6F97029503FD400DAA1E7 /* shuttle */,
 				D4FD012529481814004F149E /* dto */,
 				D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */,
 				D4C1025E293B8C4C004812C1 /* UserAuthDTO.swift */,
@@ -366,6 +386,7 @@
 				D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */,
 				D4C10262293B8C91004812C1 /* UserProfile.swift */,
 				D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */,
+				D4F0B79B29502C4900716FE3 /* SearchResult.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -448,6 +469,7 @@
 				D4816DB42920E64900ECB799 /* Extensions.swift */,
 				D4816DB62920E66300ECB799 /* ClosureSleeve.swift */,
 				D4816DB82920E6F400ECB799 /* Util.swift */,
+				D4C6F96B29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -503,6 +525,22 @@
 				D48D8CE7293CD0AF00E72C0F /* ProfileEditViewModel.swift */,
 			);
 			path = profileEdit;
+			sourceTree = "<group>";
+		};
+		D4C6F96D29503F9500DAA1E7 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				D4C6F96E29503FA000DAA1E7 /* SearchShuttleRepository.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		D4C6F97029503FD400DAA1E7 /* shuttle */ = {
+			isa = PBXGroup;
+			children = (
+				D4C6F97129503FDB00DAA1E7 /* ShuttleNetworkSource.swift */,
+			);
+			path = shuttle;
 			sourceTree = "<group>";
 		};
 		D4CFA0C2294CB25900C0F47E /* app */ = {
@@ -619,6 +657,7 @@
 		D4F591DC2921465900125E90 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				D4C6F96D29503F9500DAA1E7 /* search */,
 				D4CFA0C2294CB25900C0F47E /* app */,
 				D4F591DE2921466800125E90 /* user */,
 				D4FD012A29483ACD004F149E /* BaseRepository.swift */,
@@ -675,6 +714,7 @@
 				D4FD012829481B47004F149E /* DriverDto.swift */,
 				D415A2CD294E35CC00564E53 /* SendOtpEmailDto.swift */,
 				D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */,
+				D4F0B79F2950327200716FE3 /* ShuttleSearchResultDto.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -955,11 +995,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D40B27EE292A789500140612 /* SignUpViewController.swift in Sources */,
+				D4F0B79A29502BE900716FE3 /* SearchResultViewController.swift in Sources */,
 				D41BE5B3292AB19300826640 /* MainViewController.swift in Sources */,
 				D4816DB92920E6F400ECB799 /* Util.swift in Sources */,
 				D42D0E902944790B00F3DA91 /* DeleteAccountViewController.swift in Sources */,
 				D4A94E81294CE6EB0070416F /* ShuttleasyUserDefaults.swift in Sources */,
 				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
+				D4F0B79629502B6A00716FE3 /* SearchResultCell.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,
@@ -974,11 +1016,13 @@
 				D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */,
 				D4C1025F293B8C4C004812C1 /* UserAuthDTO.swift in Sources */,
 				D4F591E12921467C00125E90 /* UserRepository.swift in Sources */,
+				D4F0B79C29502C4900716FE3 /* SearchResult.swift in Sources */,
 				D48D8CEA293CE5E400E72C0F /* ProfileEdit.swift in Sources */,
 				D4816DC22920FF4000ECB799 /* OnboardViewModel.swift in Sources */,
 				D4F3E1952934E1D900D10463 /* ResetPasswordViewController.swift in Sources */,
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,
 				D4A94E83294CE91D0070416F /* MemorySource.swift in Sources */,
+				D4F0B7A02950327200716FE3 /* ShuttleSearchResultDto.swift in Sources */,
 				D4F3E1902934D09D00D10463 /* ResetCodeViewModel.swift in Sources */,
 				D4217A06293B622F004E4744 /* UiDataState.swift in Sources */,
 				D48D8CED293D097300E72C0F /* NotificationEvents.swift in Sources */,
@@ -995,11 +1039,14 @@
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
+				D4C6F97229503FDB00DAA1E7 /* ShuttleNetworkSource.swift in Sources */,
 				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
 				D4FD012B29483ACD004F149E /* BaseRepository.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
+				D4F0B79E29502E8900716FE3 /* SearchShuttleViewModel.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
+				D4C6F96F29503FA000DAA1E7 /* SearchShuttleRepository.swift in Sources */,
 				D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */,
 				D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */,
 				D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */,
@@ -1007,6 +1054,7 @@
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
 				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
+				D4C6F96C29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift in Sources */,
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
 				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
