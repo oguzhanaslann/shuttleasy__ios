@@ -473,6 +473,14 @@ class ProfileViewController: BaseViewController {
     func onUserLogout() {
         Navigator.shared.navigateToSignIn(from : self,clearBackStack: true)
     }
+    
+    override func getNavigationBarBackgroundColor() -> UIColor? {
+        return primaryContainer
+    }
+    
+    override func getNavigationBarTitleColor() -> UIColor? {
+        return onPrimaryContainer
+    }
 }
 
 

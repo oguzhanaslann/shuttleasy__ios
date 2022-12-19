@@ -156,6 +156,13 @@ class SearchShuttleViewContoller: BaseViewController {
         if fpc.state == .hidden || fpc.state == .tip {
             fpc.move(to: .half, animated: true)        
         }
-        
+    }
+    
+    override func getNavigationBarBackgroundColor() -> UIColor? {
+        return primaryContainer
+    }
+    
+    override func getNavigationBarTitleColor() -> UIColor? {
+        return onPrimaryContainer
     }
 }

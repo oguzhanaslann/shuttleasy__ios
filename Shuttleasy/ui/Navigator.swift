@@ -129,6 +129,7 @@ class Navigator {
     }
     
     func pushViewController(from : UIViewController , to viewController: UIViewController, animated : Bool = true, singleTop : Bool = false) {
+        print(from)
         if let navController = from.navigationController {
             pushViewControllerOn(navController, viewController)
         } else {

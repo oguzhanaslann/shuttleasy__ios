@@ -53,16 +53,24 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     }
     
     final func setNavigationBarTheme() {
-        navigationController?.navigationBar.backgroundColor = getNavigationBarBackgroundColor()
-        navigationController?.navigationBar.tintColor = getNavigationBarTitleColor()
+    
+        if let color = getNavigationBarBackgroundColor() {
+            navigationController?.navigationBar.backgroundColor = color
+        }
+        
+        
+        if let color = getNavigationBarTitleColor(){
+            navigationController?.navigationBar.tintColor = color
+        }
+      
     }
     
-    func getNavigationBarBackgroundColor() -> UIColor {
-        return primaryContainer
+    func getNavigationBarBackgroundColor() -> UIColor? {
+        return nil
     }
 
-    func getNavigationBarTitleColor() -> UIColor {
-        return onPrimaryContainer
+    func getNavigationBarTitleColor() -> UIColor? {
+        return nil
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
