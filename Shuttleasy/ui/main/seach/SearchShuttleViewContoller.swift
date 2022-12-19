@@ -15,10 +15,12 @@ class SearchShuttleViewContoller: BaseViewController {
 
     private let searchViewModel = Injector.shared.injectSearchShuttleViewModel()
     private var searchResultCancellable : AnyCancellable? = nil
-
+    private let fpc = FloatingPanelController()
+    
     private static let SEARCH_TEXT_FIELD_TAG = 2000
    
     var cancellable = [AnyCancellable]()
+    
     
     private lazy var searchField : UITextField = {
         let searchField = UITextField()
@@ -53,7 +55,7 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.setCenter(CLLocationCoordinate2DMake(38.4189, 27.1287), animated: true )
-        
+    
         return mapView
     }()
 
@@ -79,7 +81,12 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10.0), animated: false)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287), latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
+
+        // map gesture recognizer 
+        // let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
     }
+
+ 
 
     func setUpSearchField() {
         view.addSubview(searchField)
@@ -106,13 +113,13 @@ class SearchShuttleViewContoller: BaseViewController {
     }
 
     func setUpFloatingPanel() {
-        let fpc = FloatingPanelController()
-        fpc.track(scrollView: searchResultViewController.tableView)
-        fpc.set(contentViewController: searchResultViewController)
         fpc.addPanel(toParent: self)
+        fpc.set(contentViewController: searchResultViewController)
+        fpc.track(scrollView: searchResultViewController.tableView)
         let appearance = SurfaceAppearance()
         appearance.cornerRadius = roundedMediumCornerRadius
         fpc.surfaceView.appearance = appearance
+        fpc.move(to: .tip, animated: false)
     }
 
 
@@ -133,14 +140,22 @@ class SearchShuttleViewContoller: BaseViewController {
 
                 receiveValue: { [weak self] searchState in
                     searchState.onLoading {
-                        self?.searchResultViewController.onSearchResultUpdated(results: [])
+                        self?.onSearchResultUpdated(results: [])
                     }.onSuccess { data in
-                        self?.searchResultViewController.onSearchResultUpdated(results: data.data)
+                        self?.onSearchResultUpdated(results: data.data)
                     }.onError { error in
-                        self?.searchResultViewController.onSearchResultUpdated(results: [])
+                        self?.onSearchResultUpdated(results: [])
                         self?.showErrorSnackbar(message: error)
                     }
                 }
             )
+    }
+
+    private func onSearchResultUpdated(results: [SearchResult]) {
+        searchResultViewController.onSearchResultUpdated(results: results)
+        if fpc.state == .hidden || fpc.state == .tip {
+            fpc.move(to: .half, animated: true)        
+        }
+        
     }
 }
