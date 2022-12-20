@@ -179,8 +179,8 @@ class ProfileEditViewController: BaseViewController {
 
 
         let phone = findPhoneInput()?.text ?? ""
-        guard phone.count > 1 else {
-            self.showErrorSnackbar(message: "Phone cannot be empty")
+        guard isValidPhone(phone) else {
+            self.showErrorSnackbar(message: "Please enter a valid phone number")
             return
         }
 

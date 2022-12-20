@@ -222,10 +222,3 @@ class ProfileSetupViewController: BaseViewController {
         )
     }
 }
-
-
-func isValidPhone(_ phone: String) -> Bool {
-    let phoneRegex = "^\\+[0-9]{10,13}$"
-    let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-    return phoneTest.evaluate(with: phone)
-}

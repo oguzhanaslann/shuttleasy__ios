@@ -96,3 +96,15 @@ func generateQRCode(from string: String) -> UIImage? {
     }
     return nil
 }
+
+
+func isValidPhone(_ phone: String) -> Bool {
+    
+    if phone.count != 13 {
+        return false
+    }
+    
+    let phoneRegex = "^\\+[0-9]{10,13}$"
+    let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+    return phoneTest.evaluate(with: phone)
+}
