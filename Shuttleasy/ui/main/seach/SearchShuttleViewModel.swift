@@ -1,10 +1,3 @@
-//
-//  SearchShuttleViewModel.swift
-//  Shuttleasy
-//
-//  Created by Oğuzhan Aslan on 19.12.2022.
-//
-
 import Foundation
 import Combine
 
@@ -23,6 +16,9 @@ class SearchShuttleViewModel {
     }
     
     func searchShuttle(query: String) {
+        
+        print(query)
+        
         if task != nil && !task!.isCancelled {
             task?.cancel()
             return 

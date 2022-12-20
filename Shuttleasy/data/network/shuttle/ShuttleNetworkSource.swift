@@ -19,12 +19,16 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
     }
 
     func searchShuttle(query: String) async throws -> ShuttleSearchResultDTO {
+        let param = ApiParameters()
+            .lastDestination(query.lowercased().trimmingCharacters(in: .whitespaces))
+            .build()
+        
+        debugPrint(param)
+        
         return try await apiService.postRequestAsync(
             type: ShuttleSearchResultDTO.self,
             url: ApiUrlManager.shared.searchShuttle(),
-            parameters: ApiParameters()
-                .beginningDestination(query)
-                .build()
+            parameters:param
         )
     }
 }

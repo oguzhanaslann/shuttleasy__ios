@@ -1,10 +1,3 @@
-//
-//  SearchShuttleViewContoller.swift
-//  Shuttleasy
-//
-//  Created by Oğuzhan Aslan on 30.11.2022.
-//
-
 import UIKit
 import MapKit
 import SnapKit
@@ -19,8 +12,7 @@ class SearchShuttleViewContoller: BaseViewController {
     
     private static let SEARCH_TEXT_FIELD_TAG = 2000
    
-    var cancellable = [AnyCancellable]()
-    
+    var debounceTimer: Timer?
     
     private lazy var searchField : UITextField = {
         let searchField = UITextField()
@@ -81,12 +73,7 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10.0), animated: false)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287), latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
-
-        // map gesture recognizer 
-        // let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
     }
-
- 
 
     func setUpSearchField() {
         view.addSubview(searchField)
@@ -96,20 +83,7 @@ class SearchShuttleViewContoller: BaseViewController {
             make.height.equalTo(48)
         }
 
-    
-        let publisher = NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: searchField)
-        publisher
-            .map {
-                ($0.object as! UITextField).text
-            } 
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-            .sink(
-                receiveValue: { [weak self] (value) in
-                    guard let searchText = self?.searchField.text else { return }
-                    self?.searchViewModel.searchShuttle(query: searchText)
-                }
-            )
-            .store(in: &cancellable)
+        searchField.delegate = self
     }
 
     func setUpFloatingPanel() {
@@ -165,4 +139,22 @@ class SearchShuttleViewContoller: BaseViewController {
     override func getNavigationBarTitleColor() -> UIColor? {
         return onPrimaryContainer
     }
+}
+
+extension SearchShuttleViewContoller : UITextFieldDelegate {
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+            debounceTimer?.invalidate()
+
+            // Set the timer to execute a method after a certain delay
+            debounceTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] timer in
+                // This block will be executed after the specified delay
+                // You can now safely perform any actions that should be debounced
+                guard let searchText = textField.text else { return }
+                self?.searchViewModel.searchShuttle(query: searchText)
+            })
+
+            return true
+        }
+    
 }

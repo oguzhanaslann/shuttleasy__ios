@@ -108,15 +108,14 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
     func sendResetCodeTo(email: String) async throws -> Bool {
         print("UserNetworkDataSourceImpl - sendResetCodeTo - email: \(email)")
         
-        let sendOtpEmailDto =  try await apiService.postRequestAsync(
-            type: SendOtpEmailDto.self,
-            url: ApiUrlManager.shared.resetPassword(),
+        let response =  await apiService.postRequestAsyncUnit(
+            url: ApiUrlManager.shared.sendOtpEmail (),
             parameters: ApiParameters()
                 .email(email)
                 .build()
         )
         
-        return sendOtpEmailDto.date != nil
+        return  response != nil && (response?.statusCode ?? 0) >= 200 && (response?.statusCode ?? 0) < 300
     }
 
     func sendResetCode(code: String, email: String) async throws -> Token? {

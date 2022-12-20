@@ -40,7 +40,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             
             return .success(true)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     
@@ -93,7 +93,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             
             return .success(true)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
 
@@ -109,7 +109,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
 
             return .success(isSend)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     
@@ -130,7 +130,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             await localDatasource.saveAuthToken(token: token)
             return .success(token.isEmpty.not())
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     
@@ -149,7 +149,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             await localDatasource.setAsLoggedIn()
             return .success(true)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
         
@@ -159,7 +159,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             let userProfile = try await localDatasource.getUserProfile()
             return .success(userProfile)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     
@@ -209,7 +209,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             let userProfile = try await localDatasource.getUserProfile()
             return .success(userProfile)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     
@@ -230,7 +230,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             }
             return .success(isDeleted)
         } catch {
-            return .failure(error)
+            return .failure(parseProcessError(error))
         }
     }
     

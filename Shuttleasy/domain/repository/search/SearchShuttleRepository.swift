@@ -1,11 +1,5 @@
-//
-//  SearchShuttleRepository.swift
-//  Shuttleasy
-//
-//  Created by Oğuzhan Aslan on 19.12.2022.
-//
-
 import Foundation
+import Alamofire
 
 protocol SearchShuttleRepository {
     func searchShuttle(query : String) async -> Result<[SearchResult], Error>
@@ -24,12 +18,21 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
            if shouldUseDummyData() {
                 result = getDummySearchResults()
            } else {
-                result = try await shuttleNetworkSource.searchShuttle(query: query).toSearchResults()
+                let resultDto = try await shuttleNetworkSource.searchShuttle(query: query)
+
+               result = resultDto.map({ element in
+                   SearchResult(
+                    title: element.companyName ?? "",
+                    imageUrl: "",
+                    startDateText: ShuttleasyDateFormatter.shared.convertDateString(dateString: element.startTime ?? ""),
+                    shutlleBusPlateNumber: element.busLicensePlate ?? ""
+                   )
+               })
            }
 
            return .success(result)
        } catch {
-           return .failure(error)
+           return .failure(parseProcessError(error))
        }
     }
 

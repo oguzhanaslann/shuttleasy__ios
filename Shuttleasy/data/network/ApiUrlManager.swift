@@ -25,20 +25,17 @@ class ApiUrlManager {
         return baseApiUrl + "Passenger/SignUp"
     }
 
-    func sendResetCodeDriver() -> String {
-        return baseApiUrl + "Driver/SendOTPEmail"
-    }
 
-    func sendResetCodePassenger() -> String {
-        return baseApiUrl + "Passenger/SendOTPEmail"
+    func sendOtpEmail() -> String {
+        return baseApiUrl + "User/SendOTPEmail"
     }
-
+    
     func otpConfirm() -> String {
         return baseApiUrl + "User/ValidateOTP"
     }
 
     func resetPassword() -> String {
-        return baseApiUrl + "User/SendOTPEmail"
+        return baseApiUrl + "User/ResetPassword"
     }
     
     func getDriverProfile() -> String {

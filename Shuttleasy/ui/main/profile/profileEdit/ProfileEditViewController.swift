@@ -287,7 +287,7 @@ class ProfileEditViewController: BaseViewController {
 
         view.addSubview(updateProfileInformationButton)
         updateProfileInformationButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-36)
+            make.bottom.equalToSuperview().offset(-92)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-24)
             make.height.equalTo(largeButtonHeight)

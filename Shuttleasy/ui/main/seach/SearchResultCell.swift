@@ -69,8 +69,18 @@ class SearchResultCell : UITableViewCell {
 
     func configure(with result: SearchResult) {
         title.text = result.title
-        resultImage.load(url: result.imageUrl)
+        setSearchImageOrDefault(imageUrl: result.imageUrl)
         startDateText.text = result.startDateText
         plateNumber.text = result.shutlleBusPlateNumber
+    }
+    
+    private func setSearchImageOrDefault(imageUrl: String) {
+        if imageUrl.isEmpty {
+            let placeholder = UIImage(named: "shuttle_placeholder")
+            resultImage.image = placeholder
+        } else {
+            resultImage.load(url: imageUrl)
+        }
+        
     }
 }

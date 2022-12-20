@@ -1,13 +1,41 @@
 import Foundation
 
-let input = "2022-12-19T00:29:29.954Z"
-let formatter = DateFormatter()
-formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+class ShuttleasyDateFormatter {
+    static let shared = ShuttleasyDateFormatter()
 
-let date = formatter.date(from: input)!
+    static let format = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    static let target = "HH:mm dd MMMM yyyy"
 
-formatter.dateFormat = "HH:mm dd MMMM yyyy"
-let output = formatter.string(from: date)
-// Output: "00:29 19 December 2022"
+    private init() {}
 
-print(output)
+    func convertDateString(
+        dateString: String,
+        inputFormat : String = ShuttleasyDateFormatter.format,
+        targetFormat : String = ShuttleasyDateFormatter.target
+    ) -> String {
+        let inputString = dateString
+        print(inputString)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = inputFormat
+       
+        let date = dateFormatter.date(from: inputString)
+
+        dateFormatter.dateFormat = targetFormat
+
+        let outputString: String
+
+        if let parseDate = date {
+            outputString = dateFormatter.string(from: parseDate)
+        } else {
+            outputString = dateString
+        }
+        
+        return outputString
+    }
+}
+
+
+let formatter = ShuttleasyDateFormatter.shared
+
+print(formatter.convertDateString(dateString: "2022-12-18T08:25:27.163"))
