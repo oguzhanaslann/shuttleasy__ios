@@ -43,17 +43,17 @@ class MainViewController: BaseTabBarController {
     }
     
     private func setTabbarIndexAsHome(_ index : Int) {
-        tabBar.items?[index].title = "Home"
+        tabBar.items?[index].title = Localization.home.localized
         tabBar.items?[index].image = UIImage(systemName: "house")
     }
 
     private func setTabbarIndexAsSearch( _ index : Int) {
-        tabBar.items?[index].title = "Search"
+        tabBar.items?[index].title = Localization.search.localized
         tabBar.items?[index].image = UIImage(systemName: "magnifyingglass")
     }
 
     private func setTabbarIndexAsProfile( _ index : Int) {
-        tabBar.items?[index].title = "Profile"
+        tabBar.items?[index].title = Localization.profile.localized
         tabBar.items?[index].image = UIImage(systemName: "person.fill")
     }
 

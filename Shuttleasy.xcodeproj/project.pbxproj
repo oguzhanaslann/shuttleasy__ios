@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
 		6FD133BBE66D8F8751596AD2 /* Pods_Shuttleasy_ShuttleasyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D16047F3D4D6219772C15D /* Pods_Shuttleasy_ShuttleasyUITests.framework */; };
 		97D4C3F7B6680FB7ED81C793 /* Pods_Shuttleasy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */; };
@@ -131,6 +132,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0110307C29944F0900DE3268 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0110307F29944F3C00DE3268 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		017FE610299432DF000541D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		07F1AAE1A10FBCC6D31F0188 /* Pods-Shuttleasy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.debug.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.debug.xcconfig"; sourceTree = "<group>"; };
 		1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShuttleasyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +280,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0110308029944FB300DE3268 /* localization */ = {
+			isa = PBXGroup;
+			children = (
+				0110308129944FC700DE3268 /* Localization.swift */,
+			);
+			path = localization;
+			sourceTree = "<group>";
+		};
 		3C212CBDE4500DF1CB30B26C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,6 +471,7 @@
 		D44F2615292002A200CD5B85 /* theme */ = {
 			isa = PBXGroup;
 			children = (
+				0110308029944FB300DE3268 /* localization */,
 				D4422E7F2938691900342B29 /* Fonts */,
 				D44F261629200C5C00CD5B85 /* FontUtil.swift */,
 				D44F261829200F8500CD5B85 /* Color.swift */,
@@ -578,6 +591,7 @@
 		D4F116E728F9210F0083C5EB = {
 			isa = PBXGroup;
 			children = (
+				0110307D29944F0900DE3268 /* Localizable.strings */,
 				D46D7EC5294DB8DC005CF8DB /* Shuttleasy.playground */,
 				D4F116F228F9210F0083C5EB /* Shuttleasy */,
 				D4F1170928F921110083C5EB /* ShuttleasyTests */,
@@ -825,6 +839,7 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
 			);
 			mainGroup = D4F116E728F9210F0083C5EB;
 			productRefGroup = D4F116F128F9210F0083C5EB /* Products */;
@@ -1052,6 +1067,7 @@
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
+				0110308229944FC700DE3268 /* Localization.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
 				D4C6F97229503FDB00DAA1E7 /* ShuttleNetworkSource.swift in Sources */,
@@ -1121,6 +1137,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0110307D29944F0900DE3268 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0110307C29944F0900DE3268 /* en */,
+				0110307F29944F3C00DE3268 /* tr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D4F116FE28F921100083C5EB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1136,6 +1161,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1196,6 +1222,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
