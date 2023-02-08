@@ -14,4 +14,6 @@ protocol UserRepository {
     func deleteAccount(email: String, password: String) async -> Result<Bool, Error>
     func logOut() async -> Result<Void, Error>
     func updateDarkModePreference(isDarkMode: Bool) async -> Result<Bool, Error>
+    func getUserProfileType() async -> ProfileType
 }
+

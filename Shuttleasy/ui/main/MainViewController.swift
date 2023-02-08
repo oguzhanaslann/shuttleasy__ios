@@ -6,28 +6,64 @@
 //
 
 import UIKit
+import Combine
 
 class MainViewController: BaseTabBarController {
+    
+    private let mainViewModel : MainViewModel = Injector.shared.injectMainViewModel()
+    private var profileTypeObserver : AnyCancellable? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initTabBar()
+        let profileType = mainViewModel.currentProfileType()
+        initTabBar(profileType: profileType)
+        subscribeObservers()
+        mainViewModel.getProfileType()
     }
 
-    func initTabBar() {
+    private func initTabBar(profileType : ProfileType) {
         let homepageVC = UINavigationController(rootViewController:  HomepageViewContoller())
-        let searchVC = UINavigationController(rootViewController:  SearchShuttleViewContoller())
         let profileVC = UINavigationController(rootViewController: ProfileViewController())
         
-        viewControllers = [homepageVC, searchVC, profileVC]
-    
-        tabBar.items?[0].title = "Home"
-        tabBar.items?[0].image = UIImage(systemName: "house")
-      
-        tabBar.items?[1].title = "Search"
-        tabBar.items?[1].image = UIImage(systemName: "magnifyingglass")
-    
-        tabBar.items?[2].title = "Profile"
-        tabBar.items?[2].image = UIImage(systemName: "person.fill")
+        switch (profileType) {   
+            case .passenger:
+                let searchVC = UINavigationController(rootViewController:  SearchShuttleViewContoller())
+                viewControllers = [homepageVC, searchVC, profileVC]            
+                setTabbarIndexAsHome(0)
+                setTabbarIndexAsSearch(1)
+                setTabbarIndexAsProfile(2)
+            case .driver:
+                print("here")
+                viewControllers = [homepageVC, profileVC]
+                setTabbarIndexAsHome(0)
+                setTabbarIndexAsProfile(1)
+        }
+        
+        selectedViewController = viewControllers![0]
     }
+    
+    private func setTabbarIndexAsHome(_ index : Int) {
+        tabBar.items?[index].title = "Home"
+        tabBar.items?[index].image = UIImage(systemName: "house")
+    }
+
+    private func setTabbarIndexAsSearch( _ index : Int) {
+        tabBar.items?[index].title = "Search"
+        tabBar.items?[index].image = UIImage(systemName: "magnifyingglass")
+    }
+
+    private func setTabbarIndexAsProfile( _ index : Int) {
+        tabBar.items?[index].title = "Profile"
+        tabBar.items?[index].image = UIImage(systemName: "person.fill")
+    }
+
+    private func subscribeObservers() {
+        profileTypeObserver = mainViewModel.profileType
+            .receive(on: DispatchQueue.main)
+            .sink { profileType in
+            self.initTabBar(profileType: profileType)
+        }
+    }
+
+
 }

@@ -275,4 +275,18 @@ class Injector {
         
         return container.resolve(SearchShuttleViewModel.self)!
     }
+
+    // getMainViewModel
+    func injectMainViewModel() -> MainViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: MainViewModel.self,
+            onRegisterNeeded: { resolver in
+                MainViewModel(
+                    userRepository: self.injectUserRepository()
+                )
+            }
+        )
+        
+        return container.resolve(MainViewModel.self)!
+    }
 }

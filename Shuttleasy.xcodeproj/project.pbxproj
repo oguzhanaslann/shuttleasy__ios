@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
 		6FD133BBE66D8F8751596AD2 /* Pods_Shuttleasy_ShuttleasyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D16047F3D4D6219772C15D /* Pods_Shuttleasy_ShuttleasyUITests.framework */; };
 		97D4C3F7B6680FB7ED81C793 /* Pods_Shuttleasy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D546814752AE116D09DABC62 /* Pods_Shuttleasy.framework */; };
 		D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */; };
@@ -130,6 +131,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		017FE610299432DF000541D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		07F1AAE1A10FBCC6D31F0188 /* Pods-Shuttleasy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.debug.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.debug.xcconfig"; sourceTree = "<group>"; };
 		1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShuttleasyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB28156CFCA1112E754D0C9 /* Pods-ShuttleasyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShuttleasyTests.release.xcconfig"; path = "Target Support Files/Pods-ShuttleasyTests/Pods-ShuttleasyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				D406C0CD2937CAD800BC5F0C /* seach */,
 				D406C0CE2937CADF00BC5F0C /* profile */,
 				D41BE5B2292AB19300826640 /* MainViewController.swift */,
+				017FE610299432DF000541D8 /* MainViewModel.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				D4A94E81294CE6EB0070416F /* ShuttleasyUserDefaults.swift in Sources */,
 				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
 				D4F0B79629502B6A00716FE3 /* SearchResultCell.swift in Sources */,
+				017FE611299432DF000541D8 /* MainViewModel.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,

@@ -245,4 +245,12 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         await localDatasource.saveDarkModePreference(isDarkMode: isDarkMode)
         return .success(true)
     }
+    
+    func getUserProfileType() async -> ProfileType {
+        if (shouldUseDummyData()) {
+            return .passenger
+        } else {
+            return await localDatasource.getUserProfileType(defaultValue: .passenger)
+        }
+    }
 }
