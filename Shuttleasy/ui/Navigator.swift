@@ -19,6 +19,7 @@ enum Destination {
     case profileEdit
     case profileSetup(signUpModelShort: SignUpModelShort)
     case deleteAccount
+    case companyDetail
 }
 
 class Navigator {
@@ -183,6 +184,8 @@ extension Destination {
                 return ProfileSetupViewController(signUpModelShort: signUpModelShort)
             case .deleteAccount:
                 return DeleteAccountViewController()
+            case .companyDetail:
+                return CompanyDetailViewController()
             default: 
                 debugPrint("Destination not found")
                 return UIViewController()

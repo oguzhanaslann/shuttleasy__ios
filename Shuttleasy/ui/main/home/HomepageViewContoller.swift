@@ -11,9 +11,7 @@ class HomepageViewContoller: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        navigationController?.navigationBar.barTintColor = .red
+        title = Localization.home.localized
     }
     
 

@@ -295,7 +295,7 @@ class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
+        title = Localization.profile.localized
         initViews()
         profileViewModel.getUserProfile()
         subcribeObservers()
@@ -477,14 +477,6 @@ class ProfileViewController: BaseViewController {
             clearBackStack: true,
             wrappedInNavigationController: true
         )
-    }
-    
-    override func getNavigationBarBackgroundColor() -> UIColor? {
-        return primaryContainer
-    }
-    
-    override func getNavigationBarTitleColor() -> UIColor? {
-        return onPrimaryContainer
     }
 }
 

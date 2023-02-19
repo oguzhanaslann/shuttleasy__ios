@@ -108,3 +108,19 @@ func isValidPhone(_ phone: String) -> Bool {
     let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
     return phoneTest.evaluate(with: phone)
 }
+
+
+func setNavBackButton(
+    navigationItem: UINavigationItem,
+    target: Any?,
+    action: Selector?,
+    image : UIImage? = UIImage(systemName: "arrow.left")
+) {
+    let dismissButton = UIBarButtonItem(
+        image: image,
+        style: .plain,
+        target: target,
+        action: action
+    )
+    navigationItem.leftBarButtonItem = dismissButton
+}

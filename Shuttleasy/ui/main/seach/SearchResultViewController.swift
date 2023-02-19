@@ -12,10 +12,16 @@ protocol SearchUpdateListener {
     func onSearchResultUpdated(results : [SearchResult])
 }
 
+protocol SearchResultClickedListener {
+    func onSearchResultClicked(result: SearchResult)
+}
+
 class SearchResultViewController : UIViewController, SearchUpdateListener {
     let tableView = UITableView()
     
     var results: [SearchResult] = []
+    
+    private var searchResultClickedListener : SearchResultClickedListener? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +41,13 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
     }
     
     func onSearchResultUpdated(results: [SearchResult]) {
-        print("Updated")
-        // clear results and add new results
         self.results.removeAll()
         self.results.append(contentsOf: results)
-        // reload the table view
         tableView.reloadData()
+    }
+
+    func setOnSearchResultClickedListener(listener : SearchResultClickedListener) {
+        self.searchResultClickedListener = listener
     }
 }
 
@@ -50,16 +57,13 @@ extension SearchResultViewController : UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // dequeue the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.identifier, for: indexPath) as! SearchResultCell
-        // configure the cell
         cell.configure(with: results[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected")
-        // deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
+        searchResultClickedListener?.onSearchResultClicked(result: results[indexPath.row])
     }
 }

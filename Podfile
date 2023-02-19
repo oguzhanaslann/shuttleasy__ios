@@ -15,6 +15,7 @@ target 'Shuttleasy' do
   pod 'CocoaLumberjack/Swift'
   pod 'Swinject'
   pod 'FloatingPanel'
+  pod 'MaterialComponents/Tabs+TabBarView'
   
   target 'ShuttleasyTests' do
     inherit! :search_paths

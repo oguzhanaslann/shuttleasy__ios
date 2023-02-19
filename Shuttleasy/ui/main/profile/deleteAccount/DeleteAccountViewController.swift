@@ -122,15 +122,7 @@ class DeleteAccountViewController:  BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.backgroundColor = errorContainer
-        navigationController?.navigationBar.tintColor = onErrorContainer
-        let dismissButton = UIBarButtonItem(
-            image: UIImage(systemName: "arrow.left"),
-            style: .plain,
-            target: self,
-            action: #selector(dismissView)
-        )
-        navigationItem.leftBarButtonItem = dismissButton
+        setNavBackButton(navigationItem: navigationItem, target: self, action: #selector(dismissView))
     }
     
     @objc func dismissView() {
@@ -207,12 +199,18 @@ class DeleteAccountViewController:  BaseViewController {
         return errorContainer
     }
     
-    override func getNavigationBarTitleColor() -> UIColor {
+    override func getNavigationBarTintColor() -> UIColor {
         return onErrorContainer
     }
     
     override func getNavigationBarBackgroundColor() -> UIColor {
         return errorContainer
+    }
+    
+    override func getNavigationBarTitleStyle(titleColor: UIColor = onPrimaryContainer, font: UIFont = LabelLargeFont(16)) -> [NSAttributedString.Key : NSObject] {
+        var attrs = super.getNavigationBarTitleStyle(titleColor: titleColor, font: font)
+        attrs[NSAttributedString.Key.foregroundColor]  = getNavigationBarTintColor()
+        return attrs
     }
 }
 

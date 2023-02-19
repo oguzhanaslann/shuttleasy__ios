@@ -132,13 +132,17 @@ func TitleSmallFont()  -> UIFont {
 func LabelLarge(
     text : String,
     color : UIColor = .black,
-    font : UIFont  = UIFont.poppinsSemiBold(size: 16) ?? UIFont.systemFont(ofSize: 16)
+    font : UIFont  = LabelLargeFont()
 ) -> UILabel {
     let label = UILabel()
     label.text = text
     label.textColor = color
     label.font = font
     return label
+}
+
+func LabelLargeFont(_ size: CGFloat = CGFloat(16) ) -> UIFont {
+    return UIFont.poppinsSemiBold(size: size) ?? UIFont.systemFont(ofSize: size)
 }
 
 func ButtonFont() -> UIFont {

@@ -5,15 +5,16 @@ import FloatingPanel
 import Combine
 
 class SearchShuttleViewContoller: BaseViewController {
-
+    private static let SEARCH_TEXT_FIELD_TAG = 2000
+    
     private let searchViewModel = Injector.shared.injectSearchShuttleViewModel()
     private var searchResultCancellable : AnyCancellable? = nil
     private let fpc = FloatingPanelController()
-    
-    private static let SEARCH_TEXT_FIELD_TAG = 2000
    
-    var debounceTimer: Timer?
+    private var debounceTimer: Timer?
     
+    private let searchResultViewController = SearchResultViewController()
+
     private lazy var searchField : UITextField = {
         let searchField = UITextField()
         searchField.layer.cornerRadius = roundedMediumCornerRadius
@@ -38,11 +39,10 @@ class SearchShuttleViewContoller: BaseViewController {
     }()
     
     
-    private let searchResultViewController = SearchResultViewController()
+    
     
     private lazy var mapView: MKMapView =  {
         let mapView = MKMapView()
-
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
@@ -53,8 +53,9 @@ class SearchShuttleViewContoller: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
+        title = Localization.search.localized
         initViews()
+        searchResultViewController.setOnSearchResultClickedListener(listener: self)
         subscribeObservers()
     }
     
@@ -131,14 +132,6 @@ class SearchShuttleViewContoller: BaseViewController {
             fpc.move(to: .half, animated: true)        
         }
     }
-    
-    override func getNavigationBarBackgroundColor() -> UIColor? {
-        return primaryContainer
-    }
-    
-    override func getNavigationBarTitleColor() -> UIColor? {
-        return onPrimaryContainer
-    }
 }
 
 extension SearchShuttleViewContoller : UITextFieldDelegate {
@@ -156,5 +149,16 @@ extension SearchShuttleViewContoller : UITextFieldDelegate {
 
             return true
         }
-    
+}
+
+extension SearchShuttleViewContoller:  SearchResultClickedListener {
+    func onSearchResultClicked(result: SearchResult) {
+        print(result.title)
+        Navigator.shared.navigate(
+            from: self,
+            to: .companyDetail,
+            clearBackStack: false , 
+            wrappedInNavigationController: true
+        )
+    }
 }

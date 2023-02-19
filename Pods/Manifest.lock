@@ -6,6 +6,22 @@ PODS:
   - DynamicBlurView (4.1.0)
   - FloatingPanel (2.5.5)
   - Kingfisher (7.4.1)
+  - MaterialComponents/AnimationTiming (124.2.0)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/private/Color (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/Ripple (124.2.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - "MaterialComponents/Tabs+TabBarView (124.2.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MDFInternationalization
+  - MDFInternationalization (3.0.0)
   - MobilliumQRCodeReader (1.1.0)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
@@ -18,6 +34,7 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift
   - FloatingPanel
   - Kingfisher (~> 7.0)
+  - "MaterialComponents/Tabs+TabBarView"
   - MobilliumQRCodeReader
   - PopupDialog (~> 1.1)
   - SnapKit (~> 5.6.0)
@@ -31,6 +48,8 @@ SPEC REPOS:
     - DynamicBlurView
     - FloatingPanel
     - Kingfisher
+    - MaterialComponents
+    - MDFInternationalization
     - MobilliumQRCodeReader
     - PopupDialog
     - SnapKit
@@ -43,12 +62,14 @@ SPEC CHECKSUMS:
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
   FloatingPanel: a27e7827e0f710fa6236fe2596dd1b5484cb4fc1
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MobilliumQRCodeReader: f39910a38563f41ab0941ff24ae48395d6316687
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
 
-PODFILE CHECKSUM: 68ef621a43f1935b87a8fa9ea4aaa7f480f37579
+PODFILE CHECKSUM: 940230ca2cf01cdbec8015b682c0a2590c6f51c1
 
 COCOAPODS: 1.11.3

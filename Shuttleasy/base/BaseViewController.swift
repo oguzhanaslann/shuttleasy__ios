@@ -15,18 +15,26 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        setStatusBarColorByDeviceOrientation()
+        setStatusBarColorByOrientationIfNeeded()
         setNavigationBarTheme()
+    }
+    
+    private func setStatusBarColorByOrientationIfNeeded() {
+        if shouldSetStatusBarColor() {
+           setStatusBarColorByDeviceOrientation()
+        }
+    }
+    
+    func shouldSetStatusBarColor() -> Bool {
+        return true
     }
     
     private func setStatusBarColorByDeviceOrientation() {
         if UIDevice.current.orientation.isLandscape {
-            print("Landscape")
             if statusBarView != nil && view.subviews.contains(statusBarView!) {
                 statusBarView!.removeFromSuperview()
             }
         } else {
-            print("Portrait")
             setStatusBarColorIfNotSet()
         }
     }
@@ -53,29 +61,34 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     }
     
     final func setNavigationBarTheme() {
-    
-        if let color = getNavigationBarBackgroundColor() {
-            navigationController?.navigationBar.backgroundColor = color
-        }
-        
-        
-        if let color = getNavigationBarTitleColor(){
-            navigationController?.navigationBar.tintColor = color
-        }
-      
+        navigationController?.navigationBar.backgroundColor = getNavigationBarBackgroundColor()
+        navigationController?.navigationBar.tintColor = getNavigationBarTintColor()
+        navigationController?.navigationBar.titleTextAttributes = getNavigationBarTitleStyle()
     }
     
-    func getNavigationBarBackgroundColor() -> UIColor? {
-        return nil
+    func getNavigationBarBackgroundColor() -> UIColor {
+        return primaryContainer
     }
 
-    func getNavigationBarTitleColor() -> UIColor? {
-        return nil
+    func getNavigationBarTintColor() -> UIColor {
+        return onPrimaryContainer
+    }
+    
+    func getNavigationBarTitleStyle(
+        titleColor : UIColor = onPrimaryContainer,
+        font : UIFont  = LabelLargeFont(16)
+    ) -> [NSAttributedString.Key: NSObject] {
+        let textAttributes = [
+            NSAttributedString.Key.foregroundColor: titleColor,
+            NSAttributedString.Key.font: LabelLargeFont(16)
+        ]
+        
+        return textAttributes
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        setStatusBarColorByDeviceOrientation()
+        setStatusBarColorByOrientationIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
