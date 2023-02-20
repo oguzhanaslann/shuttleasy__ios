@@ -34,7 +34,7 @@ class TabLayoutMediator: NSObject, MDCTabBarViewDelegate, UIScrollViewDelegate {
     }
     
     func attach() {
-        self.tabBarView.delegate = self
+        self.tabBarView.tabBarDelegate = self
         self.scrollView.delegate = self
     }
     

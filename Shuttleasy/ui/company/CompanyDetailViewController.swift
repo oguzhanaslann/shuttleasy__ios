@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialTabs_TabBarView
+import SnapKit
 
 class CompanyDetailViewController: BaseViewController {
     
@@ -45,11 +47,62 @@ class CompanyDetailViewController: BaseViewController {
         return stackView
     }()
     
+    lazy var tabBarView =  {
+        let tabBarView = MDCTabBarView()
+        tabBarView.preferredLayoutStyle = .fixed // or .fixed
+        tabBarView.sizeToFit()
+        tabBarView.tintColor = primaryContainer
+        tabBarView.barTintColor = primaryContainer
+        tabBarView.indicatorStyle = .white
+        tabBarView.bottomDividerColor = onPrimaryContainer.withAlphaComponent(0.5)
+        tabBarView.tintColorDidChange()
+        tabBarView.setContentPadding(.zero, for: .scrollable)
+
+        return tabBarView
+    }()
+    
+    
+    private var pages : [UIView] = [UIView()]
+    lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isPagingEnabled = true
+        let guide = self.view.safeAreaLayoutGuide
+        for i in 0..<pages.count {
+            let page = UIView()
+            page.backgroundColor = .blue
+            pages.append(page)
+        }
+        
+        scrollView.contentSize = CGSize(
+            width: view.frame.width * CGFloat(pages.count),
+            height: view.frame.height * 0.50
+        )
+        
+        for index in 0..<pages.count {
+            let pageView = pages[index]
+            scrollView.addSubview(pageView)
+            pageView.frame = CGRect(
+                x: view.frame.width * CGFloat(index),
+                y: 0,
+                width: view.frame.width,
+                height: view.frame.height
+            )
+            
+        }
+        
+        return scrollView
+    }()
+    
+    private var mediator : TabLayoutMediator? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageContainer)
         view.addSubview(companyHeader)
-        
+        view.addSubview(tabBarView)
+        view.addSubview(scrollView)
+
         imageContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
@@ -60,6 +113,31 @@ class CompanyDetailViewController: BaseViewController {
             make.left.right.equalToSuperview().inset(24)
             make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
         }
+        
+        
+        
+        tabBarView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.top.greaterThanOrEqualTo(imageContainer.snp.bottom)
+            make.height.greaterThanOrEqualTo(56)
+        }
+        
+        scrollView.snp.makeConstraints { make in
+            view.bringSubviewToFront(scrollView)
+            make.top.equalTo(tabBarView.snp.bottom)
+            make.width.equalTo(view.snp.width)
+            make.height.equalTo(300)
+        }
+        
+        
+        mediator =  TabLayoutMediator(
+            tabBarView: tabBarView,
+            scrollView: scrollView
+        ) { pageIndex in
+             UITabBarItem(title: "Recents", image: UIImage(named: "phone"), tag: pageIndex)
+        }
+        
+        mediator?.attach()
     }
     
     override func viewWillAppear(_ animated: Bool) {
