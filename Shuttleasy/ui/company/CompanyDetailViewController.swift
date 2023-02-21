@@ -49,7 +49,7 @@ class CompanyDetailViewController: BaseViewController {
     
     lazy var tabBarView =  {
         let tabBarView = MDCTabBarView()
-        tabBarView.preferredLayoutStyle = .fixed // or .fixed
+        tabBarView.preferredLayoutStyle = .fixed
         tabBarView.sizeToFit()
         tabBarView.tintColor = primaryContainer
         tabBarView.barTintColor = primaryContainer
@@ -57,26 +57,24 @@ class CompanyDetailViewController: BaseViewController {
         tabBarView.bottomDividerColor = onPrimaryContainer.withAlphaComponent(0.5)
         tabBarView.tintColorDidChange()
         tabBarView.setContentPadding(.zero, for: .scrollable)
-
         return tabBarView
     }()
     
     
-    private var pages : [UIView] = [UIView()]
+    private var pages : [UIView] = [
+        UIView(),
+        UIView()
+    ]
+
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.isPagingEnabled = true
         let guide = self.view.safeAreaLayoutGuide
-        for i in 0..<pages.count {
-            let page = UIView()
-            page.backgroundColor = .blue
-            pages.append(page)
-        }
         
         scrollView.contentSize = CGSize(
             width: view.frame.width * CGFloat(pages.count),
-            height: view.frame.height * 0.50
+            height: (guide.layoutFrame.size.height - 256)
         )
         
         for index in 0..<pages.count {
@@ -86,15 +84,22 @@ class CompanyDetailViewController: BaseViewController {
                 x: view.frame.width * CGFloat(index),
                 y: 0,
                 width: view.frame.width,
-                height: view.frame.height
+                height: (guide.layoutFrame.size.height - 256)
             )
-            
         }
         
         return scrollView
     }()
     
     private var mediator : TabLayoutMediator? = nil
+    
+    let imageHeight = 200
+    let tabsHeight = 56
+    var scrollViewHeight: CGFloat {
+        get {
+            return safeAreaHeight() - CGFloat(imageHeight) - CGFloat(tabsHeight)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +111,7 @@ class CompanyDetailViewController: BaseViewController {
         imageContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(imageHeight)
         }
         
         companyHeader.snp.makeConstraints { make in
@@ -114,22 +119,30 @@ class CompanyDetailViewController: BaseViewController {
             make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
         }
         
-        
-        
         tabBarView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.greaterThanOrEqualTo(imageContainer.snp.bottom)
-            make.height.greaterThanOrEqualTo(56)
+            make.height.greaterThanOrEqualTo(tabsHeight)
         }
         
+        let height = safeAreaHeight()
         scrollView.snp.makeConstraints { make in
             view.bringSubviewToFront(scrollView)
             make.top.equalTo(tabBarView.snp.bottom)
             make.width.equalTo(view.snp.width)
-            make.height.equalTo(300)
+            make.height.equalTo((scrollViewHeight))
         }
         
         
+        attachThePagerComponents()
+    }
+    
+    private func safeAreaHeight() -> CGFloat {
+        let guide = self.view.safeAreaLayoutGuide
+        return guide.layoutFrame.size.height
+    }
+    
+    private func attachThePagerComponents() {
         mediator =  TabLayoutMediator(
             tabBarView: tabBarView,
             scrollView: scrollView
