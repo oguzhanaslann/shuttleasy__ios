@@ -25,14 +25,6 @@ class CompanyDetailViewController: BaseViewController {
         return imageContainer
     }()
     
-    lazy var companyNameTitle = {
-        return HeadlineSmall(text: "Header", color: .white)
-    }()
-    
-    lazy var companyShortSlogan = {
-        return LabelMedium(text: "slogan", color: .white)
-    }()
-    
     lazy var companyHeader = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -40,10 +32,15 @@ class CompanyDetailViewController: BaseViewController {
         
         let companyNameTitle = HeadlineSmall(text: "Header", color: .white)
         
+        companyNameTitle.breakLineFromEndIfNeeded()
+        
+        
         let companyShortSlogan = LabelMedium(text: "slogan", color: .white)
+        companyShortSlogan.breakLineFromEndIfNeeded()
         
         stackView.addArrangedSubview(companyNameTitle)
         stackView.addArrangedSubview(companyShortSlogan)
+
         return stackView
     }()
     
@@ -60,9 +57,31 @@ class CompanyDetailViewController: BaseViewController {
         return tabBarView
     }()
     
+    lazy var pointBadgeView = {
+        let badge = UIView()
+        badge.backgroundColor = secondaryColor
+        badge.clipsToBounds = true
+        badge.layer.cornerRadius = 12
+        badge.layer.maskedCorners = [.layerMinXMinYCorner]
+        
+        
+        let starIcon = UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate)
+        let starImageView = UIImageView(image: starIcon)
+        starImageView.tintColor = UIColor.white
+        badge.addSubview(starImageView)
+        starImageView.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(8)
+            make.size.equalTo(12)
+            make.centerY.equalToSuperview()
+        }
+        
+        
+        return badge
+    }()
+    
     
     private var pages : [UIView] = [
-        UIView(),
+        CompanyAboutView(),
         UIView()
     ]
 
@@ -107,6 +126,7 @@ class CompanyDetailViewController: BaseViewController {
         view.addSubview(companyHeader)
         view.addSubview(tabBarView)
         view.addSubview(scrollView)
+        view.addSubview(pointBadgeView)
 
         imageContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -114,18 +134,27 @@ class CompanyDetailViewController: BaseViewController {
             make.height.equalTo(imageHeight)
         }
         
-        companyHeader.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(24)
-            make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
+        pointBadgeView.snp.makeConstraints { make in
+            view.bringSubviewToFront(pointBadgeView)
+            make.bottom.equalTo(imageContainer.snp.bottom)
+            make.width.equalTo(105)
+            make.height.equalTo(28)
+            make.right.lessThanOrEqualToSuperview()
         }
         
+        companyHeader.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(24)
+            make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
+            make.right.lessThanOrEqualTo(pointBadgeView.snp.left).inset(8)
+        }
+        
+      
         tabBarView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.greaterThanOrEqualTo(imageContainer.snp.bottom)
             make.height.greaterThanOrEqualTo(tabsHeight)
         }
         
-        let height = safeAreaHeight()
         scrollView.snp.makeConstraints { make in
             view.bringSubviewToFront(scrollView)
             make.top.equalTo(tabBarView.snp.bottom)
@@ -184,16 +213,4 @@ class CompanyDetailViewController: BaseViewController {
         attrs[NSAttributedString.Key.foregroundColor]  = getNavigationBarTintColor()
         return attrs
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
