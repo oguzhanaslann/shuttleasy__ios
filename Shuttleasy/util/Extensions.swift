@@ -196,3 +196,17 @@ extension String {
         }
     }
 }
+extension UIView {
+    func transparentBackground() {
+        self.backgroundColor = UIColor.clear
+    }
+}
+
+
+extension UITableView {
+    func defaultSetup() {
+        self.rowHeight = UITableView.automaticDimension
+        self.separatorStyle = .none
+        self.showsVerticalScrollIndicator = false
+    }
+}

@@ -25,7 +25,7 @@ class CompanyHeaderCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        transparentBackground()
         self.addSubview(contactHeader)
         contactHeader.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)

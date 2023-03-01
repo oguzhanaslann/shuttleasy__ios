@@ -29,8 +29,7 @@ class CompanyAboutView: UIView {
         tableView.backgroundColor = backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = .none
+        tableView.defaultSetup()
         tableView.register(CommentCell.self, forCellReuseIdentifier: CommentCell.identifier)
         tableView.register(CompanyStatusCell.self, forCellReuseIdentifier: CompanyStatusCell.identifier)
         tableView.register(CompanyHeaderCell.self, forCellReuseIdentifier: CompanyHeaderCell.identifier)

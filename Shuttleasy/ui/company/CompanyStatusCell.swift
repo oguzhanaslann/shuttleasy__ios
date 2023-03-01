@@ -23,6 +23,7 @@ class CompanyStatusCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        transparentBackground()
         let statView = statusView()
         let statView2 = statusView()
         addSubview(statView)
@@ -61,7 +62,7 @@ class CompanyStatusCell : UITableViewCell {
             make.left.equalToSuperview().inset(16)
         }
         
-        let statusLabel = LabelSmall(text: "Some Label")
+        let statusLabel = LabelSmall(text: "Some Label", color : onSecondaryColor)
         statView.addSubview(statusLabel)
         statusLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
@@ -70,7 +71,7 @@ class CompanyStatusCell : UITableViewCell {
         }
         
         
-        let head = HeadlineSmall(text: "2 Yıl")
+        let head = HeadlineSmall(text: "2 Yıl", color : onSecondaryColor)
         statView.addSubview(head)
         head.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(clockIcon.snp.bottom).offset(8)

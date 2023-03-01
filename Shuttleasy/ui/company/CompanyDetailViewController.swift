@@ -11,6 +11,9 @@ import SnapKit
 
 class CompanyDetailViewController: BaseViewController {
     
+    private static let ABOUT_PAGE_INDEX = 0
+    private static let SHUTTLES_PAGE_INDEX = 1
+
     lazy var imageContainer = {
         let imageContainer = UIView()
         
@@ -82,7 +85,7 @@ class CompanyDetailViewController: BaseViewController {
     
     private var pages : [UIView] = [
         CompanyAboutView(),
-        UIView()
+        CompanyShuttlesView()
     ]
 
     lazy var scrollView : UIScrollView = {
@@ -98,6 +101,7 @@ class CompanyDetailViewController: BaseViewController {
         
         for index in 0..<pages.count {
             let pageView = pages[index]
+            pageView.backgroundColor = backgroundColor
             scrollView.addSubview(pageView)
             pageView.frame = CGRect(
                 x: view.frame.width * CGFloat(index),
@@ -176,7 +180,13 @@ class CompanyDetailViewController: BaseViewController {
             tabBarView: tabBarView,
             scrollView: scrollView
         ) { pageIndex in
-             UITabBarItem(title: "Recents", image: UIImage(named: "phone"), tag: pageIndex)
+            if ( pageIndex == CompanyDetailViewController.ABOUT_PAGE_INDEX) {
+               return UITabBarItem(title: "About", image: UIImage(named: "phone"), tag: pageIndex)
+            } else if pageIndex == CompanyDetailViewController.SHUTTLES_PAGE_INDEX {
+               return UITabBarItem(title: "Shuttles", image: UIImage(named: "phone"), tag: pageIndex)
+            } else {
+                return UITabBarItem(title: "", image: UIImage(named: "phone"), tag: pageIndex)
+            }
         }
         
         mediator?.attach()
