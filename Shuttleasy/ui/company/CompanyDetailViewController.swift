@@ -17,13 +17,16 @@ class CompanyDetailViewController: BaseViewController {
     lazy var imageContainer = {
         let imageContainer = UIView()
         
-        let image = UIImageView()
+        let image = UIImageView(image : UIImage(named: "shuttle_placeholder"))
         imageContainer.addSubview(image)
        
         image.layer.backgroundColor = UIColor.gray.cgColor
+        
         image.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
         }
+            
+        image.addoverlay(alpha: 0.33)
         
         return imageContainer
     }()
@@ -68,16 +71,22 @@ class CompanyDetailViewController: BaseViewController {
         badge.layer.maskedCorners = [.layerMinXMinYCorner]
         
         
-        let starIcon = UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate)
+        let starIcon = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
         let starImageView = UIImageView(image: starIcon)
         starImageView.tintColor = UIColor.white
         badge.addSubview(starImageView)
         starImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(8)
-            make.size.equalTo(12)
+            make.size.equalTo(14)
             make.centerY.equalToSuperview()
         }
         
+        let ratings = LabelMedium(text: "8.8(500)", color: onSecondaryColor)
+        badge.addSubview(ratings)
+        ratings.snp.makeConstraints { make in
+            make.left.equalTo(starImageView.snp.right).offset(8)
+            make.centerY.equalToSuperview()
+        }
         
         return badge
     }()
@@ -126,6 +135,7 @@ class CompanyDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.addSubview(imageContainer)
         view.addSubview(companyHeader)
         view.addSubview(tabBarView)
@@ -190,6 +200,11 @@ class CompanyDetailViewController: BaseViewController {
         }
         
         mediator?.attach()
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {

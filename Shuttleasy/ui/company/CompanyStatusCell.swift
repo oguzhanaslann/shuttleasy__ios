@@ -62,7 +62,7 @@ class CompanyStatusCell : UITableViewCell {
             make.left.equalToSuperview().inset(16)
         }
         
-        let statusLabel = LabelSmall(text: "Some Label", color : onSecondaryColor)
+        let statusLabel = LabelSmall(text: "Some Label", color : onSecondaryContainer)
         statView.addSubview(statusLabel)
         statusLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(18)
@@ -71,7 +71,7 @@ class CompanyStatusCell : UITableViewCell {
         }
         
         
-        let head = HeadlineSmall(text: "2 Yıl", color : onSecondaryColor)
+        let head = HeadlineSmall(text: "2 Yıl", color : onSecondaryContainer)
         statView.addSubview(head)
         head.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(clockIcon.snp.bottom).offset(8)
