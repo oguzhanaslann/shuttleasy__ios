@@ -27,6 +27,7 @@ class CompanyShuttlesView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.defaultSetup()
+        tableView.separatorStyle = .singleLine
         tableView.register(CompanyShuttleCell.self, forCellReuseIdentifier: CompanyShuttleCell.identifier)
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -58,6 +59,15 @@ extension CompanyShuttlesView : UITableViewDataSource {
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("clicked %d", indexPath.row)        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension CompanyShuttlesView : UITableViewDelegate {

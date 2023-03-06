@@ -32,6 +32,7 @@ class CommentCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        transparentBackground()
         addSubview(commentCard)
         initCardView()
         commentCard.addSubview(commenterProfilePhoto)

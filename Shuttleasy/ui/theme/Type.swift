@@ -164,13 +164,17 @@ func LabelMedium(
 func LabelSmall(
     text : String,
     color : UIColor = .black,
-    font : UIFont  = UIFont.poppinsLight(size: 11) ?? UIFont.systemFont(ofSize: 11)
+    font : UIFont  = LabelSmallFont()
 ) -> UILabel {
     let label = UILabel()
     label.text = text
     label.textColor = color
     label.font = font
     return label
+}
+
+func LabelSmallFont() -> UIFont {
+    return UIFont.poppinsLight(size: 11) ?? UIFont.systemFont(ofSize: 11)
 }
 
 
