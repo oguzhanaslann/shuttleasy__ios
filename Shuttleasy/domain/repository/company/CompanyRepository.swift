@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CompanyRepository {
-    func getCompanyDetail(with id: Int) -> Result<CompanyDetail, Error>
+    func getCompanyDetail(with id: Int) async -> Result<CompanyDetail, Error>
 }
 
 class CompanyRepositoryImpl: CompanyRepository {

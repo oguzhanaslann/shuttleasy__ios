@@ -8,6 +8,7 @@
 import UIKit
 import MaterialComponents.MaterialTabs_TabBarView
 import SnapKit
+import Combine
 
 class CompanyDetailViewController: BaseViewController {
     private static let ABOUT_PAGE_INDEX = 0
@@ -16,6 +17,8 @@ class CompanyDetailViewController: BaseViewController {
     private let viewModel : CompanyDetailViewModel = Injector.shared.injectCompanyDetailViewModel()
     
     let companyId: Int
+    
+    private var companyDetailObserver: AnyCancellable? = nil
     
     init(companyId: Int){
         self.companyId  = companyId
@@ -154,6 +157,7 @@ class CompanyDetailViewController: BaseViewController {
         super.viewDidLoad()
         initViews()
         viewModel.getCompanyDetail(companyId: self.companyId)
+        subscribeObservers()
     }
     
     private func initViews() {
@@ -226,6 +230,33 @@ class CompanyDetailViewController: BaseViewController {
     }
     
     
+    private func subscribeObservers() {
+        companyDetailObserver = viewModel.companyDetailPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: {[weak self] completion in
+                    switch completion {
+                        case .finished:
+                            break
+                        case .failure(let error):
+                            self?.showErrorSnackbar(message: error.localizedDescription)
+                    }
+                },
+                receiveValue: { [weak self] result in
+                    result.onSuccess { data in
+                        print(data)
+                        self?.onCompanyDetailResult(data.data)
+                    }.onError { errorMessage in
+                        self?.showErrorSnackbar(message: errorMessage)
+                    }
+                }
+            )
+    }
+    
+    private func onCompanyDetailResult(_ companyDetail : CompanyDetail) {
+        
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
           return .lightContent
     }
@@ -234,13 +265,9 @@ class CompanyDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         setNavBackButton(navigationItem: navigationItem, target: self, action: #selector(dismissView))
     }
-    
+        
     @objc func dismissView() {
         dismiss(animated: true, completion: nil)
-    }
-
-    override func viewDidLayoutSubviews() {
-        print(imageContainer.frame.width)
     }
     
     override func shouldSetStatusBarColor() -> Bool {

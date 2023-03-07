@@ -10,18 +10,27 @@ import Combine
 
 class CompanyDetailViewModel : ViewModel {
     
-    private let deleteAccountResult = CurrentValueSubject<UiDataState<CompanyDetail>, Error>(UiDataState.Initial)
-    let deleteAccountPublisher : AnyPublisher<UiDataState<CompanyDetail>, Error>
+    private let companyDetailSubject = CurrentValueSubject<UiDataState<CompanyDetail>, Error>(UiDataState.Initial)
+    let companyDetailPublisher : AnyPublisher<UiDataState<CompanyDetail>, Error>
     
-    let companyRepository : CompanyRepository
+    private let companyRepository : CompanyRepository
     
     init(companyRepository: CompanyRepository) {
         self.companyRepository = companyRepository
-        deleteAccountPublisher = deleteAccountResult.eraseToAnyPublisher()
+        companyDetailPublisher = companyDetailSubject.eraseToAnyPublisher()
     }
     
     func getCompanyDetail(companyId : Int) {
-        
+        Task.init {
+            let result = await self.companyRepository.getCompanyDetail(with: companyId)
+            
+            switch result  {
+                case .success(let companyDetail):
+                    companyDetailSubject.send(UiDataState.Success(.createFrom(data: companyDetail)))
+                case .failure(let error):
+                    companyDetailSubject.send(UiDataState.Error(error.localizedDescription))
+            }
+        }
     }
     
     func enrollToShuttle(shuttleId : Int) {
