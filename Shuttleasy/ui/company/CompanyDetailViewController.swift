@@ -10,9 +10,21 @@ import MaterialComponents.MaterialTabs_TabBarView
 import SnapKit
 
 class CompanyDetailViewController: BaseViewController {
-    
     private static let ABOUT_PAGE_INDEX = 0
     private static let SHUTTLES_PAGE_INDEX = 1
+
+    private let viewModel : CompanyDetailViewModel = Injector.shared.injectCompanyDetailViewModel()
+    
+    let companyId: Int
+    
+    init(companyId: Int){
+        self.companyId  = companyId
+        super.init(nibName: nil, bundle: nil)
+    }
+       
+    required init(coder : NSCoder){
+        fatalError()
+    }
 
     lazy var imageContainer = {
         let imageContainer = UIView()
@@ -133,42 +145,57 @@ class CompanyDetailViewController: BaseViewController {
         }
     }
     
+    private func safeAreaHeight() -> CGFloat {
+        let guide = self.view.safeAreaLayoutGuide
+        return guide.layoutFrame.size.height
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initViews()
+        viewModel.getCompanyDetail(companyId: self.companyId)
+    }
+    
+    private func initViews() {
+        initHeaderSection()
+        initTabsAndPager()
+    }
+    
+    private func initHeaderSection() {
         view.addSubview(imageContainer)
-        view.addSubview(companyHeader)
-        view.addSubview(tabBarView)
-        view.addSubview(scrollView)
-        view.addSubview(pointBadgeView)
-
         imageContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
             make.height.equalTo(imageHeight)
         }
         
+        view.addSubview(pointBadgeView)
         pointBadgeView.snp.makeConstraints { make in
             view.bringSubviewToFront(pointBadgeView)
             make.bottom.equalTo(imageContainer.snp.bottom)
             make.width.equalTo(105)
             make.height.equalTo(28)
-            make.right.lessThanOrEqualToSuperview()
+            make.right.equalToSuperview()
         }
-        
+
+        view.addSubview(companyHeader)
         companyHeader.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(24)
             make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
             make.right.lessThanOrEqualTo(pointBadgeView.snp.left).inset(8)
         }
-        
-      
+
+    }
+    
+    private func initTabsAndPager() {
+        view.addSubview(tabBarView)
         tabBarView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.greaterThanOrEqualTo(imageContainer.snp.bottom)
             make.height.greaterThanOrEqualTo(tabsHeight)
         }
-        
+
+        view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             view.bringSubviewToFront(scrollView)
             make.top.equalTo(tabBarView.snp.bottom)
@@ -179,11 +206,7 @@ class CompanyDetailViewController: BaseViewController {
         
         attachThePagerComponents()
     }
-    
-    private func safeAreaHeight() -> CGFloat {
-        let guide = self.view.safeAreaLayoutGuide
-        return guide.layoutFrame.size.height
-    }
+
     
     private func attachThePagerComponents() {
         mediator =  TabLayoutMediator(

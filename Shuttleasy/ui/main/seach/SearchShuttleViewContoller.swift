@@ -156,7 +156,7 @@ extension SearchShuttleViewContoller:  SearchResultClickedListener {
         print(result.title)
         Navigator.shared.navigate(
             from: self,
-            to: .companyDetail,
+            to: .companyDetail(ccompanyId: result.companyId),
             clearBackStack: false , 
             wrappedInNavigationController: true
         )

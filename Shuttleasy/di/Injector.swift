@@ -289,4 +289,29 @@ class Injector {
         
         return container.resolve(MainViewModel.self)!
     }
+
+    //CompanyDetailViewModel
+    func injectCompanyDetailViewModel() -> CompanyDetailViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: CompanyDetailViewModel.self,
+            onRegisterNeeded: { resolver in
+                CompanyDetailViewModel(
+                    companyRepository : self.injectCompanyRepository()
+                )
+            }
+        )
+        
+        return container.resolve(CompanyDetailViewModel.self)!
+    }
+
+    func injectCompanyRepository() -> CompanyRepository {
+        registerDependencyIfNotRegistered(
+            dependency: CompanyRepository.self,
+            onRegisterNeeded: { resolver in
+                CompanyRepositoryImpl()
+            }
+        )
+        
+        return container.resolve(CompanyRepository.self)!
+    }
 }

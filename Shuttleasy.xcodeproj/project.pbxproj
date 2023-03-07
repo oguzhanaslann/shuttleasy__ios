@@ -14,7 +14,13 @@
 		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
 		01A2B7E629A22C3300709F30 /* TabLayoutMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */; };
 		01A2B7E929A2465800709F30 /* CompanyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A2B7E829A2465800709F30 /* CompanyDetailViewController.swift */; };
+		01A6393B29B6EFE00038B31A /* CompanyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6393A29B6EFE00038B31A /* CompanyDetail.swift */; };
+		01A6393D29B6F0B70038B31A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6393C29B6F0B70038B31A /* Comment.swift */; };
+		01A6393F29B6F0DC0038B31A /* Shuttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6393E29B6F0DC0038B31A /* Shuttle.swift */; };
+		01A6394129B6F1260038B31A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394029B6F1260038B31A /* User.swift */; };
+		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
+		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
 		01E7255F29AE9EBA009CF7FE /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7255E29AE9EBA009CF7FE /* Spacing.swift */; };
 		01E7256329AEA476009CF7FE /* CompanyShuttlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7256229AEA476009CF7FE /* CompanyShuttlesView.swift */; };
 		01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */; };
@@ -152,7 +158,13 @@
 		017FE610299432DF000541D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLayoutMediator.swift; sourceTree = "<group>"; };
 		01A2B7E829A2465800709F30 /* CompanyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewController.swift; sourceTree = "<group>"; };
+		01A6393A29B6EFE00038B31A /* CompanyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetail.swift; sourceTree = "<group>"; };
+		01A6393C29B6F0B70038B31A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		01A6393E29B6F0DC0038B31A /* Shuttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shuttle.swift; sourceTree = "<group>"; };
+		01A6394029B6F1260038B31A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
 		01E7255E29AE9EBA009CF7FE /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		01E7256229AEA476009CF7FE /* CompanyShuttlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyShuttlesView.swift; sourceTree = "<group>"; };
 		01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyStatusCell.swift; sourceTree = "<group>"; };
@@ -321,6 +333,15 @@
 				01F36CC729AD46250039E12D /* CompanyHeaderCell.swift */,
 				01E7256229AEA476009CF7FE /* CompanyShuttlesView.swift */,
 				014C9F1329AFD27100DD3524 /* CompanyShuttlesCell.swift */,
+				01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */,
+			);
+			path = company;
+			sourceTree = "<group>";
+		};
+		01A6394229B6F2ED0038B31A /* company */ = {
+			isa = PBXGroup;
+			children = (
+				01A6394329B6F2FA0038B31A /* CompanyRepository.swift */,
 			);
 			path = company;
 			sourceTree = "<group>";
@@ -443,6 +464,10 @@
 				D4C10262293B8C91004812C1 /* UserProfile.swift */,
 				D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */,
 				D4F0B79B29502C4900716FE3 /* SearchResult.swift */,
+				01A6393A29B6EFE00038B31A /* CompanyDetail.swift */,
+				01A6393C29B6F0B70038B31A /* Comment.swift */,
+				01A6393E29B6F0DC0038B31A /* Shuttle.swift */,
+				01A6394029B6F1260038B31A /* User.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -718,6 +743,7 @@
 		D4F591DC2921465900125E90 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				01A6394229B6F2ED0038B31A /* company */,
 				D4C6F96D29503F9500DAA1E7 /* search */,
 				D4CFA0C2294CB25900C0F47E /* app */,
 				D4F591DE2921466800125E90 /* user */,
@@ -1058,6 +1084,7 @@
 			files = (
 				D40B27EE292A789500140612 /* SignUpViewController.swift in Sources */,
 				D4F0B79A29502BE900716FE3 /* SearchResultViewController.swift in Sources */,
+				01A6394129B6F1260038B31A /* User.swift in Sources */,
 				D41BE5B3292AB19300826640 /* MainViewController.swift in Sources */,
 				01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */,
 				D4816DB92920E6F400ECB799 /* Util.swift in Sources */,
@@ -1065,6 +1092,7 @@
 				D4A94E81294CE6EB0070416F /* ShuttleasyUserDefaults.swift in Sources */,
 				D4F116F828F9210F0083C5EB /* OnBoardingViewContoller.swift in Sources */,
 				D4F0B79629502B6A00716FE3 /* SearchResultCell.swift in Sources */,
+				01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */,
 				017FE611299432DF000541D8 /* MainViewModel.swift in Sources */,
 				01A2B7E629A22C3300709F30 /* TabLayoutMediator.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
@@ -1075,6 +1103,7 @@
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,
 				D42D0E922944793C00F3DA91 /* DeleteAccountViewModel.swift in Sources */,
+				01A6393F29B6F0DC0038B31A /* Shuttle.swift in Sources */,
 				010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */,
 				D406C0D22937CB4B00BC5F0C /* SearchShuttleViewContoller.swift in Sources */,
 				D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */,
@@ -1102,6 +1131,7 @@
 				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
+				01A6393D29B6F0B70038B31A /* Comment.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
@@ -1116,6 +1146,7 @@
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				01F36CC629AD45210039E12D /* CompanyContantCell.swift in Sources */,
 				D4F0B79E29502E8900716FE3 /* SearchShuttleViewModel.swift in Sources */,
+				01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */,
 				014C9F1429AFD27100DD3524 /* CompanyShuttlesCell.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
 				D4C6F96F29503FA000DAA1E7 /* SearchShuttleRepository.swift in Sources */,
@@ -1124,6 +1155,7 @@
 				D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */,
 				D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */,
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
+				01A6393B29B6EFE00038B31A /* CompanyDetail.swift in Sources */,
 				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
 				D4C6F96C29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import Foundation
 struct SearchResult {
+    let companyId: Int
     let title: String
     let imageUrl : String
     let startDateText : String

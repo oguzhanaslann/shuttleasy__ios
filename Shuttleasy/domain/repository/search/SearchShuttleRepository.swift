@@ -6,7 +6,11 @@ protocol SearchShuttleRepository {
 }
 
 class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
+    
+    private static let NoCompanyId = -1
+    
     private let shuttleNetworkSource : ShuttleNetworkSource
+    
     init(shuttleNetworkSource : ShuttleNetworkSource) {
         self.shuttleNetworkSource = shuttleNetworkSource
     }
@@ -22,6 +26,7 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
 
                result = resultDto.map({ element in
                    SearchResult(
+                    companyId: element.companyID ?? SearchShuttleRepositoryImpl.NoCompanyId,
                     title: element.companyName ?? "",
                     imageUrl: "",
                     startDateText: ShuttleasyDateFormatter.shared.convertDateString(dateString: element.startTime ?? ""),
@@ -38,7 +43,13 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
 
     private func getDummySearchResults()  -> [SearchResult] {
         return [
-            SearchResult(title: "Title - 1 ", imageUrl: "", startDateText: "15:15 15 Aralık 2022", shutlleBusPlateNumber: "35 YSR 2001")
+            SearchResult(
+                companyId: SearchShuttleRepositoryImpl.NoCompanyId,
+                title: "Title - 1 ",
+                imageUrl: "",
+                startDateText: "15:15 15 Aralık 2022",
+                shutlleBusPlateNumber: "35 YSR 2001"
+            )
         ]
     }
 }

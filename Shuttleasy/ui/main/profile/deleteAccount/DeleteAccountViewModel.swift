@@ -22,7 +22,7 @@ class DeleteAccountViewModel {
     func deleteAccount(email: String, password: String) {
         deleteAccountResult.send(UiDataState.Loading)
         Task.init {
-            let result = try await self.userRepository.deleteAccount(email: email, password: password)
+            let result =  await self.userRepository.deleteAccount(email: email, password: password)
             switch result  {
                 case (.success(let isSuccess) ):
                     deleteAccountResult.send(UiDataState.Success(DataContent.createFrom(data: isSuccess)))
