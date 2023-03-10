@@ -11,8 +11,9 @@ import UIKit
 class CompanyHeaderCell : UITableViewCell {
     
     public static let identifier = "CompanyHeaderCell"
+    private static let HEADER_TITLE_LABEL_TAG = 61781
     
-    let contactHeader = sectionHeader(title: "Contact")
+    let contactHeader = sectionHeader(title: "Contact", textTag: HEADER_TITLE_LABEL_TAG)
  
     
     required init?(coder: NSCoder) {
@@ -33,6 +34,13 @@ class CompanyHeaderCell : UITableViewCell {
             make.right.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
             make.height.greaterThanOrEqualTo(48)
+        }
+    }
+    
+    func setTitle(_ title: String) {
+        let label = self.contactHeader.viewWithTag(CompanyHeaderCell.HEADER_TITLE_LABEL_TAG) as? UILabel
+        if let titleView = label {
+            titleView.text = title
         }
     }
 }

@@ -11,7 +11,8 @@ import SnapKit
 
 func sectionHeader(
     title : String,
-    contentColor : UIColor = onBackgroundColor
+    contentColor : UIColor = onBackgroundColor,
+    textTag: Int? = nil
 ) -> UIView {
     let view = UIView()
     let label = LabelLarge(text: title, color : contentColor)
@@ -20,7 +21,11 @@ func sectionHeader(
         make.left.equalToSuperview()
         make.top.equalToSuperview()
     }
-
+    
+    if let tag = textTag {
+        label.tag = tag 
+    }
+ 
     let line = lineView(color : contentColor)
     view.addSubview(line)
     line.snp.makeConstraints { make in

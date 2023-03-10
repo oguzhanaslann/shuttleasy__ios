@@ -7,22 +7,23 @@
 
 import Foundation
 import UIKit
+import Combine
 
 
 class CompanyAboutView: UIView {
     
-    let tableView: UITableView = UITableView()
+    private let tableView: UITableView = UITableView()
+    private var viewModel: CompanyDetailViewModel? = nil
+    private var companyDetailObserver: AnyCancellable? = nil
+    
+    
+    private var companyDetail: CompanyDetail? = nil
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        initView()
-    }
-    
     
     private func initView() {
         self.addSubview(tableView)
@@ -41,6 +42,37 @@ class CompanyAboutView: UIView {
         }
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        fatalError()
+    }
+    
+    convenience init(viewModel : CompanyDetailViewModel) {
+        self.init(frame: CGRect.zero)
+        print("view model creation")
+        self.viewModel = viewModel
+        subscribeObservers()
+    }
+    
+    private func subscribeObservers() {
+        companyDetailObserver = viewModel?.companyDetailPublisher
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: { [weak self] result in
+                    result.onSuccess { data in
+                        self?.onCompanyDetailResult(data.data)
+                    }
+                }
+            )
+    }
+    
+    private func onCompanyDetailResult(_ companyDetail: CompanyDetail) {
+        self.companyDetail = companyDetail
+        tableView.reloadData()
+    }
+    
+    
     override func layoutSubviews() {
         tableView.reloadData()
     }
@@ -51,7 +83,8 @@ class CompanyAboutView: UIView {
 extension CompanyAboutView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let commentCount = self.companyDetail?.comments.count ?? 0
+        return 4 + commentCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,16 +92,26 @@ extension CompanyAboutView : UITableViewDataSource {
             
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCell(
+            
+            let statusCell =  tableView.dequeueReusableCell(
                 withIdentifier: CompanyStatusCell.identifier,
                 for: indexPath
             ) as? CompanyStatusCell
+            
+            statusCell?.initialize(with: companyDetail)
+            
+            cell = statusCell
 
         case 1:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyHeaderCell.identifier,
                 for: indexPath
             ) as? CompanyHeaderCell
+            
+            if let header = (cell as? CompanyHeaderCell) {
+                header.setTitle(Localization.contact.localized)
+            }
+            
         case 2:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyContentCell.identifier,
@@ -79,6 +122,11 @@ extension CompanyAboutView : UITableViewDataSource {
                 withIdentifier: CompanyHeaderCell.identifier,
                 for: indexPath
             ) as? CompanyHeaderCell
+            
+            if let header = (cell as? CompanyHeaderCell) {
+                header.setTitle(Localization.comments.localized)
+            }
+            
         default:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CommentCell.identifier,
@@ -102,9 +150,6 @@ extension CompanyAboutView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("clicked %d", indexPath.row)
-//        let personId = personList[indexPath.row].id
-//        navigationController?.pushViewController(PersonDetailViewController(personId: personId), animated: true)
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

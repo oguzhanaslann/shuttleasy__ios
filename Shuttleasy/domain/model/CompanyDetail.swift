@@ -18,5 +18,5 @@ struct CompanyDetail {
     let membershipDate : String
     let comments : [Comment]
     let shuttles : [Shuttle]
-    let slogan : String? = nil
+    let slogan : String?
 }

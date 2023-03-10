@@ -13,6 +13,11 @@ import Combine
 class CompanyDetailViewController: BaseViewController {
     private static let ABOUT_PAGE_INDEX = 0
     private static let SHUTTLES_PAGE_INDEX = 1
+    
+    private static let HEADER_PHOTO_TAG = 6607
+    private static let HEADER_COMPANY_NAME_TAG = 4241
+    private static let HEADER_COMPANY_SLOGAN_TAG = 8573
+    private static let HEADER_COMPANY_RATING_TAG = 4049
 
     private let viewModel : CompanyDetailViewModel = Injector.shared.injectCompanyDetailViewModel()
     
@@ -20,8 +25,16 @@ class CompanyDetailViewController: BaseViewController {
     
     private var companyDetailObserver: AnyCancellable? = nil
     
+    
+    private var pages : [UIView] = [
+   
+    ]
+    
     init(companyId: Int){
         self.companyId  = companyId
+        pages.append(CompanyAboutView(viewModel: viewModel))
+        pages.append(CompanyShuttlesView())
+        
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -43,6 +56,8 @@ class CompanyDetailViewController: BaseViewController {
             
         image.addoverlay(alpha: 0.33)
         
+        image.tag = CompanyDetailViewController.HEADER_PHOTO_TAG
+        
         return imageContainer
     }()
     
@@ -52,12 +67,13 @@ class CompanyDetailViewController: BaseViewController {
         stackView.spacing = 8
         
         let companyNameTitle = HeadlineSmall(text: "Header", color: .white)
-        
         companyNameTitle.breakLineFromEndIfNeeded()
+        companyNameTitle.tag = CompanyDetailViewController.HEADER_COMPANY_NAME_TAG
         
         
         let companyShortSlogan = LabelMedium(text: "slogan", color: .white)
         companyShortSlogan.breakLineFromEndIfNeeded()
+        companyShortSlogan.tag = CompanyDetailViewController.HEADER_COMPANY_SLOGAN_TAG
         
         stackView.addArrangedSubview(companyNameTitle)
         stackView.addArrangedSubview(companyShortSlogan)
@@ -102,15 +118,12 @@ class CompanyDetailViewController: BaseViewController {
             make.left.equalTo(starImageView.snp.right).offset(8)
             make.centerY.equalToSuperview()
         }
+        ratings.tag = CompanyDetailViewController.HEADER_COMPANY_RATING_TAG
         
         return badge
     }()
     
-    
-    private var pages : [UIView] = [
-        CompanyAboutView(),
-        CompanyShuttlesView()
-    ]
+
 
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -254,7 +267,35 @@ class CompanyDetailViewController: BaseViewController {
     }
     
     private func onCompanyDetailResult(_ companyDetail : CompanyDetail) {
+        setHeaderSection(with: companyDetail)
         
+    }
+    
+    private func setHeaderSection(with companyDetail : CompanyDetail) {
+        let headerPhotoView = getHeaderPhotoView()
+        headerPhotoView.load(url: companyDetail.thumbnail)
+        let companyNameHeader = getCompanyNameHeader()
+        companyNameHeader.text = companyDetail.name
+        let companySlogan = getCompanySlogan()
+        companySlogan.text = companyDetail.slogan
+        let companyRatings = getCompanyRatings()
+        companyRatings.text = "\(companyDetail.rating) (\(companyDetail.totalRating))"
+    }
+    
+    private func getHeaderPhotoView() -> UIImageView {
+        return self.view.viewWithTag(CompanyDetailViewController.HEADER_PHOTO_TAG) as! UIImageView
+    }
+
+    private func getCompanyNameHeader() -> UILabel {
+        return self.view.viewWithTag(CompanyDetailViewController.HEADER_COMPANY_NAME_TAG) as! UILabel
+    }
+
+    private func getCompanySlogan() -> UILabel {
+        return self.view.viewWithTag(CompanyDetailViewController.HEADER_COMPANY_SLOGAN_TAG) as! UILabel
+    }
+
+    private func getCompanyRatings() -> UILabel {
+        return self.view.viewWithTag(CompanyDetailViewController.HEADER_COMPANY_RATING_TAG) as! UILabel
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

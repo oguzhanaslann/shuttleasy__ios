@@ -18,14 +18,15 @@ class CompanyRepositoryImpl: CompanyRepository {
             CompanyDetail(
                 id: 0,
                 thumbnail:"",
-                name: "", 
+                name: "My company",
                 email: "", 
                 phone: "", 
-                rating: 0,  
-                totalRating: 0, 
-                membershipDate: "", 
+                rating: 4.5,
+                totalRating: 100,
+                membershipDate: "2 Yıl",
                 comments: [],
-                shuttles: []
+                shuttles: [],
+                slogan: "The best company"
             )
             
         )
