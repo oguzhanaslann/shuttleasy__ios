@@ -58,7 +58,7 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(48)
         }
 
-        let phoneRow = sectionRowView(resImageName: "icPhone", value : "",valueTag : ProfileViewController.phoneNumberTag)
+        let phoneRow = sectionRowView(resImageName: "icPhone", value : "",labelTag : ProfileViewController.phoneNumberTag)
         stackView.addSubview(phoneRow)
         phoneRow.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -67,7 +67,7 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(24)
         }
 
-        let mailRow = sectionRowView(resImageName: "icMail", value : "", valueTag : ProfileViewController.emailTag)
+        let mailRow = sectionRowView(resImageName: "icMail", value : "", labelTag : ProfileViewController.emailTag)
         stackView.addSubview(mailRow)
         mailRow.snp.makeConstraints { make in
             make.left.equalToSuperview()

@@ -19,18 +19,49 @@ class CompanyRepositoryImpl: CompanyRepository {
                 id: 0,
                 thumbnail:"",
                 name: "My company",
-                email: "", 
-                phone: "", 
+                email: "sample@sample.com",
+                phone: "1234567890", 
                 rating: 4.5,
                 totalRating: 100,
                 membershipDate: "2 Yıl",
-                comments: [],
+                comments: [
+                    Comment(
+                        id: 1,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        createdDate: "17.02.2021",
+                        user: User(
+                            id: 1,
+                            fullName: "Oguzhan Macit",
+                            profilePhoto: ""
+                        )
+                    ),
+                    
+                    Comment(
+                        id: 1,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        createdDate: "17.02.2021",
+                        user: User(
+                            id: 1,
+                            fullName: "Oguzhan Macit",
+                            profilePhoto: ""
+                        )
+                    ),
+                    
+                    Comment(
+                        id: 1,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        createdDate: "17.02.2021",
+                        user: User(
+                            id: 1,
+                            fullName: "Oguzhan Macit",
+                            profilePhoto: ""
+                        )
+                    )
+                ],
                 shuttles: [],
                 slogan: "The best company"
             )
             
         )
     }
-    
-    
 }

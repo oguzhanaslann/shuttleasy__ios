@@ -60,11 +60,11 @@ class CompanyAboutView: UIView {
                 .sink(
                     receiveCompletion: { _ in },
                     receiveValue: { [weak self] result in
-                    result.onSuccess { data in
-                        self?.onCompanyDetailResult(data.data)
+                        result.onSuccess { data in
+                            self?.onCompanyDetailResult(data.data)
+                        }
                     }
-                }
-            )
+                )
     }
     
     private func onCompanyDetailResult(_ companyDetail: CompanyDetail) {
@@ -113,10 +113,15 @@ extension CompanyAboutView : UITableViewDataSource {
             }
             
         case 2:
-            cell = tableView.dequeueReusableCell(
+            let contentCell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyContentCell.identifier,
                 for: indexPath
             ) as? CompanyContentCell
+
+            contentCell?.initialize(with: companyDetail)
+
+            cell = contentCell
+
         case 3:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyHeaderCell.identifier,
@@ -128,10 +133,14 @@ extension CompanyAboutView : UITableViewDataSource {
             }
             
         default:
-            cell = tableView.dequeueReusableCell(
+            let commentCell = tableView.dequeueReusableCell(
                 withIdentifier: CommentCell.identifier,
                 for: indexPath
             ) as? CommentCell
+
+            commentCell?.initialize(with: companyDetail?.comments[indexPath.row - 4])
+
+            cell = commentCell
         }
 
         

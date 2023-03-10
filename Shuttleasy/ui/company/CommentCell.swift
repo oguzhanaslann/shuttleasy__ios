@@ -12,14 +12,14 @@ class CommentCell: UITableViewCell {
     public static let identifier = "CommentCell"
 
     let commenterName = LabelLarge(text: "John doe", color: onSurfaceColor)
-    let comment = BodyMedium(text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", color : onSurfaceColor)
+    
+    let comment = BodyMedium(text : "", color : onSurfaceColor)
     
     let commentSendDate = LabelSmall(text: "01/01/2020", color: onSurfaceVariant)
 
     let commenterProfilePhoto =  UIImageView(image : UIImage(named: "shuttle_placeholder"))
         
     let commentCard = UIView()
-
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -59,6 +59,7 @@ class CommentCell: UITableViewCell {
         }
 
         commenterProfilePhoto.contentMode = .scaleToFill
+        commenterProfilePhoto.layer.backgroundColor = UIColor.gray.cgColor
         commenterProfilePhoto.snp.makeConstraints { make in
             make.left.top.equalToSuperview().offset(SpacingMedium)
             let dimensions = 72
@@ -90,6 +91,16 @@ class CommentCell: UITableViewCell {
             make.left.equalTo(commenterProfilePhoto.snp.left)
             make.right.equalTo(commenterProfilePhoto.snp.right)
             commentSendDate.textAlignment = .center
+        }
+    }
+    
+    
+    func initialize(with comment: Comment?) {
+        commenterName.text = comment?.user.fullName ?? ""
+        self.comment.text = comment?.comment ?? ""
+        commentSendDate.text = comment?.createdDate ?? ""
+        if let profilePhoto = comment?.user.profilePhoto {
+            commenterProfilePhoto.load(url: profilePhoto)
         }
     }
 }

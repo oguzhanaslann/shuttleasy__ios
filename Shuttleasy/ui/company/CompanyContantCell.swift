@@ -11,8 +11,11 @@ import UIKit
 class CompanyContentCell : UITableViewCell {
     public static let identifier = "CompanyContentCell"
     
-    let phoneRow = sectionRowView(resImageName: "icPhone", value: "1234567890")
-    let mailRow = sectionRowView(resImageName: "icMail", value : "sample@sample.com")
+    private static let PHONE_LABEL_TAG = 74101
+    private static let MAIL_LABEL_TAG = 79187
+    
+    let phoneRow = sectionRowView(resImageName: "icPhone", value: "1234567890", labelTag : PHONE_LABEL_TAG)
+    let mailRow = sectionRowView(resImageName: "icMail", value : "sample@sample.com", labelTag : MAIL_LABEL_TAG)
     
     
     required init?(coder: NSCoder) {
@@ -51,5 +54,20 @@ class CompanyContentCell : UITableViewCell {
         container.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
         }
+    }
+    
+    func initialize(with companyDetail: CompanyDetail?) {
+        let phoneLabel = getPhoneLabel()
+        phoneLabel?.text = companyDetail?.phone ?? ""
+        let mailLabel = getMailLabel()
+        mailLabel?.text = companyDetail?.email ?? ""
+    }
+
+    private func getPhoneLabel() -> UILabel? {
+        return viewWithTag(CompanyContentCell.PHONE_LABEL_TAG) as? UILabel
+    }
+
+    private func getMailLabel() -> UILabel? {
+        return viewWithTag(CompanyContentCell.MAIL_LABEL_TAG) as? UILabel
     }
 }

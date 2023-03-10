@@ -46,7 +46,7 @@ private func lineView(color : UIColor) -> UIView {
 func sectionRowView(
     resImageName : String,
     value : String,
-    valueTag: Int? = nil,
+    labelTag: Int? = nil,
     contentColor : UIColor = onBackgroundColor
 ) -> UIView {
     let view = UIView()
@@ -59,7 +59,7 @@ func sectionRowView(
     }
 
     let label = BodyMedium(text: value, color : contentColor)
-    if let tag = valueTag {
+    if let tag = labelTag {
         label.tag = tag
     }
     view.addSubview(label)
