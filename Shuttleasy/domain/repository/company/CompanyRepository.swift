@@ -58,7 +58,18 @@ class CompanyRepositoryImpl: CompanyRepository {
                         )
                     )
                 ],
-                shuttles: [],
+                shuttles: [
+                    Shuttle(
+                        id: 1,
+                        plateNumber: "34 AS 123",
+                        driver: Driver(
+                            id: 1,
+                            name: "Oguzhan",
+                            surname: "Macit"
+                        ),
+                        schedule: "Mon/Wed/Fri 10:00 - 12:00"
+                    )
+                ],
                 slogan: "The best company"
             )
             

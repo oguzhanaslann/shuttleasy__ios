@@ -13,7 +13,12 @@ class CompanyShuttleCell: UITableViewCell {
     
     let shuttleImage =  UIImageView(image : UIImage(named: "shuttle_placeholder"))
     let shuttleRoute = TitleSmall(text: "Konak Pier - Yaşar University")
-    let enrollButton = LabelSmall(text: "Enroll", color : primaryColor)
+    let enrollButton = LabelSmall(text: Localization.enroll.localized, color : primaryColor)
+
+    private static let PLATE_NUMBER_TAG = 92461
+    private static let SCHEDULE_NUMBER_TAG = 84437
+    private static let DRIVER_NAME_TAG = 69691
+
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -46,7 +51,11 @@ class CompanyShuttleCell: UITableViewCell {
         }
         
         
-        let plateNumber = shuttleDetailView(resImageName: "icPhone", text: "35 SE 99")
+        let plateNumber = shuttleDetailView(
+            resImageName: "icPhone",
+            text: "35 SE 99",
+            textTag : CompanyShuttleCell.PLATE_NUMBER_TAG
+        )
         addSubview(plateNumber)
         plateNumber.snp.makeConstraints { make in
             make.top.equalTo(shuttleRoute.snp.bottom).offset(SpacingXSmall)
@@ -55,7 +64,11 @@ class CompanyShuttleCell: UITableViewCell {
         }
         
         
-        let shuttleSchedule = shuttleDetailView(resImageName: "icPhone", text: "Mon/Tue/Wen : 12:30")
+        let shuttleSchedule = shuttleDetailView(
+            resImageName: "icPhone",
+            text: "Mon/Tue/Wen : 12:30",
+            textTag : CompanyShuttleCell.SCHEDULE_NUMBER_TAG
+        )
         addSubview(shuttleSchedule)
         shuttleSchedule.snp.makeConstraints { make in
             make.top.equalTo(plateNumber.snp.bottom).offset(SpacingSmall)
@@ -64,7 +77,13 @@ class CompanyShuttleCell: UITableViewCell {
         }
         
         
-        let driverName = shuttleDetailView(resImageName: "icPhone", text: "John doe", contentColor : neutral60)
+        let driverName = shuttleDetailView(
+            resImageName: "icPhone", 
+            text: "John doe", 
+            textTag : CompanyShuttleCell.DRIVER_NAME_TAG,
+            contentColor : neutral60
+        )
+
         addSubview(driverName)
         driverName.snp.makeConstraints { make in
             make.top.equalTo(shuttleSchedule.snp.bottom).offset(SpacingSmall)
@@ -91,6 +110,7 @@ class CompanyShuttleCell: UITableViewCell {
     private func shuttleDetailView(
         resImageName: String,
         text : String,
+        textTag : Int? = nil,
         contentColor : UIColor = onBackgroundColor
     ) -> UIView {
         let horizontalStack = UIStackView()
@@ -105,6 +125,10 @@ class CompanyShuttleCell: UITableViewCell {
         
         let label = LabelSmall(text: text, color : contentColor)
         horizontalStack.addSubview(label)
+
+        if let tag = textTag {
+            label.tag = tag
+        }
         
         image.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -121,5 +145,28 @@ class CompanyShuttleCell: UITableViewCell {
         
         return horizontalStack
     }
-    
+
+    func initialize(with shuttle: Shuttle?) {
+        let plateNumberLabel = getPlateNumberLabel()
+        plateNumberLabel?.text = shuttle?.plateNumber
+        
+        let scheduleLabel = getScheduleLabel()
+        scheduleLabel?.text = shuttle?.schedule
+        
+        let driverNameLabel = getDriverNameLabel()
+        driverNameLabel?.text = shuttle?.driver.fullName
+
+    }
+
+    private func getPlateNumberLabel() -> UILabel? {
+        return viewWithTag(CompanyShuttleCell.PLATE_NUMBER_TAG) as? UILabel
+    }
+
+    private func getScheduleLabel() -> UILabel? {
+        return viewWithTag(CompanyShuttleCell.SCHEDULE_NUMBER_TAG) as? UILabel
+    }
+
+    private func getDriverNameLabel() -> UILabel? {
+        return viewWithTag(CompanyShuttleCell.DRIVER_NAME_TAG) as? UILabel
+    }
 }

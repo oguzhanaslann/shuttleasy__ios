@@ -21,6 +21,7 @@
 		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
+		01E63A8729BAE4C400220865 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E63A8629BAE4C400220865 /* Driver.swift */; };
 		01E7255F29AE9EBA009CF7FE /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7255E29AE9EBA009CF7FE /* Spacing.swift */; };
 		01E7256329AEA476009CF7FE /* CompanyShuttlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7256229AEA476009CF7FE /* CompanyShuttlesView.swift */; };
 		01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */; };
@@ -165,6 +166,7 @@
 		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
+		01E63A8629BAE4C400220865 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		01E7255E29AE9EBA009CF7FE /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		01E7256229AEA476009CF7FE /* CompanyShuttlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyShuttlesView.swift; sourceTree = "<group>"; };
 		01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyStatusCell.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				01A6393C29B6F0B70038B31A /* Comment.swift */,
 				01A6393E29B6F0DC0038B31A /* Shuttle.swift */,
 				01A6394029B6F1260038B31A /* User.swift */,
+				01E63A8629BAE4C400220865 /* Driver.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1133,6 +1136,7 @@
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
 				01A6393D29B6F0B70038B31A /* Comment.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
+				01E63A8729BAE4C400220865 /* Driver.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,

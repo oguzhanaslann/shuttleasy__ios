@@ -33,7 +33,7 @@ class CompanyDetailViewController: BaseViewController {
     init(companyId: Int){
         self.companyId  = companyId
         pages.append(CompanyAboutView(viewModel: viewModel))
-        pages.append(CompanyShuttlesView())
+        pages.append(CompanyShuttlesView(viewModel: viewModel))
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -96,7 +96,7 @@ class CompanyDetailViewController: BaseViewController {
     
     lazy var pointBadgeView = {
         let badge = UIView()
-        badge.backgroundColor = secondaryColor
+        badge.backgroundColor = primaryColor
         badge.clipsToBounds = true
         badge.layer.cornerRadius = 12
         badge.layer.maskedCorners = [.layerMinXMinYCorner]
@@ -112,7 +112,7 @@ class CompanyDetailViewController: BaseViewController {
             make.centerY.equalToSuperview()
         }
         
-        let ratings = LabelMedium(text: "8.8(500)", color: onSecondaryColor)
+        let ratings = LabelMedium(text: "8.8(500)", color: onPrimaryColor)
         badge.addSubview(ratings)
         ratings.snp.makeConstraints { make in
             make.left.equalTo(starImageView.snp.right).offset(8)

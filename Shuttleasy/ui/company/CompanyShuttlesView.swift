@@ -7,10 +7,15 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class CompanyShuttlesView: UIView {
     
-    let tableView: UITableView = UITableView()
+    private let tableView: UITableView = UITableView()
+    private var viewModel: CompanyDetailViewModel? = nil
+    
+    private var companyDetailObserver: AnyCancellable? = nil
+    private var companyDetail : CompanyDetail? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +25,13 @@ class CompanyShuttlesView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initView()
+    }
+    
+    convenience init(viewModel : CompanyDetailViewModel) {
+        self.init(frame: CGRect.zero)
+        print("view model creation")
+        self.viewModel = viewModel
+        subscribeObservers()
     }
     
     private func initView() {
@@ -36,12 +48,31 @@ class CompanyShuttlesView: UIView {
             make.height.equalToSuperview()
         }
     }
+    
+    private func subscribeObservers() {
+        companyDetailObserver = viewModel?.companyDetailPublisher
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: { [weak self] result in
+                        result.onSuccess { data in
+                            self?.onCompanyDetailResult(data.data)
+                        }
+                    }
+                )
+    }
+    
+    private func onCompanyDetailResult(_ companyDetail: CompanyDetail) {
+        self.companyDetail = companyDetail
+        tableView.reloadData()
+    }
+    
 }
 
 extension CompanyShuttlesView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return companyDetail?.shuttles.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,6 +81,8 @@ extension CompanyShuttlesView : UITableViewDataSource {
             for: indexPath
         ) as? CompanyShuttleCell
         
+        
+        cell?.initialize(with : companyDetail?.shuttles[indexPath.row])
         
         
         if cell == nil {

@@ -10,4 +10,7 @@ import Foundation
 
 struct Shuttle {
     let id : Int
+    let plateNumber: String
+    let driver: Driver
+    let schedule: String
 }

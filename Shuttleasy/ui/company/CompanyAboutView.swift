@@ -49,7 +49,6 @@ class CompanyAboutView: UIView {
     
     convenience init(viewModel : CompanyDetailViewModel) {
         self.init(frame: CGRect.zero)
-        print("view model creation")
         self.viewModel = viewModel
         subscribeObservers()
     }
