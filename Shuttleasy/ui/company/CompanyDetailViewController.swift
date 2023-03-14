@@ -24,17 +24,9 @@ class CompanyDetailViewController: BaseViewController {
     let companyId: Int
     
     private var companyDetailObserver: AnyCancellable? = nil
-    
-    
-    private var pages : [UIView] = [
-   
-    ]
-    
+
     init(companyId: Int){
         self.companyId  = companyId
-        pages.append(CompanyAboutView(viewModel: viewModel))
-        pages.append(CompanyShuttlesView(viewModel: viewModel))
-        
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -80,20 +72,7 @@ class CompanyDetailViewController: BaseViewController {
 
         return stackView
     }()
-    
-    lazy var tabBarView =  {
-        let tabBarView = MDCTabBarView()
-        tabBarView.preferredLayoutStyle = .fixed
-        tabBarView.sizeToFit()
-        tabBarView.tintColor = primaryContainer
-        tabBarView.barTintColor = primaryContainer
-        tabBarView.indicatorStyle = .white
-        tabBarView.bottomDividerColor = onPrimaryContainer.withAlphaComponent(0.5)
-        tabBarView.tintColorDidChange()
-        tabBarView.setContentPadding(.zero, for: .scrollable)
-        return tabBarView
-    }()
-    
+
     lazy var pointBadgeView = {
         let badge = UIView()
         badge.backgroundColor = primaryColor
@@ -123,43 +102,17 @@ class CompanyDetailViewController: BaseViewController {
         return badge
     }()
     
-
-
-    lazy var scrollView : UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.isPagingEnabled = true
-        let guide = self.view.safeAreaLayoutGuide
-        
-        scrollView.contentSize = CGSize(
-            width: view.frame.width * CGFloat(pages.count),
-            height: (guide.layoutFrame.size.height - 256)
-        )
-        
-        for index in 0..<pages.count {
-            let pageView = pages[index]
-            pageView.backgroundColor = backgroundColor
-            scrollView.addSubview(pageView)
-            pageView.frame = CGRect(
-                x: view.frame.width * CGFloat(index),
-                y: 0,
-                width: view.frame.width,
-                height: (guide.layoutFrame.size.height - 256)
-            )
-        }
-        
-        return scrollView
-    }()
-    
-    private var mediator : TabLayoutMediator? = nil
     
     let imageHeight = 200
-    let tabsHeight = 56
-    var scrollViewHeight: CGFloat {
-        get {
-            return safeAreaHeight() - CGFloat(imageHeight) - CGFloat(tabsHeight)
+
+    
+    lazy var enrollButton : UIButton = {
+        let button = LargeButton(titleOnNormalState: "Enroll", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        button.setOnClickListener {
+            //self.onSignUpButtonClicked()
         }
-    }
+        return button
+    }()
     
     private func safeAreaHeight() -> CGFloat {
         let guide = self.view.safeAreaLayoutGuide
@@ -175,7 +128,15 @@ class CompanyDetailViewController: BaseViewController {
     
     private func initViews() {
         initHeaderSection()
-        initTabsAndPager()
+        initAboutView()
+        
+        view.addSubview(enrollButton)
+        enrollButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-32)
+            make.left.equalToSuperview().offset(32)
+            make.right.equalToSuperview().offset(-32)
+            make.height.equalTo(largeButtonHeight)
+        }
     }
     
     private func initHeaderSection() {
@@ -201,48 +162,18 @@ class CompanyDetailViewController: BaseViewController {
             make.bottom.equalTo(imageContainer.snp.bottom).inset(16)
             make.right.lessThanOrEqualTo(pointBadgeView.snp.left).inset(8)
         }
-
     }
     
-    private func initTabsAndPager() {
-        view.addSubview(tabBarView)
-        tabBarView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.greaterThanOrEqualTo(imageContainer.snp.bottom)
-            make.height.greaterThanOrEqualTo(tabsHeight)
+    private func initAboutView() {
+        let aboutView = CompanyAboutView(viewModel: viewModel)
+        view.addSubview(aboutView)
+        aboutView.snp.makeConstraints { make in
+            make.top.equalTo(imageContainer.snp.bottom)
+            make.bottom.equalTo(view.snp.bottom)
+            make.left.right.equalToSuperview()
         }
-
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            view.bringSubviewToFront(scrollView)
-            make.top.equalTo(tabBarView.snp.bottom)
-            make.width.equalTo(view.snp.width)
-            make.height.equalTo((scrollViewHeight))
-        }
-        
-        
-        attachThePagerComponents()
     }
 
-    
-    private func attachThePagerComponents() {
-        mediator =  TabLayoutMediator(
-            tabBarView: tabBarView,
-            scrollView: scrollView
-        ) { pageIndex in
-            if ( pageIndex == CompanyDetailViewController.ABOUT_PAGE_INDEX) {
-               return UITabBarItem(title: "About", image: UIImage(named: "phone"), tag: pageIndex)
-            } else if pageIndex == CompanyDetailViewController.SHUTTLES_PAGE_INDEX {
-               return UITabBarItem(title: "Shuttles", image: UIImage(named: "phone"), tag: pageIndex)
-            } else {
-                return UITabBarItem(title: "", image: UIImage(named: "phone"), tag: pageIndex)
-            }
-        }
-        
-        mediator?.attach()
-    }
-    
-    
     private func subscribeObservers() {
         companyDetailObserver = viewModel.companyDetailPublisher
             .receive(on: DispatchQueue.main)

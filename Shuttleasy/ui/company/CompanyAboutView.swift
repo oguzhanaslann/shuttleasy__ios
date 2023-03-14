@@ -40,6 +40,9 @@ class CompanyAboutView: UIView {
             make.left.right.equalToSuperview()
             make.height.equalToSuperview()
         }
+        
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0)
+        tableView.contentInset = insets
     }
     
     required init?(coder: NSCoder) {
