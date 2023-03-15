@@ -28,7 +28,7 @@ class ResetPasswordViewController: BaseViewController {
     private lazy var logoContainer : UIView = {
         let view = UILabel()
         view.backgroundColor = primaryContainer
-        let logo = resImage(name: "logo")
+        let logo = resImageView(name: "logo")
         view.addSubview(logo)
         logo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

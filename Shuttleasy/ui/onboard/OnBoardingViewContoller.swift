@@ -20,21 +20,21 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
     
     lazy var onboardingPage1 : UIView = {
         return onboardingView(
-            image: resImage(name:"onboard1"),
+            image: resImageView(name:"onboard1"),
             slogan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
     }()
     
     lazy var onboardingPage2 : UIView = {
         return onboardingView(
-            image: resImage(name:"onboard2"),
+            image: resImageView(name:"onboard2"),
             slogan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
     }()
     
     lazy var onboardingPage3 : UIView = {
         return onboardingView(
-            image: resImage(name:"onboard3"),
+            image: resImageView(name:"onboard3"),
             slogan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
     }()

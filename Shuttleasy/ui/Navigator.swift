@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 enum Destination {
     case signIn
@@ -19,7 +20,8 @@ enum Destination {
     case profileEdit
     case profileSetup(signUpModelShort: SignUpModelShort)
     case deleteAccount
-    case companyDetail(ccompanyId: Int)
+    case companyDetail(companyId: Int)
+    case pickupSelection(destination : CLLocationCoordinate2D)
 }
 
 class Navigator {
@@ -186,6 +188,8 @@ extension Destination {
                 return DeleteAccountViewController()
             case .companyDetail(let companyId):
                 return CompanyDetailViewController(companyId: companyId)
+            case .pickupSelection(let destination):
+                return PickupSelectionViewController(destinationPoint: destination)
             default: 
                 debugPrint("Destination not found")
                 return UIViewController()

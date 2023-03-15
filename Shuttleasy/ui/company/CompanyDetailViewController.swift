@@ -9,6 +9,7 @@ import UIKit
 import MaterialComponents.MaterialTabs_TabBarView
 import SnapKit
 import Combine
+import MapKit
 
 class CompanyDetailViewController: BaseViewController {
     private static let ABOUT_PAGE_INDEX = 0
@@ -109,7 +110,9 @@ class CompanyDetailViewController: BaseViewController {
     lazy var enrollButton : UIButton = {
         let button = LargeButton(titleOnNormalState: "Enroll", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
-            //self.onSignUpButtonClicked()
+            Navigator.shared.navigate(from: self, to: Destination.pickupSelection(
+               destination: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287)
+            ))
         }
         return button
     }()

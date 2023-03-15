@@ -37,7 +37,7 @@ func systemImage(
     return imageView
 }
 
-func resImage (
+func resImageView (
     name : String,
     clipToBounds : Bool? = nil,
     borderColor: CGColor? = nil,
@@ -59,6 +59,13 @@ func resImage (
     }
     
     return imageView
+}
+
+func resImage(
+    name : String
+) -> UIImage? {
+    let image = UIImage(named: name)
+    return image
 }
 
 

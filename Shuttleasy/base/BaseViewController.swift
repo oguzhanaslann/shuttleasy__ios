@@ -93,5 +93,5 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         statusBarView = nil
-    }   
+    }
 }

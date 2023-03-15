@@ -50,7 +50,7 @@ func sectionRowView(
     contentColor : UIColor = onBackgroundColor
 ) -> UIView {
     let view = UIView()
-    let image = resImage(name: resImageName)
+    let image = resImageView(name: resImageName)
     image.tintColor = contentColor
     view.addSubview(image)
     image.snp.makeConstraints { make in
@@ -99,7 +99,7 @@ func sectionRowIconLabelView(
     contentColor : UIColor = onBackgroundColor
 ) -> UIView {
     let view = UIView()
-    let image = resImage(name: resImageName)
+    let image = resImageView(name: resImageName)
     view.addSubview(image)
     image.snp.makeConstraints { make in
         make.left.equalToSuperview()

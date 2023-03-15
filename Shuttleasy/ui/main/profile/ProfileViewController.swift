@@ -232,7 +232,7 @@ class ProfileViewController: BaseViewController {
 
         let logOutRow = sectionEndIcon(
             title: "Log Out",
-            iconView : resImage(name: "icLogout")
+            iconView : resImageView(name: "icLogout")
         )
         
         let tapGestureLogOut = UITapGestureRecognizer(target: self, action: #selector(onLogOutClicked(_:)))

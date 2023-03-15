@@ -13,7 +13,7 @@ func LargeButton(
     backgroundColor : UIColor,
     titleColorOnNormalState : UIColor
 )  -> UIButton {
-    let button = UIButton()
+    let button = DynamicColorButton()
     button.setTitle(titleOnNormalState, for: .normal)
     if let label = button.titleLabel {
         label.font = ButtonFont()
