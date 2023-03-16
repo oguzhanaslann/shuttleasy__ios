@@ -3,10 +3,10 @@ import Alamofire
 
 protocol SearchShuttleRepository {
     func searchShuttle(query : String) async -> Result<[SearchResult], Error>
+    func getDestinationPoints() async -> Result<[CGPoint], Error>
 }
 
 class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
-    
     private static let NoCompanyId = -1
     
     private let shuttleNetworkSource : ShuttleNetworkSource
@@ -51,5 +51,27 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                 shutlleBusPlateNumber: "35 YSR 2001"
             )
         ]
+    }
+    
+    
+    func getDestinationPoints() async -> Result<[CGPoint], Error> {
+        if shouldUseDummyData() {
+            return .success(getDestinationPointsDummyData())
+        } else {
+           return await getDestinationPointsFromNetwork()
+        }
+    }
+    
+    
+    private func getDestinationPointsDummyData()  -> [CGPoint] {
+        return [
+            CGPoint(x: 38.4189, y: 27.1287)
+        ]
+    }
+    
+    
+    private func getDestinationPointsFromNetwork() async -> Result<[CGPoint], Error> {
+        //TODO: implement here
+        return .failure(NSError())
     }
 }

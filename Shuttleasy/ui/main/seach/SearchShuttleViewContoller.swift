@@ -9,6 +9,8 @@ class SearchShuttleViewContoller: BaseViewController {
     
     private let searchViewModel = Injector.shared.injectSearchShuttleViewModel()
     private var searchResultCancellable : AnyCancellable? = nil
+    private var destinationCancellable : AnyCancellable? = nil
+    
     private let fpc = FloatingPanelController()
    
     private var debounceTimer: Timer?
@@ -47,7 +49,7 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.setCenter(CLLocationCoordinate2DMake(38.4189, 27.1287), animated: true )
-    
+        mapView.delegate = self
         return mapView
     }()
 
@@ -125,6 +127,29 @@ class SearchShuttleViewContoller: BaseViewController {
                 }
             )
     }
+    
+    private func subcribeDestinationPoints() {
+        destinationCancellable = searchViewModel.destinationPoints
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    switch completion {
+                        case .failure(let error):
+                            print(error)
+                            self?.showErrorSnackbar(message: error.localizedDescription)
+                        case .finished:
+                            print("finished")
+                            break
+                        }
+                },
+                receiveValue: { [weak self] destinationPoints in
+                    destinationPoints.onSuccess { destinationPointData in
+                        destinationPointData.data.forEach { destinationPoint in
+                            self?.mapView.addPinAt(destinationPoint)
+                    }
+                }
+            })
+    }
 
     private func onSearchResultUpdated(results: [SearchResult]) {
         searchResultViewController.onSearchResultUpdated(results: results)
@@ -156,9 +181,28 @@ extension SearchShuttleViewContoller:  SearchResultClickedListener {
         print(result.title)
         Navigator.shared.navigate(
             from: self,
-            to: .companyDetail(companyId: result.companyId),
+            to: .companyDetail(
+                args: CompanyDetailArgs(companyId: result.companyId)
+            ),
             clearBackStack: false , 
             wrappedInNavigationController: true
         )
+    }
+}
+
+extension SearchShuttleViewContoller : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        return themedOverlayRenderer(rendererFor: overlay)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        return customPin(viewFor: annotation)
+    }
+        
+    
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        if(fullyRendered) {
+            subcribeDestinationPoints()
+        }
     }
 }

@@ -1,19 +1,11 @@
-//
-//  PickupSelectionViewController.swift
-//  Shuttleasy
-//
-//  Created by OguzhanMac on 14.03.2023.
-//
-
 import UIKit
 import SnapKit
 import MapKit
 
 class PickupSelectionViewController: BaseViewController {
 
-    
     lazy var enrollButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Enroll", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(titleOnNormalState: Localization.enroll.localized, backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         return button
     }()
     
@@ -31,12 +23,16 @@ class PickupSelectionViewController: BaseViewController {
         return imageView
     }()
     
-    let destinationPoint : CLLocationCoordinate2D
+    private let args : PickupSelectionArgs
     
-    init(
-        destinationPoint : CLLocationCoordinate2D
-    ){
-        self.destinationPoint = destinationPoint
+    private var  pickupAreas:PickupAreas?  {
+        get {
+            return args.pickupAreas
+        }
+    }
+    
+    init(args : PickupSelectionArgs){
+        self.args = args
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -46,10 +42,12 @@ class PickupSelectionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+    
         view.addSubview(mapView)
         mapView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
-            mapView.setCenter(destinationPoint, animated: true )
+            mapView.setCenter(args.destinationPoint, animated: true )
         }
         initMap()
 
@@ -76,34 +74,22 @@ class PickupSelectionViewController: BaseViewController {
         )
         
         let region = MKCoordinateRegion(
-            center: destinationPoint,
+            center: args.destinationPoint,
             latitudinalMeters: 1000,
             longitudinalMeters: 1000
         )
         
         mapView.setRegion(region, animated: true)
         
-        let pin = MKPlacemark(coordinate: destinationPoint)
-        mapView.addAnnotation(pin)
+        mapView.addPinAt(args.destinationPoint)
         
-        addPolygon()
+        if let polygons = args.pickupAreas {
+            polygons.forEach { polygon in
+                mapView.addPolygon(polygon)
+            }
+        }
     }
-    
-    var points = [
-        CLLocationCoordinate2DMake(38.4189, 27.1287),
-        CLLocationCoordinate2DMake(38.4169, 27.1267),
-        CLLocationCoordinate2DMake(38.4169, 27.1307),
-    ]
 
-    
-    func addPolygon(){
-        
-        let polygon = MKPolygon(coordinates: &points, count: points.count)
-        mapView.addOverlay(polygon)
-        
-        
-    }
-    
     override func shouldSetStatusBarColor() -> Bool {
         return false
     }
@@ -120,72 +106,40 @@ class PickupSelectionViewController: BaseViewController {
 
 extension PickupSelectionViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-        annotationView.canShowCallout = true
-        if let image = resImage(name: "pinBlue") {
-            annotationView.image = image
-        }
-        
-        return annotationView
+        return customPin(viewFor: annotation)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        if overlay is MKCircle {
-            let renderer = MKCircleRenderer(overlay: overlay)
-            renderer.fillColor = inversePrimary.withAlphaComponent(0.5)
-            renderer.strokeColor = inversePrimary.withAlphaComponent(0.5)
-            renderer.lineWidth = 1
-            return renderer
-        
-        } else if overlay is MKPolyline {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = inversePrimary.withAlphaComponent(0.5)
-            renderer.lineWidth = 1
-            return renderer
-        
-        } else if overlay is MKPolygon {
-            let renderer = MKPolygonRenderer(polygon: overlay as! MKPolygon)
-            renderer.fillColor = inversePrimary.withAlphaComponent(0.5)
-            renderer.strokeColor = inversePrimary.withAlphaComponent(0.5)
-            renderer.lineWidth = 1
-            return renderer
-        }
-        
-        return MKOverlayRenderer()
+        return themedOverlayRenderer(rendererFor: overlay)
     }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let centerPoint = mapView.centerCoordinate
-        let center = CGPoint(x: centerPoint.latitude, y: centerPoint.longitude)
+        let center = centerPoint.toCGPoint()
+
         
-        let polygon = points.map { coordinate in
-            return CGPoint(x: coordinate.latitude, y: coordinate.longitude)
+        var isCenterPinInAnyArea = false
+        
+        guard let pickupAreas = pickupAreas else {
+            enrollButton.isEnabled = false
+            return
         }
-        let contains = containsPoint(polygon: polygon, test: center)
-        print(contains)
+
+        for polygon in pickupAreas {
+            let polygon = polygon.map { coordinate in
+                return coordinate.toCGPoint()
+            }
+            
+            let contains = center.isInside(polygon)
+            
+            isCenterPinInAnyArea = contains
+            
+            if isCenterPinInAnyArea {
+                break
+            }
+        }
         
-        enrollButton.isEnabled = contains
+        enrollButton.isEnabled = isCenterPinInAnyArea
     }
-    
-    
-    func containsPoint(polygon: [CGPoint], test: CGPoint) -> Bool {
-            if polygon.count <= 1 {
-                return false //or if first point = test -> return true
-            }
-
-            let p = UIBezierPath()
-            let firstPoint = polygon[0] as CGPoint
-
-
-            p.move(to: firstPoint)
-
-            for index in 1...polygon.count-1 {
-                p.addLine(to: polygon[index] as CGPoint)
-            }
-
-            p.close()
-
-           return p.contains(test)
-        }
 }
+

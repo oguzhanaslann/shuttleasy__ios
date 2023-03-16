@@ -20,8 +20,8 @@ enum Destination {
     case profileEdit
     case profileSetup(signUpModelShort: SignUpModelShort)
     case deleteAccount
-    case companyDetail(companyId: Int)
-    case pickupSelection(destination : CLLocationCoordinate2D)
+    case companyDetail(args: CompanyDetailArgs)
+    case pickupSelection(args : PickupSelectionArgs)
 }
 
 class Navigator {
@@ -186,10 +186,10 @@ extension Destination {
                 return ProfileSetupViewController(signUpModelShort: signUpModelShort)
             case .deleteAccount:
                 return DeleteAccountViewController()
-            case .companyDetail(let companyId):
-                return CompanyDetailViewController(companyId: companyId)
-            case .pickupSelection(let destination):
-                return PickupSelectionViewController(destinationPoint: destination)
+            case .companyDetail(let args):
+                return CompanyDetailViewController(args :args )
+            case .pickupSelection(let args):
+                return PickupSelectionViewController(args: args)
             default: 
                 debugPrint("Destination not found")
                 return UIViewController()

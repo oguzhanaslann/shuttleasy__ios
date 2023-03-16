@@ -10,6 +10,9 @@
 		010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C263D29A6CCAC00FE38EA /* CompanyAboutView.swift */; };
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		01554F6729A7F8F200F16B51 /* SectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01554F6629A7F8F200F16B51 /* SectionViews.swift */; };
+		0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */; };
+		0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */; };
+		016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B927429C3A3CC00207A38 /* MapExtensions.swift */; };
 		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
 		0193898829C204CC00D82A62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0110307D29944F0900DE3268 /* Localizable.strings */; };
 		01A2B7E629A22C3300709F30 /* TabLayoutMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */; };
@@ -156,6 +159,9 @@
 		0110307F29944F3C00DE3268 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		01554F6629A7F8F200F16B51 /* SectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViews.swift; sourceTree = "<group>"; };
+		0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionArgs.swift; sourceTree = "<group>"; };
+		0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailArgs.swift; sourceTree = "<group>"; };
+		016B927429C3A3CC00207A38 /* MapExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
 		017FE610299432DF000541D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLayoutMediator.swift; sourceTree = "<group>"; };
 		01A2B7E829A2465800709F30 /* CompanyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 				01F36CC529AD45210039E12D /* CompanyContantCell.swift */,
 				01F36CC729AD46250039E12D /* CompanyHeaderCell.swift */,
 				01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */,
+				0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */,
 			);
 			path = company;
 			sourceTree = "<group>";
@@ -343,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				01A30E5629C032CF005958BB /* PickupSelectionViewController.swift */,
+				0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */,
 			);
 			path = pickupArea;
 			sourceTree = "<group>";
@@ -567,6 +575,7 @@
 				D4816DB82920E6F400ECB799 /* Util.swift */,
 				D4C6F96B29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift */,
 				01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */,
+				016B927429C3A3CC00207A38 /* MapExtensions.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1152,6 +1161,7 @@
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				0110308229944FC700DE3268 /* Localization.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
+				0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */,
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
 				D4C6F97229503FDB00DAA1E7 /* ShuttleNetworkSource.swift in Sources */,
 				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
@@ -1168,6 +1178,7 @@
 				D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */,
 				D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */,
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
+				016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */,
 				01A6393B29B6EFE00038B31A /* CompanyDetail.swift in Sources */,
 				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,
@@ -1179,6 +1190,7 @@
 				01A30E5729C032CF005958BB /* PickupSelectionViewController.swift in Sources */,
 				D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */,
 				01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */,
+				0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */,
 				01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */,
 				D4C1025D293B8AC8004812C1 /* ShuttleasyUserRepository.swift in Sources */,
 				D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */,

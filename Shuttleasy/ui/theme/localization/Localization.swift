@@ -18,8 +18,7 @@ enum Localization : String {
     case enroll = "enroll"
     
     var localized: String {
-            let path = Bundle.main.preferredLocalizations.first
-            return NSLocalizedString(self.rawValue, comment: "")
+        return NSLocalizedString(self.rawValue, comment: "")
     }
 }
 

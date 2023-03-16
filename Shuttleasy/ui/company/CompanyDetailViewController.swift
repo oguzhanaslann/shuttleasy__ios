@@ -26,8 +26,8 @@ class CompanyDetailViewController: BaseViewController {
     
     private var companyDetailObserver: AnyCancellable? = nil
 
-    init(companyId: Int){
-        self.companyId  = companyId
+    init(args : CompanyDetailArgs){
+        self.companyId  = args.companyId
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -111,7 +111,22 @@ class CompanyDetailViewController: BaseViewController {
         let button = LargeButton(titleOnNormalState: "Enroll", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         button.setOnClickListener {
             Navigator.shared.navigate(from: self, to: Destination.pickupSelection(
-               destination: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287)
+                args: PickupSelectionArgs(
+                    destinationPoint: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287),
+                    pickupAreas: [
+                        [
+                            CLLocationCoordinate2DMake(38.4189, 27.1287),
+                            CLLocationCoordinate2DMake(38.4169, 27.1267),
+                            CLLocationCoordinate2DMake(38.4169, 27.1307),
+                        ],
+                        
+                        [
+                            CLLocationCoordinate2DMake(38.4289, 27.1487),
+                            CLLocationCoordinate2DMake(38.4269, 27.1467),
+                            CLLocationCoordinate2DMake(38.4269, 27.1507),
+                        ]
+                    ]
+                )
             ))
         }
         return button
