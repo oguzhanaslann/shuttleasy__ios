@@ -6,8 +6,11 @@
   
 */
 
-"home" = "HOME";
+"home" = "Home";
+"search" = "Search";
+"profile" = "Profile";
 "comments" = "Comments";
+"contact" = "Contact";
 "membership" = "Membership";
 "shuttles" = "Shuttles";
 "enroll" = "Enroll";

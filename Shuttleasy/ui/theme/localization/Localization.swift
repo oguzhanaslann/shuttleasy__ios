@@ -18,9 +18,11 @@ enum Localization : String {
     case enroll = "enroll"
     
     var localized: String {
-           return NSLocalizedString(self.rawValue, comment: "")
+            let path = Bundle.main.preferredLocalizations.first
+            return NSLocalizedString(self.rawValue, comment: "")
     }
 }
+
 
 extension Localization {
     func localize(_ key : String? = nil) -> String {
@@ -37,3 +39,4 @@ extension String {
         return localization.localize()
     }
 }
+

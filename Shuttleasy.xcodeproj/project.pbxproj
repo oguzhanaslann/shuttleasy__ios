@@ -11,6 +11,7 @@
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		01554F6729A7F8F200F16B51 /* SectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01554F6629A7F8F200F16B51 /* SectionViews.swift */; };
 		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
+		0193898829C204CC00D82A62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0110307D29944F0900DE3268 /* Localizable.strings */; };
 		01A2B7E629A22C3300709F30 /* TabLayoutMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */; };
 		01A2B7E929A2465800709F30 /* CompanyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A2B7E829A2465800709F30 /* CompanyDetailViewController.swift */; };
 		01A30E5729C032CF005958BB /* PickupSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A30E5629C032CF005958BB /* PickupSelectionViewController.swift */; };
@@ -941,6 +942,7 @@
 				D4422EA429386E8C00342B29 /* Poppins-MediumItalic.ttf in Resources */,
 				D4422E9E29386E8C00342B29 /* Poppins-ThinItalic.ttf in Resources */,
 				D4422E9C29386E8C00342B29 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				0193898829C204CC00D82A62 /* Localizable.strings in Resources */,
 				D4F1170028F921100083C5EB /* LaunchScreen.storyboard in Resources */,
 				D4F116FD28F921100083C5EB /* Assets.xcassets in Resources */,
 				D4422E9D29386E8C00342B29 /* Poppins-ExtraLightItalic.ttf in Resources */,
