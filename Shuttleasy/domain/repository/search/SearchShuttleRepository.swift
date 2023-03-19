@@ -2,7 +2,8 @@ import Foundation
 import Alamofire
 
 protocol SearchShuttleRepository {
-    func searchShuttle(query : String) async -> Result<[SearchResult], Error>
+    func searchCompanyFor(destinationName : String) async -> Result<[SearchResult], Error>
+    func searchCompanyFor(destination: CGPoint) async -> Result<[SearchResult], Error>
     func getDestinationPoints() async -> Result<[CGPoint], Error>
 }
 
@@ -15,22 +16,24 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
         self.shuttleNetworkSource = shuttleNetworkSource
     }
 
-    func searchShuttle(query: String) async -> Result<[SearchResult], Error> {
+    func searchCompanyFor(destinationName: String) async -> Result<[SearchResult], Error> {
        do {
            let result : [SearchResult]
 
            if shouldUseDummyData() {
                 result = getDummySearchResults()
            } else {
-                let resultDto = try await shuttleNetworkSource.searchShuttle(query: query)
+                let resultDto = try await shuttleNetworkSource.searchCompany(destinationName: destinationName)
 
                result = resultDto.map({ element in
                    SearchResult(
                     companyId: element.companyID ?? SearchShuttleRepositoryImpl.NoCompanyId,
-                    title: element.companyName ?? "",
+                    title: "",
                     imageUrl: "",
-                    startDateText: ShuttleasyDateFormatter.shared.convertDateString(dateString: element.startTime ?? ""),
-                    shutlleBusPlateNumber: element.busLicensePlate ?? ""
+                    destinationPoint: CGPoint(),
+                    rating: 4.8,
+                    totalRating: 0
+                    //TODO: implement here
                    )
                })
            }
@@ -45,10 +48,11 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
         return [
             SearchResult(
                 companyId: SearchShuttleRepositoryImpl.NoCompanyId,
-                title: "Title - 1 ",
+                title: "Company Name",
                 imageUrl: "",
-                startDateText: "15:15 15 Aralık 2022",
-                shutlleBusPlateNumber: "35 YSR 2001"
+                destinationPoint: CGPoint(x: 38.4189, y: 27.1287),
+                rating: 4.8,
+                totalRating: 0
             )
         ]
     }
@@ -74,4 +78,33 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
         //TODO: implement here
         return .failure(NSError())
     }
+
+    func searchCompanyFor(destination: CGPoint) async -> Result<[SearchResult], Error> {
+        do {
+            let result : [SearchResult]
+
+            if shouldUseDummyData() {
+                result = getDummySearchResults()
+            } else {
+                let resultDto = try await shuttleNetworkSource.searchCompanyFor(destination: destination)
+
+                result = resultDto.map({ element in
+                    SearchResult(
+                        companyId: element.companyID ?? SearchShuttleRepositoryImpl.NoCompanyId,
+                        title: "",
+                        imageUrl: "",
+                        destinationPoint: CGPoint(),
+                        rating: 4.8,
+                        totalRating: 0
+                        //TODO: implement here
+                    )
+                })
+            }
+
+            return .success(result)
+        } catch {
+            return .failure(parseProcessError(error))
+        }
+    }
+
 }

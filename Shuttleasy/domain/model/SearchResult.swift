@@ -10,6 +10,7 @@ struct SearchResult {
     let companyId: Int
     let title: String
     let imageUrl : String
-    let startDateText : String
-    let shutlleBusPlateNumber: String
+    let destinationPoint : CGPoint
+    let rating : Double
+    let totalRating: Int
 }

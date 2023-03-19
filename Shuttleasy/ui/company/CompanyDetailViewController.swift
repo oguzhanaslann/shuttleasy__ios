@@ -75,30 +75,13 @@ class CompanyDetailViewController: BaseViewController {
     }()
 
     lazy var pointBadgeView = {
-        let badge = UIView()
-        badge.backgroundColor = primaryColor
-        badge.clipsToBounds = true
-        badge.layer.cornerRadius = 12
+        let badge = ratingBadgeView(
+            rating: 0,
+            totalRatings: 0,
+            ratingsTag: CompanyDetailViewController.HEADER_COMPANY_RATING_TAG
+        )
+        
         badge.layer.maskedCorners = [.layerMinXMinYCorner]
-        
-        
-        let starIcon = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-        let starImageView = UIImageView(image: starIcon)
-        starImageView.tintColor = UIColor.white
-        badge.addSubview(starImageView)
-        starImageView.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(8)
-            make.size.equalTo(14)
-            make.centerY.equalToSuperview()
-        }
-        
-        let ratings = LabelMedium(text: "8.8(500)", color: onPrimaryColor)
-        badge.addSubview(ratings)
-        ratings.snp.makeConstraints { make in
-            make.left.equalTo(starImageView.snp.right).offset(8)
-            make.centerY.equalToSuperview()
-        }
-        ratings.tag = CompanyDetailViewController.HEADER_COMPANY_RATING_TAG
         
         return badge
     }()

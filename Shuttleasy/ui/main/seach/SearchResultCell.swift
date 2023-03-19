@@ -15,8 +15,14 @@ class SearchResultCell : UITableViewCell {
     let cardContainer = UIView()
     let resultImage = UIImageView()
     let title = TitleSmall(text: "", color: onSurfaceVariant)
-    let startDateText  = LabelSmall(text: "", color : UIColor.gray)
-    let plateNumber = LabelSmall(text: "", color : UIColor.gray)
+    
+    let badgeView = ratingBadgeView(
+        rating: 0.0,
+        totalRatings: 0,
+        ratingsTag: ratingLabel
+    )
+    
+    private static let ratingLabel: Int = 1231
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -48,20 +54,24 @@ class SearchResultCell : UITableViewCell {
             make.top.equalTo(resultImage.snp.bottom).offset(20)
         }
         
-        cardContainer.addSubview(plateNumber)
-        plateNumber.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(16)
-            make.top.equalTo(title.snp.bottom).offset(8)
+        
+        badgeView.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMinXMaxYCorner
+        ]
+        
+        
+        cardContainer.addSubview(badgeView)
+        
+        badgeView.snp.makeConstraints { make in
+            make.height.equalTo(30)
+            make.width.greaterThanOrEqualTo(108)
+            make.centerY.equalTo(resultImage.snp.bottom)
+            make.right.lessThanOrEqualToSuperview()
+           
         }
-
-
-        cardContainer.addSubview(startDateText)
-        startDateText.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(16)
-            make.top.equalTo(title.snp.bottom).offset(8)
-        }
-
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -70,8 +80,7 @@ class SearchResultCell : UITableViewCell {
     func configure(with result: SearchResult) {
         title.text = result.title
         setSearchImageOrDefault(imageUrl: result.imageUrl)
-        startDateText.text = result.startDateText
-        plateNumber.text = result.shutlleBusPlateNumber
+        
     }
     
     private func setSearchImageOrDefault(imageUrl: String) {

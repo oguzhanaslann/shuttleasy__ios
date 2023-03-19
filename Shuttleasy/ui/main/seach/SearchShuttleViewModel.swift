@@ -22,9 +22,9 @@ class SearchShuttleViewModel {
         self.getDestinationPoints()
     }
     
-    func searchShuttle(query: String) {
+    func searchCompanyFor(destinationName: String) {
         
-        print(query)
+        print(destinationName)
         
         if task != nil && !task!.isCancelled {
             task?.cancel()
@@ -33,7 +33,7 @@ class SearchShuttleViewModel {
 
         searchResultSubject.send(UiDataState.Loading)
         task = Task.init {
-            let result = await searchRepository.searchShuttle(query: query)
+            let result = await searchRepository.searchCompanyFor(destinationName: destinationName)
             
             switch result {
                 case .success(let results):
@@ -54,6 +54,34 @@ class SearchShuttleViewModel {
                     destinationPointsPublisher.send(UiDataState.Success(DataContent.createFrom(data: results)))
                 case .failure(let error):
                     destinationPointsPublisher.send(UiDataState.Error(error.localizedDescription))
+            }
+        }
+    }
+
+    func getCurrentDestinationPoints() -> [CGPoint] {
+        switch destinationPointsPublisher.value {
+            case .Success(let data):
+                return data.data
+            default:
+                return []
+        }
+    }
+
+    func searchCompanyFor(destination: CGPoint) {
+        if task != nil && !task!.isCancelled {
+            task?.cancel()
+            return 
+        }
+
+        searchResultSubject.send(UiDataState.Loading)
+        task = Task.init {
+            let result = await searchRepository.searchCompanyFor(destination: destination)
+
+            switch result {
+                case .success(let results):
+                    searchResultSubject.send(UiDataState.Success(DataContent.createFrom(data: results)))
+                case .failure(let error):
+                    searchResultSubject.send(UiDataState.Error(error.localizedDescription))
             }
         }
     }

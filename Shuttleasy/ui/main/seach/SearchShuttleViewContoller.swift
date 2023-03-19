@@ -40,9 +40,6 @@ class SearchShuttleViewContoller: BaseViewController {
         return searchField
     }()
     
-    
-    
-    
     private lazy var mapView: MKMapView =  {
         let mapView = MKMapView()
         mapView.mapType = .standard
@@ -61,13 +58,13 @@ class SearchShuttleViewContoller: BaseViewController {
         subscribeObservers()
     }
     
-    func initViews() {
+   private func initViews() {
         setUpMapView()
         setUpSearchField()
         setUpFloatingPanel()
     }
     
-    func setUpMapView() {
+    private func setUpMapView() {
         view.addSubview(mapView)
 
         mapView.snp.makeConstraints { make in
@@ -78,7 +75,7 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.setRegion(region, animated: true)
     }
 
-    func setUpSearchField() {
+    private func setUpSearchField() {
         view.addSubview(searchField)
         searchField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
@@ -89,7 +86,7 @@ class SearchShuttleViewContoller: BaseViewController {
         searchField.delegate = self
     }
 
-    func setUpFloatingPanel() {
+    private func setUpFloatingPanel() {
         fpc.addPanel(toParent: self)
         fpc.set(contentViewController: searchResultViewController)
         fpc.track(scrollView: searchResultViewController.tableView)
@@ -100,7 +97,11 @@ class SearchShuttleViewContoller: BaseViewController {
     }
 
 
-    func subscribeObservers() {
+    private func subscribeObservers() {
+        subscribeToSearchResult()
+    }
+
+    private func subscribeToSearchResult() {
         searchResultCancellable = searchViewModel.searchResultsPublisher
             .receive(on: DispatchQueue.main)
             .sink(
@@ -113,12 +114,12 @@ class SearchShuttleViewContoller: BaseViewController {
                             print("finished")
                             break
                         }
-                }, 
-
+                },
                 receiveValue: { [weak self] searchState in
                     searchState.onLoading {
                         self?.onSearchResultUpdated(results: [])
                     }.onSuccess { data in
+                        self?.moveMapToSearchResultDestination(searchResult: data.data)
                         self?.onSearchResultUpdated(results: data.data)
                     }.onError { error in
                         self?.onSearchResultUpdated(results: [])
@@ -127,6 +128,22 @@ class SearchShuttleViewContoller: BaseViewController {
                 }
             )
     }
+
+    private func moveMapToSearchResultDestination(searchResult: [SearchResult]) {
+        let destination = searchResult.first!.destinationPoint.toCoordinate()
+        
+        if !mapView.hasPinAt(destination) {
+            mapView.addPinAt(destination)
+        }
+        
+        let region = MKCoordinateRegion(
+            center: destination,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
+        )
+        self.mapView.setRegion(region, animated: true)
+    }
+
     
     private func subcribeDestinationPoints() {
         destinationCancellable = searchViewModel.destinationPoints
@@ -146,9 +163,10 @@ class SearchShuttleViewContoller: BaseViewController {
                     destinationPoints.onSuccess { destinationPointData in
                         destinationPointData.data.forEach { destinationPoint in
                             self?.mapView.addPinAt(destinationPoint)
+                         }
                     }
-                }
-            })
+                 }   
+            )
     }
 
     private func onSearchResultUpdated(results: [SearchResult]) {
@@ -169,7 +187,7 @@ extension SearchShuttleViewContoller : UITextFieldDelegate {
                 // This block will be executed after the specified delay
                 // You can now safely perform any actions that should be debounced
                 guard let searchText = textField.text else { return }
-                self?.searchViewModel.searchShuttle(query: searchText)
+                self?.searchViewModel.searchCompanyFor(destinationName: searchText)
             })
 
             return true
@@ -199,10 +217,15 @@ extension SearchShuttleViewContoller : MKMapViewDelegate {
         return customPin(viewFor: annotation)
     }
         
-    
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         if(fullyRendered) {
             subcribeDestinationPoints()
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let pin = view.annotation as? MKPlacemark else { return }
+        mapView.moveCenterTo(pin.coordinate)
+        self.searchViewModel.searchCompanyFor(destination : pin.coordinate.toCGPoint() )
     }
 }

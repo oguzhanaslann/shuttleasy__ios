@@ -46,6 +46,8 @@ extension MKMapViewDelegate {
                 return MKOverlayRenderer()
         }
     }
+    
+    
 }
 
 extension MKMapView {
@@ -62,11 +64,38 @@ extension MKMapView {
     func addPinAt(_ point: CGPoint) {
         addPinAt(point.toCoordinate())
     }
+
+    func hasPinAt(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        return annotations.filter(
+                { $0 is MKPlacemark }
+            ).contains(
+                where: { 
+                    ($0 as! MKPlacemark).coordinate.compareTo(coordinate) 
+                }
+            )
+    }
+
+    func moveCenterTo(_ coordinate: CLLocationCoordinate2D) {
+        let latitudinalMetersOfMap = region.span.latitudeDelta * 111000
+        let longitudinalMetersOfMap = region.span.longitudeDelta * 111000 * cos(region.center.latitude * .pi / 180) // One degree of longitude is approximately 111,000 meters at the equator, but less at other latitudes
+        let region = MKCoordinateRegion(
+            center: coordinate,
+            latitudinalMeters: latitudinalMetersOfMap,
+            longitudinalMeters: longitudinalMetersOfMap
+        )
+        setRegion(region, animated: true)
+    }
+
+    
 }
 
 extension CLLocationCoordinate2D  {
     func toCGPoint() -> CGPoint {
         return CGPoint(x: latitude, y: longitude)
+    }
+
+    func compareTo(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        return latitude == coordinate.latitude && longitude == coordinate.longitude
     }
 }
 

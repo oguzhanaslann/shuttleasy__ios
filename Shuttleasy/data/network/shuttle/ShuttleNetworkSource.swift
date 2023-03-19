@@ -9,7 +9,8 @@ import Foundation
 
 
 protocol ShuttleNetworkSource {
-    func searchShuttle(query : String) async throws -> ShuttleSearchResultDTO
+    func searchCompany(destinationName : String) async throws -> ShuttleSearchResultDTO
+    func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO
 }
 
 class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
@@ -18,9 +19,9 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
         self.apiService = apiService
     }
 
-    func searchShuttle(query: String) async throws -> ShuttleSearchResultDTO {
+    func searchCompany(destinationName: String) async throws -> ShuttleSearchResultDTO {
         let param = ApiParameters()
-            .lastDestination(query.lowercased().trimmingCharacters(in: .whitespaces))
+            .destinationName(destinationName.lowercased().trimmingCharacters(in: .whitespaces))
             .build()
         
         debugPrint(param)
@@ -31,4 +32,11 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
             parameters:param
         )
     }
+    
+    func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO {
+        //TODO: Implement here
+        // throw error 
+        throw NSError(domain: "Not implemented", code: 0, userInfo: nil)
+    }
+    
 }
