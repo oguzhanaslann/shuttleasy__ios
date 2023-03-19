@@ -12,6 +12,6 @@ typealias Polygon = [CLLocationCoordinate2D]
 typealias PickupAreas = [Polygon]
 
 struct PickupSelectionArgs {
-    let destinationPoint : CLLocationCoordinate2D
+    let destinationPoint : CGPoint
     let pickupAreas: PickupAreas?
 }

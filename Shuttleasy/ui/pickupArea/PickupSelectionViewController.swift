@@ -47,7 +47,7 @@ class PickupSelectionViewController: BaseViewController {
         view.addSubview(mapView)
         mapView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
-            mapView.setCenter(args.destinationPoint, animated: true )
+            mapView.setCenter(args.destinationPoint.toCoordinate(), animated: true )
         }
         initMap()
 
@@ -74,7 +74,7 @@ class PickupSelectionViewController: BaseViewController {
         )
         
         let region = MKCoordinateRegion(
-            center: args.destinationPoint,
+            center: args.destinationPoint.toCoordinate(),
             latitudinalMeters: 1000,
             longitudinalMeters: 1000
         )

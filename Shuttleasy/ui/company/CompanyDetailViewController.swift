@@ -22,12 +22,12 @@ class CompanyDetailViewController: BaseViewController {
 
     private let viewModel : CompanyDetailViewModel = Injector.shared.injectCompanyDetailViewModel()
     
-    let companyId: Int
+    let args : CompanyDetailArgs
     
     private var companyDetailObserver: AnyCancellable? = nil
 
     init(args : CompanyDetailArgs){
-        self.companyId  = args.companyId
+        self.args  = args
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -95,20 +95,8 @@ class CompanyDetailViewController: BaseViewController {
         button.setOnClickListener {
             Navigator.shared.navigate(from: self, to: Destination.pickupSelection(
                 args: PickupSelectionArgs(
-                    destinationPoint: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287),
-                    pickupAreas: [
-                        [
-                            CLLocationCoordinate2DMake(38.4189, 27.1287),
-                            CLLocationCoordinate2DMake(38.4169, 27.1267),
-                            CLLocationCoordinate2DMake(38.4169, 27.1307),
-                        ],
-                        
-                        [
-                            CLLocationCoordinate2DMake(38.4289, 27.1487),
-                            CLLocationCoordinate2DMake(38.4269, 27.1467),
-                            CLLocationCoordinate2DMake(38.4269, 27.1507),
-                        ]
-                    ]
+                    destinationPoint: self.args.destinationPoint,
+                    pickupAreas: nil
                 )
             ))
         }
@@ -123,7 +111,7 @@ class CompanyDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
-        viewModel.getCompanyDetail(companyId: self.companyId)
+        viewModel.getCompanyDetail(companyId: self.args.companyId)
         subscribeObservers()
     }
     

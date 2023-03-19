@@ -200,7 +200,10 @@ extension SearchShuttleViewContoller:  SearchResultClickedListener {
         Navigator.shared.navigate(
             from: self,
             to: .companyDetail(
-                args: CompanyDetailArgs(companyId: result.companyId)
+                args: CompanyDetailArgs(
+                    companyId: result.companyId,
+                    destinationPoint: result.destinationPoint
+                )
             ),
             clearBackStack: false , 
             wrappedInNavigationController: true
