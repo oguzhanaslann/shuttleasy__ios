@@ -11,6 +11,7 @@ import Foundation
 protocol ShuttleNetworkSource {
     func searchCompany(destinationName : String) async throws -> ShuttleSearchResultDTO
     func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO
+    func getDestinationPoints() async throws -> [DestinationDTO]
 }
 
 class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
@@ -37,6 +38,13 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
         //TODO: Implement here
         // throw error 
         throw NSError(domain: "Not implemented", code: 0, userInfo: nil)
+    }
+    
+    func getDestinationPoints() async throws -> [DestinationDTO] {
+        return try await apiService.postRequestAsync(
+            type: [DestinationDTO].self,
+            url: ApiUrlManager.shared.getAllGeopoints()
+        )
     }
     
 }

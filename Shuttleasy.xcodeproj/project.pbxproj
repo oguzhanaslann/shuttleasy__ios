@@ -10,6 +10,7 @@
 		010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C263D29A6CCAC00FE38EA /* CompanyAboutView.swift */; };
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		013FF25329C764A90050C063 /* RatingBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25229C764A90050C063 /* RatingBadge.swift */; };
+		013FF25529C795E90050C063 /* DestinationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25429C795E90050C063 /* DestinationDTO.swift */; };
 		01554F6729A7F8F200F16B51 /* SectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01554F6629A7F8F200F16B51 /* SectionViews.swift */; };
 		0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */; };
 		0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */; };
@@ -160,6 +161,7 @@
 		0110307F29944F3C00DE3268 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		013FF25229C764A90050C063 /* RatingBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingBadge.swift; sourceTree = "<group>"; };
+		013FF25429C795E90050C063 /* DestinationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDTO.swift; sourceTree = "<group>"; };
 		01554F6629A7F8F200F16B51 /* SectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViews.swift; sourceTree = "<group>"; };
 		0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionArgs.swift; sourceTree = "<group>"; };
 		0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailArgs.swift; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 				D415A2CD294E35CC00564E53 /* SendOtpEmailDto.swift */,
 				D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */,
 				D4F0B79F2950327200716FE3 /* ShuttleSearchResultDto.swift */,
+				013FF25429C795E90050C063 /* DestinationDTO.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1124,6 +1127,7 @@
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,
 				D415A2D0294E412E00564E53 /* OtpConfirmDto.swift in Sources */,
+				013FF25529C795E90050C063 /* DestinationDTO.swift in Sources */,
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
 				D4816DBF2920FDE500ECB799 /* Shape.swift in Sources */,
 				D40B27F2292A797100140612 /* Navigator.swift in Sources */,

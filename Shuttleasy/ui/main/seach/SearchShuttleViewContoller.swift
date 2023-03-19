@@ -45,7 +45,6 @@ class SearchShuttleViewContoller: BaseViewController {
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        mapView.setCenter(CLLocationCoordinate2DMake(38.4189, 27.1287), animated: true )
         mapView.delegate = self
         return mapView
     }()
@@ -71,7 +70,11 @@ class SearchShuttleViewContoller: BaseViewController {
             make.edges.equalToSuperview()
         }
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10.0), animated: false)
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 38.4189, longitude: 27.1287), latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(
+            center: searchViewModel.initialStartPoint.toCoordinate(),
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
+        )
         mapView.setRegion(region, animated: true)
     }
 

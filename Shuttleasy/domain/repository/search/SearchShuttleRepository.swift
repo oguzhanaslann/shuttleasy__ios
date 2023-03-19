@@ -75,8 +75,20 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
     
     
     private func getDestinationPointsFromNetwork() async -> Result<[CGPoint], Error> {
-        //TODO: implement here
-        return .failure(NSError())
+        do {
+            let destinationResult = try await shuttleNetworkSource.getDestinationPoints()
+            let points = destinationResult
+                .filter({ dto in
+                    dto.latitude != nil && dto.longtitude != nil
+                })
+                .map { dto in
+                    CGPoint(x: dto.latitude!, y: dto.longtitude!)
+                }
+
+            return .success(points)
+        } catch {
+            return .failure(parseProcessError(error))
+        }
     }
 
     func searchCompanyFor(destination: CGPoint) async -> Result<[SearchResult], Error> {

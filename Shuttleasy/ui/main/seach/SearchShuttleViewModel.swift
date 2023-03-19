@@ -10,10 +10,13 @@ class SearchShuttleViewModel {
     
     private var task : Task<(), Error>? = nil
     
-    
     private let destinationPointsPublisher =  CurrentValueSubject<UiDataState<[CGPoint]>, Error>(UiDataState.Initial)
     let destinationPoints : AnyPublisher<UiDataState<[CGPoint]>, Error>
 
+    
+    let initialStartPoint : CGPoint = CGPoint(x : 38.4189, y: 27.1287)
+    
+    
     init(searchRepository : SearchShuttleRepository) {
         self.searchRepository = searchRepository
         self.searchResultsPublisher = searchResultSubject.eraseToAnyPublisher()
