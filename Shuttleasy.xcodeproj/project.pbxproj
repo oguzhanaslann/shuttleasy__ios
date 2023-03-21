@@ -26,6 +26,7 @@
 		01A6393F29B6F0DC0038B31A /* Shuttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6393E29B6F0DC0038B31A /* Shuttle.swift */; };
 		01A6394129B6F1260038B31A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394029B6F1260038B31A /* User.swift */; };
 		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
+		01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
@@ -177,6 +178,7 @@
 		01A6393E29B6F0DC0038B31A /* Shuttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shuttle.swift; sourceTree = "<group>"; };
 		01A6394029B6F1260038B31A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
+		01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailDTO.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 				D415A2CF294E412E00564E53 /* OtpConfirmDto.swift */,
 				D4F0B79F2950327200716FE3 /* ShuttleSearchResultDto.swift */,
 				013FF25429C795E90050C063 /* DestinationDTO.swift */,
+				01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1198,6 +1201,7 @@
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
 				013FF25729C7A3D50050C063 /* PickupSelectionViewModel.swift in Sources */,
 				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
+				01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */,
 				D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */,
 				01A30E5729C032CF005958BB /* PickupSelectionViewController.swift in Sources */,
 				D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */,

@@ -52,28 +52,6 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
                         fullName: "Oguzhan Macit",
                         profilePhoto: ""
                     )
-                ),
-                
-                Comment(
-                    id: 1,
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    createdDate: "17.02.2021",
-                    user: User(
-                        id: 1,
-                        fullName: "Oguzhan Macit",
-                        profilePhoto: ""
-                    )
-                ),
-                
-                Comment(
-                    id: 1,
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    createdDate: "17.02.2021",
-                    user: User(
-                        id: 1,
-                        fullName: "Oguzhan Macit",
-                        profilePhoto: ""
-                    )
                 )
             ],
             shuttleCount: 10,
@@ -81,6 +59,33 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
         )
     }
     
+    private func getCompanyDetailFromNetwork(with id : Int) async -> Result<CompanyDetail, Error> {
+        do {
+            let compnayDetailDto = try await shuttleNetworkSource.getCompanyDetail(with: id)
+            let company = getCompanyFrom(dto: compnayDetailDto)
+            return .success(company)
+        } catch {
+            return .failure(parseProcessError(error))
+        }
+    }
+    
+    private func getCompanyFrom(dto: CompanyDetailDTO) -> CompanyDetail {
+//      TOOO: missing fields
+        return CompanyDetail(
+            id: dto.id,
+            thumbnail: "",
+            name: dto.name,
+            email: dto.email,
+            phone: dto.phoneNumber,
+            rating: dto.rating,
+            totalRating: dto.votesNumber,
+            membershipDate: "",
+            comments: [],
+            shuttleCount: 0,
+            slogan: ""
+        )
+    }
+ 
     
     func getCompanyPickupAreas(
         companyId: Int,

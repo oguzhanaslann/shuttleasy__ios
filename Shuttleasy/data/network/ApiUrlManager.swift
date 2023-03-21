@@ -25,7 +25,6 @@ class ApiUrlManager {
         return baseApiUrl + "Passenger/SignUp"
     }
 
-
     func sendOtpEmail() -> String {
         return baseApiUrl + "User/SendOTPEmail"
     }
@@ -64,5 +63,9 @@ class ApiUrlManager {
     
     func getAllGeopoints() -> String {
         return baseApiUrl + "GeoPoint/GetAllGeoPoint"
+    }
+    
+    func getCompany() -> String {
+        return baseApiUrl + "Company/GetCompany"
     }
 }
