@@ -27,6 +27,7 @@
 		01A6394129B6F1260038B31A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394029B6F1260038B31A /* User.swift */; };
 		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
 		01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */; };
+		01ADA1B929C965BC0065BAE4 /* PickSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
@@ -179,6 +180,7 @@
 		01A6394029B6F1260038B31A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailDTO.swift; sourceTree = "<group>"; };
+		01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSessionsViewController.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
@@ -372,6 +374,14 @@
 			path = company;
 			sourceTree = "<group>";
 		};
+		01ADA1B729C965940065BAE4 /* picksessions */ = {
+			isa = PBXGroup;
+			children = (
+				01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */,
+			);
+			path = picksessions;
+			sourceTree = "<group>";
+		};
 		3C212CBDE4500DF1CB30B26C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +564,7 @@
 				D41BE5B1292AB18100826640 /* main */,
 				01A2B7E729A2461D00709F30 /* company */,
 				01A30E5529C032A8005958BB /* pickupArea */,
+				01ADA1B729C965940065BAE4 /* picksessions */,
 				D4816DC02920FF2600ECB799 /* onboard */,
 				D44F2615292002A200CD5B85 /* theme */,
 				D40B27F1292A797100140612 /* Navigator.swift */,
@@ -1116,6 +1127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01ADA1B929C965BC0065BAE4 /* PickSessionsViewController.swift in Sources */,
 				D40B27EE292A789500140612 /* SignUpViewController.swift in Sources */,
 				D4F0B79A29502BE900716FE3 /* SearchResultViewController.swift in Sources */,
 				01A6394129B6F1260038B31A /* User.swift in Sources */,

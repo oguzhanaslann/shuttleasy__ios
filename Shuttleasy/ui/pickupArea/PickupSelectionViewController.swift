@@ -66,6 +66,19 @@ class PickupSelectionViewController: BaseViewController {
             make.height.equalTo(largeButtonHeight)
         }
         
+        enrollButton.setOnClickListener {
+            Navigator.shared.navigate(
+                from: self,
+                to: Destination.picksessions(
+                    args: PickSessionsArgs(
+                        companyId: self.args.companyId,
+                        destinationPoint: self.args.destinationPoint,
+                        pickupPoint: CGPoint()
+                    )
+                )
+            )
+        }
+        
         view.addSubview(centerView)
         centerView.snp.makeConstraints { make in
             make.center.equalToSuperview()

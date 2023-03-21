@@ -70,7 +70,7 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
     }
     
     private func getCompanyFrom(dto: CompanyDetailDTO) -> CompanyDetail {
-//      TOOO: missing fields
+        //TODO: missing fields
         return CompanyDetail(
             id: dto.id,
             thumbnail: "",
@@ -86,19 +86,25 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
         )
     }
  
-    
     func getCompanyPickupAreas(
         companyId: Int,
         destinationPoint: CGPoint
     ) async -> Result<PickupAreas, Error> {
-        return .success(
-           [
+        if shouldUseDummyData() {
+            return .success(getDummyPickupAreas(destinationPoint))
+        } else {
+            //TODO: implement network connection 
+            return .failure( NSError(domain: "Not implemented", code: 0, userInfo: nil))
+        }
+    }
+
+    private func getDummyPickupAreas(_ point: CGPoint) -> PickupAreas {
+        return [
                 [
-                    CGPoint(x: 38.4189, y: 27.1287),
-                    CGPoint(x: 38.4159, y: 27.1257),
-                    CGPoint(x: 38.4209, y: 27.1257),
+                    CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                    CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                    CGPoint(x: point.x + 0.005, y: point.y + 0.005),
                 ]
            ]
-        )
     }
 }

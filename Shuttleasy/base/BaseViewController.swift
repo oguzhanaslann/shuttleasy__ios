@@ -93,5 +93,12 @@ class BaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         statusBarView = nil
+        setStatusBarColorByOrientationIfNeeded()
+        setNavigationBarTheme()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setStatusBarColorByOrientationIfNeeded()
+        setNavigationBarTheme()
     }
 }

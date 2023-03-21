@@ -13,6 +13,7 @@ protocol ShuttleNetworkSource {
     func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO
     func getDestinationPoints() async throws -> [DestinationDTO]
     func getCompanyDetail(with id: Int) async throws -> CompanyDetailDTO
+    
 }
 
 class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
