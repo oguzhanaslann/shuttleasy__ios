@@ -8,10 +8,11 @@
 import Foundation
 import MapKit
 
-typealias Polygon = [CLLocationCoordinate2D]
+typealias Polygon = [CGPoint]
 typealias PickupAreas = [Polygon]
 
 struct PickupSelectionArgs {
+    let companyId: Int
     let destinationPoint : CGPoint
     let pickupAreas: PickupAreas?
 }

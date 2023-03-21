@@ -123,7 +123,7 @@ class CompanyStatusCell : UITableViewCell {
         membershipText?.text = companyDetail?.membershipDate
         
         let shuttleCountText = getShuttleCountText()
-        shuttleCountText?.text = String(companyDetail?.shuttles.count ?? 0)
+        shuttleCountText?.text = String(companyDetail?.shuttleCount ?? 0)
         layoutSubviews()
     }
 

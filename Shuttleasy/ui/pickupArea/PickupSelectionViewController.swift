@@ -1,14 +1,19 @@
+
 import UIKit
 import SnapKit
 import MapKit
+import Combine
+
 
 class PickupSelectionViewController: BaseViewController {
+    
+    private let viewModel = Injector.shared.injectPickupSelectionViewModel()
+    private var pickUpAreas : AnyCancellable? = nil
 
     lazy var enrollButton : UIButton = {
         let button = LargeButton(titleOnNormalState: Localization.enroll.localized, backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
         return button
     }()
-    
     
     private lazy var mapView: MKMapView =  {
         let mapView = MKMapView()
@@ -25,12 +30,6 @@ class PickupSelectionViewController: BaseViewController {
     
     private let args : PickupSelectionArgs
     
-    private var  pickupAreas:PickupAreas?  {
-        get {
-            return args.pickupAreas
-        }
-    }
-    
     init(args : PickupSelectionArgs){
         self.args = args
         super.init(nibName: nil, bundle: nil)
@@ -42,8 +41,15 @@ class PickupSelectionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        initViews()
+        subscribeObservers()
+        viewModel.getPickupAreasOf(
+            company: args.companyId,
+            destinationPoint: args.destinationPoint
+        )
+    }
     
+    private func initViews() {
         view.addSubview(mapView)
         mapView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
@@ -84,10 +90,30 @@ class PickupSelectionViewController: BaseViewController {
         mapView.addPinAt(args.destinationPoint)
         
         if let polygons = args.pickupAreas {
-            polygons.forEach { polygon in
-                mapView.addPolygon(polygon)
-            }
+            drawDestinationPoints(pickupAreas: polygons)
         }
+    }
+    
+    private func drawDestinationPoints(pickupAreas: PickupAreas) {
+        pickupAreas.forEach { pickupAreas in
+            let polygon = pickupAreas.map { point in
+                return point.toCoordinate()
+            }
+
+            mapView.addPolygon(polygon)
+        }
+    }
+    
+    private func subscribeObservers() {
+        pickUpAreas = viewModel.pickupAreaPublished
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                
+            }, receiveValue: { pickUpState in
+                pickUpState.onSuccess {[weak self] data in
+                    self?.drawDestinationPoints(pickupAreas: data.data)
+                }
+            })
     }
 
     override func shouldSetStatusBarColor() -> Bool {
@@ -120,16 +146,14 @@ extension PickupSelectionViewController: MKMapViewDelegate {
         
         var isCenterPinInAnyArea = false
         
+        let pickupAreas = viewModel.getCurrentPickupAreas()
+        
         guard let pickupAreas = pickupAreas else {
             enrollButton.isEnabled = false
             return
         }
 
         for polygon in pickupAreas {
-            let polygon = polygon.map { coordinate in
-                return coordinate.toCGPoint()
-            }
-            
             let contains = center.isInside(polygon)
             
             isCenterPinInAnyArea = contains

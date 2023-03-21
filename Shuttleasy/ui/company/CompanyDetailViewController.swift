@@ -95,6 +95,7 @@ class CompanyDetailViewController: BaseViewController {
         button.setOnClickListener {
             Navigator.shared.navigate(from: self, to: Destination.pickupSelection(
                 args: PickupSelectionArgs(
+                    companyId : self.args.companyId,
                     destinationPoint: self.args.destinationPoint,
                     pickupAreas: nil
                 )

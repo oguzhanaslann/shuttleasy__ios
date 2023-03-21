@@ -32,8 +32,4 @@ class CompanyDetailViewModel : ViewModel {
             }
         }
     }
-    
-    func enrollToShuttle(shuttleId : Int) {
-        
-    }
 }

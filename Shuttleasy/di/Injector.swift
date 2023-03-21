@@ -308,10 +308,26 @@ class Injector {
         registerDependencyIfNotRegistered(
             dependency: CompanyRepository.self,
             onRegisterNeeded: { resolver in
-                CompanyRepositoryImpl()
+                CompanyRepositoryImpl(
+                    shuttleNetworkSource: self.injectShuttleNetworkDataSource()
+                )
             }
         )
         
         return container.resolve(CompanyRepository.self)!
+    }
+
+    //injectPickupSelectionViewModel
+    func injectPickupSelectionViewModel() -> PickupSelectionViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: PickupSelectionViewModel.self,
+            onRegisterNeeded: { resolver in
+                PickupSelectionViewModel(
+                    companyRepository: self.injectCompanyRepository()
+                )
+            }
+        )
+        
+        return container.resolve(PickupSelectionViewModel.self)!
     }
 }

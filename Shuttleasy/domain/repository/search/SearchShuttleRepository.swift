@@ -50,7 +50,7 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                 companyId: SearchShuttleRepositoryImpl.NoCompanyId,
                 title: "Company Name",
                 imageUrl: "",
-                destinationPoint: CGPoint(x: 38.4289, y: 27.1387),
+                destinationPoint: CGPoint(x: 38.4189, y: 27.1287),
                 rating: 4.8,
                 totalRating: 0
             )

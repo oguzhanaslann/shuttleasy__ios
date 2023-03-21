@@ -11,6 +11,7 @@
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		013FF25329C764A90050C063 /* RatingBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25229C764A90050C063 /* RatingBadge.swift */; };
 		013FF25529C795E90050C063 /* DestinationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25429C795E90050C063 /* DestinationDTO.swift */; };
+		013FF25729C7A3D50050C063 /* PickupSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25629C7A3D50050C063 /* PickupSelectionViewModel.swift */; };
 		01554F6729A7F8F200F16B51 /* SectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01554F6629A7F8F200F16B51 /* SectionViews.swift */; };
 		0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */; };
 		0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */; };
@@ -162,6 +163,7 @@
 		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		013FF25229C764A90050C063 /* RatingBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingBadge.swift; sourceTree = "<group>"; };
 		013FF25429C795E90050C063 /* DestinationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDTO.swift; sourceTree = "<group>"; };
+		013FF25629C7A3D50050C063 /* PickupSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionViewModel.swift; sourceTree = "<group>"; };
 		01554F6629A7F8F200F16B51 /* SectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViews.swift; sourceTree = "<group>"; };
 		0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionArgs.swift; sourceTree = "<group>"; };
 		0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailArgs.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 			children = (
 				01A30E5629C032CF005958BB /* PickupSelectionViewController.swift */,
 				0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */,
+				013FF25629C7A3D50050C063 /* PickupSelectionViewModel.swift */,
 			);
 			path = pickupArea;
 			sourceTree = "<group>";
@@ -1193,6 +1196,7 @@
 				D4C6F96C29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift in Sources */,
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
+				013FF25729C7A3D50050C063 /* PickupSelectionViewModel.swift in Sources */,
 				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
 				D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */,
 				01A30E5729C032CF005958BB /* PickupSelectionViewController.swift in Sources */,

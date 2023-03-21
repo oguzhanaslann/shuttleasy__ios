@@ -17,6 +17,6 @@ struct CompanyDetail {
     let totalRating : Int
     let membershipDate : String
     let comments : [Comment]
-    let shuttles : [Shuttle]
+    let shuttleCount: Int
     let slogan : String?
 }
