@@ -222,3 +222,12 @@ extension UIView {
         addSubview(overlay)
     }
 }
+
+extension UICollectionView {
+    func defaultSetup() {
+        self.showsHorizontalScrollIndicator = false
+        self.isPagingEnabled = true
+        self.isScrollEnabled = true
+        self.backgroundColor = .clear
+    }
+}

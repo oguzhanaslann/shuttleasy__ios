@@ -18,6 +18,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
         return view
     }()
     
+//    TODO:
     lazy var onboardingPage1 : UIView = {
         return onboardingView(
             image: resImageView(name:"onboard1"),

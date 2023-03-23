@@ -47,6 +47,7 @@ class SearchShuttleViewModel {
             }
         }
     }
+
     
     func getDestinationPoints() {
         Task.init {
