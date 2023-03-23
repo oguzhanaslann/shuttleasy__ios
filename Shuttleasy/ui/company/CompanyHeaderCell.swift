@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CompanyHeaderCell : UITableViewCell {
+class CompanyHeaderCell : BaseTableViewCell {
     
     public static let identifier = "CompanyHeaderCell"
     private static let HEADER_TITLE_LABEL_TAG = 61781
@@ -26,7 +26,7 @@ class CompanyHeaderCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        transparentBackground()
+
         self.addSubview(contactHeader)
         contactHeader.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)

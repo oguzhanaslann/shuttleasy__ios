@@ -33,6 +33,7 @@
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
 		01D4FA8429CC11BC009E9B61 /* SessionPickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */; };
+		01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */; };
 		01E63A8729BAE4C400220865 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E63A8629BAE4C400220865 /* Driver.swift */; };
 		01E7255F29AE9EBA009CF7FE /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7255E29AE9EBA009CF7FE /* Spacing.swift */; };
 		01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */; };
@@ -188,6 +189,7 @@
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
 		01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickCell.swift; sourceTree = "<group>"; };
+		01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		01E63A8629BAE4C400220865 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		01E7255E29AE9EBA009CF7FE /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyStatusCell.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				D4D0650D2926143C002991A1 /* ViewModel.swift */,
 				D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */,
 				D4217A05293B622F004E4744 /* UiDataState.swift */,
+				01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1185,6 +1188,7 @@
 				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
+				01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */,
 				01A6393D29B6F0B70038B31A /* Comment.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
 				01E63A8729BAE4C400220865 /* Driver.swift in Sources */,

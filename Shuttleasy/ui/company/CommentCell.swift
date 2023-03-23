@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CommentCell: UITableViewCell {
+class CommentCell: BaseTableViewCell {
     public static let identifier = "CommentCell"
 
     let commenterName = LabelLarge(text: "John doe", color: onSurfaceColor)
@@ -32,7 +32,6 @@ class CommentCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        transparentBackground()
         addSubview(commentCard)
         initCardView()
         commentCard.addSubview(commenterProfilePhoto)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SessionListCell : UITableViewCell {
+class SessionListCell : BaseTableViewCell {
     
     public static let identifier = "SessionListCell"
     
@@ -30,9 +30,7 @@ class SessionListCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        transparentBackground()
         backgroundColor = .red
-        selectionStyle = .none
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 2
         contentView.addSubview(dateLabel)

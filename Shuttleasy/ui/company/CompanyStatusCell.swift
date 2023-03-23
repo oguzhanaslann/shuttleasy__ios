@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CompanyStatusCell : UITableViewCell {
+class CompanyStatusCell : BaseTableViewCell {
     
     public static let identifier = "CompanyStatusCell"
     
@@ -46,8 +46,7 @@ class CompanyStatusCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        transparentBackground()
-        
+
         addSubview(statView)
         addSubview(statView2)
         

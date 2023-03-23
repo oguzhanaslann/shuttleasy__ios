@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SearchResultCell : UITableViewCell {
+class SearchResultCell : BaseTableViewCell {
 
     static let identifier = "SearchResultCell"
 

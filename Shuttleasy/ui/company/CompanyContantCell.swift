@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CompanyContentCell : UITableViewCell {
+class CompanyContentCell : BaseTableViewCell {
     public static let identifier = "CompanyContentCell"
     
     private static let PHONE_LABEL_TAG = 74101
@@ -29,7 +29,7 @@ class CompanyContentCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        transparentBackground()
+
         let container = UIView()
         container.addSubview(phoneRow)
         phoneRow.snp.makeConstraints { make in
