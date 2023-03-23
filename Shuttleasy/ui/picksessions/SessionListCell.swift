@@ -15,7 +15,7 @@ class SessionListCell : BaseTableViewCell {
     let dateLabel = TitleMedium(text: "Monday")
     
     private let flowLayout = UICollectionViewFlowLayout()
-    let sessionTimeCollectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    let sessionTimeCollectionView : BaseUICollectionView = BaseUICollectionView(frame: .zero, collectionViewLayout: .init())
     
     
     private var itemSize : CGSize = .init(width: 0, height: 0)
@@ -45,7 +45,6 @@ class SessionListCell : BaseTableViewCell {
         
         flowLayout.scrollDirection = .horizontal
         sessionTimeCollectionView.setCollectionViewLayout(flowLayout, animated: true)
-        sessionTimeCollectionView.defaultSetup()
         contentView.addSubview(sessionTimeCollectionView)
 
 

@@ -34,6 +34,8 @@
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
 		01D4FA8429CC11BC009E9B61 /* SessionPickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */; };
 		01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */; };
+		01D4FA8A29CCDD68009E9B61 /* BaseUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */; };
+		01D4FA8C29CCDF55009E9B61 /* BaseUICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8B29CCDF55009E9B61 /* BaseUICollectionView.swift */; };
 		01E63A8729BAE4C400220865 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E63A8629BAE4C400220865 /* Driver.swift */; };
 		01E7255F29AE9EBA009CF7FE /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7255E29AE9EBA009CF7FE /* Spacing.swift */; };
 		01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */; };
@@ -190,6 +192,8 @@
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
 		01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickCell.swift; sourceTree = "<group>"; };
 		01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITableView.swift; sourceTree = "<group>"; };
+		01D4FA8B29CCDF55009E9B61 /* BaseUICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUICollectionView.swift; sourceTree = "<group>"; };
 		01E63A8629BAE4C400220865 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		01E7255E29AE9EBA009CF7FE /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyStatusCell.swift; sourceTree = "<group>"; };
@@ -618,6 +622,8 @@
 				D406C0C92937C2B800BC5F0C /* BaseTabbarController.swift */,
 				D4217A05293B622F004E4744 /* UiDataState.swift */,
 				01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */,
+				01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */,
+				01D4FA8B29CCDF55009E9B61 /* BaseUICollectionView.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1196,6 +1202,7 @@
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
 				D44F261729200C5C00CD5B85 /* FontUtil.swift in Sources */,
 				0110308229944FC700DE3268 /* Localization.swift in Sources */,
+				01D4FA8A29CCDD68009E9B61 /* BaseUITableView.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
 				0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */,
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
@@ -1228,6 +1235,7 @@
 				01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */,
 				D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */,
 				01A30E5729C032CF005958BB /* PickupSelectionViewController.swift in Sources */,
+				01D4FA8C29CCDF55009E9B61 /* BaseUICollectionView.swift in Sources */,
 				D4F3E18E2934D08200D10463 /* ResetCodeViewController.swift in Sources */,
 				01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */,
 				0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */,

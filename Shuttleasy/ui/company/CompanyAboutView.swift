@@ -12,7 +12,7 @@ import Combine
 
 class CompanyAboutView: UIView {
     
-    private let tableView: UITableView = UITableView()
+    private let tableView: UITableView = BaseUITableView()
     private var viewModel: CompanyDetailViewModel? = nil
     private var companyDetailObserver: AnyCancellable? = nil
     
@@ -30,7 +30,6 @@ class CompanyAboutView: UIView {
         tableView.backgroundColor = backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.defaultSetup()
         tableView.register(CommentCell.self, forCellReuseIdentifier: CommentCell.identifier)
         tableView.register(CompanyStatusCell.self, forCellReuseIdentifier: CompanyStatusCell.identifier)
         tableView.register(CompanyHeaderCell.self, forCellReuseIdentifier: CompanyHeaderCell.identifier)

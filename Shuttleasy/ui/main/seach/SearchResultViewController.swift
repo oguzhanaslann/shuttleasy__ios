@@ -17,7 +17,7 @@ protocol SearchResultClickedListener {
 }
 
 class SearchResultViewController : UIViewController, SearchUpdateListener {
-    let tableView = UITableView()
+    let tableView = BaseUITableView()
     
     var results: [SearchResult] = []
     
@@ -32,9 +32,6 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
             make.top.equalToSuperview().offset(16)
         }
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self

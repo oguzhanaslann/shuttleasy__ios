@@ -17,7 +17,7 @@ class PickSessionsViewController: BaseViewController {
     
     private let args : PickSessionsArgs
 
-    private let tableView: UITableView = UITableView()
+    private let tableView: UITableView = BaseUITableView()
     
     private let itemSize = CGSize(width: 96, height: 42)
     
@@ -36,7 +36,6 @@ class PickSessionsViewController: BaseViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.defaultSetup()
         tableView.register(SessionListCell.self, forCellReuseIdentifier: SessionListCell.identifier)
         tableView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -65,7 +64,7 @@ class PickSessionsViewController: BaseViewController {
 
 extension PickSessionsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return itemSize.height + ( 12 * 2) + 24 
+        return itemSize.height + ( 12 * 2) + 24
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
