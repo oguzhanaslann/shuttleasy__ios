@@ -67,16 +67,7 @@ class PickupSelectionViewController: BaseViewController {
         }
         
         enrollButton.setOnClickListener {
-            Navigator.shared.navigate(
-                from: self,
-                to: Destination.picksessions(
-                    args: PickSessionsArgs(
-                        companyId: self.args.companyId,
-                        destinationPoint: self.args.destinationPoint,
-                        pickupPoint: CGPoint()
-                    )
-                )
-            )
+            
         }
         
         view.addSubview(centerView)

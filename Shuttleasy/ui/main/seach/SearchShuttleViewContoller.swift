@@ -205,7 +205,8 @@ extension SearchShuttleViewContoller:  SearchResultClickedListener {
             to: .companyDetail(
                 args: CompanyDetailArgs(
                     companyId: result.companyId,
-                    destinationPoint: result.destinationPoint
+                    destinationPoint: result.destinationPoint,
+                    sessionPickModel: result.sessionPickModel
                 )
             ),
             clearBackStack: false , 

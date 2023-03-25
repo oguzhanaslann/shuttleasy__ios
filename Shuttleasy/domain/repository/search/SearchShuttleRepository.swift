@@ -32,8 +32,9 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                     imageUrl: "",
                     destinationPoint: CGPoint(),
                     rating: 4.8,
-                    totalRating: 0
-                    //TODO: implement here
+                    totalRating: 0,
+                    //TODO: implement here,
+                    sessionPickModel: []
                    )
                })
            }
@@ -52,7 +53,21 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                 imageUrl: "",
                 destinationPoint: CGPoint(x: 38.4189, y: 27.1287),
                 rating: 4.8,
-                totalRating: 0
+                totalRating: 0,
+                sessionPickModel: [
+                    SessionPickListModel(
+                        dayName: "Name",
+                        sessionPickList: [
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
+                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                        ]
+                    )
+                ]
             )
         ]
     }
@@ -107,7 +122,8 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                         imageUrl: "",
                         destinationPoint: CGPoint(),
                         rating: 4.8,
-                        totalRating: 0
+                        totalRating: 0,
+                        sessionPickModel: []
                         //TODO: implement here
                     )
                 })

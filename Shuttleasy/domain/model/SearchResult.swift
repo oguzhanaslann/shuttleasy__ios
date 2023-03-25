@@ -13,4 +13,5 @@ struct SearchResult {
     let destinationPoint : CGPoint
     let rating : Double
     let totalRating: Int
+    let sessionPickModel : [SessionPickListModel]
 }

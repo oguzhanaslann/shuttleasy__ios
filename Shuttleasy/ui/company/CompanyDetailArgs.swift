@@ -10,4 +10,5 @@ import Foundation
 struct CompanyDetailArgs {
     let companyId : Int
     let destinationPoint : CGPoint
+    let sessionPickModel : [SessionPickListModel]
 }

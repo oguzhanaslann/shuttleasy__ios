@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 func DisplayLarge(
-    text : String,
+    text : String = "" ,
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsMedium(size: 57) ?? UIFont.systemFont(ofSize: 57)
 ) -> UILabel {
@@ -21,7 +21,7 @@ func DisplayLarge(
 }
 
 func DisplayMedium(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsSemiBold(size: 45) ?? UIFont.systemFont(ofSize: 45)
 ) -> UILabel {
@@ -33,7 +33,7 @@ func DisplayMedium(
 }
 
 func DisplaySmall(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsMedium(size: 36) ?? UIFont.systemFont(ofSize: 36)
 ) -> UILabel {
@@ -45,7 +45,7 @@ func DisplaySmall(
 }
 
 func HeadlineLarge(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsSemiBold(size: 32) ?? UIFont.systemFont(ofSize: 32)
 ) -> UILabel {
@@ -57,7 +57,7 @@ func HeadlineLarge(
 }
 
 func HeadlineMedium(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsSemiBold(size: 28) ?? UIFont.systemFont(ofSize: 28)
 ) -> UILabel {
@@ -69,7 +69,7 @@ func HeadlineMedium(
 }
 
 func HeadlineSmall(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsSemiBold(size: 24) ?? UIFont.systemFont(ofSize: 24)
 ) -> UILabel {
@@ -83,7 +83,7 @@ func HeadlineSmall(
 
 
 func TitleLarge(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsSemiBold(size: 22) ?? UIFont.systemFont(ofSize: 22)
 ) -> UILabel {
@@ -97,7 +97,7 @@ func TitleLarge(
 
 
 func TitleMedium(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont = TitleMediumFont()
 ) -> UILabel {
@@ -113,7 +113,7 @@ func TitleMediumFont() -> UIFont {
 }
 
 func TitleSmall(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = TitleSmallFont()
 ) -> UILabel {
@@ -130,7 +130,7 @@ func TitleSmallFont()  -> UIFont {
 
 
 func LabelLarge(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = LabelLargeFont()
 ) -> UILabel {
@@ -150,7 +150,7 @@ func ButtonFont() -> UIFont {
 }
 
 func LabelMedium(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsMedium(size: 14) ?? UIFont.systemFont(ofSize: 14)
 ) -> UILabel {
@@ -162,7 +162,7 @@ func LabelMedium(
 }
 
 func LabelSmall(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = LabelSmallFont()
 ) -> UILabel {
@@ -179,7 +179,7 @@ func LabelSmallFont() -> UIFont {
 
 
 func BodyLarge(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = UIFont.poppinsRegular(size: 16) ?? UIFont.systemFont(ofSize: 16)
 ) -> UILabel {
@@ -191,7 +191,7 @@ func BodyLarge(
 }
 
 func BodyMedium(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont = BodyMediumFont()
 ) -> UILabel {
@@ -207,7 +207,7 @@ func BodyMediumFont() -> UIFont {
 }
 
 func BodySmall(
-    text : String,
+    text : String = "",
     color : UIColor = .black,
     font : UIFont  = BodySmallFont()
 ) -> UILabel {

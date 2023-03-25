@@ -8,18 +8,26 @@
 import Foundation
 import UIKit
 
-class SessionListCell : BaseTableViewCell {
+class SessionListCell : BaseTableViewCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     public static let identifier = "SessionListCell"
     
-    let dateLabel = TitleMedium(text: "Monday")
+    private static let itemSize = CGSize(width: 96, height: 42)
+    public static let height = itemSize.height + ( 12 * 2 ) + 24 + 12
+    
+    private let dateLabel = TitleMedium()
     
     private let flowLayout = UICollectionViewFlowLayout()
-    let sessionTimeCollectionView : BaseUICollectionView = BaseUICollectionView(frame: .zero, collectionViewLayout: .init())
+    let sessionTimeCollectionView : BaseUICollectionView = BaseUICollectionView(
+        frame: .zero,
+        collectionViewLayout: .init()
+    )
     
+
+    private var sessionPickList : [SessionPickModel] = []
     
-    private var itemSize : CGSize = .init(width: 0, height: 0)
-    
+    weak var delegate : SessionListCellDelegate? = nil
+
     required init?(coder: NSCoder) {
         fatalError()
     }
@@ -30,9 +38,6 @@ class SessionListCell : BaseTableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .red
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 2
         contentView.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -40,35 +45,41 @@ class SessionListCell : BaseTableViewCell {
             make.height.greaterThanOrEqualTo(24)
         }
         
-        
         sessionTimeCollectionView.register(SessionPickCell.self, forCellWithReuseIdentifier: SessionPickCell.identifier)
         
         flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = SessionListCell.itemSize
         sessionTimeCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+        sessionTimeCollectionView.dataSource = self
+        sessionTimeCollectionView.delegate = self
+        sessionTimeCollectionView.isUserInteractionEnabled = true
         contentView.addSubview(sessionTimeCollectionView)
 
 
         sessionTimeCollectionView.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(dateLabel.snp.bottom)
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(8)
+            make.right.equalToSuperview()
             make.height.equalTo(66)
+            sessionTimeCollectionView.reloadData()
         }
     }
-    
+
+
     func configure(
-        _ itemSize : CGSize = .init(width: 0, height: 0)
+        with model: SessionPickListModel
     ) {
-        self.itemSize = itemSize
-        flowLayout.itemSize = itemSize
+        dateLabel.text = model.dayName
+        self.sessionPickList = model.sessionPickList
+        
         sessionTimeCollectionView.reloadData()
     }
-    
 }
 
-extension SessionListCell: UICollectionViewDelegate {
-    
+struct SessionPickListModel {
+    let dayName : String
+    let sessionPickList : [SessionPickModel]
 }
-
 
 extension SessionListCell: UICollectionViewDataSource {
     
@@ -77,27 +88,36 @@ extension SessionListCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return sessionPickList.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SessionPickCell.identifier, for: indexPath) as? SessionPickCell
         
-        if cell == nil {
+        guard let cell = cell else {
             return UICollectionViewCell()
         }
-        
-        return cell!
+
+        cell.configure(
+            with: sessionPickList[indexPath.row],
+            self
+        )
+
+        return cell
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSize
+        return SessionListCell.itemSize
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectSession(atRow: indexPath.row)
+    }
 }
 
 
-extension SessionListCell: UICollectionViewDelegateFlowLayout {
-    
+protocol SessionListCellDelegate: AnyObject {
+    func didSelectSession(atRow: Int)
 }

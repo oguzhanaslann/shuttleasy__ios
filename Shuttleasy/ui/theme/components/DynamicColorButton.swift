@@ -10,7 +10,7 @@ import UIKit
 
 class DynamicColorButton : UIButton {
     
-    private var buttonColors: ButtonColors = ButtonColors()
+    internal var buttonColors: ButtonColors = defaultButtonColors()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,28 +28,51 @@ class DynamicColorButton : UIButton {
         initButton()
     }
     
-    private func initButton() {
+    internal func initButton() {
         setTitleColor(buttonColors.onNormalColor, for: .normal)
         setTitleColor(buttonColors.onDisabledColor, for: .disabled)
+        setButtonBackgroundAndOutline(by: isEnabled)
     }
-    
     
     open override var isEnabled: Bool {
             didSet {
-                if (isEnabled) {
-                    backgroundColor = buttonColors.normalColor
-                } else {
-                    backgroundColor = neutral80
-                }
+                setButtonBackgroundAndOutline(by : isEnabled)
             }
+    }
+    
+    private func setButtonBackgroundAndOutline(by state: Bool) {
+        if (isEnabled) {
+            backgroundColor = buttonColors.backgroundColor
+            if let outlineColor = buttonColors.outlineColor {
+                layer.borderColor = outlineColor.cgColor
+            }
+        } else {
+            backgroundColor = neutral80
+            if let disabledOutlineColor = buttonColors.disabledOutlineColor {
+                layer.borderColor = disabledOutlineColor.cgColor
+            }
+        }
     }
     
 }
 
 
 struct ButtonColors {
-    let normalColor = primaryColor
-    let onNormalColor = onPrimaryColor
-    let disabledColor : UIColor = neutral80
-    let onDisabledColor : UIColor = .white
+    let backgroundColor : UIColor
+    let onNormalColor: UIColor
+    let disabledColor : UIColor
+    let onDisabledColor : UIColor
+    let outlineColor: UIColor?
+    let disabledOutlineColor : UIColor?
+}
+
+func defaultButtonColors() -> ButtonColors {
+    return ButtonColors(
+        backgroundColor: primaryColor,
+        onNormalColor: onPrimaryColor,
+        disabledColor: neutral80,
+        onDisabledColor: .white,
+        outlineColor: nil ,
+        disabledOutlineColor: nil
+    )
 }

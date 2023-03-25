@@ -10,16 +10,14 @@ import UIKit
 struct PickSessionsArgs {
     let companyId : Int
     let destinationPoint: CGPoint
-    let pickupPoint: CGPoint
+    let sessionPickModel : [SessionPickListModel]
 }
 
-class PickSessionsViewController: BaseViewController {
+class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     
     private let args : PickSessionsArgs
 
     private let tableView: UITableView = BaseUITableView()
-    
-    private let itemSize = CGSize(width: 96, height: 42)
     
     init(args : PickSessionsArgs){
         self.args = args
@@ -63,65 +61,36 @@ class PickSessionsViewController: BaseViewController {
 }
 
 extension PickSessionsViewController : UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return itemSize.height + ( 12 * 2) + 24
+        return SessionListCell.height
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return args.sessionPickModel.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let statusCell =  tableView.dequeueReusableCell(
             withIdentifier: SessionListCell.identifier,
             for: indexPath
         ) as? SessionListCell
         
-        statusCell?.sessionTimeCollectionView.delegate = self
-        statusCell?.sessionTimeCollectionView.dataSource = self
-        statusCell?.configure(itemSize)
-
-        
-        return statusCell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("clicked %d", indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension PickSessionsViewController : UITableViewDelegate {
-    
-}
-
-extension PickSessionsViewController: UICollectionViewDelegate {
-    
-}
-
-extension PickSessionsViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SessionPickCell.identifier, for: indexPath) as? SessionPickCell
-        
-        if cell == nil {
-            return UICollectionViewCell()
+        guard let statusCell = statusCell else {
+            return UITableViewCell()
         }
         
-        return cell!
+        statusCell.delegate = self
+        statusCell.configure(
+            with: args.sessionPickModel[indexPath.row]
+        )
+
+        return statusCell
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return itemSize
+}
+
+extension PickSessionsViewController: SessionListCellDelegate {
+    func didSelectSession(atRow: Int) {
+        print("didSelectSession atRow: \(atRow)")
     }
-    
 }

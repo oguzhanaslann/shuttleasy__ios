@@ -11,19 +11,39 @@ class SessionPickCell: UICollectionViewCell {
     
     public static let identifier = "SessionPickCell"
     
+    private let button = ToggleButton(with: .init())
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let timeLabel = LabelMedium(text: "08:00")
-        
-        addSubview(timeLabel)
-        timeLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.black.cgColor
+        contentView.addSubview(button)
+        button.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(42)
+            make.width.equalTo(96)
         }
+        button.isUserInteractionEnabled = false
     }
+    
+    func configure(
+        with pickModel : SessionPickModel,
+        _ gestureRecognizerDelegate: UIGestureRecognizerDelegate? = nil
+    ) {
+        button.setTitle(pickModel.sessionTitle, for: .normal)
+        button.isSelected = pickModel.isSelected
+        button.isEnabled = pickModel.isEnabled
+    }
+}
+
+
+struct SessionPickModel {
+    let sessionId : Int
+    let isSelected: Bool
+    let isEnabled : Bool
+    let sessionTitle: String
 }

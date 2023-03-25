@@ -89,17 +89,22 @@ class CompanyDetailViewController: BaseViewController {
     
     let imageHeight = 200
 
-    
     lazy var enrollButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Enroll", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: "Enroll",
+            backgroundColor: primaryColor,
+            titleColorOnNormalState: onPrimaryColor
+        )
+        
         button.setOnClickListener {
-            Navigator.shared.navigate(from: self, to: Destination.pickupSelection(
-                args: PickupSelectionArgs(
-                    companyId : self.args.companyId,
+            Navigator.shared.navigate(from: self, to: Destination.picksessions(
+                args: PickSessionsArgs(
+                    companyId: self.args.companyId,
                     destinationPoint: self.args.destinationPoint,
-                    pickupAreas: nil
+                    sessionPickModel: self.args.sessionPickModel
+                    )
                 )
-            ))
+            )
         }
         return button
     }()
