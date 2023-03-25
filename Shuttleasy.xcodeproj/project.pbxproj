@@ -29,6 +29,10 @@
 		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
 		01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */; };
 		01ADA1B929C965BC0065BAE4 /* PickSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */; };
+		01B0AB2F29CEC4C3001341E1 /* PickSessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB2E29CEC4C3001341E1 /* PickSessionsViewModel.swift */; };
+		01B0AB3429CED73D001341E1 /* SessionPickListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */; };
+		01B0AB3629CED7D4001341E1 /* SessionPickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */; };
+		01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3729CEE0DD001341E1 /* Pair.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
@@ -188,6 +192,10 @@
 		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		01ADA1B529C94EAD0065BAE4 /* CompanyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailDTO.swift; sourceTree = "<group>"; };
 		01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSessionsViewController.swift; sourceTree = "<group>"; };
+		01B0AB2E29CEC4C3001341E1 /* PickSessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSessionsViewModel.swift; sourceTree = "<group>"; };
+		01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickListModel.swift; sourceTree = "<group>"; };
+		01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickModel.swift; sourceTree = "<group>"; };
+		01B0AB3729CEE0DD001341E1 /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
@@ -392,8 +400,34 @@
 				01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */,
 				0140C37329CAB7CA000B607A /* SessionListCell.swift */,
 				01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */,
+				01B0AB2E29CEC4C3001341E1 /* PickSessionsViewModel.swift */,
 			);
 			path = picksessions;
+			sourceTree = "<group>";
+		};
+		01B0AB3029CED6F7001341E1 /* company */ = {
+			isa = PBXGroup;
+			children = (
+				01A6393A29B6EFE00038B31A /* CompanyDetail.swift */,
+			);
+			path = company;
+			sourceTree = "<group>";
+		};
+		01B0AB3129CED70D001341E1 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				D4F0B79B29502C4900716FE3 /* SearchResult.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		01B0AB3229CED72B001341E1 /* session */ = {
+			isa = PBXGroup;
+			children = (
+				01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */,
+				01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */,
+			);
+			path = session;
 			sourceTree = "<group>";
 		};
 		3C212CBDE4500DF1CB30B26C /* Frameworks */ = {
@@ -512,12 +546,13 @@
 		D41BE5BE292ABDD500826640 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				01B0AB3229CED72B001341E1 /* session */,
+				01B0AB3129CED70D001341E1 /* search */,
+				01B0AB3029CED6F7001341E1 /* company */,
 				D41BE5BF292ABDE400826640 /* ProfileType.swift */,
 				D41BE5C1292ABE0B00826640 /* UserAuthenticationModel.swift */,
 				D4C10262293B8C91004812C1 /* UserProfile.swift */,
 				D48D8CE9293CE5E400E72C0F /* ProfileEdit.swift */,
-				D4F0B79B29502C4900716FE3 /* SearchResult.swift */,
-				01A6393A29B6EFE00038B31A /* CompanyDetail.swift */,
 				01A6393C29B6F0B70038B31A /* Comment.swift */,
 				01A6393E29B6F0DC0038B31A /* Shuttle.swift */,
 				01A6394029B6F1260038B31A /* User.swift */,
@@ -612,6 +647,7 @@
 				D4C6F96B29503F6B00DAA1E7 /* ShuttleasyDateFormatter.swift */,
 				01A2B7E529A22C3300709F30 /* TabLayoutMediator.swift */,
 				016B927429C3A3CC00207A38 /* MapExtensions.swift */,
+				01B0AB3729CEE0DD001341E1 /* Pair.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1158,6 +1194,7 @@
 				D4F0B79629502B6A00716FE3 /* SearchResultCell.swift in Sources */,
 				01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */,
 				017FE611299432DF000541D8 /* MainViewModel.swift in Sources */,
+				01B0AB3429CED73D001341E1 /* SessionPickListModel.swift in Sources */,
 				01A2B7E629A22C3300709F30 /* TabLayoutMediator.swift in Sources */,
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
@@ -1201,6 +1238,7 @@
 				01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */,
 				01A6393D29B6F0B70038B31A /* Comment.swift in Sources */,
 				D4F591EA29214A2200125E90 /* SignInViewController.swift in Sources */,
+				01B0AB2F29CEC4C3001341E1 /* PickSessionsViewModel.swift in Sources */,
 				01E63A8729BAE4C400220865 /* Driver.swift in Sources */,
 				D4816DB72920E66300ECB799 /* ClosureSleeve.swift in Sources */,
 				D4FD012929481B47004F149E /* DriverDto.swift in Sources */,
@@ -1235,6 +1273,7 @@
 				D41BE5BD292ABA7800826640 /* UserNetworkDataSource.swift in Sources */,
 				D4816DBB2920F05B00ECB799 /* Type.swift in Sources */,
 				013FF25729C7A3D50050C063 /* PickupSelectionViewModel.swift in Sources */,
+				01B0AB3629CED7D4001341E1 /* SessionPickModel.swift in Sources */,
 				D4F3E19729352C6C00D10463 /* ResetPasswordViewModel.swift in Sources */,
 				01ADA1B629C94EAD0065BAE4 /* CompanyDetailDTO.swift in Sources */,
 				D4C10265293B9348004812C1 /* ProfileViewModel.swift in Sources */,
@@ -1249,6 +1288,7 @@
 				D4BDA02229515E3E008118F5 /* NetworkUtil.swift in Sources */,
 				D4C10263293B8C91004812C1 /* UserProfile.swift in Sources */,
 				D4C10268293BA6C3004812C1 /* ProfileEditViewController.swift in Sources */,
+				01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */,
 				01F36CC829AD46250039E12D /* CompanyHeaderCell.swift in Sources */,
 				D406C0D42937CB5700BC5F0C /* ProfileViewController.swift in Sources */,
 				D415A2CE294E35CC00564E53 /* SendOtpEmailDto.swift in Sources */,

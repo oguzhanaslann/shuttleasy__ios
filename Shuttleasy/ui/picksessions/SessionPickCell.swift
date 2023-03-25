@@ -19,8 +19,6 @@ class SessionPickCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
         contentView.addSubview(button)
         button.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -38,12 +36,4 @@ class SessionPickCell: UICollectionViewCell {
         button.isSelected = pickModel.isSelected
         button.isEnabled = pickModel.isEnabled
     }
-}
-
-
-struct SessionPickModel {
-    let sessionId : Int
-    let isSelected: Bool
-    let isEnabled : Bool
-    let sessionTitle: String
 }

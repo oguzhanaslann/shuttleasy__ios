@@ -317,7 +317,7 @@ class Injector {
         return container.resolve(CompanyRepository.self)!
     }
 
-    //injectPickupSelectionViewModel
+
     func injectPickupSelectionViewModel() -> PickupSelectionViewModel {
         registerDependencyIfNotRegistered(
             dependency: PickupSelectionViewModel.self,
@@ -329,5 +329,17 @@ class Injector {
         )
         
         return container.resolve(PickupSelectionViewModel.self)!
+    }
+
+
+    func injectPickSessionsViewModel() -> PickSessionsViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: PickSessionsViewModel.self,
+            onRegisterNeeded: { resolver in
+                PickSessionsViewModel()
+            }
+        )
+        
+        return container.resolve(PickSessionsViewModel.self)!
     }
 }

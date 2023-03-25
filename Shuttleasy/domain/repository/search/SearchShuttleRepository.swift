@@ -66,6 +66,54 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                             SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
                             SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
                         ]
+                    ),
+                    SessionPickListModel(
+                        dayName: "Name",
+                        sessionPickList: [
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
+                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                        ]
+                    ),
+                    SessionPickListModel(
+                        dayName: "Name",
+                        sessionPickList: [
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
+                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                        ]
+                    ),
+                    SessionPickListModel(
+                        dayName: "Name",
+                        sessionPickList: [
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
+                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                        ]
+                    ),
+                    SessionPickListModel(
+                        dayName: "Name",
+                        sessionPickList: [
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
+                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                        ]
                     )
                 ]
             )

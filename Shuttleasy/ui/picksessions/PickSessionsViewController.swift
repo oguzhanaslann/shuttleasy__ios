@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Combine
 
 struct PickSessionsArgs {
     let companyId : Int
@@ -15,12 +17,17 @@ struct PickSessionsArgs {
 
 class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     
+    private let viewModel = Injector.shared.injectPickSessionsViewModel()
+    private var sessionPickListObserver : AnyCancellable? = nil
+    
     private let args : PickSessionsArgs
+    private var sessionPickModelList :  [SessionPickListModel] = []
 
     private let tableView: UITableView = BaseUITableView()
     
     init(args : PickSessionsArgs){
         self.args = args
+        viewModel.setSessionModels(args.sessionPickModel)
         super.init(nibName: nil, bundle: nil)
     }
        
@@ -28,9 +35,15 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
         fatalError()
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Pick your sessions"
+        initViews()
+        subscribeObervers()
+    }
+
+    private func initViews() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,6 +55,41 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
         }
     }
     
+    private func subscribeObervers() {
+        sessionPickListObserver = viewModel.sessionModelListPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveValue: { [weak self] pickModelList in
+                    self?.sessionPickModelList = pickModelList.first
+                    self?.reloadDataOfSessions(pickModelList)
+                    self?.tableView.layoutIfNeeded()
+                }
+            )
+    }
+    
+    private func reloadDataOfSessions(_ pickModelList: Pair<[SessionPickListModel], Int?>) {
+        if let updateIndex =  pickModelList.second {
+            self.reloadDataAndKeepScrollState(updateIndex)
+        } else {
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func reloadDataAndKeepScrollState(_ updateIndex: Int) {
+        let cell = self.tableView.cellForRow(
+            at: IndexPath(row: updateIndex, section: 0)
+        ) as? SessionListCell
+        
+        let collectionView = cell?.sessionTimeCollectionView
+        let scrollState = collectionView?.contentOffset
+        
+        tableView.reloadRows(at: [IndexPath(row: updateIndex, section: 0)], with: .none)
+        
+        if let scrollState = scrollState {
+            collectionView?.layoutIfNeeded()
+            collectionView?.setContentOffset(scrollState, animated: false)
+        }
+    }
     
     override func getNavigationBarBackgroundColor() -> UIColor {
         return .clear
@@ -67,7 +115,7 @@ extension PickSessionsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return args.sessionPickModel.count
+        return sessionPickModelList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,9 +128,9 @@ extension PickSessionsViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
-        statusCell.delegate = self
+        statusCell.setDelegate(self, at: indexPath.row)
         statusCell.configure(
-            with: args.sessionPickModel[indexPath.row]
+            with: sessionPickModelList[indexPath.row]
         )
 
         return statusCell
@@ -90,7 +138,7 @@ extension PickSessionsViewController : UITableViewDataSource {
 }
 
 extension PickSessionsViewController: SessionListCellDelegate {
-    func didSelectSession(atRow: Int) {
-        print("didSelectSession atRow: \(atRow)")
+    func didSelectSession(atRow: Int, atTablePosition: Int) {
+        viewModel.onSessionToggleReceive(pickModelIndex: atTablePosition, sessionIndex: atRow)
     }
 }

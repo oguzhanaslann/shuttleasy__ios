@@ -22,11 +22,12 @@ class SessionListCell : BaseTableViewCell, UICollectionViewDelegate, UICollectio
         frame: .zero,
         collectionViewLayout: .init()
     )
-    
 
     private var sessionPickList : [SessionPickModel] = []
     
-    weak var delegate : SessionListCellDelegate? = nil
+    private weak var delegate : SessionListCellDelegate? = nil
+    
+    private var position: Int? =  nil
 
     required init?(coder: NSCoder) {
         fatalError()
@@ -74,11 +75,14 @@ class SessionListCell : BaseTableViewCell, UICollectionViewDelegate, UICollectio
         
         sessionTimeCollectionView.reloadData()
     }
-}
-
-struct SessionPickListModel {
-    let dayName : String
-    let sessionPickList : [SessionPickModel]
+    
+    func setDelegate(
+        _ delegate: SessionListCellDelegate,
+        at position: Int
+    ) {
+        self.delegate = delegate
+        self.position = position
+    }
 }
 
 extension SessionListCell: UICollectionViewDataSource {
@@ -113,11 +117,11 @@ extension SessionListCell: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectSession(atRow: indexPath.row)
+        delegate?.didSelectSession(atRow: indexPath.row, atTablePosition: position ?? 0)
     }
 }
 
 
 protocol SessionListCellDelegate: AnyObject {
-    func didSelectSession(atRow: Int)
+    func didSelectSession(atRow: Int, atTablePosition: Int)
 }
