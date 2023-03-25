@@ -41,6 +41,7 @@ class UserInfoLocalDataSourceImpl :UserInfoLocalDataSource  {
     
     func saveUserAuthData(model: UserAuthenticationModel) async {
         await shuttleasyUserDefaults.saveUserAuthData(model: model)
+        memoryDataSource.setAuthToken(token: model.authenticationToken)
     }
 
     func saveAuthToken(token: String) async {

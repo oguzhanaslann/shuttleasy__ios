@@ -59,15 +59,16 @@ func newJSONEncoder() -> JSONEncoder {
 extension PassengerDto {
     func toUserAuthDTO() -> UserAuthDTO {
         return UserAuthDTO(
-            id: id ?? 0,
-            authenticationToken: token ?? "",
-            profileType: .passenger,
-            profilePic: profilePic ?? "",
-            name: name ?? "",
-            surname: surname ?? "",
-            phoneNumber: phoneNumber ?? "",
-            qrString: qrString ?? "",
-            email: email ?? ""
+           id: id ?? 0,
+           profilePic: profilePic ?? "",
+           name: name ?? "",
+           surname: surname ?? "",
+           phoneNumber: phoneNumber ?? "",
+           email: email ?? "",
+           city: "",
+           passengerAddress: "",
+           qrString: qrString ?? "",
+           token: token ?? ""
         )
     }
     

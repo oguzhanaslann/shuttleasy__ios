@@ -61,6 +61,11 @@ class ApiUrlManager {
         return baseApiUrl + "ShuttleSession/SearchShuttle"
     }
     
+    func getShuttleByGeoPoint() -> String {
+        return baseApiUrl + "ShuttleSession/GetShuttleByGeoPoint"
+    }
+    
+    
     func getAllGeopoints() -> String {
         return baseApiUrl + "GeoPoint/GetAllGeoPoint"
     }

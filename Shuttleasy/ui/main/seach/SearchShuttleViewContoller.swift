@@ -133,7 +133,10 @@ class SearchShuttleViewContoller: BaseViewController {
     }
 
     private func moveMapToSearchResultDestination(searchResult: [SearchResult]) {
-        let destination = searchResult.first!.destinationPoint.toCoordinate()
+        let firstResult = searchResult.first
+        let destinationPoint = firstResult?.destinationPoint
+        let coordinate = destinationPoint?.toCoordinate()
+        guard let destination = coordinate else { return }
         
         if !mapView.hasPinAt(destination) {
             mapView.addPinAt(destination)

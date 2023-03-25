@@ -9,7 +9,6 @@ import Foundation
 
 
 struct Comment {
-    let id : Int
     let comment : String
     let createdDate : String
     let user : User

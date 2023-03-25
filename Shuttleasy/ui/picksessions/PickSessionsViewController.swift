@@ -34,7 +34,6 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     required init(coder : NSCoder){
         fatalError()
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

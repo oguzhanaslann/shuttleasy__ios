@@ -39,5 +39,22 @@ class ShuttleasyDateFormatter {
         
         return outputString
     }
+
+
+    func tryFormattingDateString(
+        dateString : String? = nil,
+        inputFormat : String = ShuttleasyDateFormatter.format,
+        targetFormat : String = ShuttleasyDateFormatter.target
+    ) -> String {
+        if let dateString = dateString {
+            do {
+                return convertDateString(dateString: dateString, inputFormat: inputFormat, targetFormat: targetFormat)
+            } catch {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    }
 }
 

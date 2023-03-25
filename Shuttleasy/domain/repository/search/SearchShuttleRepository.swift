@@ -15,7 +15,7 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
     init(shuttleNetworkSource : ShuttleNetworkSource) {
         self.shuttleNetworkSource = shuttleNetworkSource
     }
-
+    
     func searchCompanyFor(destinationName: String) async -> Result<[SearchResult], Error> {
        do {
            let result : [SearchResult]
@@ -24,19 +24,8 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                 result = getDummySearchResults()
            } else {
                 let resultDto = try await shuttleNetworkSource.searchCompany(destinationName: destinationName)
-
-               result = resultDto.map({ element in
-                   SearchResult(
-                    companyId: element.companyID ?? SearchShuttleRepositoryImpl.NoCompanyId,
-                    title: "",
-                    imageUrl: "",
-                    destinationPoint: CGPoint(),
-                    rating: 4.8,
-                    totalRating: 0,
-                    //TODO: implement here,
-                    sessionPickModel: []
-                   )
-               })
+               
+               result = mapResultToSearchResult(resultDto)
            }
 
            return .success(result)
@@ -44,82 +33,49 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
            return .failure(parseProcessError(error))
        }
     }
-
-    private func getDummySearchResults()  -> [SearchResult] {
-        return [
+    
+    private func mapResultToSearchResult(_ resultDto: ShuttleSearchResultDTO) -> [SearchResult] {
+        return resultDto.map({ element in
             SearchResult(
-                companyId: SearchShuttleRepositoryImpl.NoCompanyId,
-                title: "Company Name",
+                companyId: element.companyDetail?.id ?? SearchShuttleRepositoryImpl.NoCompanyId,
+                title: element.companyDetail?.name ?? "",
                 imageUrl: "",
-                destinationPoint: CGPoint(x: 38.4189, y: 27.1287),
-                rating: 4.8,
-                totalRating: 0,
-                sessionPickModel: [
-                    SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),
-                    SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),
-                    SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),
-                    SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),
-                    SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: true, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    )
-                ]
+                destinationPoint: getDestinationPoint(element),
+                rating: element.companyDetail?.rating ?? 0.0,
+                totalRating: element.companyDetail?.votesNumber ?? 0,
+                sessionPickModel: sessionPickListModels(element.shuttleSessionDeparture)
             )
-        ]
+        })
     }
     
+    private func getDestinationPoint(_ result : ShuttleSearchResultDTOElement) -> CGPoint {
+        var destinationPoint : CGPoint = .init()
+        let deperature = result.shuttleSessionDeparture?.first(where: { deperature in
+            return deperature.latitude != nil && deperature.longitude != nil
+        })
+        
+        if let deperature = deperature {
+            destinationPoint = .init(
+                x: deperature.latitude?.toDoubleOrZero() ?? 0.0,
+                y: deperature.longitude?.toDoubleOrZero() ?? 0.0
+            )
+        }
+        
+        return destinationPoint
+    }
+    
+    
+    private func sessionPickListModels(_ depetures : [ShuttleSessionDeparture]?) -> [SessionPickListModel] {
+        
+        let sessionPickModels = depetures?.map { $0.toSessionPickModel() } ?? []
+        
+        return depetures?.map({
+            SessionPickListModel(
+                dayName: $0.sessionDate ?? "",
+                sessionPickList: sessionPickModels
+            )
+        }) ?? []
+    }
     
     func getDestinationPoints() async -> Result<[CGPoint], Error> {
         if shouldUseDummyData() {
@@ -130,22 +86,25 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
     }
     
     
-    private func getDestinationPointsDummyData()  -> [CGPoint] {
-        return [
-            CGPoint(x: 38.4189, y: 27.1287)
-        ]
-    }
-    
-    
     private func getDestinationPointsFromNetwork() async -> Result<[CGPoint], Error> {
         do {
             let destinationResult = try await shuttleNetworkSource.getDestinationPoints()
             let points = destinationResult
                 .filter({ dto in
+                    let length = dto.locationName?.count ?? 0
+                    return length > 0 
+                })
+                .filter({ dto in
                     dto.latitude != nil && dto.longtitude != nil
                 })
+                .map({ dto in
+                    Pair(first: dto.latitude!.toDoubleOrZero(), second: dto.longtitude!.toDoubleOrZero())
+                })
+                .filter({ coordinates in
+                    coordinates.first != 0.0 && coordinates.second != 0.0
+                })
                 .map { dto in
-                    CGPoint(x: dto.latitude!, y: dto.longtitude!)
+                    CGPoint(x: dto.first, y: dto.second)
                 }
 
             return .success(points)
@@ -162,19 +121,7 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
                 result = getDummySearchResults()
             } else {
                 let resultDto = try await shuttleNetworkSource.searchCompanyFor(destination: destination)
-
-                result = resultDto.map({ element in
-                    SearchResult(
-                        companyId: element.companyID ?? SearchShuttleRepositoryImpl.NoCompanyId,
-                        title: "",
-                        imageUrl: "",
-                        destinationPoint: CGPoint(),
-                        rating: 4.8,
-                        totalRating: 0,
-                        sessionPickModel: []
-                        //TODO: implement here
-                    )
-                })
+                result = mapResultToSearchResult(resultDto)
             }
 
             return .success(result)
@@ -183,4 +130,22 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
         }
     }
 
+}
+
+extension ShuttleSessionDeparture {
+    func toSessionPickModel() -> SessionPickModel {
+        return SessionPickModel(
+            sessionId: id ?? randomPositiveInt(),
+            isSelected: false,
+            isEnabled: true,
+            sessionTitle: ShuttleasyDateFormatter.shared.tryFormattingDateString(
+                dateString: self.startTime,
+                targetFormat: "HH:mm"
+            )
+        )
+    }
+
+    private func randomPositiveInt() -> Int {
+        return Int.random(in: 1..<1000)
+    }
 }

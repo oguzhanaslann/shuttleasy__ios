@@ -32,10 +32,18 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
             if shouldUseDummyData() {
                 authDTO = dummyUserAuthDto(isDriver : isDriver)
             } else {
-                authDTO = try await networkDatasource.signInUser(email: email, password: password,isDriver : isDriver)
+                authDTO = try await networkDatasource.signInUser(
+                    email: email,
+                    password: password,
+                    isDriver : isDriver
+                )
             }
             
-            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+            await localDatasource.saveUserAuthData(
+                model: authDTO.toUserAuthenticationModel(
+                    profileType: getProfileType(from : isDriver)
+                )
+            )
             await localDatasource.setAsLoggedIn()
             
             return .success(true)
@@ -44,27 +52,11 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         }
     }
     
-    private func dummyUserAuthDto(isDriver:Bool) -> UserAuthDTO {
-        let profileType: ProfileType
-        
-        if isDriver {
-            profileType = .driver
-        } else {
-            profileType = .passenger
-        }
-
-        return UserAuthDTO(
-            id: 1,
-            authenticationToken: "",
-            profileType : profileType,
-            profilePic: "",
-            name: "Oguzhan",
-            surname: "Aslan",
-            phoneNumber: "5398775750",
-            qrString: "",
-            email: "sample@gmail.com"
-        )
+    private func getProfileType(from isDriver: Bool) -> ProfileType {
+        return isDriver ? .driver : .passenger
     }
+    
+
     
     func signUpUser(
         email: String,
@@ -88,7 +80,9 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
                 )
             }
 
-            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
+            await localDatasource.saveUserAuthData(
+                model: authDTO.toUserAuthenticationModel(profileType: .driver)
+            )
             await localDatasource.setAsLoggedIn()
             
             return .success(true)
@@ -136,17 +130,6 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     
     func resetPassword(email : String, password: String) async -> Result<Bool,Error> {
         do {
-            let authDTO : UserAuthDTO
-
-            if shouldUseDummyData() {
-                authDTO = dummyUserAuthDto(isDriver : false)
-            } else {
-                try await networkDatasource.resetPassword(email: email, password: password)
-                authDTO = dummyUserAuthDto(isDriver : false) //TODO: implement here log in user 
-            }
-
-            await localDatasource.saveUserAuthData(model: authDTO.toUserAuthenticationModel())
-            await localDatasource.setAsLoggedIn()
             return .success(true)
         } catch {
             return .failure(parseProcessError(error))

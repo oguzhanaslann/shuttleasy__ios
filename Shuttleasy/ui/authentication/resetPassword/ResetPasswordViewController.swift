@@ -138,7 +138,7 @@ class ResetPasswordViewController: BaseViewController {
                 result.onSuccess { resetted in
                     if resetted.data {
                         self?.showInformationSnackbar(message: "Password resetted successfully")
-                        self?.navigateToMainpage()
+                        self?.navigateToSignIn()
                     } else {
                         self?.showErrorSnackbar(message: "Password reset failed")
                     }
@@ -148,7 +148,7 @@ class ResetPasswordViewController: BaseViewController {
             }
     }
 
-    func navigateToMainpage() {
+    func navigateToSignIn() {
         Navigator.shared.navigate(
             from: self,
             to: .signIn,

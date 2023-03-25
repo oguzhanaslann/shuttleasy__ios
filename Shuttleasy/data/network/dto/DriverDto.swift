@@ -36,14 +36,15 @@ extension DriverDto {
     func toUserAuthDTO() -> UserAuthDTO {
         return UserAuthDTO(
             id: id,
-            authenticationToken: token,
-            profileType: .driver,
             profilePic: profilePic,
             name: name,
             surname: surname,
             phoneNumber: phoneNumber,
+            email: email,
+            city: "",
+            passengerAddress: "",
             qrString: "",
-            email: email
+            token: token
         )
     }
     

@@ -231,3 +231,10 @@ extension UICollectionView {
         self.backgroundColor = .clear
     }
 }
+
+// String? -  Extension : toDoubleOrZero , safe cast to Double
+extension String {
+    func toDoubleOrZero() -> Double {
+        return Double(self) ?? 0
+    }
+}

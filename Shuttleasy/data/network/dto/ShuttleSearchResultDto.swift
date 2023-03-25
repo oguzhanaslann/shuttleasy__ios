@@ -11,18 +11,29 @@ import Alamofire
 typealias ShuttleSearchResultDTO = [ShuttleSearchResultDTOElement]
 
 struct ShuttleSearchResultDTOElement: Codable {
-    let id: Int?
-    let companyID: Int?
-    let busID: Int?
-    let passengerCount: Int?
+    let companyDetail: CompanyDTO?
+    let shuttleSessionDeparture: [ShuttleSessionDeparture]?
+    let shuttleSessionReturn: [ShuttleSessionDeparture]?
+    
+    enum CodingKeys: String, CodingKey {
+        case companyDetail = "companyDetail"
+        case shuttleSessionDeparture = "shuttleSessionDeparture"
+        case shuttleSessionReturn = "shuttleSessionReturn"
+    }
+}
+
+struct ShuttleSessionDeparture: Codable {
+    let id, companyID, busID, passengerCount: Int?
     let startTime: String?
     let driverID: Int?
     let isActive: Bool?
-    let startGeopoint: Int?
-    let finalGeopoint: Int?
-    let destinationName: String?
-    let returning: Bool?
+    let longitude, latitude, destinationName: String?
+    let shuttleSessionDepartureReturn: Bool?
     let sessionDate: String?
+    let capacity: Int?
+    let busModel, licensePlate: String?
+    let state: Bool?
+
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -32,10 +43,14 @@ struct ShuttleSearchResultDTOElement: Codable {
         case startTime = "startTime"
         case driverID = "driverId"
         case isActive = "isActive"
-        case startGeopoint = "startGeopoint"
-        case finalGeopoint = "finalGeopoint"
+        case longitude = "longitude"
+        case latitude = "latitude"
         case destinationName = "destinationName"
-        case returning = "return"
+        case shuttleSessionDepartureReturn = "return"
         case sessionDate = "sessionDate"
+        case capacity = "capacity"
+        case busModel = "busModel"
+        case licensePlate = "licensePlate"
+        case state = "state"
     }
 }

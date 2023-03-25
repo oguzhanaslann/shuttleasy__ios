@@ -9,8 +9,8 @@ import Foundation
 
 struct DestinationDTO: Codable {
     let id: Int?
-    let latitude: Double?
-    let longtitude: Double?
+    let latitude: String?
+    let longtitude: String?
     let locationName: String?
 
     enum CodingKeys: String, CodingKey {

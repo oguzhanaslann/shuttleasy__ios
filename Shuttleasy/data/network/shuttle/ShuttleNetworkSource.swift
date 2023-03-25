@@ -37,8 +37,14 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
     }
     
     func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO {
-        //TODO: Implement here
-        throw NSError(domain: "Not implemented", code: 0, userInfo: nil)
+        let param = ApiParameters()
+            .build()
+        
+        return try await apiService.postRequestAsync(
+            type: ShuttleSearchResultDTO.self,
+            url: ApiUrlManager.shared.getShuttleByGeoPoint(),
+            parameters:param
+        )
     }
     
     func getDestinationPoints() async throws -> [DestinationDTO] {
