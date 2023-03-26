@@ -11,11 +11,12 @@ import MapKit
 extension MKMapViewDelegate {
     func customPin(viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-        annotationView.canShowCallout = true
+        
         if let image = resImage(name: "pinBlue") {
             annotationView.image = image
         }
         
+        annotationView.canShowCallout = false
         return annotationView
     }
     

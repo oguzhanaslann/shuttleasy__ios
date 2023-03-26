@@ -13,10 +13,15 @@ protocol CompanyRepository {
         companyId: Int,
         destinationPoint: CGPoint
     ) async -> Result<PickupAreas,Error>
+    
+    func enrollUserTo(
+        sessions: [Int],
+        pickUpLocation: CGPoint
+    ) async -> Result<Void,Error>
 }
 
 class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
-    
+
     private let shuttleNetworkSource : ShuttleNetworkSource
     
     init(shuttleNetworkSource : ShuttleNetworkSource) {
@@ -98,13 +103,11 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
         }
     }
 
-    private func getDummyPickupAreas(_ point: CGPoint) -> PickupAreas {
-        return [
-                [
-                    CGPoint(x: point.x - 0.005, y: point.y - 0.005),
-                    CGPoint(x: point.x - 0.005, y: point.y + 0.005),
-                    CGPoint(x: point.x + 0.005, y: point.y + 0.005),
-                ]
-           ]
+    func enrollUserTo(sessions: [Int], pickUpLocation: CGPoint) async -> Result<Void, Error> {
+        if shouldUseDummyData() {
+            return .success(())
+        } else {
+            return .failure( NSError(domain: "Not implemented", code: 0, userInfo: nil))
+        }
     }
 }

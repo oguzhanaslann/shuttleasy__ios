@@ -109,14 +109,7 @@ class SearchShuttleViewContoller: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
-                    switch completion {
-                        case .failure(let error):
-                            print(error)
-                            self?.showErrorSnackbar(message: error.localizedDescription)
-                        case .finished:
-                            print("finished")
-                            break
-                        }
+                    self?.handleCompletion(completion)
                 },
                 receiveValue: { [weak self] searchState in
                     searchState.onLoading {
@@ -156,14 +149,7 @@ class SearchShuttleViewContoller: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
-                    switch completion {
-                        case .failure(let error):
-                            print(error)
-                            self?.showErrorSnackbar(message: error.localizedDescription)
-                        case .finished:
-                            print("finished")
-                            break
-                        }
+                    self?.handleCompletion(completion)
                 },
                 receiveValue: { [weak self] destinationPoints in
                     destinationPoints.onSuccess { destinationPointData in
@@ -180,6 +166,10 @@ class SearchShuttleViewContoller: BaseViewController {
         if fpc.state == .hidden || fpc.state == .tip {
             fpc.move(to: .half, animated: true)        
         }
+    }
+    
+    private func collapseFloatingPanel() {
+        fpc.move(to: .tip, animated: true)
     }
 }
 

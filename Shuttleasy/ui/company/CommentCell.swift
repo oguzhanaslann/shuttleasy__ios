@@ -11,11 +11,11 @@ import UIKit
 class CommentCell: BaseTableViewCell {
     public static let identifier = "CommentCell"
 
-    let commenterName = LabelLarge(text: "John doe", color: onSurfaceColor)
+    let commenterName = LabelLarge(color: onSurfaceColor)
     
-    let comment = BodyMedium(text : "", color : onSurfaceColor)
+    let comment = BodyMedium(color : onSurfaceColor)
     
-    let commentSendDate = LabelSmall(text: "01/01/2020", color: onSurfaceVariant)
+    let commentSendDate = LabelSmall(color: onSurfaceVariant)
 
     let commenterProfilePhoto =  UIImageView(image : UIImage(named: "shuttle_placeholder"))
         

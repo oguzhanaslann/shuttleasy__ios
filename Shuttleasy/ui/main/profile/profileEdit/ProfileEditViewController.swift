@@ -321,13 +321,8 @@ class ProfileEditViewController: BaseViewController {
         userProfileObserver = profileEditViewModel.userProfilePublisher
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            self.showErrorSnackbar(message: error.localizedDescription)
-                    }
+                receiveCompletion: {[weak self] completion in
+                    self?.handleCompletion(completion)
                 }, receiveValue: { profileState in
                         profileState.onSuccess { [weak self] profileData in
                             let profile = profileData.data
@@ -345,13 +340,8 @@ class ProfileEditViewController: BaseViewController {
         editProfileObserver = profileEditViewModel.editProfilePublisher
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            self.showErrorSnackbar(message: error.localizedDescription)
-                    }
+                receiveCompletion: { [weak self] completion in
+                    self?.handleCompletion(completion)
                 }, receiveValue: { [weak self] editProfileState in
                     switch editProfileState {
                         case .proccessing:

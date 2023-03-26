@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+import Combine
 
 extension UIScrollView {
     func scrollTo(horizontalPage : Int = 0, verticalPage: Int = 0, animated : Bool = true) {
@@ -113,13 +114,18 @@ extension UIViewController {
     
     func showInformationSnackbar(message : String, duration : SnackBar.Duration = .lengthShort ) {
         SnackBar
-            .make(in: self.view, message: message, duration: duration, styleBuilder: {
-                var style = SnackBarStyle()
-                style.textColor = onPrimaryColor
-                style.background = primaryColor
-                style.font = BodySmallFont()
-                return style
-            })
+            .make(
+                in: self.view,
+                message: message,
+                duration: duration,
+                styleBuilder: {
+                    var style = SnackBarStyle()
+                    style.textColor = onPrimaryColor
+                    style.background = primaryColor
+                    style.font = BodySmallFont()
+                    return style
+                }
+            )
         .show()
     }
     
@@ -143,9 +149,25 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    func handleCompletion(_ completion :  Subscribers.Completion<Error>) {
+        switch completion {
+            case .failure(let error):
+                self.showErrorSnackbar(message: error.localizedDescription)
+            case .finished:
+                break
+            }
+    }
+    
+    func handleCompletion(_ completion :  Subscribers.Completion<Never>) {
+        switch completion {
+            case .failure(let error):
+                self.showErrorSnackbar(message: error.localizedDescription)
+            case .finished:
+                break
+            }
+    }
 }
-
-
 
 extension UIImageView {
     func load(url: String) {

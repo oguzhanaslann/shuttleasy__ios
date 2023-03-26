@@ -9,6 +9,7 @@ class PickupSelectionViewController: BaseViewController {
     
     private let viewModel = Injector.shared.injectPickupSelectionViewModel()
     private var pickUpAreas : AnyCancellable? = nil
+    private var enrollObserver : AnyCancellable? = nil
 
     lazy var enrollButton : UIButton = {
         let button = LargeButton(titleOnNormalState: Localization.enroll.localized, backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
@@ -23,7 +24,7 @@ class PickupSelectionViewController: BaseViewController {
         return mapView
     }()
     
-    private lazy var centerView : UIView = {
+    private lazy var pickLocationView : UIView = {
         let imageView = resImageView(name: "pinYellow")
         return imageView
     }()
@@ -48,35 +49,28 @@ class PickupSelectionViewController: BaseViewController {
             destinationPoint: args.destinationPoint
         )
     }
-    
+       
     private func initViews() {
-        view.addSubview(mapView)
-        mapView.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
-            mapView.setCenter(args.destinationPoint.toCoordinate(), animated: true )
-        }
         initMap()
-
-        
-        view.addSubview(enrollButton)
-        enrollButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-32)
-            make.left.equalToSuperview().offset(32)
-            make.right.equalToSuperview().offset(-32)
-            make.height.equalTo(largeButtonHeight)
-        }
-        
-        enrollButton.setOnClickListener {
-            
-        }
-        
-        view.addSubview(centerView)
-        centerView.snp.makeConstraints { make in
+        initEnrollButton()
+        putPickLocationViewToCenter()
+    }
+    
+    private func putPickLocationViewToCenter() {
+        view.addSubview(pickLocationView)
+        pickLocationView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
     
     private func initMap(){
+        view.addSubview(mapView)
+        
+        mapView.snp.makeConstraints { make in
+            make.left.right.top.bottom.equalToSuperview()
+            mapView.setCenter(args.destinationPoint.toCoordinate(), animated: true )
+        }
+        
         mapView.delegate = self
         mapView.setCameraZoomRange(
             MKMapView.CameraZoomRange(minCenterCoordinateDistance: 10.0),
@@ -108,16 +102,52 @@ class PickupSelectionViewController: BaseViewController {
         }
     }
     
+    private func initEnrollButton() {
+        view.addSubview(enrollButton)
+        enrollButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-32)
+            make.left.equalToSuperview().offset(32)
+            make.right.equalToSuperview().offset(-32)
+            make.height.equalTo(largeButtonHeight)
+        }
+        
+        enrollButton.setOnClickListener {
+            self.viewModel.enrollUserToCompanySessions(
+                sessionIds: self.args.selectedSessionIds,
+                pickUpLocation: self.mapView.centerCoordinate.toCGPoint()
+            )
+        }
+    }
+    
     private func subscribeObservers() {
         pickUpAreas = viewModel.pickupAreaPublished
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                
+            .sink(receiveCompletion: {[weak self] completion in
+                self?.handleCompletion(completion)
             }, receiveValue: { pickUpState in
                 pickUpState.onSuccess {[weak self] data in
                     self?.drawDestinationPoints(pickupAreas: data.data)
                 }
             })
+
+        subscribeToEnrollObserver()
+    }
+
+    private func subscribeToEnrollObserver() {
+        enrollObserver = viewModel.enrollEventPublished
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {[weak self] completion in
+                self?.handleCompletion(completion)
+            }, receiveValue: { enrollState in
+                    enrollState.onSuccess {[weak self] data in
+                        self?.showInformationSnackbar(message: "You have enrolled successfully")
+                        self?.navigationController?.popToRootViewController(animated: true)
+                        self?.navigationController?.dismiss(animated: true, completion: nil)
+                    }.onError {[weak self] error in
+                        self?.showErrorSnackbar(message: error)
+                    }
+                }
+            )
     }
 
     override func shouldSetStatusBarColor() -> Bool {
@@ -170,4 +200,3 @@ extension PickupSelectionViewController: MKMapViewDelegate {
         enrollButton.isEnabled = isCenterPinInAnyArea
     }
 }
-

@@ -178,4 +178,14 @@ extension BaseRepository {
         )
     }
     
+    
+    internal func getDummyPickupAreas(_ point: CGPoint) -> PickupAreas {
+        return [
+                [
+                    CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                    CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                    CGPoint(x: point.x + 0.005, y: point.y + 0.005),
+                ]
+           ]
+    }
 }

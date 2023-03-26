@@ -174,12 +174,7 @@ class CompanyDetailViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: {[weak self] completion in
-                    switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            self?.showErrorSnackbar(message: error.localizedDescription)
-                    }
+                    self?.handleCompletion(completion)
                 },
                 receiveValue: { [weak self] result in
                     result.onSuccess { data in

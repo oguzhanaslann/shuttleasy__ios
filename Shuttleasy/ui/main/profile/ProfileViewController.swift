@@ -420,13 +420,8 @@ class ProfileViewController: BaseViewController {
 
         userProfileObserver = profileViewModel.publisher
             .receive(on: DispatchQueue.main)
-            .sink( receiveCompletion: { completion in
-                switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        self.showErrorSnackbar(message: error.localizedDescription)
-                }
+            .sink( receiveCompletion: { [weak self] completion in
+                self?.handleCompletion(completion)
              }, receiveValue: { profileState in
                     profileState.onSuccess { [weak self] profileData in
                         let profile = profileData.data
@@ -452,14 +447,9 @@ class ProfileViewController: BaseViewController {
         userLogoutObserver = profileViewModel.userLogoutResultPublisher
             .receive(on: DispatchQueue.main)
             .sink( receiveCompletion: { [weak self] completion in
-                    switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            self?.showErrorSnackbar(message: error.localizedDescription)
-                    }
-                }, receiveValue: { _ in
-                    self.onUserLogout()
+                    self?.handleCompletion(completion)
+                }, receiveValue: {[weak self] _ in
+                    self?.onUserLogout()
                 }
             )
 

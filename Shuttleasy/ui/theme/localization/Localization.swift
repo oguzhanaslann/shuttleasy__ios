@@ -17,6 +17,8 @@ enum Localization : String {
     case shuttles = "shuttles"
     case enroll = "enroll"
     case next = "next"
+    case pickYourSessions = "pickYourSessions"
+
     
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

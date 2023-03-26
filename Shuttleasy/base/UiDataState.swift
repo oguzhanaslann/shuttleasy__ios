@@ -92,3 +92,15 @@ struct DataContent<Data> {
         return DataContent.init(data: data)
     }
 }
+
+
+extension Result {
+    func toUiDataState() -> UiDataState<Success> {
+        switch self {
+            case .success(let data):
+                return .Success(DataContent(data: data))
+            case .failure(let error):
+                return .Error(error.localizedDescription)
+        }
+    }
+}

@@ -49,7 +49,7 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Pick your sessions"
+        title = Localization.pickYourSessions.localized
         initViews()
         subscribeObervers()
     }
@@ -139,7 +139,7 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
             )
         )
     }
-    
+        
     override func getNavigationBarBackgroundColor() -> UIColor {
         return .clear
     }
