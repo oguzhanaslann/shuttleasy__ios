@@ -14,5 +14,6 @@ typealias PickupAreas = [Polygon]
 struct PickupSelectionArgs {
     let companyId: Int
     let destinationPoint : CGPoint
+    let selectedSessionIds : [Int]
     let pickupAreas: PickupAreas?
 }

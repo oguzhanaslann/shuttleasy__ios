@@ -33,7 +33,7 @@ class ToggleButton: DynamicColorButton {
     
     private func configureButton() {
         layer.borderWidth = 1
-        layer.cornerRadius = CGFloat(SHAPE_MEDIUM)
+        layer.cornerRadius = roundedMediumCornerRadius
     }
     
     private func getButtonColors() -> ButtonColors {
@@ -69,7 +69,7 @@ struct ToggleButtonColors {
         disabledColor: neutral80,
         onDisabledColor: neutral60,
         outlineColor: primaryColor,
-        disabledOutlineColor: .lightGray
+        disabledOutlineColor: neutral80
     )
     let unselectedColors : ButtonColors = ButtonColors(
         backgroundColor: .clear,
@@ -77,6 +77,6 @@ struct ToggleButtonColors {
         disabledColor: neutral80,
         onDisabledColor: neutral60,
         outlineColor: primaryColor,
-        disabledOutlineColor: .lightGray
+        disabledOutlineColor: neutral80
     )
 }

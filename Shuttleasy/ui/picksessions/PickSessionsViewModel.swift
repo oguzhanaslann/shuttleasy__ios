@@ -14,9 +14,17 @@ class PickSessionsViewModel : ViewModel {
     
     private let sessionModelListSubject : CurrentValueSubject<Pair<SessionPickOptions,Int?>, Never> = CurrentValueSubject(.init(first: [], second: nil))
     let sessionModelListPublisher : AnyPublisher<Pair<[SessionPickListModel],Int?>, Never>
+        
+    let selectedSessionsPublisher : AnyPublisher<[SessionPickModel], Never>
     
     init() {
         self.sessionModelListPublisher = sessionModelListSubject.eraseToAnyPublisher()
+        
+        selectedSessionsPublisher = sessionModelListSubject
+            .map { $0.first }
+            .map { $0.flatMap { $0.sessionPickList } }
+            .map { $0.filter { $0.isSelected } }
+            .eraseToAnyPublisher()
     }
     
     func setSessionModels(_ models : [SessionPickListModel]) {
@@ -54,5 +62,14 @@ class PickSessionsViewModel : ViewModel {
         sessionModelListSubject.send(
             .init(first: newList, second: pickModelIndex)
         )
+    }
+
+    func getSelectedSessionIds() -> [Int] {
+        return sessionModelListSubject.value
+            .first
+            .compactMap { $0.sessionPickList }
+            .flatMap { $0 }
+            .filter({ $0.isSelected })
+            .map { $0.sessionId }
     }
 }

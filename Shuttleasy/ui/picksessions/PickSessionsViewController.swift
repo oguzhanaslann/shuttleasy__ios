@@ -19,12 +19,24 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     
     private let viewModel = Injector.shared.injectPickSessionsViewModel()
     private var sessionPickListObserver : AnyCancellable? = nil
+    private var selectedSessionsObserver : AnyCancellable? = nil
     
     private let args : PickSessionsArgs
     private var sessionPickModelList :  [SessionPickListModel] = []
 
     private let tableView: UITableView = BaseUITableView()
     
+    private lazy var nextButton : DynamicColorButton = {
+        let nextButton = DynamicColorButton()
+        nextButton.setTitle(Localization.next.localized, for: .normal)
+        nextButton.setFont(LabelMediumFont())
+        nextButton.snp.makeConstraints { make in
+            make.width.greaterThanOrEqualTo(64)
+            make.height.equalTo(40)
+        }
+        return nextButton
+    }()
+
     init(args : PickSessionsArgs){
         self.args = args
         viewModel.setSessionModels(args.sessionPickModel)
@@ -55,6 +67,11 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     }
     
     private func subscribeObervers() {
+        subscribeToSessionModelsList()
+        subscribeToSelectedSessions()
+    }
+    
+    private func subscribeToSessionModelsList() {
         sessionPickListObserver = viewModel.sessionModelListPublisher
             .receive(on: DispatchQueue.main)
             .sink(
@@ -88,6 +105,39 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
             collectionView?.layoutIfNeeded()
             collectionView?.setContentOffset(scrollState, animated: false)
         }
+    }
+    
+    private func subscribeToSelectedSessions() {
+        selectedSessionsObserver = viewModel.selectedSessionsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveValue: { [weak self] selectedSessions in
+                    self?.nextButton.isEnabled = selectedSessions.count > 0
+                }
+            )
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onNextClicked))
+        nextButton.addGestureRecognizer(tapGesture)
+
+        let navButton = UIBarButtonItem(customView: nextButton)
+        navigationItem.rightBarButtonItem = navButton
+    }
+    
+    @objc func onNextClicked() {
+        Navigator.shared.navigate(
+            from: self,
+            to: .pickupSelection(
+                args: PickupSelectionArgs(
+                    companyId: args.companyId,
+                    destinationPoint: args.destinationPoint,
+                    selectedSessionIds: viewModel.getSelectedSessionIds(),
+                    pickupAreas: nil
+                )
+            )
+        )
     }
     
     override func getNavigationBarBackgroundColor() -> UIColor {

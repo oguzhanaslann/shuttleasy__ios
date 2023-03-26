@@ -12,20 +12,29 @@ class DynamicColorButton : UIButton {
     
     internal var buttonColors: ButtonColors = defaultButtonColors()
     
+    private var titleFont = ButtonFont()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initButton()
+        configureShape()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initButton()
+        configureShape()
     }
     
     convenience init(with colors: ButtonColors) {
         self.init(frame: CGRect.zero)
         self.buttonColors = colors
         initButton()
+        configureShape()
+    }
+    
+    private func configureShape() {
+        layer.cornerRadius = roundedSmallCornerRadius
     }
     
     internal func initButton() {
@@ -54,6 +63,22 @@ class DynamicColorButton : UIButton {
         }
     }
     
+    
+    override func setTitle(_ title: String?, for state: UIControl.State) {
+        super.setTitle(title, for: state)
+        applyFontToTitleIfPossible()
+    }
+    
+    private func applyFontToTitleIfPossible() {
+        if let label = self.titleLabel {
+            label.font = titleFont
+        }
+    }
+    
+    func setFont(_ newFont : UIFont) {
+        titleFont = newFont
+        applyFontToTitleIfPossible()
+    }
 }
 
 

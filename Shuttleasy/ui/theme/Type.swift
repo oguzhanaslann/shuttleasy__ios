@@ -152,13 +152,17 @@ func ButtonFont() -> UIFont {
 func LabelMedium(
     text : String = "",
     color : UIColor = .black,
-    font : UIFont  = UIFont.poppinsMedium(size: 14) ?? UIFont.systemFont(ofSize: 14)
+    font : UIFont  = LabelMediumFont()
 ) -> UILabel {
     let label = UILabel()
     label.text = text
     label.textColor = color
     label.font = font
     return label
+}
+
+func LabelMediumFont() -> UIFont {
+    return UIFont.poppinsMedium(size: 14) ?? UIFont.systemFont(ofSize: 14)
 }
 
 func LabelSmall(
