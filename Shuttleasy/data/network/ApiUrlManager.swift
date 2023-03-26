@@ -65,12 +65,15 @@ class ApiUrlManager {
         return baseApiUrl + "ShuttleSession/GetShuttleByGeoPoint"
     }
     
-    
     func getAllGeopoints() -> String {
         return baseApiUrl + "GeoPoint/GetAllGeoPoint"
     }
     
     func getCompany() -> String {
         return baseApiUrl + "Company/GetCompany"
+    }
+
+    func enrollToSessions() -> String {
+        return baseApiUrl + "ShuttleSession/EnrollPassengerMultipleSession"
     }
 }

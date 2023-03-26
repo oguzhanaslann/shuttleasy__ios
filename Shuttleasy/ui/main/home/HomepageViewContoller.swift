@@ -8,21 +8,31 @@
 import UIKit
 
 class HomepageViewContoller: BaseViewController {
+    
+    private var enrollNotificationObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Localization.home.localized
+        
+        subscribeToEnrollNotification()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func subscribeToEnrollNotification() {
+       enrollNotificationObserver = NotificationCenter.default.addObserver(
+            forName: notificationNamed(.enrolled),
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            // Handle the notification
+            print("Enrolled to shuttle")
+        }
     }
-    */
 
+
+    deinit {
+        if let enrollNotificationObserver = enrollNotificationObserver {
+            NotificationCenter.default.removeObserver(enrollNotificationObserver)
+        }
+    }
 }

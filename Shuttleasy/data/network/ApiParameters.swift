@@ -66,6 +66,32 @@ class ApiParameters {
         params["destinationName"] = destinationName
         return self
     }
+
+    func sessionIdList(_ sessionIdList: [Int]) -> ApiParameters {
+        params["sessionIdList"] = sessionIdList
+        return self
+    }
+
+    func longitude(_ longitude: String) -> ApiParameters {
+        params["longitude"] = longitude
+        return self
+    }
+
+    func latitude(_ latitude: String) -> ApiParameters {
+        params["latitude"] = latitude
+        return self
+    }
+
+    /** 
+        There is a typo in the API. So I had to create a new function for this.
+    */
+    func longtitude(_ longtitude: String) -> ApiParameters {
+        params["longtitude"] = longtitude
+        return self
+    }
+
+    
+
     
     func build() -> Parameters {
         return params

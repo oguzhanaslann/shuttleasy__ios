@@ -5,7 +5,7 @@ import MapKit
 import Combine
 
 
-class PickupSelectionViewController: BaseViewController {
+class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate {
     
     private let viewModel = Injector.shared.injectPickupSelectionViewModel()
     private var pickUpAreas : AnyCancellable? = nil
@@ -120,6 +120,11 @@ class PickupSelectionViewController: BaseViewController {
     }
     
     private func subscribeObservers() {
+        subscribeToPickUpAreas()
+        subscribeToEnrollObserver()
+    }
+    
+    private func subscribeToPickUpAreas() {
         pickUpAreas = viewModel.pickupAreaPublished
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] completion in
@@ -129,8 +134,6 @@ class PickupSelectionViewController: BaseViewController {
                     self?.drawDestinationPoints(pickupAreas: data.data)
                 }
             })
-
-        subscribeToEnrollObserver()
     }
 
     private func subscribeToEnrollObserver() {
@@ -140,14 +143,21 @@ class PickupSelectionViewController: BaseViewController {
                 self?.handleCompletion(completion)
             }, receiveValue: { enrollState in
                     enrollState.onSuccess {[weak self] data in
-                        self?.showInformationSnackbar(message: "You have enrolled successfully")
-                        self?.navigationController?.popToRootViewController(animated: true)
-                        self?.navigationController?.dismiss(animated: true, completion: nil)
+                        sendNotification(.enrolled)
+                        self?.showInformationSnackbar(
+                            message: Localization.enrolledSuccessCallout.localized,
+                            delegate: self
+                        )
                     }.onError {[weak self] error in
                         self?.showErrorSnackbar(message: error)
                     }
                 }
             )
+    }
+    
+    func onSnackbarDismissed() {
+        navigationController?.popToRootViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
     override func shouldSetStatusBarColor() -> Bool {

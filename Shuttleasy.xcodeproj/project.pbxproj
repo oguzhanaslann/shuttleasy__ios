@@ -34,6 +34,7 @@
 		01B0AB3629CED7D4001341E1 /* SessionPickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */; };
 		01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3729CEE0DD001341E1 /* Pair.swift */; };
 		01B0AB3A29CF3917001341E1 /* CompanyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3929CF3917001341E1 /* CompanyDetailDTO.swift */; };
+		01B0AB3E29D05B82001341E1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3D29D05B82001341E1 /* Event.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
@@ -198,6 +199,7 @@
 		01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickModel.swift; sourceTree = "<group>"; };
 		01B0AB3729CEE0DD001341E1 /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		01B0AB3929CF3917001341E1 /* CompanyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailDTO.swift; sourceTree = "<group>"; };
+		01B0AB3D29D05B82001341E1 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */,
 				01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */,
 				01D4FA8B29CCDF55009E9B61 /* BaseUICollectionView.swift */,
+				01B0AB3D29D05B82001341E1 /* Event.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				D4F3E1902934D09D00D10463 /* ResetCodeViewModel.swift in Sources */,
 				D4217A06293B622F004E4744 /* UiDataState.swift in Sources */,
 				D48D8CED293D097300E72C0F /* NotificationEvents.swift in Sources */,
+				01B0AB3E29D05B82001341E1 /* Event.swift in Sources */,
 				D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */,
 				D4C10261293B8C71004812C1 /* UserProfileDTO.swift in Sources */,
 				D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */,

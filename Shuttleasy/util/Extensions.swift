@@ -112,7 +112,11 @@ extension UIViewController {
         .show()
     }
     
-    func showInformationSnackbar(message : String, duration : SnackBar.Duration = .lengthShort ) {
+    func showInformationSnackbar(
+        message : String,
+        duration : SnackBar.Duration = .lengthShort,
+        delegate : SnackbarDismissDelegate? = nil
+    ) {
         SnackBar
             .make(
                 in: self.view,
@@ -126,6 +130,7 @@ extension UIViewController {
                     return style
                 }
             )
+        .setDelegate(delegate: delegate)
         .show()
     }
     

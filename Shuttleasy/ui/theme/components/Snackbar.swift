@@ -7,7 +7,6 @@ public protocol SnackBarAction {
 }
 
 public protocol SnackBarPresentable {
-    
     func show()
     func dismiss()
 }
@@ -50,6 +49,7 @@ open class SnackBar: UIView, SnackBarAction, SnackBarPresentable {
     private let message: String
     private let duration: Duration
     private var dismissTimer: Timer?
+    weak var delegate: SnackbarDismissDelegate? = nil
     
     required public init(contextView: UIView, message: String, duration: Duration) {
         self.contextView = contextView
@@ -185,13 +185,21 @@ open class SnackBar: UIView, SnackBarAction, SnackBarPresentable {
     }
     
     @objc public func dismiss() {
-
+        delegate?.onSnackbarDismissed()
         invalidDismissTimer()
-        
         animation(with: 200, completion: { _ in
             self.removeFromSuperview()
         })
     }
+
+    func setDelegate(delegate : SnackbarDismissDelegate?) -> Self {
+        self.delegate = delegate
+        return self
+    } 
+}
+
+protocol SnackbarDismissDelegate: AnyObject {
+    func onSnackbarDismissed() 
 }
 
 

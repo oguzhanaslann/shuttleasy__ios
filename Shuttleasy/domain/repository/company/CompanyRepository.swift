@@ -48,7 +48,6 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
     }
     
     private func getCompanyFrom(dto: CompanyDetailDTO) -> CompanyDetail {
-        //TODO: missing fields
         return CompanyDetail(
             id: dto.company?.id ?? 0  ,
             thumbnail: "",

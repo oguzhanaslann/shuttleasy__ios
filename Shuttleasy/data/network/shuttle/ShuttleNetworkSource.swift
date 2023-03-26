@@ -13,7 +13,10 @@ protocol ShuttleNetworkSource {
     func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO
     func getDestinationPoints() async throws -> [DestinationDTO]
     func getCompanyDetail(with id: Int) async throws -> CompanyDetailDTO
-    
+    func enrollToSessions(
+        pickupArea : CGPoint,
+        sessionIds : [Int]
+    ) async throws -> [Int]
 }
 
 class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
@@ -38,6 +41,8 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
     
     func searchCompanyFor(destination: CGPoint) async throws -> ShuttleSearchResultDTO {
         let param = ApiParameters()
+            .latitude("\(destination.x)")
+            .longtitude("\(destination.y)")
             .build()
         
         return try await apiService.postRequestAsync(
@@ -62,6 +67,21 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
         return try await apiService.postRequestAsync(
             type: CompanyDetailDTO.self,
             url: ApiUrlManager.shared.getCompany(),
+            parameters: param
+        )
+    }
+    
+    func enrollToSessions(pickupArea: CGPoint, sessionIds: [Int]) async throws -> [Int] {
+        
+        let param = ApiParameters()
+            .sessionIdList(sessionIds)
+            .latitude("\(pickupArea.x)")
+            .longitude("\(pickupArea.y)")
+            .build()
+        
+        return try await apiService.postRequestAsync(
+            type: [Int].self,
+            url: ApiUrlManager.shared.enrollToSessions(),
             parameters: param
         )
     }

@@ -10,7 +10,7 @@ import Foundation
 
 class BaseRepository {
     func shouldUseDummyData() -> Bool {
-        return true
+        return false
     }
 }
 
