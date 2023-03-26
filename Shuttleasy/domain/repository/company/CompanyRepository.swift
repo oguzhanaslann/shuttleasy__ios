@@ -50,7 +50,7 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
     private func getCompanyFrom(dto: CompanyDetailDTO) -> CompanyDetail {
         return CompanyDetail(
             id: dto.company?.id ?? 0  ,
-            thumbnail: "",
+            thumbnail: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2369&q=80",
             name: dto.company?.name ?? "",
             email: dto.company?.email ?? "",
             phone: dto.company?.phoneNumber ?? "",
@@ -101,12 +101,26 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
             return .failure( NSError(domain: "Not implemented", code: 0, userInfo: nil))
         }
     }
-
+    
     func enrollUserTo(sessions: [Int], pickUpLocation: CGPoint) async -> Result<Void, Error> {
         if shouldUseDummyData() {
             return .success(())
         } else {
-            return .failure( NSError(domain: "Not implemented", code: 0, userInfo: nil))
+            return await enrollUserToSessions(pickUpLocation, sessions)
+            
+        }
+    }
+    
+    private func enrollUserToSessions(_ pickUpLocation: CGPoint, _ sessions: [Int]) async -> Result<Void, Error>{
+        do {
+            let enrollResult = try await shuttleNetworkSource.enrollToSessions(
+                pickupArea: pickUpLocation,
+                sessionIds: sessions
+            )
+            
+            return .success(())
+        } catch {
+            return .failure(parseProcessError(error))
         }
     }
 }

@@ -342,4 +342,17 @@ class Injector {
         
         return container.resolve(PickSessionsViewModel.self)!
     }
+
+    func injectHomeViewModel() -> HomeViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: HomeViewModel.self,
+            onRegisterNeeded: { resolver in
+                HomeViewModel(
+                    userRepository: self.injectUserRepository()
+                )
+            }
+        )
+        
+        return container.resolve(HomeViewModel.self)!
+    }
 }

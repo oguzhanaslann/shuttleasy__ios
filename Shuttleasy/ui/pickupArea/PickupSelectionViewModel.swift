@@ -25,6 +25,7 @@ class PickupSelectionViewModel : ViewModel {
     }
     
     func getPickupAreasOf(company: Int, destinationPoint: CGPoint) {
+        print("getPickupAreasOf : \(company) - \(destinationPoint)")
         Task.init {
             let result = await self.companyRepository.getCompanyPickupAreas(
                 companyId: company,

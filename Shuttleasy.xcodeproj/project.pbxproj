@@ -35,6 +35,7 @@
 		01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3729CEE0DD001341E1 /* Pair.swift */; };
 		01B0AB3A29CF3917001341E1 /* CompanyDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3929CF3917001341E1 /* CompanyDetailDTO.swift */; };
 		01B0AB3E29D05B82001341E1 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3D29D05B82001341E1 /* Event.swift */; };
+		01B0AB4029D091F6001341E1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
@@ -200,6 +201,7 @@
 		01B0AB3729CEE0DD001341E1 /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		01B0AB3929CF3917001341E1 /* CompanyDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailDTO.swift; sourceTree = "<group>"; };
 		01B0AB3D29D05B82001341E1 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				D406C0CF2937CB2A00BC5F0C /* HomepageViewContoller.swift */,
+				01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -1260,6 +1263,7 @@
 				D47217072942D2C800216931 /* ProfileSetupViewController.swift in Sources */,
 				D4A62AE129340AFE00D02694 /* EmailPasswordResetViewModel.swift in Sources */,
 				D4FD012B29483ACD004F149E /* BaseRepository.swift in Sources */,
+				01B0AB4029D091F6001341E1 /* HomeViewModel.swift in Sources */,
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				01F36CC629AD45210039E12D /* CompanyContantCell.swift in Sources */,
 				D4F0B79E29502E8900716FE3 /* SearchShuttleViewModel.swift in Sources */,
