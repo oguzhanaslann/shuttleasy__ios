@@ -11,15 +11,16 @@ import Combine
 
 struct PickSessionsArgs {
     let companyId : Int
-    let destinationPoint: CGPoint
+    let pickUpPoint: CGPoint
     let sessionPickModel : [SessionPickListModel]
 }
 
-class PickSessionsViewController: BaseViewController, UITableViewDelegate {
+class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  UITableViewDelegate {
     
     private let viewModel = Injector.shared.injectPickSessionsViewModel()
     private var sessionPickListObserver : AnyCancellable? = nil
     private var selectedSessionsObserver : AnyCancellable? = nil
+    private var enrollObserver : AnyCancellable? = nil
     
     private let args : PickSessionsArgs
     private var sessionPickModelList :  [SessionPickListModel] = []
@@ -116,6 +117,30 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
                 }
             )
     }
+    
+    private func subscribeToEnrollObserver() {
+        enrollObserver = viewModel.enrollEventPublished
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: {[weak self] completion in
+                self?.handleCompletion(completion)
+            }, receiveValue: { enrollState in
+                    enrollState.onSuccess {[weak self] data in
+                        sendNotification(.enrolled)
+                        self?.showInformationSnackbar(
+                            message: Localization.enrolledSuccessCallout.localized,
+                            delegate: self
+                        )
+                    }.onError {[weak self] error in
+                        self?.showErrorSnackbar(message: error)
+                    }
+                }
+            )
+    }
+    
+    func onSnackbarDismissed() {
+        navigationController?.popToRootViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -127,17 +152,7 @@ class PickSessionsViewController: BaseViewController, UITableViewDelegate {
     }
     
     @objc func onNextClicked() {
-        Navigator.shared.navigate(
-            from: self,
-            to: .pickupSelection(
-                args: PickupSelectionArgs(
-                    companyId: args.companyId,
-                    destinationPoint: args.destinationPoint,
-                    selectedSessionIds: viewModel.getSelectedSessionIds(),
-                    pickupAreas: nil
-                )
-            )
-        )
+        viewModel.enrollUserToCompanySessions(pickUpLocation: args.pickUpPoint)
     }
         
     override func getNavigationBarBackgroundColor() -> UIColor {

@@ -91,21 +91,11 @@ class CompanyDetailViewController: BaseViewController {
 
     lazy var enrollButton : UIButton = {
         let button = LargeButton(
-            titleOnNormalState: "Enroll",
+            titleOnNormalState: Localization.enroll.localized,
             backgroundColor: primaryColor,
             titleColorOnNormalState: onPrimaryColor
         )
         
-        button.setOnClickListener {
-            Navigator.shared.navigate(from: self, to: Destination.picksessions(
-                args: PickSessionsArgs(
-                    companyId: self.args.companyId,
-                    destinationPoint: self.args.destinationPoint,
-                    sessionPickModel: self.args.sessionPickModel
-                    )
-                )
-            )
-        }
         return button
     }()
     
@@ -124,16 +114,9 @@ class CompanyDetailViewController: BaseViewController {
     private func initViews() {
         initHeaderSection()
         initAboutView()
-        
-        view.addSubview(enrollButton)
-        enrollButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.snp.bottom).offset(-32)
-            make.left.equalToSuperview().offset(32)
-            make.right.equalToSuperview().offset(-32)
-            make.height.equalTo(largeButtonHeight)
-        }
+        initEnrollButton()
     }
-    
+
     private func initHeaderSection() {
         view.addSubview(imageContainer)
         imageContainer.snp.makeConstraints { make in
@@ -166,6 +149,27 @@ class CompanyDetailViewController: BaseViewController {
             make.top.equalTo(imageContainer.snp.bottom)
             make.bottom.equalTo(view.snp.bottom)
             make.left.right.equalToSuperview()
+        }
+    }
+    
+    private func initEnrollButton() {
+        view.addSubview(enrollButton)
+        enrollButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom).offset(-32)
+            make.left.equalToSuperview().offset(32)
+            make.right.equalToSuperview().offset(-32)
+            make.height.equalTo(largeButtonHeight)
+        }
+        
+        enrollButton.setOnClickListener {
+            Navigator.shared.navigate(from: self, to: .pickupSelection(
+                args: PickupSelectionArgs(
+                        companyId: self.args.companyId,
+                        destinationPoint: self.args.destinationPoint,
+                        sessionPickModels: self.args.sessionPickModel                        
+                    )
+                )
+            )
         }
     }
 

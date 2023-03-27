@@ -73,7 +73,13 @@ class ApiUrlManager {
         return baseApiUrl + "Company/GetCompany"
     }
 
+
     func enrollToSessions() -> String {
         return baseApiUrl + "ShuttleSession/EnrollPassengerMultipleSession"
     }
+
+    func getShuttlePickUpAreas() -> String {
+        return baseApiUrl + "PickupArea/GetShuttlePickUpAreas"
+    }
+    
 }

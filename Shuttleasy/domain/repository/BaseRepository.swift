@@ -10,7 +10,7 @@ import Foundation
 
 class BaseRepository {
     func shouldUseDummyData() -> Bool {
-        return true
+        return false
     }
 }
 
@@ -179,13 +179,17 @@ extension BaseRepository {
     }
     
     
-    internal func getDummyPickupAreas(_ point: CGPoint) -> PickupAreas {
+    internal func getDummyPickupAreas(_ point: CGPoint) -> [PickupArea] {
         return [
-                [
-                    CGPoint(x: point.x - 0.005, y: point.y - 0.005),
-                    CGPoint(x: point.x - 0.005, y: point.y + 0.005),
-                    CGPoint(x: point.x + 0.005, y: point.y + 0.005),
-                ]
+                PickupArea(
+                    id: 0,
+                    sessionId: 0,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                )
            ]
     }
 }

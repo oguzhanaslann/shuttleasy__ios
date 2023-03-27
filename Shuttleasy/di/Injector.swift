@@ -336,7 +336,9 @@ class Injector {
         registerDependencyIfNotRegistered(
             dependency: PickSessionsViewModel.self,
             onRegisterNeeded: { resolver in
-                PickSessionsViewModel()
+                PickSessionsViewModel(
+                    companyRepository: self.injectCompanyRepository()
+                )
             }
         )
         

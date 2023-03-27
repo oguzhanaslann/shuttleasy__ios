@@ -8,15 +8,20 @@
 import Foundation
 import Combine
 
+struct EnrollResult{
+    let enrolledSessionIds: [Int]
+    let pickUpPoint : CGPoint
+}
+
 class PickupSelectionViewModel : ViewModel {
     
     private let companyRepository : CompanyRepository
     
-    private let pickupAreaSubject = CurrentValueSubject<UiDataState<PickupAreas>, Error>(UiDataState.Initial)
-    let pickupAreaPublished : AnyPublisher<UiDataState<PickupAreas>, Error>
+    private let pickupAreaSubject = CurrentValueSubject<UiDataState<[PickupArea]>, Error>(UiDataState.Initial)
+    let pickupAreaPublished : AnyPublisher<UiDataState<[PickupArea]>, Error>
 
-    private let enrollEventSubject = PassthroughSubject<UiDataState<Void>, Error>()
-    let enrollEventPublished : AnyPublisher<UiDataState<Void>, Error>
+    private let enrollEventSubject = PassthroughSubject<UiDataState<EnrollResult>, Error>()
+    let enrollEventPublished : AnyPublisher<UiDataState<EnrollResult>, Error>
     
     init(companyRepository: CompanyRepository) {
         self.companyRepository = companyRepository
@@ -24,34 +29,58 @@ class PickupSelectionViewModel : ViewModel {
         self.enrollEventPublished = enrollEventSubject.eraseToAnyPublisher()
     }
     
-    func getPickupAreasOf(company: Int, destinationPoint: CGPoint) {
-        print("getPickupAreasOf : \(company) - \(destinationPoint)")
+    func getPickupAreasOf(
+        destinationPoint: CGPoint,
+        sessionPickModel : [SessionPickListModel]
+    ) {
+        print("getPickupAreasOf : \(destinationPoint)")
         Task.init {
+            
+            let sessionIds = sessionPickModel
+                .flatMap {
+                    $0.sessionPickList.map{ $0.sessionId }
+                }
+            
             let result = await self.companyRepository.getCompanyPickupAreas(
-                companyId: company,
-                destinationPoint: destinationPoint
+                destinationPoint: destinationPoint,
+                sessionIds: sessionIds
             )
-
+            
             pickupAreaSubject.send(result.toUiDataState())
         }
     }
     
-    func getCurrentPickupAreas() -> PickupAreas? {
+    func getCurrentPickupAreas() -> [PickupArea]? {
         return pickupAreaSubject.value.getDataContent()?.data
     }
     
     
     func enrollUserToCompanySessions(
-        sessionIds: [Int],
-        pickUpLocation: CGPoint
+        pickUpPoint: CGPoint
     ) {
         Task.init {
-            let enrollResult = await self.companyRepository.enrollUserTo(
-                sessions: sessionIds,
-                pickUpLocation: pickUpLocation
+            
+            enrollEventSubject.send(.Loading)
+            
+            var sessionIds:  [Int] = []
+            
+            let currentAreas = getCurrentPickupAreas() ?? []
+            
+            for area in currentAreas {
+                if pickUpPoint.isInside(area.polygon) {
+                    sessionIds.append(area.sessionId)
+                }
+            }
+            
+           
+            let enrolledSessionResult: Result<EnrollResult, Never>  = Result.success(
+                EnrollResult(
+                    enrolledSessionIds: sessionIds,
+                    pickUpPoint: pickUpPoint
+                )
             )
-
-            enrollEventSubject.send(enrollResult.toUiDataState())
+            
+            enrollEventSubject.send(enrolledSessionResult.toUiDataState())
         }
     }
 }

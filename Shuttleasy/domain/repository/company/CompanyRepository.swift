@@ -10,9 +10,9 @@ import Foundation
 protocol CompanyRepository {
     func getCompanyDetail(with id: Int) async -> Result<CompanyDetail, Error>
     func getCompanyPickupAreas(
-        companyId: Int,
-        destinationPoint: CGPoint
-    ) async -> Result<PickupAreas,Error>
+        destinationPoint: CGPoint,
+        sessionIds: [Int]
+    ) async -> Result<[PickupArea],Error>
     
     func enrollUserTo(
         sessions: [Int],
@@ -91,14 +91,60 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
     
  
     func getCompanyPickupAreas(
-        companyId: Int,
-        destinationPoint: CGPoint
-    ) async -> Result<PickupAreas, Error> {
+        destinationPoint: CGPoint,
+        sessionIds: [Int]
+    ) async -> Result<[PickupArea], Error> {
         if shouldUseDummyData() {
             return .success(getDummyPickupAreas(destinationPoint))
         } else {
-            //TODO: implement network connection 
-            return .failure( NSError(domain: "Not implemented", code: 0, userInfo: nil))
+            return await getCompanyPickupAreasFromNetwork(sessionIds: sessionIds)
+        }
+    }
+    
+    func getCompanyPickupAreasFromNetwork(
+        sessionIds: [Int]
+    ) async -> Result<[PickupArea], Error> {
+        do {
+            let result = try await shuttleNetworkSource.getCompanyPickUpAreas(
+                sessionIds: sessionIds
+            )
+            
+            let resultsWithPolygon = result.map {
+                PickupArea(
+                    id: $0.id,
+                    sessionId: $0.sessionId,
+                    polygon: parseJsonPointTuples($0.polygonPoints) ?? []
+                )
+            }.filter {
+                !$0.polygon.isEmpty
+            }
+        
+            return .success(resultsWithPolygon)
+            
+        } catch {
+            return .failure(parseProcessError(error))
+        }
+    }
+    
+    
+    func parseJsonPointTuples(_ pointTupleJson: String) -> [CGPoint]? {
+        guard let data = pointTupleJson.data(using: .utf8) else { return nil }
+
+        do {
+            let coordinates = try JSONSerialization.jsonObject(with: data, options: []) as? [[Double]]
+            
+            guard let validCoordinates = coordinates else { return nil }
+            
+            var points: [CGPoint] = []
+            for coordinate in validCoordinates {
+                let point = CGPoint(x: coordinate[1], y: coordinate[0])
+                points.append(point)
+            }
+            
+            return points
+        } catch {
+            debugPrint("Error json parse: \(error.localizedDescription)")
+            return nil
         }
     }
     

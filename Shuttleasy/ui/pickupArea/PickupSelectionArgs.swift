@@ -8,12 +8,8 @@
 import Foundation
 import MapKit
 
-typealias Polygon = [CGPoint]
-typealias PickupAreas = [Polygon]
-
 struct PickupSelectionArgs {
     let companyId: Int
     let destinationPoint : CGPoint
-    let selectedSessionIds : [Int]
-    let pickupAreas: PickupAreas?
+    let sessionPickModels : [SessionPickListModel]
 }

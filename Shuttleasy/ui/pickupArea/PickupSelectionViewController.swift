@@ -5,14 +5,19 @@ import MapKit
 import Combine
 
 
-class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate {
+class PickupSelectionViewController: BaseViewController {
     
     private let viewModel = Injector.shared.injectPickupSelectionViewModel()
     private var pickUpAreas : AnyCancellable? = nil
     private var enrollObserver : AnyCancellable? = nil
 
     lazy var enrollButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: Localization.enroll.localized, backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: Localization.enroll.localized,
+            backgroundColor: primaryColor,
+            titleColorOnNormalState: onPrimaryColor
+        )
+        button.isEnabled = false
         return button
     }()
     
@@ -45,8 +50,8 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
         initViews()
         subscribeObservers()
         viewModel.getPickupAreasOf(
-            company: args.companyId,
-            destinationPoint: args.destinationPoint
+            destinationPoint: args.destinationPoint,
+            sessionPickModel: args.sessionPickModels
         )
     }
        
@@ -86,22 +91,9 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
         mapView.setRegion(region, animated: true)
         
         mapView.addPinAt(args.destinationPoint)
-        
-        if let polygons = args.pickupAreas {
-            drawDestinationPoints(pickupAreas: polygons)
-        }
     }
     
-    private func drawDestinationPoints(pickupAreas: PickupAreas) {
-        pickupAreas.forEach { pickupAreas in
-            let polygon = pickupAreas.map { point in
-                return point.toCoordinate()
-            }
 
-            mapView.addPolygon(polygon)
-        }
-    }
-    
     private func initEnrollButton() {
         view.addSubview(enrollButton)
         enrollButton.snp.makeConstraints { make in
@@ -113,8 +105,7 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
         
         enrollButton.setOnClickListener {
             self.viewModel.enrollUserToCompanySessions(
-                sessionIds: self.args.selectedSessionIds,
-                pickUpLocation: self.mapView.centerCoordinate.toCGPoint()
+                pickUpPoint: self.mapView.centerCoordinate.toCGPoint()
             )
         }
     }
@@ -135,7 +126,31 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
                 }
             })
     }
-
+    
+    private func drawDestinationPoints(pickupAreas: [PickupArea]) {
+        print("****pickupAreas \(pickupAreas)")
+        
+//        let point = CGPoint(x: 38.4189, y: 27.1287)
+//       let polygon =  [
+//            CGPoint(x: point.x - 0.005, y: point.y - 0.005).toCoordinate(),
+//
+//            CGPoint(x: point.x - 0.005, y: point.y + 0.005).toCoordinate(),
+//            CGPoint(x: point.x + 0.005, y: point.y + 0.005).toCoordinate(),
+//
+//            CGPoint(x: point.x - 0.005, y: point.y - 0.005).toCoordinate(),
+//        ]
+//        
+//        mapView.addPolygon(polygon)
+        
+        pickupAreas.forEach { pickupArea in
+            let polygon = pickupArea.polygon.map { point in
+                point.toCoordinate()
+            }
+            
+            mapView.addPolygon(polygon)
+        }
+    }
+    
     private func subscribeToEnrollObserver() {
         enrollObserver = viewModel.enrollEventPublished
             .receive(on: DispatchQueue.main)
@@ -143,10 +158,9 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
                 self?.handleCompletion(completion)
             }, receiveValue: { enrollState in
                     enrollState.onSuccess {[weak self] data in
-                        sendNotification(.enrolled)
-                        self?.showInformationSnackbar(
-                            message: Localization.enrolledSuccessCallout.localized,
-                            delegate: self
+                        self?.navigateToSessionPick(
+                            data.data.enrolledSessionIds,
+                            pickUpPoint: data.data.pickUpPoint
                         )
                     }.onError {[weak self] error in
                         self?.showErrorSnackbar(message: error)
@@ -155,11 +169,32 @@ class PickupSelectionViewController: BaseViewController, SnackbarDismissDelegate
             )
     }
     
-    func onSnackbarDismissed() {
-        navigationController?.popToRootViewController(animated: true)
-        navigationController?.dismiss(animated: true, completion: nil)
+    private func navigateToSessionPick(_ selectedArea: [Int], pickUpPoint: CGPoint) {
+        Navigator.shared.navigate(
+            from: self,
+            to: .picksessions(
+                args: PickSessionsArgs(
+                    companyId: args.companyId,
+                    pickUpPoint: pickUpPoint,
+                    sessionPickModel: getSessionPickListModel(selectedArea)
+                )
+            )
+        )
     }
-
+    
+    private func getSessionPickListModel(_ selectedAreaSessionIds : [Int])  -> [SessionPickListModel]{
+        return args.sessionPickModels.map { model in
+            SessionPickListModel(
+                dayName: model.dayName,
+                sessionPickList: model.sessionPickList.filter {
+                    selectedAreaSessionIds.contains($0.sessionId)
+                }
+            )
+        }.filter { sessionPickModel in
+            !sessionPickModel.sessionPickList.isEmpty
+        }
+    }
+    
     override func shouldSetStatusBarColor() -> Bool {
         return false
     }
@@ -197,7 +232,8 @@ extension PickupSelectionViewController: MKMapViewDelegate {
             return
         }
 
-        for polygon in pickupAreas {
+        for pickupArea in pickupAreas {
+            let polygon = pickupArea.polygon
             let contains = center.isInside(polygon)
             
             isCenterPinInAnyArea = contains

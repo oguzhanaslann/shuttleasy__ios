@@ -90,8 +90,10 @@ class ApiParameters {
         return self
     }
 
-    
-
+    func idList(_ idList: [Int]) -> ApiParameters {
+        params["idList"] = idList
+        return self
+    }
     
     func build() -> Parameters {
         return params

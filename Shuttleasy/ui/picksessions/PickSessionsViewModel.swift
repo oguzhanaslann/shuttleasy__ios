@@ -12,19 +12,29 @@ fileprivate typealias SessionPickOptions = [SessionPickListModel]
 
 class PickSessionsViewModel : ViewModel {
     
+    private let companyRepository : CompanyRepository
+    
     private let sessionModelListSubject : CurrentValueSubject<Pair<SessionPickOptions,Int?>, Never> = CurrentValueSubject(.init(first: [], second: nil))
     let sessionModelListPublisher : AnyPublisher<Pair<[SessionPickListModel],Int?>, Never>
         
     let selectedSessionsPublisher : AnyPublisher<[SessionPickModel], Never>
     
-    init() {
+    private let enrollEventSubject = PassthroughSubject<UiDataState<Void>, Error>()
+    let enrollEventPublished : AnyPublisher<UiDataState<Void>, Error>
+    
+    init(companyRepository : CompanyRepository) {
+        
+        self.companyRepository = companyRepository
         self.sessionModelListPublisher = sessionModelListSubject.eraseToAnyPublisher()
+        self.enrollEventPublished = enrollEventSubject.eraseToAnyPublisher()
         
         selectedSessionsPublisher = sessionModelListSubject
             .map { $0.first }
             .map { $0.flatMap { $0.sessionPickList } }
             .map { $0.filter { $0.isSelected } }
             .eraseToAnyPublisher()
+        
+        
     }
     
     func setSessionModels(_ models : [SessionPickListModel]) {
@@ -71,5 +81,23 @@ class PickSessionsViewModel : ViewModel {
             .flatMap { $0 }
             .filter({ $0.isSelected })
             .map { $0.sessionId }
+    }
+    
+    
+    
+    func enrollUserToCompanySessions(
+        pickUpLocation: CGPoint
+    ) {
+        Task.init {
+            enrollEventSubject.send(.Loading)
+
+            let sessionIds:  [Int] = getSelectedSessionIds()
+            let enrollResult = await self.companyRepository.enrollUserTo(
+                sessions: sessionIds,
+                pickUpLocation: pickUpLocation
+            )
+            
+            enrollEventSubject.send(enrollResult.toUiDataState())
+        }
     }
 }

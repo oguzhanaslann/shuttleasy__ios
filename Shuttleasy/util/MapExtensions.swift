@@ -127,5 +127,8 @@ extension CGPoint {
     func toCoordinate() -> CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: x, longitude: y)
     }
+    
+    func isEqualTo(_ other: CGPoint) -> Bool {
+        return self.x == other.x && self.y == other.y
+    }
 }
-
