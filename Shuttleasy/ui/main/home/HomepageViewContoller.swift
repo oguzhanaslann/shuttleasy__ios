@@ -15,17 +15,19 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
     
     private var enrollNotificationObserver: NSObjectProtocol?
     private var profileObserver : AnyCancellable? = nil
+    private var nextSessionObserver : AnyCancellable? = nil
+    private var activeSessionsObserver : AnyCancellable? = nil
         
     private let tableView: UITableView = BaseUITableView()
 
-    
     private var sections: [HomeSection] = []
-
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Localization.home.localized
         initViews()
         viewModel.getUserProfile()
+        viewModel.getActiveSessions()
         subscribeObserves()
     }
     
@@ -34,6 +36,9 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(GreetionSection.self, forCellReuseIdentifier: GreetionSection.identifier)
+        tableView.register(NextSessionCell.self, forCellReuseIdentifier: NextSessionCell.identifier)
+        tableView.register(HeaderCell.self, forCellReuseIdentifier: HeaderCell.identifier)
+        tableView.register(UpComingCell.self, forCellReuseIdentifier: UpComingCell.identifier)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -45,6 +50,8 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
     private func subscribeObserves() {
         subscribeToEnrollNotification()
         subscribeToProfile()
+        subscribeToNextSession()
+        subscribeToActiveSessions()
     }
 
     private func subscribeToEnrollNotification() {
@@ -53,8 +60,7 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
             object: nil,
             queue: .main
         ) { [weak self] notification in
-            // Handle the notification
-            print("Enrolled to shuttle")
+            self?.viewModel.getActiveSessions()
         }
     }
     
@@ -83,6 +89,15 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         
         newSection.append(section)
         
+        if newSection.contains(where: { $0 == .upComingSessions  }) {
+            if !newSection.contains(.upComingSessionHeader) {
+                newSection.append(.upComingSessionHeader)
+            }
+        } else {
+            newSection.removeAll(where: { $0 == .upComingSessionHeader })
+        }
+
+
         newSection.sort {
             $0.priority() < $1.priority()
         }
@@ -92,10 +107,53 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         tableView.reloadData()
     }
     
+
+    private func subscribeToNextSession() {
+        nextSessionObserver = viewModel.nextSessionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.handleCompletion(completion)
+                },
+                receiveValue: { [weak self] nextSession in
+                    self?.addSection(
+                        .nextSession(nextSessionModel: nextSession.toNextSessionModel())
+                    )
+                }
+            )
+    }
+        
+
+    private func subscribeToActiveSessions() {
+        activeSessionsObserver = viewModel.activeSessionsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    self?.handleCompletion(completion)
+                },
+                receiveValue: { [weak self] activeSessions in
+                    self?.addSection(.upComingSessions)
+                }
+            )
+    }
+
     deinit {
         if let enrollNotificationObserver = enrollNotificationObserver {
             NotificationCenter.default.removeObserver(enrollNotificationObserver)
         }
+    }
+}
+
+extension ActiveSession {
+    func toNextSessionModel() -> NextSessionModel {
+        return NextSessionModel(
+            sessionId: sessionId,
+            sessionBusPlateNumber: plateNumber,
+            destinationName: destinationName,
+            startDate: startDate,
+            startLocation: startLocation,
+            destinationLocation: endLocation
+        )
     }
 }
 
@@ -121,11 +179,34 @@ extension HomepageViewContoller : UITableViewDataSource {
                 greedingCard?.configure(userProfile)
                 
                 cell = greedingCard
-            case .nextSession:
-                cell = UITableViewCell()
+            case .nextSession(let nextSessionModel):
+                let nextSessionCell = tableView.dequeueReusableCell(
+                    withIdentifier: NextSessionCell.identifier,
+                    for: indexPath
+                ) as? NextSessionCell
+                
+                nextSessionCell?.configure(nextSessionModel)
+                
+                cell = nextSessionCell
+            case .upComingSessionHeader:
+                let headerCell  = tableView.dequeueReusableCell(
+                    withIdentifier: HeaderCell.identifier,
+                    for: indexPath
+                ) as? HeaderCell
+
+                headerCell?.setTitle(Localization.upCommingSessions.localized)
+                
+                cell = headerCell
             case .upComingSessions:
-                cell = UITableViewCell()
-        }
+                let upComingCell = tableView.dequeueReusableCell(
+                    withIdentifier: UpComingCell.identifier,
+                    for: indexPath
+                ) as? UpComingCell
+                
+                //upComingCell?.configure()
+                
+                cell = upComingCell
+            }
         
         
         
@@ -133,5 +214,7 @@ extension HomepageViewContoller : UITableViewDataSource {
         
         return cell
     }
+    
+    
     
 }

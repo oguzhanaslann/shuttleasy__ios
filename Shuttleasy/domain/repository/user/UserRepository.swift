@@ -15,5 +15,6 @@ protocol UserRepository {
     func logOut() async -> Result<Void, Error>
     func updateDarkModePreference(isDarkMode: Bool) async -> Result<Bool, Error>
     func getUserProfileType() async -> ProfileType
+    func getActiveSessions() async -> Result<[ActiveSession], Error> 
 }
 

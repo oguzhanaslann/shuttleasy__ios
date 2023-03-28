@@ -7,10 +7,16 @@
 
 import Foundation
 
-enum HomeSection {
+enum HomeSection: Equatable {
     case greeting(userProfile : UserProfile)
-    case nextSession
+    case nextSession(nextSessionModel: NextSessionModel)
+    case upComingSessionHeader
     case upComingSessions
+    
+    
+    static func == (lhs: HomeSection, rhs: HomeSection) -> Bool {
+        return lhs.priority() == rhs.priority()
+    }
 }
 
 
@@ -21,8 +27,10 @@ extension HomeSection {
                 return 0
             case .nextSession:
                 return 1
-            case .upComingSessions:
+            case .upComingSessionHeader:
                 return 2
+            case .upComingSessions:
+                return 3
         }
     }
 }

@@ -10,9 +10,10 @@ import UIKit
 import SnapKit
 
 func sectionHeader(
-    title : String,
+    title : String = "",
     contentColor : UIColor = onBackgroundColor,
-    textTag: Int? = nil
+    textTag: Int? = nil,
+    includeDivider : Bool = true
 ) -> UIView {
     let view = UIView()
     let label = LabelLarge(text: title, color : contentColor)
@@ -26,14 +27,17 @@ func sectionHeader(
         label.tag = tag 
     }
  
-    let line = lineView(color : contentColor)
-    view.addSubview(line)
-    line.snp.makeConstraints { make in
-        make.left.equalToSuperview()
-        make.right.equalToSuperview()
-        make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
-        make.height.equalTo(1)
+    if includeDivider {
+        let line = lineView(color : contentColor)
+        view.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
+            make.height.equalTo(1)
+        }
     }
+    
     return view
 }
 

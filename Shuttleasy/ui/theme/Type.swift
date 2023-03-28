@@ -225,3 +225,15 @@ func BodySmall(
 func BodySmallFont() -> UIFont {
     return UIFont.poppinsRegular(size: 12) ?? UIFont.systemFont(ofSize: 12)
 }
+
+func TitleSM(
+    text : String = "",
+    color : UIColor = .black,
+    font : UIFont  = UIFont.poppinsSemiBold(size: 14) ?? UIFont.systemFont(ofSize: 14)
+) -> UILabel {
+    let label = UILabel()
+    label.text = text
+    label.textColor = color
+    label.font = font
+    return label
+}
