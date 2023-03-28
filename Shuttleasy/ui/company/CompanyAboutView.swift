@@ -16,7 +16,6 @@ class CompanyAboutView: UIView {
     private var viewModel: CompanyDetailViewModel? = nil
     private var companyDetailObserver: AnyCancellable? = nil
     
-    
     private var companyDetail: CompanyDetail? = nil
     
     

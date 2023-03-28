@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C263D29A6CCAC00FE38EA /* CompanyAboutView.swift */; };
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
+		0130CC9D29D2ACA6001C9BF5 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130CC9C29D2ACA6001C9BF5 /* HomeSection.swift */; };
+		0130CCA029D2B059001C9BF5 /* GreetingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130CC9F29D2B059001C9BF5 /* GreetingSection.swift */; };
 		013FF25329C764A90050C063 /* RatingBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25229C764A90050C063 /* RatingBadge.swift */; };
 		013FF25529C795E90050C063 /* DestinationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25429C795E90050C063 /* DestinationDTO.swift */; };
 		013FF25729C7A3D50050C063 /* PickupSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FF25629C7A3D50050C063 /* PickupSelectionViewModel.swift */; };
@@ -178,6 +180,8 @@
 		0110307C29944F0900DE3268 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0110307F29944F3C00DE3268 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		0130CC9C29D2ACA6001C9BF5 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		0130CC9F29D2B059001C9BF5 /* GreetingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingSection.swift; sourceTree = "<group>"; };
 		013FF25229C764A90050C063 /* RatingBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingBadge.swift; sourceTree = "<group>"; };
 		013FF25429C795E90050C063 /* DestinationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDTO.swift; sourceTree = "<group>"; };
 		013FF25629C7A3D50050C063 /* PickupSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -371,6 +375,15 @@
 			path = localization;
 			sourceTree = "<group>";
 		};
+		0130CC9E29D2B042001C9BF5 /* homeSection */ = {
+			isa = PBXGroup;
+			children = (
+				0130CC9C29D2ACA6001C9BF5 /* HomeSection.swift */,
+				0130CC9F29D2B059001C9BF5 /* GreetingSection.swift */,
+			);
+			path = homeSection;
+			sourceTree = "<group>";
+		};
 		01A2B7E729A2461D00709F30 /* company */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +480,7 @@
 		D406C0CC2937CAD400BC5F0C /* home */ = {
 			isa = PBXGroup;
 			children = (
+				0130CC9E29D2B042001C9BF5 /* homeSection */,
 				D406C0CF2937CB2A00BC5F0C /* HomepageViewContoller.swift */,
 				01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */,
 			);
@@ -1222,6 +1236,7 @@
 				D42D0E922944793C00F3DA91 /* DeleteAccountViewModel.swift in Sources */,
 				01A6393F29B6F0DC0038B31A /* Shuttle.swift in Sources */,
 				010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */,
+				0130CC9D29D2ACA6001C9BF5 /* HomeSection.swift in Sources */,
 				D406C0D22937CB4B00BC5F0C /* SearchShuttleViewContoller.swift in Sources */,
 				D4A62ADF293409C700D02694 /* ViewGenerators.swift in Sources */,
 				01B0AB3A29CF3917001341E1 /* CompanyDetailDTO.swift in Sources */,
@@ -1311,6 +1326,7 @@
 				01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */,
 				01F36CC829AD46250039E12D /* CompanyHeaderCell.swift in Sources */,
 				D406C0D42937CB5700BC5F0C /* ProfileViewController.swift in Sources */,
+				0130CCA029D2B059001C9BF5 /* GreetingSection.swift in Sources */,
 				D415A2CE294E35CC00564E53 /* SendOtpEmailDto.swift in Sources */,
 				D406C0D02937CB2A00BC5F0C /* HomepageViewContoller.swift in Sources */,
 				D44D4D7A29413CC50024D0AC /* ApiUrlManager.swift in Sources */,
