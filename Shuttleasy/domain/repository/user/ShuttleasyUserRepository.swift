@@ -242,30 +242,39 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
        if shouldUseDummyData() {
            return .success(getDummyActiveSessions())
        } else {
-           return .failure(NSError(domain: "Not implemented", code: 0))
+           return await getActiveSessionsFromNetwork()
        }
-    }  
-
-    private func getDummyActiveSessions() -> [ActiveSession] {
-        return [
-            ActiveSession(
-                sessionId: 0,
-                plateNumber: "35SE3407",
-                destinationName: "Konak pier",
-                startDate: Date(),
-                startLocation: .init(),
-                endLocation: CGPoint(x: 38.4189, y: 27.1287),
-                isReturn: false
-            ),
-            ActiveSession(
-                sessionId: 1,
-                plateNumber: "35SE3407",
-                destinationName: "Konak pier",
-                startDate: Date().addingTimeInterval(60*60*24),
-                startLocation: .init(),
-                endLocation: CGPoint(x: 38.4189, y: 27.1287),
-                isReturn: false
-            )
-        ]
+    }
+    
+    private func getActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
+        do {
+            let activeSessionsDTO = try await networkDatasource.getActiveSessions()
+            
+            let activeSessions : [ActiveSession] = activeSessionsDTO.map { dto in
+                ActiveSession(
+                    sessionId: dto.id ?? 0 ,
+                    plateNumber: dto.licensePlate ?? "",
+                    destinationName: dto.destinationName ?? "",
+                    startDate: ShuttleasyDateFormatter.shared.tryParsingDateString(
+                        dateString: dto.startTime ?? ""
+                    ) ?? Date() ,
+                    startLocation: CGPoint(
+                        x: dto.latitudeStart?.toDoubleOrZero() ?? 0,
+                        y: dto.longitudeStart?.toDoubleOrZero() ?? 0
+                    ),
+                    endLocation: CGPoint(
+                        x: dto.latitudeFinal?.toDoubleOrZero() ?? 0  ,
+                        y: dto.longitudeFinal?.toDoubleOrZero() ?? 0
+                    ),
+                    isReturn: dto.isReturn ?? false
+                )
+            }
+            
+            return .success(activeSessions)
+            
+        } catch {
+            return .failure(parseProcessError(error))
+        }
     }
 }
+

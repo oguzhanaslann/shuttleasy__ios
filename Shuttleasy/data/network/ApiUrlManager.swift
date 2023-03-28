@@ -81,5 +81,10 @@ class ApiUrlManager {
     func getShuttlePickUpAreas() -> String {
         return baseApiUrl + "PickupArea/GetShuttlePickUpAreas"
     }
+
+
+    func getMyShuttleSessions() -> String {
+        return baseApiUrl + "Passenger/GetMyShuttleSessions"
+    }
     
 }

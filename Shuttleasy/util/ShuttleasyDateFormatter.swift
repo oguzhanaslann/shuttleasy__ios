@@ -65,5 +65,23 @@ class ShuttleasyDateFormatter {
         dateFormatter.dateFormat = targetFormat
         return dateFormatter.string(from: date)
     }
+
+    // try parsing date string in "format" to Date object
+    func tryParsingDateString(
+        dateString : String? = nil,
+        inputFormat : String = ShuttleasyDateFormatter.format
+    ) -> Date? {
+        if let dateString = dateString {
+            do {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = inputFormat
+                return dateFormatter.date(from: dateString)
+            } catch {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
 }
 

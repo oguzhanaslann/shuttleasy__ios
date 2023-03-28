@@ -33,9 +33,11 @@ protocol  UserNetworkDataSource {
     func getUserProfile(userId: Int,isDriver: Bool) async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO
     func deleteAccount(email: String, password: String) async throws -> Bool
+    func getActiveSessions() async throws -> ActiveSessionDTO
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
+
     let apiService: ApiService
 
     init(apiService: ApiService) {
@@ -223,6 +225,13 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             parameters: ApiParameters().email(email).password(password).build()
         )
         return fallible
+    }
+    
+    func getActiveSessions() async throws -> ActiveSessionDTO {
+        return try await apiService.postRequestAsync(
+            type: ActiveSessionDTO.self,
+            url: ApiUrlManager.shared.getMyShuttleSessions()
+        )
     }
 }
 
