@@ -84,25 +84,25 @@ extension CompanyAboutView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let commentCount = self.companyDetail?.comments.count ?? 0
-        return 4 + commentCount
+        return 3 + commentCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell?
             
         switch indexPath.row {
-        case 0:
-            
-            let statusCell =  tableView.dequeueReusableCell(
-                withIdentifier: CompanyStatusCell.identifier,
-                for: indexPath
-            ) as? CompanyStatusCell
-            
-            statusCell?.initialize(with: companyDetail)
-            
-            cell = statusCell
+//        case 0:
+//
+//            let statusCell =  tableView.dequeueReusableCell(
+//                withIdentifier: CompanyStatusCell.identifier,
+//                for: indexPath
+//            ) as? CompanyStatusCell
+//
+//            statusCell?.initialize(with: companyDetail)
+//
+//            cell = statusCell
 
-        case 1:
+        case 0:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyHeaderCell.identifier,
                 for: indexPath
@@ -112,7 +112,7 @@ extension CompanyAboutView : UITableViewDataSource {
                 header.setTitle(Localization.contact.localized)
             }
             
-        case 2:
+        case 1:
             let contentCell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyContentCell.identifier,
                 for: indexPath
@@ -122,7 +122,7 @@ extension CompanyAboutView : UITableViewDataSource {
 
             cell = contentCell
 
-        case 3:
+        case 2:
             cell = tableView.dequeueReusableCell(
                 withIdentifier: CompanyHeaderCell.identifier,
                 for: indexPath
@@ -138,7 +138,7 @@ extension CompanyAboutView : UITableViewDataSource {
                 for: indexPath
             ) as? CommentCell
 
-            commentCell?.initialize(with: companyDetail?.comments[indexPath.row - 4])
+            commentCell?.initialize(with: companyDetail?.comments[indexPath.row - 3])
 
             cell = commentCell
         }
