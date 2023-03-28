@@ -75,8 +75,8 @@ class UpComingCell : BaseTableViewCell {
         badgeView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(36)
-            make.width.equalTo(108)
+            make.height.equalTo(26)
+            make.width.equalTo(88)
         }
         
         

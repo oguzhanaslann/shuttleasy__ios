@@ -11,7 +11,7 @@ enum HomeSection: Equatable {
     case greeting(userProfile : UserProfile)
     case nextSession(nextSessionModel: NextSessionModel)
     case upComingSessionHeader
-    case upComingSessions
+    case upComingSessions(upComingSessions : UpComingSessionModel)
     
     
     static func == (lhs: HomeSection, rhs: HomeSection) -> Bool {

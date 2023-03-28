@@ -16,7 +16,7 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
     private var enrollNotificationObserver: NSObjectProtocol?
     private var profileObserver : AnyCancellable? = nil
     private var nextSessionObserver : AnyCancellable? = nil
-    private var activeSessionsObserver : AnyCancellable? = nil
+    private var upComingSessionObserver : AnyCancellable? = nil
         
     private let tableView: UITableView = BaseUITableView()
 
@@ -89,7 +89,7 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         
         newSection.append(section)
         
-        if newSection.contains(where: { $0 == .upComingSessions  }) {
+        if newSection.contains(where: { if case .upComingSessions = $0 { return true } else { return false } }){
             if !newSection.contains(.upComingSessionHeader) {
                 newSection.append(.upComingSessionHeader)
             }
@@ -125,14 +125,20 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         
 
     private func subscribeToActiveSessions() {
-        activeSessionsObserver = viewModel.activeSessionsPublisher
+        upComingSessionObserver = viewModel.upComingSessionsPublisher
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
                     self?.handleCompletion(completion)
                 },
-                receiveValue: { [weak self] activeSessions in
-                    self?.addSection(.upComingSessions)
+                receiveValue: { [weak self] upComingSession in
+                    upComingSession.forEach {
+                        self?.addSection(
+                            .upComingSessions(
+                                upComingSessions: $0.toUpComingSessionModel()
+                            )
+                        )
+                    }
                 }
             )
     }
@@ -153,6 +159,15 @@ extension ActiveSession {
             startDate: startDate,
             startLocation: startLocation,
             destinationLocation: endLocation
+        )
+    }
+
+    func toUpComingSessionModel() -> UpComingSessionModel {
+        return UpComingSessionModel(
+            sessionId: sessionId,
+            sessionBusPlateNumber: plateNumber,
+            destinationName: destinationName,
+            startDate: startDate
         )
     }
 }
@@ -197,13 +212,13 @@ extension HomepageViewContoller : UITableViewDataSource {
                 headerCell?.setTitle(Localization.upCommingSessions.localized)
                 
                 cell = headerCell
-            case .upComingSessions:
+            case .upComingSessions(let upComingSessions):
                 let upComingCell = tableView.dequeueReusableCell(
                     withIdentifier: UpComingCell.identifier,
                     for: indexPath
                 ) as? UpComingCell
                 
-                //upComingCell?.configure()
+                upComingCell?.configure(upComingSessions)
                 
                 cell = upComingCell
             }
