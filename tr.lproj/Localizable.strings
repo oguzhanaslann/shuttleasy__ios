@@ -20,3 +20,4 @@
 "upCommingSessions" = "Upcoming Sessions";
 "destination" = "Destination";
 "startTime" = "Start Time";
+"userGreeting" = "Hello %@";

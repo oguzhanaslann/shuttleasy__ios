@@ -91,11 +91,12 @@ class GreetionSection : BaseTableViewCell {
         return greetingCardHeight + topSpacing
     }
     
-    
-    
     func configure(_ userProfile : UserProfile) {
         let userFullNameLabel = getUserFullNameLabel()
-        userFullNameLabel?.text = userProfile.fullName
+        userFullNameLabel?.text =  String(
+            format: Localization.userGreeting.localized,
+            userProfile.fullName
+        )
 
         let userProfileImageView = getUserProfileImageView()
         userProfileImageView?.load(url: userProfile.profileImageUrl)

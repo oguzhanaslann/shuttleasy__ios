@@ -83,13 +83,14 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
             )
     }
 
+
     private func addSection(_ section : HomeSection) {
         
         var newSection = self.sections
         
         newSection.append(section)
         
-        if newSection.contains(where: { if case .upComingSessions = $0 { return true } else { return false } }){
+        if newSection.contains(where: { return containsAnyUpcommingSession($0)}){
             if !newSection.contains(.upComingSessionHeader) {
                 newSection.append(.upComingSessionHeader)
             }
@@ -105,6 +106,10 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         
         self.sections = newSection
         tableView.reloadData()
+    }
+    
+    private func containsAnyUpcommingSession(_ section: HomeSection) -> Bool {
+        if case .upComingSessions = section { return true } else { return false }
     }
     
 
