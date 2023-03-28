@@ -144,7 +144,7 @@ class NextSessionCell : BaseTableViewCell {
         
         let destinationSection = createCardSection(
             title: model.destinationName,
-            subtitle: "Destination",
+            subtitle: Localization.destination.localized,
             resImageName: "icCity"
         )
         
@@ -172,7 +172,7 @@ class NextSessionCell : BaseTableViewCell {
                date:  model.startDate,
                targetFormat: "HH:mm  - dd/MM/yyyy"
             ),
-            subtitle: "Start Time",
+            subtitle: Localization.startTime.localized,
             resImageName: "icCalendar"
         )
 

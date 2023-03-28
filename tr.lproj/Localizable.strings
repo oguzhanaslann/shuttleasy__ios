@@ -18,3 +18,5 @@
 "enrolledSuccessCallout" = "You have enrolled successfully";
 "yourNextSessions" = "Your Next Sessions";
 "upCommingSessions" = "Upcoming Sessions";
+"destination" = "Destination";
+"startTime" = "Start Time";

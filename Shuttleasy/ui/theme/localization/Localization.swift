@@ -21,7 +21,8 @@ enum Localization : String {
     case enrolledSuccessCallout = "enrolledSuccessCallout"
     case yourNextSessions = "yourNextSessions"
     case upCommingSessions = "upCommingSessions"
-    
+    case destination = "destination"
+    case startTime = "startTime"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

@@ -80,7 +80,8 @@ class SearchResultCell : BaseTableViewCell {
     func configure(with result: SearchResult) {
         title.text = result.title
         setSearchImageOrDefault(imageUrl: result.imageUrl)
-        
+        let ratingLabel = getRatingLabel()
+        ratingLabel?.text = "\(result.rating) (\(result.totalRating))"
     }
     
     private func setSearchImageOrDefault(imageUrl: String) {
@@ -91,5 +92,10 @@ class SearchResultCell : BaseTableViewCell {
             resultImage.load(url: imageUrl)
         }
         
+    }
+
+    // get rating label 
+    func getRatingLabel() -> UILabel? {
+        return badgeView.viewWithTag(SearchResultCell.ratingLabel) as? UILabel
     }
 }

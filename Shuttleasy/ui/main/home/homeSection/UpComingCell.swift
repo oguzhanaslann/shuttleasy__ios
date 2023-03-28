@@ -82,14 +82,14 @@ class UpComingCell : BaseTableViewCell {
         
         let destinationSection = createCardSection(
             title: model.destinationName,
-            subtitle: "Destination",
+            subtitle: Localization.destination.localized,
             resImageName: "icCity",
             contentColor: onSurfaceVariant
         )
         
         nextSessionCard.addSubview(destinationSection)
         destinationSection.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(18)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.greaterThanOrEqualTo(34)
@@ -101,7 +101,7 @@ class UpComingCell : BaseTableViewCell {
                date:  model.startDate,
                targetFormat: "HH:mm  - dd/MM/yyyy"
             ),
-            subtitle: "Start Time",
+            subtitle: Localization.startTime.localized,
             resImageName: "icCalendar",
             contentColor: onSurfaceVariant
         )
