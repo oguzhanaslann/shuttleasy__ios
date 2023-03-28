@@ -70,6 +70,7 @@ class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  
     private func subscribeObervers() {
         subscribeToSessionModelsList()
         subscribeToSelectedSessions()
+        subscribeToEnrollObserver()
     }
     
     private func subscribeToSessionModelsList() {
@@ -123,8 +124,8 @@ class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {[weak self] completion in
                 self?.handleCompletion(completion)
-            }, receiveValue: { enrollState in
-                    enrollState.onSuccess {[weak self] data in
+            }, receiveValue: { [weak self] enrollState in
+                    enrollState.onSuccess { data in
                         sendNotification(.enrolled)
                         self?.showInformationSnackbar(
                             message: Localization.enrolledSuccessCallout.localized,

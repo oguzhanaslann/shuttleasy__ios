@@ -89,9 +89,10 @@ class PickSessionsViewModel : ViewModel {
         pickUpLocation: CGPoint
     ) {
         Task.init {
-            enrollEventSubject.send(.Loading)
+//            enrollEventSubject.send(.Loading)
 
             let sessionIds:  [Int] = getSelectedSessionIds()
+            
             let enrollResult = await self.companyRepository.enrollUserTo(
                 sessions: sessionIds,
                 pickUpLocation: pickUpLocation

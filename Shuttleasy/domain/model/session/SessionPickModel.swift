@@ -13,4 +13,5 @@ struct SessionPickModel {
     var isSelected: Bool
     let isEnabled : Bool
     let sessionTitle: String
+    var sessionDate: String = ""
 }

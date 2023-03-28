@@ -128,20 +128,6 @@ class PickupSelectionViewController: BaseViewController {
     }
     
     private func drawDestinationPoints(pickupAreas: [PickupArea]) {
-        print("****pickupAreas \(pickupAreas)")
-        
-//        let point = CGPoint(x: 38.4189, y: 27.1287)
-//       let polygon =  [
-//            CGPoint(x: point.x - 0.005, y: point.y - 0.005).toCoordinate(),
-//
-//            CGPoint(x: point.x - 0.005, y: point.y + 0.005).toCoordinate(),
-//            CGPoint(x: point.x + 0.005, y: point.y + 0.005).toCoordinate(),
-//
-//            CGPoint(x: point.x - 0.005, y: point.y - 0.005).toCoordinate(),
-//        ]
-//        
-//        mapView.addPolygon(polygon)
-        
         pickupAreas.forEach { pickupArea in
             let polygon = pickupArea.polygon.map { point in
                 point.toCoordinate()

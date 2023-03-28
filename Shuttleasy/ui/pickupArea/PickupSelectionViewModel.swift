@@ -8,11 +8,6 @@
 import Foundation
 import Combine
 
-struct EnrollResult{
-    let enrolledSessionIds: [Int]
-    let pickUpPoint : CGPoint
-}
-
 class PickupSelectionViewModel : ViewModel {
     
     private let companyRepository : CompanyRepository
@@ -85,4 +80,7 @@ class PickupSelectionViewModel : ViewModel {
     }
 }
 
-
+struct EnrollResult{
+    let enrolledSessionIds: [Int]
+    let pickUpPoint : CGPoint
+}

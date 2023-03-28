@@ -153,7 +153,6 @@ class CompanyRepositoryImpl: BaseRepository, CompanyRepository {
             return .success(())
         } else {
             return await enrollUserToSessions(pickUpLocation, sessions)
-            
         }
     }
     

@@ -66,16 +66,69 @@ class SearchShuttleRepositoryImpl : BaseRepository ,SearchShuttleRepository {
     
     
     private func sessionPickListModels(_ depetures : [ShuttleSessionDeparture]?) -> [SessionPickListModel] {
+//        depetures?.forEach {
+//            print("depeture : id - \($0.id), startTime \($0.startTime) , sessionDate: \($0.sessionDate)")
+//        }
         
-        let sessionPickModels = depetures?.map { $0.toSessionPickModel() } ?? []
-        
-        return depetures?.map({
-            SessionPickListModel(
-                dayName: $0.sessionDate ?? "",
-                sessionPickList: sessionPickModels
+        let uniqueDepetures = depetures?.unique(by: { $0.id }) ?? []
+        var result : [SessionPickListModel] = []
+        uniqueDepetures.forEach {
+            result.append(
+                SessionPickListModel(
+                    dayName: $0.sessionDate ?? "",
+                    sessionPickList: [$0.toSessionPickModel()]
+                )
             )
-        }) ?? []
+        }
+
+        let grouped = Dictionary(grouping: result, by: { $0.dayName })
+            .mapValues { $0.flatMap { $0.sessionPickList } }
+        
+        
+        result = grouped.map {
+            SessionPickListModel(
+                dayName: $0.key,
+                sessionPickList: $0.value
+            )
+        }
+        
+        result.sort { priority($0) < priority($1) }
+
+//        result.forEach {
+//            print("result -- day : \($0.dayName)")
+//            print("[")
+//            $0.sessionPickList.forEach {
+//                print("\($0)")
+//            }
+//            print("] -- result")
+//        }
+        
+        return result
     }
+    
+    
+    
+    private func priority(_ sessionModel: SessionPickListModel ) -> Int {
+        switch sessionModel.dayName.lowercased() {
+            case "monday":
+                return 1
+            case "tuesday":
+                return 2
+            case "wednesday":
+                return 3
+            case "thursday":
+                return 4
+            case "friday":
+                return 5
+            case "saturday":
+                return 6
+            case "sunday":
+                return 7
+            default :
+                return 8
+        }
+    }
+    
     
     func getDestinationPoints() async -> Result<[CGPoint], Error> {
         if shouldUseDummyData() {
@@ -137,12 +190,22 @@ extension ShuttleSessionDeparture {
         return SessionPickModel(
             sessionId: id ?? randomPositiveInt(),
             isSelected: false,
-            isEnabled: true,
+            isEnabled: getIfEnabled(),
             sessionTitle: ShuttleasyDateFormatter.shared.tryFormattingDateString(
                 dateString: self.startTime,
                 targetFormat: "HH:mm"
-            )
+            ),
+            sessionDate: self.startTime ?? ""
         )
+    }
+    
+    private func getIfEnabled()  -> Bool{
+        var isNotFull: Bool = false
+        if let passengerCount = passengerCount, let capacity = capacity {
+            isNotFull =  passengerCount < capacity
+        }
+            
+        return self.isActive ?? false  && isNotFull
     }
 
     private func randomPositiveInt() -> Int {
