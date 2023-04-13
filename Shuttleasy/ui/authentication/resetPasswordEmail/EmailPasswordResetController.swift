@@ -134,6 +134,22 @@ class EmailPasswordResetController: BaseViewController {
                 }
             }
     }
+    
+    override func getNavigationBarBackgroundColor() -> UIColor {
+        return .clear
+    }
+    
+    override func getNavigationBarTintColor() -> UIColor {
+        return .black
+    }
+    
+    override func shouldSetStatusBarColor() -> Bool {
+        return false
+    }
+    
+    override func getStatusBarColor() -> UIColor {
+        .clear
+    }
 
     func navigateToResetCodePage() {
         let email = getEmailInput().text!

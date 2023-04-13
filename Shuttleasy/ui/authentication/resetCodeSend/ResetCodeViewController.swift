@@ -199,4 +199,20 @@ class ResetCodeViewController : BaseViewController {
    func navigateToResetPasswordPage() {
        Navigator.shared.navigateToResetPassword(from: self,userEmail: userEmail)
    }
+    
+    override func getNavigationBarBackgroundColor() -> UIColor {
+        return .clear
+    }
+    
+    override func getNavigationBarTintColor() -> UIColor {
+        return .black
+    }
+    
+    override func shouldSetStatusBarColor() -> Bool {
+        return false
+    }
+    
+    override func getStatusBarColor() -> UIColor {
+        .clear
+    }
 }

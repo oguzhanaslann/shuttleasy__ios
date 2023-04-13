@@ -182,6 +182,22 @@ class SignUpViewController: BaseViewController {
         }
     }
 
+    override func getNavigationBarBackgroundColor() -> UIColor {
+        return .clear
+    }
+    
+    override func getNavigationBarTintColor() -> UIColor {
+        return .black
+    }
+    
+    override func shouldSetStatusBarColor() -> Bool {
+        return false
+    }
+    
+    override func getStatusBarColor() -> UIColor {
+        .clear
+    }
+    
     func onSignUpButtonClicked() {
         let isPrivacyAgreementChecked = self.isPrivacyAgreementChecked()
 

@@ -156,6 +156,23 @@ class ResetPasswordViewController: BaseViewController {
             wrappedInNavigationController: true
         )
     }
+    
+    
+    override func getNavigationBarBackgroundColor() -> UIColor {
+        return .clear
+    }
+    
+    override func getNavigationBarTintColor() -> UIColor {
+        return .black
+    }
+    
+    override func shouldSetStatusBarColor() -> Bool {
+        return false
+    }
+    
+    override func getStatusBarColor() -> UIColor {
+        .clear
+    }
 
     @objc
     func onResetPasswordClicked(){
