@@ -227,14 +227,19 @@ extension HomepageViewContoller : UITableViewDataSource {
                 
                 cell = upComingCell
             }
-        
-        
-        
+
         guard let cell = cell else { return UITableViewCell() }
-        
         return cell
     }
     
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = sections[indexPath.row]
+        switch section {
+            case .nextSession(let nextSessionModel):
+                Navigator.shared.navigate(from: self, to: .sessionDetail)
+            default:
+                break
+        }
+    }    
 }

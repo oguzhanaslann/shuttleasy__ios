@@ -24,6 +24,7 @@ enum Localization : String {
     case destination = "destination"
     case startTime = "startTime"
     case userGreeting = "userGreeting"
+    case yourRide = "yourRide"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

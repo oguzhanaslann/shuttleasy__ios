@@ -39,6 +39,7 @@
 		01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6394329B6F2FA0038B31A /* CompanyRepository.swift */; };
 		01ADA1B629C94EAD0065BAE4 /* CompanyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B529C94EAD0065BAE4 /* CompanyDTO.swift */; };
 		01ADA1B929C965BC0065BAE4 /* PickSessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */; };
+		01AF343B29EE4FEA00BC4199 /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */; };
 		01B0AB2F29CEC4C3001341E1 /* PickSessionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB2E29CEC4C3001341E1 /* PickSessionsViewModel.swift */; };
 		01B0AB3429CED73D001341E1 /* SessionPickListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */; };
 		01B0AB3629CED7D4001341E1 /* SessionPickModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */; };
@@ -215,6 +216,7 @@
 		01A6394329B6F2FA0038B31A /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		01ADA1B529C94EAD0065BAE4 /* CompanyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDTO.swift; sourceTree = "<group>"; };
 		01ADA1B829C965BC0065BAE4 /* PickSessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSessionsViewController.swift; sourceTree = "<group>"; };
+		01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 		01B0AB2E29CEC4C3001341E1 /* PickSessionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSessionsViewModel.swift; sourceTree = "<group>"; };
 		01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickListModel.swift; sourceTree = "<group>"; };
 		01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickModel.swift; sourceTree = "<group>"; };
@@ -443,6 +445,14 @@
 			path = picksessions;
 			sourceTree = "<group>";
 		};
+		01AF343929EE4FA000BC4199 /* sessionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */,
+			);
+			path = sessionDetail;
+			sourceTree = "<group>";
+		};
 		01B0AB3029CED6F7001341E1 /* company */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +665,7 @@
 				01A2B7E729A2461D00709F30 /* company */,
 				01A30E5529C032A8005958BB /* pickupArea */,
 				01ADA1B729C965940065BAE4 /* picksessions */,
+				01AF343929EE4FA000BC4199 /* sessionDetail */,
 				D4816DC02920FF2600ECB799 /* onboard */,
 				D44F2615292002A200CD5B85 /* theme */,
 				D40B27F1292A797100140612 /* Navigator.swift */,
@@ -1314,6 +1325,7 @@
 				D4D0650E2926143C002991A1 /* ViewModel.swift in Sources */,
 				01F36CC629AD45210039E12D /* CompanyContantCell.swift in Sources */,
 				D4F0B79E29502E8900716FE3 /* SearchShuttleViewModel.swift in Sources */,
+				01AF343B29EE4FEA00BC4199 /* SessionDetailViewController.swift in Sources */,
 				01A6394429B6F2FA0038B31A /* CompanyRepository.swift in Sources */,
 				D44F261929200F8500CD5B85 /* Color.swift in Sources */,
 				01D4FA8429CC11BC009E9B61 /* SessionPickCell.swift in Sources */,
