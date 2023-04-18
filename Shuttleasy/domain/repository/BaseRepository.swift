@@ -10,7 +10,7 @@ import Foundation
 
 class BaseRepository {
     func shouldUseDummyData() -> Bool {
-        return false
+        return true
     }
 }
 
@@ -51,8 +51,8 @@ extension BaseRepository {
                 title: "Company Name",
                 imageUrl: "",
                 destinationPoint: CGPoint(x: 38.4189, y: 27.1287),
-                rating: 4.8,
-                totalRating: 0,
+                rating: 4.8899999,
+                totalRating: 100,
                 sessionPickModel: [
                     SessionPickListModel(
                         dayName: "Name",

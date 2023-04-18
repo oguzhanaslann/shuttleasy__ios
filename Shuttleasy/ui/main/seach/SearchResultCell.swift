@@ -14,7 +14,7 @@ class SearchResultCell : BaseTableViewCell {
 
     let cardContainer = UIView()
     let resultImage = UIImageView()
-    let title = TitleSmall(text: "", color: onSurfaceVariant)
+    let title = TitleSmall(color: onSurfaceVariant)
     
     let badgeView = ratingBadgeView(
         rating: 0.0,
@@ -81,7 +81,8 @@ class SearchResultCell : BaseTableViewCell {
         title.text = result.title
         setSearchImageOrDefault(imageUrl: result.imageUrl)
         let ratingLabel = getRatingLabel()
-        ratingLabel?.text = "\(result.rating) (\(result.totalRating))"
+        let formattedRating = result.rating.twoPointDecimal()
+        ratingLabel?.text = "\(formattedRating) (\(result.totalRating))"
     }
     
     private func setSearchImageOrDefault(imageUrl: String) {

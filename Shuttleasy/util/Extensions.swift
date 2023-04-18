@@ -281,3 +281,9 @@ extension Array {
         return arrayOrdered
     }
 }
+
+extension Double {
+    func twoPointDecimal() -> String {
+        return String(format: "%.2f", self)
+    }
+}

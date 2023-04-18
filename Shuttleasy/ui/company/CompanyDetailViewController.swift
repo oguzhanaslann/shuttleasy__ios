@@ -204,7 +204,8 @@ class CompanyDetailViewController: BaseViewController {
         let companySlogan = getCompanySlogan()
         companySlogan.text = companyDetail.slogan
         let companyRatings = getCompanyRatings()
-        companyRatings.text = "\(companyDetail.rating) (\(companyDetail.totalRating))"
+        let formattedRating = companyDetail.rating.twoPointDecimal()
+        companyRatings.text = "\(formattedRating) (\(companyDetail.totalRating))"
     }
     
     private func getHeaderPhotoView() -> UIImageView {
