@@ -125,7 +125,10 @@ class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  
             .sink(receiveCompletion: {[weak self] completion in
                 self?.handleCompletion(completion)
             }, receiveValue: { [weak self] enrollState in
-                    enrollState.onSuccess { data in
+                    enrollState
+                    .isLoading { isLoading in
+                        self?.nextButton.isEnabled = isLoading
+                    }.onSuccess { data in
                         sendNotification(.enrolled)
                         self?.showInformationSnackbar(
                             message: Localization.enrolledSuccessCallout.localized,

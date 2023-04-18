@@ -84,6 +84,18 @@ enum UiDataState<T> {
         
         return self
     }
+    
+    func isLoading(isLoading : (Bool) -> Void) -> UiDataState {
+        switch self {
+        case .Loading:
+            isLoading(true)
+            break
+        default :
+            isLoading(false)
+        }
+        
+        return self
+    }
 }
  
 struct DataContent<Data> {
