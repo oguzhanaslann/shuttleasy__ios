@@ -22,3 +22,7 @@
 "startTime" = "Start Time";
 "userGreeting" = "Hello %@";
 "yourRide" = "Your Ride";
+"notStarted" = "Not Started";
+"onGoing" = "On Going";
+"completed" = "Completed";
+"nextStopIsYou" = "Next Stop Is You";

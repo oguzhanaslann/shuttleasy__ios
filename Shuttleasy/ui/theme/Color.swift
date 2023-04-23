@@ -33,6 +33,7 @@ enum Color {
     case onSurfaceVariant
     case neutral80
     case neutral60
+    case neutral50
     case neutral40
     case inverseSurface
     case onInverseSurface
@@ -94,6 +95,8 @@ func getUIColor(color : Color) -> UIColor {
             return UIColor.init(named : "inverseSurface")!
         case .onInverseSurface:
             return UIColor.init(named : "onInverseSurface")!
+        case .neutral50:
+            return UIColor.init(named : "neutral50")!
     }
 }
 
@@ -118,9 +121,10 @@ let errorContainer = getUIColor(color: .errorContainer)
 let onErrorContainer = getUIColor(color: .onErrorContainer)
 let secondaryContainer = getUIColor(color: .secondaryContainer)
 let onSecondaryContainer = getUIColor(color: .onSecondaryContainer)
-let neutral60 = getUIColor(color: .neutral60)
 let inversePrimary = getUIColor(color: .inversePrimary)
 let neutral80 = getUIColor(color: .neutral80)
+let neutral60 = getUIColor(color: .neutral60)
+let neutral50 = getUIColor(color: .neutral50)
 let neutral40 = getUIColor(color: .neutral40)
 let inverseSurface = getUIColor(color: .inverseSurface)
 let onInverseSurface = getUIColor(color: .onInverseSurface)
