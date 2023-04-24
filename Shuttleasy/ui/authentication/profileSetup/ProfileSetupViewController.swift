@@ -114,7 +114,9 @@ class ProfileSetupViewController: BaseViewController {
     }
 
     lazy var signUpButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: "Next"
+        )
         button.setOnClickListener {
             self.onSignUpButtonClicked()
         }

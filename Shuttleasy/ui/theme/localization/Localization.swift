@@ -30,6 +30,11 @@ enum Localization : String {
     case completed = "completed"
     case nextStopIsYou = "nextStopIsYou"
 
+    //Cancel My Session
+    case cancelMySession = "cancelMySession"
+    //Wait 5 Minutes 
+    case wait5Minutes = "wait5Minutes"
+
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")
     }

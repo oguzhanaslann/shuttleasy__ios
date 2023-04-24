@@ -111,7 +111,7 @@ class OnBoardingViewContoller: BaseViewController, UIScrollViewDelegate {
     
     
     lazy var nextPageButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(titleOnNormalState: Localization.next.localized)
         button.setOnClickListener {
             self.buttonAction()
         }

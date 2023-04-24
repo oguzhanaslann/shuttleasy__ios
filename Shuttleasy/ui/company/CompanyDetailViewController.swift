@@ -91,9 +91,7 @@ class CompanyDetailViewController: BaseViewController {
 
     lazy var enrollButton : UIButton = {
         let button = LargeButton(
-            titleOnNormalState: Localization.enroll.localized,
-            backgroundColor: primaryColor,
-            titleColorOnNormalState: onPrimaryColor
+            titleOnNormalState: Localization.enroll.localized
         )
         
         return button

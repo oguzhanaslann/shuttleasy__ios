@@ -104,7 +104,7 @@ class SignInViewController: BaseViewController {
     }
 
     lazy var signInButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(titleOnNormalState: Localization.next.localized)
         button.setOnClickListener {
            self.onSignInClicked()
         }

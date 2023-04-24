@@ -91,8 +91,7 @@ class DeleteAccountViewController:  BaseViewController {
     lazy var deleteButton: UIButton = {
         let button = LargeButton(
             titleOnNormalState: "Delete",
-            backgroundColor: errorColor,
-            titleColorOnNormalState: onErrorColor
+            buttonColors: errorButtonColors()
         )
 
         button.setOnClickListener {

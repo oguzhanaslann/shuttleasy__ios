@@ -25,6 +25,10 @@
 		0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */; };
 		0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */; };
 		016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B927429C3A3CC00207A38 /* MapExtensions.swift */; };
+		016FE6F629F6FE2E00A44034 /* ButtonColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F529F6FE2E00A44034 /* ButtonColors.swift */; };
+		016FE6F829F6FF1C00A44034 /* SessionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F729F6FF1C00A44034 /* SessionDetail.swift */; };
+		016FE6FA29F6FFA200A44034 /* SessionDetailWithState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F929F6FFA200A44034 /* SessionDetailWithState.swift */; };
+		016FE6FC29F6FFC900A44034 /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6FB29F6FFC900A44034 /* SessionState.swift */; };
 		017FE611299432DF000541D8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE610299432DF000541D8 /* MainViewModel.swift */; };
 		0184228329D1D63300F0FF4D /* SessionAreaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0184228229D1D63300F0FF4D /* SessionAreaDTO.swift */; };
 		0184228529D1D9BF00F0FF4D /* PickupArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0184228429D1D9BF00F0FF4D /* PickupArea.swift */; };
@@ -49,6 +53,7 @@
 		01B0AB4029D091F6001341E1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */; };
 		01B9699F29A8FEA40059C1D6 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9699E29A8FEA40059C1D6 /* CommentCell.swift */; };
 		01BB6DA529F596F70067B417 /* SessionStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB6DA429F596F70067B417 /* SessionStateView.swift */; };
+		01BB6DA729F5BBD70067B417 /* SessionControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
 		01D4FA8429CC11BC009E9B61 /* SessionPickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */; };
@@ -204,6 +209,10 @@
 		0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionArgs.swift; sourceTree = "<group>"; };
 		0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailArgs.swift; sourceTree = "<group>"; };
 		016B927429C3A3CC00207A38 /* MapExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
+		016FE6F529F6FE2E00A44034 /* ButtonColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColors.swift; sourceTree = "<group>"; };
+		016FE6F729F6FF1C00A44034 /* SessionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetail.swift; sourceTree = "<group>"; };
+		016FE6F929F6FFA200A44034 /* SessionDetailWithState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailWithState.swift; sourceTree = "<group>"; };
+		016FE6FB29F6FFC900A44034 /* SessionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
 		017FE610299432DF000541D8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0184228229D1D63300F0FF4D /* SessionAreaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionAreaDTO.swift; sourceTree = "<group>"; };
 		0184228429D1D9BF00F0FF4D /* PickupArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupArea.swift; sourceTree = "<group>"; };
@@ -227,6 +236,7 @@
 		01B0AB3F29D091F6001341E1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		01B9699E29A8FEA40059C1D6 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		01BB6DA429F596F70067B417 /* SessionStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStateView.swift; sourceTree = "<group>"; };
+		01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControlViewController.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
 		01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickCell.swift; sourceTree = "<group>"; };
@@ -403,6 +413,26 @@
 			path = homeSection;
 			sourceTree = "<group>";
 		};
+		016FE6F429F6FE1200A44034 /* button */ = {
+			isa = PBXGroup;
+			children = (
+				01C550F829C1812F003E0D40 /* DynamicColorButton.swift */,
+				D4816DBC2920FCA600ECB799 /* Buttons.swift */,
+				016FE6F529F6FE2E00A44034 /* ButtonColors.swift */,
+			);
+			path = button;
+			sourceTree = "<group>";
+		};
+		016FE6FD29F705F200A44034 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				016FE6F729F6FF1C00A44034 /* SessionDetail.swift */,
+				016FE6F929F6FFA200A44034 /* SessionDetailWithState.swift */,
+				016FE6FB29F6FFC900A44034 /* SessionState.swift */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
 		01A2B7E729A2461D00709F30 /* company */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +482,7 @@
 			children = (
 				01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */,
 				01BB6DA429F596F70067B417 /* SessionStateView.swift */,
+				01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */,
 			);
 			path = sessionDetail;
 			sourceTree = "<group>";
@@ -475,6 +506,7 @@
 		01B0AB3229CED72B001341E1 /* session */ = {
 			isa = PBXGroup;
 			children = (
+				016FE6FD29F705F200A44034 /* detail */,
 				01B0AB3329CED73D001341E1 /* SessionPickListModel.swift */,
 				01B0AB3529CED7D4001341E1 /* SessionPickModel.swift */,
 				0184228429D1D9BF00F0FF4D /* PickupArea.swift */,
@@ -559,11 +591,11 @@
 		D40B27F4292A8F1600140612 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				016FE6F429F6FE1200A44034 /* button */,
 				D40B27F5292A8F2700140612 /* Snackbar.swift */,
 				D41BE5C7292ACADA00826640 /* Checkbox.swift */,
 				D4A62ADE293409C700D02694 /* ViewGenerators.swift */,
 				01554F6629A7F8F200F16B51 /* SectionViews.swift */,
-				01C550F829C1812F003E0D40 /* DynamicColorButton.swift */,
 				013FF25229C764A90050C063 /* RatingBadge.swift */,
 				01D4FA8D29CCE46E009E9B61 /* ToggleButton.swift */,
 			);
@@ -685,7 +717,6 @@
 				D44F261629200C5C00CD5B85 /* FontUtil.swift */,
 				D44F261829200F8500CD5B85 /* Color.swift */,
 				D4816DBA2920F05B00ECB799 /* Type.swift */,
-				D4816DBC2920FCA600ECB799 /* Buttons.swift */,
 				D4816DBE2920FDE500ECB799 /* Shape.swift */,
 				01E7255E29AE9EBA009CF7FE /* Spacing.swift */,
 			);
@@ -1286,6 +1317,7 @@
 				0140C37429CAB7CA000B607A /* SessionListCell.swift in Sources */,
 				D4F3E1952934E1D900D10463 /* ResetPasswordViewController.swift in Sources */,
 				D4816DBD2920FCA600ECB799 /* Buttons.swift in Sources */,
+				016FE6FA29F6FFA200A44034 /* SessionDetailWithState.swift in Sources */,
 				D4A94E83294CE91D0070416F /* MemorySource.swift in Sources */,
 				01431F4929D2FEF00069E3FC /* UpComingCell.swift in Sources */,
 				01E7255F29AE9EBA009CF7FE /* Spacing.swift in Sources */,
@@ -1319,6 +1351,7 @@
 				0110308229944FC700DE3268 /* Localization.swift in Sources */,
 				01D4FA8A29CCDD68009E9B61 /* BaseUITableView.swift in Sources */,
 				D44D4D7429411CA90024D0AC /* ApiService.swift in Sources */,
+				016FE6F629F6FE2E00A44034 /* ButtonColors.swift in Sources */,
 				0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */,
 				D4FD012729481822004F149E /* PassengerDto.swift in Sources */,
 				D4C6F97229503FDB00DAA1E7 /* ShuttleNetworkSource.swift in Sources */,
@@ -1358,9 +1391,12 @@
 				01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */,
 				0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */,
 				01F36CC429AD418D0039E12D /* CompanyStatusCell.swift in Sources */,
+				016FE6F829F6FF1C00A44034 /* SessionDetail.swift in Sources */,
 				D4C1025D293B8AC8004812C1 /* ShuttleasyUserRepository.swift in Sources */,
+				016FE6FC29F6FFC900A44034 /* SessionState.swift in Sources */,
 				D4A62ADD2933F46400D02694 /* SignUpViewModel.swift in Sources */,
 				D4BDA02229515E3E008118F5 /* NetworkUtil.swift in Sources */,
+				01BB6DA729F5BBD70067B417 /* SessionControlViewController.swift in Sources */,
 				D4C10263293B8C91004812C1 /* UserProfile.swift in Sources */,
 				D4C10268293BA6C3004812C1 /* ProfileEditViewController.swift in Sources */,
 				01B0AB3829CEE0DD001341E1 /* Pair.swift in Sources */,

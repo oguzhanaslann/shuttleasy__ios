@@ -89,7 +89,9 @@ class ResetPasswordViewController: BaseViewController {
     }
 
     lazy var resetButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Reset", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: "Reset"
+        )
         button.setOnClickListener {
            self.onResetPasswordClicked()
         }

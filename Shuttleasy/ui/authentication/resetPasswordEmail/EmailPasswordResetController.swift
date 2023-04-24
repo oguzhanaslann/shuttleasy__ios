@@ -72,7 +72,9 @@ class EmailPasswordResetController: BaseViewController {
     }
     
     lazy var signInButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Next", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: "Next"
+        )
         button.setOnClickListener {
            self.onResetPasswordClicked()
         }

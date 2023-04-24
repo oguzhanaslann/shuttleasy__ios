@@ -54,11 +54,13 @@ class DynamicColorButton : UIButton {
             backgroundColor = buttonColors.backgroundColor
             if let outlineColor = buttonColors.outlineColor {
                 layer.borderColor = outlineColor.cgColor
+                layer.borderWidth = 1
             }
         } else {
-            backgroundColor = neutral80
+            backgroundColor = buttonColors.disabledColor
             if let disabledOutlineColor = buttonColors.disabledOutlineColor {
                 layer.borderColor = disabledOutlineColor.cgColor
+                layer.borderWidth = 1
             }
         }
     }
@@ -79,25 +81,4 @@ class DynamicColorButton : UIButton {
         titleFont = newFont
         applyFontToTitleIfPossible()
     }
-}
-
-
-struct ButtonColors {
-    let backgroundColor : UIColor
-    let onNormalColor: UIColor
-    let disabledColor : UIColor
-    let onDisabledColor : UIColor
-    let outlineColor: UIColor?
-    let disabledOutlineColor : UIColor?
-}
-
-func defaultButtonColors() -> ButtonColors {
-    return ButtonColors(
-        backgroundColor: primaryColor,
-        onNormalColor: onPrimaryColor,
-        disabledColor: neutral80,
-        onDisabledColor: .white,
-        outlineColor: nil ,
-        disabledOutlineColor: nil
-    )
 }

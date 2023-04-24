@@ -13,7 +13,7 @@ class SessionStateView : UIView {
     private let STATE_ICON_TAG = 1
     private let STATE_TEXT_TAG = 2
     
-    private var state : SessionState = .nextStopIsYou
+    private var state : SessionState = .notStarted
     
     private lazy var sessionStateView : UIView = {
         let container = UIView()
@@ -40,7 +40,7 @@ class SessionStateView : UIView {
             make.right.equalToSuperview().offset(-8)
             make.centerY.equalToSuperview()
         }
-        
+                
     
         return container
     }()
@@ -108,10 +108,3 @@ class SessionStateView : UIView {
     }
 }
 
-
-enum SessionState {
-    case notStarted
-    case ongoing
-    case completed
-    case nextStopIsYou
-}

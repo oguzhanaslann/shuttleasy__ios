@@ -149,7 +149,7 @@ class ProfileEditViewController: BaseViewController {
 
     
     lazy var updateProfileInformationButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Update", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(titleOnNormalState: "Update")
         button.setOnClickListener {
             self.onUpdateClicked()
         }

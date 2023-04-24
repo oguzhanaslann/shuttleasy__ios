@@ -78,7 +78,9 @@ class ResetCodeViewController : BaseViewController {
     }
 
     lazy var resetButton : UIButton = {
-        let button = LargeButton(titleOnNormalState: "Confirm Code", backgroundColor: primaryColor, titleColorOnNormalState: onPrimaryColor)
+        let button = LargeButton(
+            titleOnNormalState: "Confirm Code"
+        )
         button.setOnClickListener {
             self.onResetCodeSendClicked()
         }

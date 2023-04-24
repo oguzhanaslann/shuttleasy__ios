@@ -10,16 +10,14 @@ import UIKit
 
 func LargeButton(
     titleOnNormalState : String,
-    backgroundColor : UIColor,
-    titleColorOnNormalState : UIColor
+    buttonColors: ButtonColors = defaultButtonColors()
 )  -> UIButton {
-    let button = DynamicColorButton()
+    let button = DynamicColorButton(with: buttonColors)
     button.setTitle(titleOnNormalState, for: .normal)
     if let label = button.titleLabel {
         label.font = ButtonFont()
     }
-    button.backgroundColor = backgroundColor
-    button.setTitleColor(titleColorOnNormalState, for: .normal)
+    
     button.layer.cornerRadius = roundedMediumCornerRadius
     return button
 }
