@@ -99,7 +99,7 @@ class UpComingCell : BaseTableViewCell {
         let startTime = createCardSection(
             title: ShuttleasyDateFormatter.shared.convertDate(
                date:  model.startDate,
-               targetFormat: "HH:mm  - dd/MM/yyyy"
+               targetFormat: ShuttleasyDateFormatter.timeAndCalendarDateFormat()
             ),
             subtitle: Localization.startTime.localized,
             resImageName: "icCalendar",

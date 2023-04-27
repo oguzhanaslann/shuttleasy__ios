@@ -57,7 +57,7 @@ class GreetionSection : BaseTableViewCell {
         
         currentDate.text = ShuttleasyDateFormatter.shared.convertDate(
             date: Date(),
-            targetFormat: "EEEE, dd MMMM"
+            targetFormat: "\(ShuttleasyDateFormatter.FULL_DAY_NAME), \(ShuttleasyDateFormatter.DAY_OF_THE_MONTH) \(ShuttleasyDateFormatter.MONTH_NAME)"
         )
         
         return container

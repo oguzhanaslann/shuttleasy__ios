@@ -10,14 +10,31 @@ import UIKit
 import SnapKit
 import FloatingPanel
 import MapKit
+import Combine
+
 
 class SessionDetailViewController: BaseViewController {
+    
+    private let viewModel: SessionDetailViewModel = Injector.shared.injectSessionDetailViewModel()
+    private var sessionDetailObserver : AnyCancellable? = nil
     
     let sessionStateView = SessionStateView()
     
     private let fpc = FloatingPanelController()
     
-    private let controlViewController = SessionControllerViewController()
+    private var controlViewController: SessionControllerViewController
+
+    private var args : SessionDetailArgs
+    
+    init(args : SessionDetailArgs){
+        self.args  = args
+        controlViewController = SessionControllerViewController(viewModel: viewModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder : NSCoder){
+        fatalError()
+    }
     
     private lazy var mapView: MKMapView =  {
         let mapView = MKMapView()
@@ -30,15 +47,31 @@ class SessionDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         title = Localization.yourRide.localized
+        viewModel.getSessionDetail(sessionId: args.sessionId)
         view.addSubview(sessionStateView)
         sessionStateView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(SpacingMedium)
             make.right.equalToSuperview().offset(-16)
             sessionStateView.layoutIfNeeded()
         }
         
         sessionStateView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSessionStateView)))
-
+        subcribeObservers()
+    }
+    
+    private func subcribeObservers() {
+         sessionDetailObserver = viewModel.sessionDetailPublisher
+            .receive(on: DispatchQueue.main)
+            .sink (
+                receiveCompletion: { _ in},
+                receiveValue: {[weak self] sessionDetailDataState in
+                    sessionDetailDataState.onSuccess {
+                        let sessionDetail = $0.data.sessionDetail
+                        let sessionState = $0.data.sessionState
+                        self?.sessionStateView.setState(state: sessionState)
+                    }
+                }
+        )
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,6 +119,12 @@ class SessionDetailViewController: BaseViewController {
     @objc func dismissView() {
         Navigator.shared.popBack(from: self)
     }
+
+    deinit {
+        sessionDetailObserver?.cancel()
+        sessionDetailObserver = nil
+    }
+
 }
 
 extension SessionDetailViewController : MKMapViewDelegate {

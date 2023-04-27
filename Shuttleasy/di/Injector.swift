@@ -357,4 +357,15 @@ class Injector {
         
         return container.resolve(HomeViewModel.self)!
     }
+
+    func injectSessionDetailViewModel() -> SessionDetailViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: SessionDetailViewModel.self,
+            onRegisterNeeded: { resolver in
+                SessionDetailViewModel()
+            }
+        )
+        
+        return container.resolve(SessionDetailViewModel.self)!
+    }
 }

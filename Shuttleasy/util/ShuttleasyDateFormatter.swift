@@ -9,14 +9,34 @@ import Foundation
 class ShuttleasyDateFormatter {
     static let shared = ShuttleasyDateFormatter()
 
-    static let format = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+     
+    static let ISO8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS"
     static let target = "HH:mm dd MMMM yyyy"
+    
+    static let HOUR_MINUTE = "HH:mm"
+    static let DAY_MONTH_YEAR_CALENDAR = "dd/MM/yyyy"
+    static let DAY_MONTH_NAME_YEAR = "dd MMMM yyyy"
+    
+    static let FULL_DAY_NAME = "EEEE"
+    static let DAY_OF_THE_MONTH = "dd"
+    static let MONTH_NAME = "MMMM"
+
 
     private init() {}
 
+
+    public static func timeAndExplicitDateFormat() -> String  {
+        return "\(HOUR_MINUTE) \(DAY_MONTH_NAME_YEAR)"
+    }
+    
+
+    public static func timeAndCalendarDateFormat() -> String  {
+        return "\(HOUR_MINUTE) - \(DAY_MONTH_YEAR_CALENDAR)"
+    }
+
     func convertDateString(
         dateString: String,
-        inputFormat : String = ShuttleasyDateFormatter.format,
+        inputFormat : String = ShuttleasyDateFormatter.ISO8601,
         targetFormat : String = ShuttleasyDateFormatter.target
     ) -> String {
         let inputString = dateString
@@ -43,7 +63,7 @@ class ShuttleasyDateFormatter {
 
     func tryFormattingDateString(
         dateString : String? = nil,
-        inputFormat : String = ShuttleasyDateFormatter.format,
+        inputFormat : String = ShuttleasyDateFormatter.ISO8601,
         targetFormat : String = ShuttleasyDateFormatter.target
     ) -> String {
         if let dateString = dateString {
@@ -69,7 +89,7 @@ class ShuttleasyDateFormatter {
     // try parsing date string in "format" to Date object
     func tryParsingDateString(
         dateString : String? = nil,
-        inputFormat : String = ShuttleasyDateFormatter.format
+        inputFormat : String = ShuttleasyDateFormatter.ISO8601
     ) -> Date? {
         if let dateString = dateString {
             do {

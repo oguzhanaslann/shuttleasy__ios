@@ -23,7 +23,7 @@ enum Destination {
     case companyDetail(args: CompanyDetailArgs)
     case pickupSelection(args : PickupSelectionArgs)
     case picksessions(args: PickSessionsArgs)
-    case sessionDetail
+    case sessionDetail(args: SessionDetailArgs)
 }
 
 class Navigator {
@@ -194,8 +194,8 @@ extension Destination {
                 return PickupSelectionViewController(args: args)
             case .picksessions(let args):
                 return PickSessionsViewController(args: args)
-        case .sessionDetail:
-                return SessionDetailViewController()
+        case .sessionDetail(let args):
+                return SessionDetailViewController(args: args)
             default: 
                 debugPrint("Destination not found")
                 return UIViewController()

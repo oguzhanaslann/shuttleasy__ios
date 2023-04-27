@@ -13,3 +13,13 @@ enum SessionState {
     case completed
     case nextStopIsYou
 }
+
+extension SessionState {
+    func isCancellable() -> Bool {
+        return self == .notStarted || self == .ongoing
+    }
+
+    func canBeExtendable() -> Bool {
+        return self == .ongoing
+    }
+}

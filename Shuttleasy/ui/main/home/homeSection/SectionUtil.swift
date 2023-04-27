@@ -14,7 +14,9 @@ func createCardSection(
     subtitle : String,
     resImageName : String,
     contentColor : UIColor = onPrimaryContainer,
-    subContentColor : UIColor = neutral40
+    subContentColor : UIColor = neutral40,
+    titleTag : Int? = nil,
+    subTitleTag: Int? = nil 
 ) -> UIView {
     let view = UIView()
     let image = resImageView(name: resImageName)
@@ -28,6 +30,9 @@ func createCardSection(
 
     let description = LabelSmall(text: subtitle, color : subContentColor)
     view.addSubview(description)
+    if let tag = subTitleTag {
+        description.tag = tag
+    }
     description.snp.makeConstraints { make in
         make.left.greaterThanOrEqualTo(image.snp.right).offset(8)
         make.top.equalTo(image.snp.top)
@@ -36,6 +41,9 @@ func createCardSection(
 
     let sectionTitle = TitleSM(text: title, color: contentColor)
     view.addSubview(sectionTitle)
+    if let tag = titleTag {
+        sectionTitle.tag = tag
+    }
     // place below the image and align to left as image
     sectionTitle.snp.makeConstraints { make in
         make.left.equalToSuperview()

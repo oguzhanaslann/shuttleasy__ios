@@ -237,7 +237,7 @@ extension HomepageViewContoller : UITableViewDataSource {
         let section = sections[indexPath.row]
         switch section {
             case .nextSession(let nextSessionModel):
-                Navigator.shared.navigate(from: self, to: .sessionDetail)
+            Navigator.shared.navigate(from: self, to: .sessionDetail(args: .init(sessionId: nextSessionModel.sessionId)))
             default:
                 break
         }
