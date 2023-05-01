@@ -25,6 +25,8 @@ class ShuttleasyUserDefaults {
     private static let USER_PHONE_NUMBER_KEY = "USER_PHONE_NUMBER_KEY"
     private static let USER_QR_STRING_KEY = "USER_QR_STRING_KEY"
 
+    private static let USER_FCM_ID = FCM_ID
+
     func setAsSeenOnboard() async {
         UserDefaults.standard.set(true, forKey: ShuttleasyUserDefaults.onboardSeenKey)
     }
@@ -111,5 +113,14 @@ class ShuttleasyUserDefaults {
     func getUserId() -> Int? {
         return UserDefaults.standard.integer(forKey: ShuttleasyUserDefaults.USER_ID_KEY)
     }
+
+    func setFcmId(fcmId: String) async {
+        UserDefaults.standard.set(fcmId, forKey: ShuttleasyUserDefaults.USER_FCM_ID)
+    }
+
+
+    func getFcmId() -> String? {
+        return UserDefaults.standard.string(forKey: ShuttleasyUserDefaults.USER_FCM_ID) 
+    } 
 
 }

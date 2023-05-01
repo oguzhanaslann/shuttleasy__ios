@@ -29,5 +29,21 @@ class MemoryDataSource : UserTokenProvider {
         }
         _token = token
     }
+
+    // key value pair
+    private var _data: [String: Any] = [:]
+
+    // key value with generic type
+    func set<T>(key: String, value: T) {
+        _data[key] = value
+    }
+
+    func get<T>(key: String) -> T? {
+        return _data[key] as? T
+    }
+
+    func remove(key: String) {
+        _data.removeValue(forKey: key)
+    }
         
 }

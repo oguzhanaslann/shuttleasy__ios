@@ -4,8 +4,97 @@ PODS:
   - CocoaLumberjack/Swift (3.8.0):
     - CocoaLumberjack/Core
   - DynamicBlurView (4.1.0)
-  - FloatingPanel (2.5.5)
-  - Kingfisher (7.4.1)
+  - Firebase/Core (10.9.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 10.9.0)
+  - Firebase/CoreOnly (10.9.0):
+    - FirebaseCore (= 10.9.0)
+  - Firebase/Messaging (10.9.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.9.0)
+  - FirebaseAnalytics (10.9.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.9.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.9.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleAppMeasurement (= 10.9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCore (10.9.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Logger (~> 7.8)
+  - FirebaseCoreInternal (10.9.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseInstallations (10.9.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.9.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FloatingPanel (2.6.1)
+  - GoogleAppMeasurement (10.9.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.9.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.9.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.9.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleDataTransport (9.2.2):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.11.1):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.11.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.11.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.11.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.11.1)"
+  - GoogleUtilities/Reachability (7.11.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.11.1):
+    - GoogleUtilities/Logger
+  - Kingfisher (7.6.2)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/private/Color (124.2.0):
@@ -22,16 +111,24 @@ PODS:
     - MaterialComponents/Ripple
     - MDFInternationalization
   - MDFInternationalization (3.0.0)
-  - MobilliumQRCodeReader (1.1.0)
+  - MobilliumQRCodeReader (1.1.1)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
+  - PromisesObjC (2.2.0)
   - SnapKit (5.6.0)
   - SwiftyJSON (4.3.0)
-  - Swinject (2.8.2)
+  - Swinject (2.8.3)
 
 DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack/Swift
+  - Firebase/Core
+  - Firebase/Messaging
   - FloatingPanel
   - Kingfisher (~> 7.0)
   - "MaterialComponents/Tabs+TabBarView"
@@ -46,12 +143,23 @@ SPEC REPOS:
     - Alamofire
     - CocoaLumberjack
     - DynamicBlurView
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCoreInternal
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FloatingPanel
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleUtilities
     - Kingfisher
     - MaterialComponents
     - MDFInternationalization
     - MobilliumQRCodeReader
+    - nanopb
     - PopupDialog
+    - PromisesObjC
     - SnapKit
     - SwiftyJSON
     - Swinject
@@ -60,16 +168,27 @@ SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   CocoaLumberjack: 78abfb691154e2a9df8ded4350d504ee19d90732
   DynamicBlurView: 58e18fae80bb614e34681a4486870e7d257b62e8
-  FloatingPanel: a27e7827e0f710fa6236fe2596dd1b5484cb4fc1
-  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  Firebase: bd152f0f3d278c4060c5c71359db08ebcfd5a3e2
+  FirebaseAnalytics: 5ea0db4893825e7b0149d575352cd838236313dc
+  FirebaseCore: b68d3616526ec02e4d155166bbafb8eca64af557
+  FirebaseCoreInternal: d2b4acb827908e72eca47a9fd896767c3053921e
+  FirebaseInstallations: c58489c9caacdbf27d1da60891a87318e20218e0
+  FirebaseMessaging: 6b7052cc3da7bc8e5f72bef871243e8f04a14eed
+  FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
+  GoogleAppMeasurement: 373bcbead1bb6a85be7a64d5d8f96284b762ea9c
+  GoogleDataTransport: 8378d1fa8ac49753ea6ce70d65a7cb70ce5f66e6
+  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
-  MobilliumQRCodeReader: f39910a38563f41ab0941ff24ae48395d6316687
+  MobilliumQRCodeReader: d819ebfb3efdbb8e2c7afd72eab7ccfa57636886
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
-  Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
+  Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
 
-PODFILE CHECKSUM: 940230ca2cf01cdbec8015b682c0a2590c6f51c1
+PODFILE CHECKSUM: 64968cf062d87e0663f12becc0b71dc53d4f2d4d
 
 COCOAPODS: 1.11.3

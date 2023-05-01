@@ -58,6 +58,7 @@
 		01BB6DA729F5BBD70067B417 /* SessionControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */; };
 		01C550F929C1812F003E0D40 /* DynamicColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C550F829C1812F003E0D40 /* DynamicColorButton.swift */; };
 		01D0D17F29B5A87400ACFEF9 /* CompanyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */; };
+		01D3253529FFA02800FFB4D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01D3253429FFA02700FFB4D2 /* GoogleService-Info.plist */; };
 		01D4FA8429CC11BC009E9B61 /* SessionPickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */; };
 		01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */; };
 		01D4FA8A29CCDD68009E9B61 /* BaseUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */; };
@@ -243,6 +244,7 @@
 		01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControlViewController.swift; sourceTree = "<group>"; };
 		01C550F829C1812F003E0D40 /* DynamicColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicColorButton.swift; sourceTree = "<group>"; };
 		01D0D17E29B5A87400ACFEF9 /* CompanyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailViewModel.swift; sourceTree = "<group>"; };
+		01D3253429FFA02700FFB4D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01D4FA8329CC11BC009E9B61 /* SessionPickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPickCell.swift; sourceTree = "<group>"; };
 		01D4FA8729CCDBC7009E9B61 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		01D4FA8929CCDD68009E9B61 /* BaseUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUITableView.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		01F36CC329AD418D0039E12D /* CompanyStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyStatusCell.swift; sourceTree = "<group>"; };
 		01F36CC529AD45210039E12D /* CompanyContantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyContantCell.swift; sourceTree = "<group>"; };
 		01F36CC729AD46250039E12D /* CompanyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyHeaderCell.swift; sourceTree = "<group>"; };
+		01F5BE1329FFB59600202BE7 /* Shuttleasy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shuttleasy.entitlements; sourceTree = "<group>"; };
 		07F1AAE1A10FBCC6D31F0188 /* Pods-Shuttleasy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuttleasy.debug.xcconfig"; path = "Target Support Files/Pods-Shuttleasy/Pods-Shuttleasy.debug.xcconfig"; sourceTree = "<group>"; };
 		1C0ABBCFC511E7C40374D63E /* Pods_ShuttleasyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShuttleasyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB28156CFCA1112E754D0C9 /* Pods-ShuttleasyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShuttleasyTests.release.xcconfig"; path = "Target Support Files/Pods-ShuttleasyTests/Pods-ShuttleasyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -838,6 +841,7 @@
 		D4F116E728F9210F0083C5EB = {
 			isa = PBXGroup;
 			children = (
+				01D3253429FFA02700FFB4D2 /* GoogleService-Info.plist */,
 				0110307D29944F0900DE3268 /* Localizable.strings */,
 				D46D7EC5294DB8DC005CF8DB /* Shuttleasy.playground */,
 				D4F116F228F9210F0083C5EB /* Shuttleasy */,
@@ -862,6 +866,7 @@
 		D4F116F228F9210F0083C5EB /* Shuttleasy */ = {
 			isa = PBXGroup;
 			children = (
+				01F5BE1329FFB59600202BE7 /* Shuttleasy.entitlements */,
 				D44F261D292014C100CD5B85 /* base */,
 				D4F591E22921469400125E90 /* data */,
 				D4F591D629212ECD00125E90 /* di */,
@@ -1132,6 +1137,7 @@
 				D4422E9D29386E8C00342B29 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				D4422E9629386E8C00342B29 /* Poppins-ExtraBold.ttf in Resources */,
 				D4422EA029386E8C00342B29 /* Poppins-BlackItalic.ttf in Resources */,
+				01D3253529FFA02800FFB4D2 /* GoogleService-Info.plist in Resources */,
 				D4422E9B29386E8C00342B29 /* Poppins-Regular.ttf in Resources */,
 				D4422E9929386E8C00342B29 /* Poppins-LightItalic.ttf in Resources */,
 				D4422E9529386E8C00342B29 /* Poppins-BoldItalic.ttf in Resources */,
@@ -1593,6 +1599,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shuttleasy/Shuttleasy.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PGB4ZFDG33;
@@ -1610,6 +1618,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oguzhanaslann.Shuttleasy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1622,6 +1631,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shuttleasy/Shuttleasy.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PGB4ZFDG33;
@@ -1639,6 +1650,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oguzhanaslann.Shuttleasy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -16,6 +16,8 @@ target 'Shuttleasy' do
   pod 'Swinject'
   pod 'FloatingPanel'
   pod 'MaterialComponents/Tabs+TabBarView'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
   
   target 'ShuttleasyTests' do
     inherit! :search_paths

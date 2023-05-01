@@ -22,5 +22,15 @@ class AppRepository {
         let token = shuttleasyUserDefaults.getAuthToken()
         // if token exists send it to memory source
         memoryDataSource.setAuthToken(token: token)
+        
+        let fcmId = shuttleasyUserDefaults.getFcmId()
+        memoryDataSource.set(key: FCM_ID, value: fcmId)
     }
+    
+    func setFcmId(fcmId : String) {
+        Task.init {
+            await shuttleasyUserDefaults.setFcmId(fcmId: fcmId)
+            memoryDataSource.set(key: FCM_ID, value: fcmId)
+        }
+    }   
 }

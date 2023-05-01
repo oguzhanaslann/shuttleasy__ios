@@ -21,3 +21,5 @@ let HAS_USER_LOGGED_IN_KEY = "shuttleasy.ios.logged.in"
 let IS_DARK_MODE_KEY = "shuttleasy.ios.dark.mode"
 
 let DEFAULT_PHONE_REGION = "+90"
+
+let FCM_ID = "shuttleasy.ios.fcm.id"
