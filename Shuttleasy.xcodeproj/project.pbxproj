@@ -10,6 +10,9 @@
 		010C263E29A6CCAC00FE38EA /* CompanyAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C263D29A6CCAC00FE38EA /* CompanyAboutView.swift */; };
 		0110308229944FC700DE3268 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110308129944FC700DE3268 /* Localization.swift */; };
 		012164BA2A057C1D0054089A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012164B92A057C1D0054089A /* PrivacyPolicyViewController.swift */; };
+		012164BD2A0636640054089A /* search_not_found.json in Resources */ = {isa = PBXBuildFile; fileRef = 012164BC2A0636640054089A /* search_not_found.json */; };
+		012164BF2A0636940054089A /* not_found_error.json in Resources */ = {isa = PBXBuildFile; fileRef = 012164BE2A0636940054089A /* not_found_error.json */; };
+		012164C12A069BFA0054089A /* onboarding_driver.json in Resources */ = {isa = PBXBuildFile; fileRef = 012164C02A069BFA0054089A /* onboarding_driver.json */; };
 		0130CC9D29D2ACA6001C9BF5 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130CC9C29D2ACA6001C9BF5 /* HomeSection.swift */; };
 		0130CCA029D2B059001C9BF5 /* GreetingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130CC9F29D2B059001C9BF5 /* GreetingSection.swift */; };
 		0130CCA229D2C222001C9BF5 /* NextSessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0130CCA129D2C222001C9BF5 /* NextSessionCell.swift */; };
@@ -199,6 +202,9 @@
 		0110307F29944F3C00DE3268 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0110308129944FC700DE3268 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		012164B92A057C1D0054089A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		012164BC2A0636640054089A /* search_not_found.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_not_found.json; sourceTree = "<group>"; };
+		012164BE2A0636940054089A /* not_found_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = not_found_error.json; sourceTree = "<group>"; };
+		012164C02A069BFA0054089A /* onboarding_driver.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding_driver.json; sourceTree = "<group>"; };
 		0130CC9C29D2ACA6001C9BF5 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		0130CC9F29D2B059001C9BF5 /* GreetingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingSection.swift; sourceTree = "<group>"; };
 		0130CCA129D2C222001C9BF5 /* NextSessionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSessionCell.swift; sourceTree = "<group>"; };
@@ -418,6 +424,16 @@
 				012164B92A057C1D0054089A /* PrivacyPolicyViewController.swift */,
 			);
 			path = privacyPolicy;
+			sourceTree = "<group>";
+		};
+		012164BB2A0636530054089A /* lottie */ = {
+			isa = PBXGroup;
+			children = (
+				012164C02A069BFA0054089A /* onboarding_driver.json */,
+				012164BE2A0636940054089A /* not_found_error.json */,
+				012164BC2A0636640054089A /* search_not_found.json */,
+			);
+			path = lottie;
 			sourceTree = "<group>";
 		};
 		0130CC9E29D2B042001C9BF5 /* homeSection */ = {
@@ -888,6 +904,7 @@
 		D4F116F228F9210F0083C5EB /* Shuttleasy */ = {
 			isa = PBXGroup;
 			children = (
+				012164BB2A0636530054089A /* lottie */,
 				01F5BE1329FFB59600202BE7 /* Shuttleasy.entitlements */,
 				D44F261D292014C100CD5B85 /* base */,
 				D4F591E22921469400125E90 /* data */,
@@ -1146,6 +1163,7 @@
 				D4422EA129386E8C00342B29 /* Poppins-Italic.ttf in Resources */,
 				D4422E9829386E8C00342B29 /* Poppins-Black.ttf in Resources */,
 				D4422E9329386E8C00342B29 /* Poppins-Thin.ttf in Resources */,
+				012164BD2A0636640054089A /* search_not_found.json in Resources */,
 				D4422EA329386E8C00342B29 /* Poppins-SemiBold.ttf in Resources */,
 				D4422E9429386E8C00342B29 /* Poppins-Medium.ttf in Resources */,
 				D4422E9729386E8C00342B29 /* Poppins-Bold.ttf in Resources */,
@@ -1157,11 +1175,13 @@
 				D4F1170028F921100083C5EB /* LaunchScreen.storyboard in Resources */,
 				D4F116FD28F921100083C5EB /* Assets.xcassets in Resources */,
 				D4422E9D29386E8C00342B29 /* Poppins-ExtraLightItalic.ttf in Resources */,
+				012164C12A069BFA0054089A /* onboarding_driver.json in Resources */,
 				D4422E9629386E8C00342B29 /* Poppins-ExtraBold.ttf in Resources */,
 				D4422EA029386E8C00342B29 /* Poppins-BlackItalic.ttf in Resources */,
 				01D3253529FFA02800FFB4D2 /* GoogleService-Info.plist in Resources */,
 				D4422E9B29386E8C00342B29 /* Poppins-Regular.ttf in Resources */,
 				D4422E9929386E8C00342B29 /* Poppins-LightItalic.ttf in Resources */,
+				012164BF2A0636940054089A /* not_found_error.json in Resources */,
 				D4422E9529386E8C00342B29 /* Poppins-BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

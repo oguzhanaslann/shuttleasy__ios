@@ -11,4 +11,5 @@ import Foundation
 let SpacingXSmall = 8
 let SpacingSmall = 12
 let SpacingMedium = 16
+let SpacingLarge = 24
 

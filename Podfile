@@ -18,6 +18,7 @@ target 'Shuttleasy' do
   pod 'MaterialComponents/Tabs+TabBarView'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'lottie-ios'
   
   target 'ShuttleasyTests' do
     inherit! :search_paths

@@ -162,7 +162,7 @@ class SearchShuttleViewContoller: BaseViewController {
     }
 
     private func onSearchResultUpdated(results: [SearchResult]) {
-        searchResultViewController.onSearchResultUpdated(results: results)
+        searchResultViewController.onSearchResultUpdated(results: [])
         if fpc.state == .hidden || fpc.state == .tip {
             fpc.move(to: .half, animated: true)        
         }

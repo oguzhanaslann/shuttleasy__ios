@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 protocol SearchUpdateListener {
     func onSearchResultUpdated(results : [SearchResult])
@@ -20,6 +21,8 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
     let tableView = BaseUITableView()
     
     var results: [SearchResult] = []
+    
+    private var lottieAnimView : UIView? = nil
     
     private var searchResultClickedListener : SearchResultClickedListener? = nil
     
@@ -38,9 +41,60 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
     }
     
     func onSearchResultUpdated(results: [SearchResult]) {
+        addOrRemoveNoResultViewBy(results: results)
         self.results.removeAll()
         self.results.append(contentsOf: results)
         tableView.reloadData()
+    }
+    
+    private func addOrRemoveNoResultViewBy(results: [SearchResult]) {
+        if(results.isEmpty) {
+            if let file = getLottieFile() {
+                lottieAnimView = emptyResultView(file : file)
+                view.addSubview(lottieAnimView!)
+                lottieAnimView?.snp.makeConstraints({ make in
+                    make.top.equalToSuperview().offset(16)
+                    make.centerX.equalToSuperview()
+                })
+            }
+        } else {
+            lottieAnimView?.removeFromSuperview()
+            lottieAnimView = nil
+        }
+    }
+    
+    private func emptyResultView(file :String) -> UIView {
+        let container = UIView()
+        
+        let noResultLabel = LabelMedium(text: Localization.noResultFound.localized)
+        container.addSubview(noResultLabel)
+        noResultLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(SpacingLarge)
+            make.centerX.equalToSuperview()
+            make.left.lessThanOrEqualToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+        }
+        
+        noResultLabel.breakLineFromEndIfNeeded()
+        
+        let lottieAnimView = LottieAnimationView(filePath: file)
+        lottieAnimView.loopMode = .loop
+        lottieAnimView.play()
+        container.addSubview(lottieAnimView)
+        lottieAnimView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(noResultLabel.snp.bottom).offset(SpacingXSmall)
+            make.size.lessThanOrEqualTo(180)
+        }
+        
+        
+        
+        return container
+    }
+    
+    func getLottieFile() -> String? {
+        guard let file = Bundle.main.path(forResource: emptySearchLottie, ofType: "json") else { return nil }
+        return file
     }
 
     func setOnSearchResultClickedListener(listener : SearchResultClickedListener) {

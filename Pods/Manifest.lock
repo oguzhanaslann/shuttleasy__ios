@@ -95,6 +95,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.11.1):
     - GoogleUtilities/Logger
   - Kingfisher (7.6.2)
+  - lottie-ios (4.2.0)
   - MaterialComponents/AnimationTiming (124.2.0)
   - MaterialComponents/Availability (124.2.0)
   - MaterialComponents/private/Color (124.2.0):
@@ -131,6 +132,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - FloatingPanel
   - Kingfisher (~> 7.0)
+  - lottie-ios
   - "MaterialComponents/Tabs+TabBarView"
   - MobilliumQRCodeReader
   - PopupDialog (~> 1.1)
@@ -154,6 +156,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - Kingfisher
+    - lottie-ios
     - MaterialComponents
     - MDFInternationalization
     - MobilliumQRCodeReader
@@ -179,6 +182,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8378d1fa8ac49753ea6ce70d65a7cb70ce5f66e6
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
+  lottie-ios: 809ecf2d460ed650a6aed7aa88b2ec45fab4779c
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MobilliumQRCodeReader: d819ebfb3efdbb8e2c7afd72eab7ccfa57636886
@@ -189,6 +193,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Swinject: 893c9a543000ac2f10ee4cbaf0933c6992c935d5
 
-PODFILE CHECKSUM: 64968cf062d87e0663f12becc0b71dc53d4f2d4d
+PODFILE CHECKSUM: 5096a732ebe4ca7e9c03405bdee1a2048e26be95
 
 COCOAPODS: 1.11.3

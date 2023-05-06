@@ -127,3 +127,7 @@ let termsOfService = """
 </body>
 </html>
 """
+
+
+let emptySearchLottie = "search_not_found"
+let driverEmptyLottie = "onboarding_driver"

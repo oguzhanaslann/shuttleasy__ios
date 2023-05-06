@@ -1,10 +1,11 @@
-/* 
+/*
   Localizable.strings
   Shuttleasy
 
   Created by OguzhanMac on 9.02.2023.
   
 */
+
 "home" = "Home";
 "search" = "Search";
 "profile" = "Profile";
@@ -38,3 +39,12 @@
 "privacyPolicy" = "Privacy Policy";
 "termsOfUse" = "Terms of Use";
 "enable" = "Enable";
+"deleteAccount" = "Delete Account";
+"driverDeleteAccountAction" = "Only passengers can delete their account, please contact with your Manager.";
+"passengerDeleteAccountAction" = "Are you sure you want to delete your account?";
+"delete" = "Delete";
+"darkMode" = "Dark Mode";
+"preferences" = "Preferences";
+"yourQr" = "Your Profile QR";
+"swipeBottomToDismiss" = "Swipe bottom to dismiss";
+"noResultFound" = "No Result Found";

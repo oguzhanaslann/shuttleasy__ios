@@ -48,6 +48,7 @@ enum Localization : String {
     case preferences = "preferences"
     case yourQr = "yourQr"
     case swipeBottomToDismiss = "swipeBottomToDismiss"
+    case noResultFound = "noResultFound"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")
