@@ -41,7 +41,8 @@ func resImageView (
     name : String,
     clipToBounds : Bool? = nil,
     borderColor: CGColor? = nil,
-    borderWidth : CGFloat? = nil
+    borderWidth : CGFloat? = nil,
+    tint : UIColor? = nil
 )  -> UIImageView {
     let image = UIImage(named: name)
     let imageView = UIImageView(image: image)
@@ -57,6 +58,11 @@ func resImageView (
     if borderWidth !=  nil {
         imageView.layer.borderWidth = borderWidth!
     }
+    
+    if tint != nil {
+        imageView.tintColor = tint!
+    }
+    
     
     return imageView
 }

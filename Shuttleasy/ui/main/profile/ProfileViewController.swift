@@ -49,7 +49,7 @@ class ProfileViewController: BaseViewController {
     private lazy var contactSectionView: UIView = {
         let stackView  = UIView()
         
-        let header = sectionHeader(title: "Contact")
+        let header = sectionHeader(title: Localization.contact.localized)
         stackView.addSubview(header)
         header.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -112,14 +112,14 @@ class ProfileViewController: BaseViewController {
     private func openQrCodeDialog() {
         let qrSeed = profileViewModel.getQrSeedOrEmpty()
         let qrCode = generateQRCode(from: qrSeed)
-        let popup = PopupDialog(title: "Your Profile QR", message: "Swipe bottom to dismiss", image: qrCode)
+        let popup = PopupDialog(title: Localization.yourQr.localized, message: Localization.swipeBottomToDismiss.localized, image: qrCode)
         self.present(popup, animated: true, completion: nil )
     }
 
     private lazy var preferencesSectionView: UIView = {
          let stackView  = UIView()
         
-        let header = sectionHeader(title: "Preferences")
+        let header = sectionHeader(title: Localization.preferences.localized)
         stackView.addSubview(header)
         header.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -130,7 +130,7 @@ class ProfileViewController: BaseViewController {
 
         let darkModeRow = sectionWithSwitchRow(
             switchTag: ProfileViewController.darkModeSwitchTag,
-            title : "Dark Mode"
+            title : Localization.darkMode.localized
         )
 
         stackView.addSubview(darkModeRow)
@@ -142,7 +142,7 @@ class ProfileViewController: BaseViewController {
         }
 
     
-        let deleteAccount = sectionRowIconLabelView(resImageName: "icTrash",description : "Delete Account")
+        let deleteAccount = sectionRowIconLabelView(resImageName: "icTrash",description : Localization.deleteAccount.localized)
         stackView.addSubview(deleteAccount)
         deleteAccount.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -170,7 +170,7 @@ class ProfileViewController: BaseViewController {
         if profileType == .passenger {
             self.openDeleteAccountDialog()
         } else {
-            showErrorSnackbar(message: "Only passengers can delete their account, please contact with your Manager.")
+            showErrorSnackbar(message: Localization.driverDeleteAccountAction.localized)
         }
      }
 
@@ -178,7 +178,7 @@ class ProfileViewController: BaseViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(
-            title: "Delete", 
+            title: Localization.delete.localized,
             style: .destructive, 
             handler: { action in
                 Navigator.shared.navigate(from: self, to: .deleteAccount, clearBackStack: false, wrappedInNavigationController: true)
@@ -186,8 +186,8 @@ class ProfileViewController: BaseViewController {
         )
 
         showAlertDialog(
-            title: "Delete Account",
-            message: "Are you sure you want to delete your account?",
+            title: Localization.deleteAccount.localized,
+            message: Localization.passengerDeleteAccountAction.localized,
             actions: [cancelAction, deleteAction]
         )
     }
@@ -204,7 +204,7 @@ class ProfileViewController: BaseViewController {
             make.height.greaterThanOrEqualTo(48)
         }
 
-        let privacyRow = sectionWithEnterIcon(title: "Privacy Policy")
+        let privacyRow = sectionWithEnterIcon(title: Localization.privacyPolicy.localized)
         uiView.addSubview(privacyRow)
         privacyRow.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -217,7 +217,7 @@ class ProfileViewController: BaseViewController {
         privacyRow.addGestureRecognizer(tapGesturePrivacy)
         privacyRow.isUserInteractionEnabled = true
 
-        let termsRow = sectionWithEnterIcon(title: "Terms of Service")
+        let termsRow = sectionWithEnterIcon(title: Localization.termsOfUse.localized)
         uiView.addSubview(termsRow)
         termsRow.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -231,7 +231,7 @@ class ProfileViewController: BaseViewController {
         termsRow.isUserInteractionEnabled = true
 
         let logOutRow = sectionEndIcon(
-            title: "Log Out",
+            title: Localization.logout.localized,
             iconView : resImageView(name: "icLogout")
         )
         
@@ -255,24 +255,22 @@ class ProfileViewController: BaseViewController {
     }
 
     @objc func onPrivacyClicked(_ sender: UITapGestureRecognizer) {
-        print("onPrivacyClicked")
+        Navigator.shared.navigate(from: self, to: .webContent(html: privacyPolicy))
     }
 
     @objc func onTermsClicked(_ sender: UITapGestureRecognizer) {
-        print("onTermsClicked")
+        Navigator.shared.navigate(from: self, to: .webContent(html: termsOfService))
     }
 
     @objc func onLogOutClicked(_ sender: UITapGestureRecognizer) {
-        print("onLogOutClicked")
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: { action in
+        let cancelAction = UIAlertAction(title: Localization.cancel.localized, style: .cancel, handler: nil)
+        let logOutAction = UIAlertAction(title: Localization.logout.localized, style: .destructive, handler: { action in
             self.profileViewModel.logOut()
         })
 
         showAlertDialog(
-            title:"Log Out",
-            message: "Are you sure you want to log out?",
+            title: Localization.logout.localized,
+            message: Localization.logoutConfirmation.localized,
             actions: [cancelAction, logOutAction]
         )
     }

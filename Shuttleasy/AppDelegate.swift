@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureAppNotifications(application: application)
         setUpPopupDialogAppereance()
-       
         appRepository.initApplication()
         return true
     }

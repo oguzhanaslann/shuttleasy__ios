@@ -29,11 +29,25 @@ enum Localization : String {
     case onGoing = "onGoing"
     case completed = "completed"
     case nextStopIsYou = "nextStopIsYou"
-
-    //Cancel My Session
     case cancelMySession = "cancelMySession"
-    //Wait 5 Minutes 
     case wait5Minutes = "wait5Minutes"
+    case enable = "enable"
+    case logout = "logout"
+    case logoutConfirmation = "logoutConfirmation"
+    case cancel = "cancel"
+    case ok = "ok"
+    case yes = "yes"
+    case no = "no"
+    case privacyPolicy = "privacyPolicy"
+    case termsOfUse = "termsOfUse"
+    case deleteAccount = "deleteAccount"
+    case driverDeleteAccountAction = "driverDeleteAccountAction"
+    case passengerDeleteAccountAction = "passengerDeleteAccountAction"
+    case delete = "delete"
+    case darkMode = "darkMode"
+    case preferences = "preferences"
+    case yourQr = "yourQr"
+    case swipeBottomToDismiss = "swipeBottomToDismiss"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

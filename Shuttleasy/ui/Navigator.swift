@@ -24,6 +24,7 @@ enum Destination {
     case pickupSelection(args : PickupSelectionArgs)
     case picksessions(args: PickSessionsArgs)
     case sessionDetail(args: SessionDetailArgs)
+    case webContent(html: String)
 }
 
 class Navigator {
@@ -194,14 +195,13 @@ extension Destination {
                 return PickupSelectionViewController(args: args)
             case .picksessions(let args):
                 return PickSessionsViewController(args: args)
-        case .sessionDetail(let args):
+            case .sessionDetail(let args):
                 return SessionDetailViewController(args: args)
+            case .webContent(let html):
+                return WebViewController(htmlString: html)
             default: 
                 debugPrint("Destination not found")
                 return UIViewController()
         }
     }    
 }
-
-
-
