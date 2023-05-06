@@ -39,6 +39,7 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         tableView.register(NextSessionCell.self, forCellReuseIdentifier: NextSessionCell.identifier)
         tableView.register(HeaderCell.self, forCellReuseIdentifier: HeaderCell.identifier)
         tableView.register(UpComingCell.self, forCellReuseIdentifier: UpComingCell.identifier)
+        tableView.register(EmptySessionCell.self, forCellReuseIdentifier: EmptySessionCell.identifier)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -97,15 +98,24 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
         } else {
             newSection.removeAll(where: { $0 == .upComingSessionHeader })
         }
-
-
-        newSection.sort {
-            $0.priority() < $1.priority()
-        }
-        
+                
+        updateSessionSection(&newSection)
         
         self.sections = newSection
         tableView.reloadData()
+    }
+    
+    
+    private func updateSessionSection(_ sections: inout [HomeSection]) {
+        if sections.filter({ $0.isSessionSection() }).isEmpty {
+            sections.append(.noSession)
+        } else {
+            sections.removeAll(where: { $0 == .noSession })
+        }
+        
+        sections.sort {
+            $0.priority() < $1.priority()
+        }
     }
     
     private func containsAnyUpcommingSession(_ section: HomeSection) -> Bool {
@@ -226,6 +236,14 @@ extension HomepageViewContoller : UITableViewDataSource {
                 upComingCell?.configure(upComingSessions)
                 
                 cell = upComingCell
+            
+            case .noSession:
+                let headerCell  = tableView.dequeueReusableCell(
+                    withIdentifier: EmptySessionCell.identifier,
+                    for: indexPath
+                ) as? EmptySessionCell
+
+                cell = headerCell
             }
 
         guard let cell = cell else { return UITableViewCell() }

@@ -65,7 +65,7 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
     
     private func emptyResultView(file :String) -> UIView {
         let container = UIView()
-        
+
         let noResultLabel = LabelMedium(text: Localization.noResultFound.localized)
         container.addSubview(noResultLabel)
         noResultLabel.snp.makeConstraints { make in
@@ -86,9 +86,7 @@ class SearchResultViewController : UIViewController, SearchUpdateListener {
             make.top.equalTo(noResultLabel.snp.bottom).offset(SpacingXSmall)
             make.size.lessThanOrEqualTo(180)
         }
-        
-        
-        
+
         return container
     }
     

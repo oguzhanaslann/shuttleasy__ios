@@ -12,6 +12,7 @@ enum HomeSection: Equatable {
     case nextSession(nextSessionModel: NextSessionModel)
     case upComingSessionHeader
     case upComingSessions(upComingSessions : UpComingSessionModel)
+    case noSession
     
     
     static func == (lhs: HomeSection, rhs: HomeSection) -> Bool {
@@ -31,6 +32,19 @@ extension HomeSection {
                 return 2
             case .upComingSessions:
                 return 3
+        case .noSession:
+                return 4
+        }
+    }
+    
+    func isSessionSection() -> Bool {
+        switch self {
+            case .nextSession, .upComingSessions:
+                return true
+            default:
+                return false
         }
     }
 }
+
+
