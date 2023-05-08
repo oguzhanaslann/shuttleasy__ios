@@ -7,18 +7,29 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class SessionListCell : BaseTableViewCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     public static let identifier = "SessionListCell"
     
     private static let itemSize = CGSize(width: 96, height: 42)
-    public static let height = itemSize.height + ( 12 * 2 ) + 24 + 12
     
-    private let dateLabel = TitleMedium()
+    
+    private let dateLabel = TitleLarge()
+    
+    let line = lineView(color : onBackgroundColor)
     
     private let flowLayout = UICollectionViewFlowLayout()
-    let sessionTimeCollectionView : BaseUICollectionView = BaseUICollectionView(
+
+    let departureSessionsLabel = LabelMedium(text: Localization.departure.localized)
+    let departureSessionsTimeCollection : BaseUICollectionView = BaseUICollectionView(
+        frame: .zero,
+        collectionViewLayout: .init()
+    )
+    
+    let returnSessionsLabel = LabelMedium(text: Localization._return.localized)
+    let returnSessionsTimeCollection : BaseUICollectionView = BaseUICollectionView(
         frame: .zero,
         collectionViewLayout: .init()
     )
@@ -43,37 +54,123 @@ class SessionListCell : BaseTableViewCell, UICollectionViewDelegate, UICollectio
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.left.equalToSuperview().offset(16)
-            make.height.greaterThanOrEqualTo(24)
+            make.height.equalTo(24)
         }
         
-        sessionTimeCollectionView.register(SessionPickCell.self, forCellWithReuseIdentifier: SessionPickCell.identifier)
-        
+        contentView.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(8)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(1)
+        }
+    
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = SessionListCell.itemSize
-        sessionTimeCollectionView.setCollectionViewLayout(flowLayout, animated: true)
-        sessionTimeCollectionView.dataSource = self
-        sessionTimeCollectionView.delegate = self
-        sessionTimeCollectionView.isUserInteractionEnabled = true
-        contentView.addSubview(sessionTimeCollectionView)
-
-
-        sessionTimeCollectionView.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(dateLabel.snp.bottom)
-            make.left.equalToSuperview().offset(8)
-            make.right.equalToSuperview()
-            make.height.equalTo(66)
-            sessionTimeCollectionView.reloadData()
-        }
     }
-
-
+    
     func configure(
         with model: SessionPickListModel
     ) {
         dateLabel.text = model.dayName
         self.sessionPickList = model.sessionPickList
         
-        sessionTimeCollectionView.reloadData()
+        departureSessionsLabel.removeFromSuperview()
+        departureSessionsTimeCollection.removeFromSuperview()
+        let departures = sessionPickList.filter { $0.isDeparture }
+        if !departures.isEmpty {
+            putDepartureView()
+        }
+        
+        returnSessionsLabel.removeFromSuperview()
+        returnSessionsTimeCollection.removeFromSuperview()
+        
+        let returns = sessionPickList.filter { !$0.isDeparture }
+        if !returns.isEmpty {
+            putReturnView(departures: departures)
+        }
+    
+        layoutIfNeeded()
+    }
+    
+    private func putDepartureView() {
+        contentView.addSubview(departureSessionsLabel)
+        departureSessionsLabel.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(line.snp.bottom).offset(12)
+            make.left.lessThanOrEqualToSuperview().offset(16)
+            make.height.equalTo(24)
+        }
+        
+        departureSessionsTimeCollection.register(SessionPickCell.self, forCellWithReuseIdentifier: SessionPickCell.identifier)
+        departureSessionsTimeCollection.setCollectionViewLayout(flowLayout, animated: true)
+        departureSessionsTimeCollection.dataSource = self
+        departureSessionsTimeCollection.delegate = self
+        departureSessionsTimeCollection.isUserInteractionEnabled = true
+        
+        contentView.addSubview(departureSessionsTimeCollection)
+        departureSessionsTimeCollection.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(departureSessionsLabel.snp.bottom)
+            make.left.equalToSuperview().offset(8)
+            make.right.equalToSuperview()
+            make.height.equalTo(66)
+        }
+        
+        
+        departureSessionsTimeCollection.collectionViewLayout.invalidateLayout()
+        departureSessionsTimeCollection.reloadData()
+    }
+    
+    private func putReturnView(departures : [SessionPickModel]) {
+        contentView.addSubview(returnSessionsLabel)
+        returnSessionsLabel.snp.makeConstraints { make in
+            if !departures.isEmpty {
+                make.top.greaterThanOrEqualTo(departureSessionsTimeCollection.snp.bottom).offset(12)
+            } else {
+                make.top.greaterThanOrEqualTo(line.snp.bottom).offset(12)
+            }
+            make.left.lessThanOrEqualToSuperview().offset(16)
+            make.height.equalTo(24)
+        }
+
+        returnSessionsTimeCollection.register(SessionPickCell.self, forCellWithReuseIdentifier: SessionPickCell.identifier)
+        returnSessionsTimeCollection.setCollectionViewLayout(flowLayout, animated: true)
+        returnSessionsTimeCollection.dataSource = self
+        returnSessionsTimeCollection.delegate = self
+        returnSessionsTimeCollection.isUserInteractionEnabled = true
+        
+        contentView.addSubview(returnSessionsTimeCollection)
+
+        returnSessionsTimeCollection.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(returnSessionsLabel.snp.bottom)
+            make.left.equalToSuperview().offset(8)
+            make.right.equalToSuperview()
+            make.height.equalTo(66)
+            returnSessionsTimeCollection.reloadData()
+        }
+        
+        returnSessionsTimeCollection.collectionViewLayout.invalidateLayout()
+        returnSessionsTimeCollection.reloadData()
+    }
+    
+    static func height() -> CGFloat {
+        return  cellSpacingHeight() + dayAndLineHeight() + labelWithCollectionHeight() + labelWithCollectionHeight()
+    }
+    
+    static func singleListHeight() -> CGFloat {
+        return cellSpacingHeight() + dayAndLineHeight() + labelWithCollectionHeight()
+    }
+    
+    private static func labelWithCollectionHeight() -> CGFloat {
+        return (itemSize.height) + 12 + 24
+    }
+    
+    
+    private static func dayAndLineHeight() -> CGFloat {
+        return 24 + 8 + 1 + 16
+    }
+    
+    private static func cellSpacingHeight() ->  CGFloat {
+        return 36
     }
     
     func setDelegate(
@@ -92,7 +189,22 @@ extension SessionListCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sessionPickList.count
+        if collectionView == departureSessionsTimeCollection {
+            return departureSessions().count
+        } else  {
+            return returnSessions().count
+        }
+    }
+    
+    private func departureSessions() -> [SessionPickModel] {
+        let models = sessionPickList.filter { $0.isDeparture }
+        return models
+    }
+
+    
+    private func returnSessions()-> [SessionPickModel] {
+        let models = sessionPickList.filter { !$0.isDeparture }
+        return models
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -103,6 +215,8 @@ extension SessionListCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
+        let sessionPickList = getSessionsByView(collectionView)
+
         cell.configure(
             with: sessionPickList[indexPath.row],
             self
@@ -111,17 +225,27 @@ extension SessionListCell: UICollectionViewDataSource {
         return cell
     }
     
+    private func getSessionsByView(_ collectionView: UICollectionView) -> [SessionPickModel] {
+        if collectionView == departureSessionsTimeCollection {
+            return departureSessions()
+        } else  {
+            return returnSessions()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return SessionListCell.itemSize
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectSession(atRow: indexPath.row, atTablePosition: position ?? 0)
+        delegate?.didSelectSession(
+            sessionId: getSessionsByView(collectionView)[indexPath.row].sessionId,
+            atTablePosition: position ?? 0)
     }
 }
 
 
 protocol SessionListCellDelegate: AnyObject {
-    func didSelectSession(atRow: Int, atTablePosition: Int)
+    func didSelectSession(sessionId: Int, atTablePosition: Int)
 }

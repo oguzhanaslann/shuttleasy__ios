@@ -195,7 +195,8 @@ extension ShuttleSessionDeparture {
                 dateString: self.startTime,
                 targetFormat: "HH:mm"
             ),
-            sessionDate: self.startTime ?? ""
+            sessionDate: self.startTime ?? "",
+            isDeparture: self.shuttleSessionDepartureReturn == true
         )
     }
     

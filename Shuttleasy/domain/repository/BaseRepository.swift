@@ -55,96 +55,53 @@ extension BaseRepository {
                 totalRating: 100,
                 sessionPickModel: [
                     SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Monday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "departure", isDeparture : true),
+                            SessionPickModel(sessionId: 1, isSelected: false, isEnabled: true, sessionTitle: "return1", isDeparture : false),
+                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: true, sessionTitle: "isDeparture1", isDeparture : false),
+                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: true, sessionTitle: "isDeparture2", isDeparture : false),
+                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "return2", isDeparture : false),
+                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "departure3", isDeparture : false),
+                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "isDeparture3", isDeparture : false),
+                            SessionPickModel(sessionId: 7, isSelected: false, isEnabled: true, sessionTitle: "00:00", isDeparture : false),
+                            SessionPickModel(sessionId: 8, isSelected: false, isEnabled: true, sessionTitle: "01:00", isDeparture : false),
+                            SessionPickModel(sessionId: 9, isSelected: false, isEnabled: true, sessionTitle: "02:00", isDeparture : false),
+                            SessionPickModel(sessionId: 10, isSelected: false, isEnabled: true, sessionTitle: "03:00", isDeparture : false),
+                            SessionPickModel(sessionId: 11, isSelected: false, isEnabled: true, sessionTitle: "04:00", isDeparture : false)
+
                         ]
                     ),
                     SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Tuesday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "isDeparture2", isDeparture : false),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "return2", isDeparture : true)
                         ]
                     ),
                     SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Wednesday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "departure3", isDeparture : false),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "isDeparture3", isDeparture : false)
                         ]
                     ),
                     SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Thursday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00", isDeparture : true),
+                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00", isDeparture : true)
                         ]
                     ),
                     SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Friday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00", isDeparture : false)
                         ]
                     ),SessionPickListModel(
-                        dayName: "Name",
+                        dayName: "Saturday",
                         sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
-                        ]
-                    ),SessionPickListModel(
-                        dayName: "Name",
-                        sessionPickList: [
-                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00"),
-                            SessionPickModel(sessionId: 1, isSelected: true, isEnabled: true, sessionTitle: "01:00"),
-                            SessionPickModel(sessionId: 2, isSelected: false, isEnabled: false, sessionTitle: "02:00"),
-                            SessionPickModel(sessionId: 3, isSelected: false, isEnabled: false, sessionTitle: "03:00"),
-                            SessionPickModel(sessionId: 4, isSelected: false, isEnabled: true, sessionTitle: "04:00"),
-                            SessionPickModel(sessionId: 5, isSelected: false, isEnabled: true, sessionTitle: "05:00"),
-                            SessionPickModel(sessionId: 6, isSelected: false, isEnabled: true, sessionTitle: "06:00")
+                            SessionPickModel(sessionId: 0, isSelected: false, isEnabled: true, sessionTitle: "00:00", isDeparture : true)
                         ]
                     )
                 ]
@@ -189,7 +146,68 @@ extension BaseRepository {
                         CGPoint(x: point.x - 0.005, y: point.y + 0.005),
                         CGPoint(x: point.x + 0.005, y: point.y + 0.005)
                     ]
-                )
+                ),
+                
+                PickupArea(
+                    id: 1,
+                    sessionId: 1,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+
+                PickupArea(
+                    id: 2,
+                    sessionId: 2,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+
+                PickupArea(
+                    id: 3,
+                    sessionId: 3,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+
+                PickupArea(
+                    id: 4,
+                    sessionId: 4,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+
+                PickupArea(
+                    id: 5,
+                    sessionId: 5,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+
+                PickupArea(
+                    id: 6,
+                    sessionId: 6,
+                    polygon: [
+                        CGPoint(x: point.x - 0.005, y: point.y - 0.005),
+                        CGPoint(x: point.x - 0.005, y: point.y + 0.005),
+                        CGPoint(x: point.x + 0.005, y: point.y + 0.005)
+                    ]
+                ),
+                
            ]
     }
     
@@ -212,7 +230,7 @@ extension BaseRepository {
                 startLocation: .init(),
                 endLocation: CGPoint(x: 38.4189, y: 27.1287),
                 isReturn: false
-            )
+            ),
         ]
     }
 }

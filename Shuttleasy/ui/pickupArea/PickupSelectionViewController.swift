@@ -143,7 +143,7 @@ class PickupSelectionViewController: BaseViewController {
             }, receiveValue: { enrollState in
                     enrollState.onSuccess {[weak self] data in
                         self?.navigateToSessionPick(
-                            data.data.enrolledSessionIds,
+                            enrolledSessionIds: data.data.enrolledSessionIds,
                             pickUpPoint: data.data.pickUpPoint
                         )
                     }.onError {[weak self] error in
@@ -153,26 +153,24 @@ class PickupSelectionViewController: BaseViewController {
             )
     }
     
-    private func navigateToSessionPick(_ selectedArea: [Int], pickUpPoint: CGPoint) {
+    private func navigateToSessionPick(enrolledSessionIds: [Int], pickUpPoint: CGPoint) {
         Navigator.shared.navigate(
             from: self,
             to: .picksessions(
                 args: PickSessionsArgs(
                     companyId: args.companyId,
                     pickUpPoint: pickUpPoint,
-                    sessionPickModel: getSessionPickListModel(selectedArea)
+                    sessionPickModel: getSessionPickListModel(enrolledSessionIds)
                 )
             )
         )
     }
     
-    private func getSessionPickListModel(_ selectedAreaSessionIds : [Int])  -> [SessionPickListModel]{
+    private func getSessionPickListModel(_ enrolledSessionIds : [Int])  -> [SessionPickListModel]{
         return args.sessionPickModels.map { model in
-            SessionPickListModel(
+            return SessionPickListModel(
                 dayName: model.dayName,
-                sessionPickList: model.sessionPickList.filter {
-                    selectedAreaSessionIds.contains($0.sessionId)
-                }
+                sessionPickList: model.sessionPickList.filter { enrolledSessionIds.contains($0.sessionId) }
             )
         }.filter { sessionPickModel in
             !sessionPickModel.sessionPickList.isEmpty

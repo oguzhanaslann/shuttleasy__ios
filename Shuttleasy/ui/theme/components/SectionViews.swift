@@ -33,15 +33,15 @@ func sectionHeader(
         line.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
             make.height.equalTo(1)
+            make.top.greaterThanOrEqualTo(label.snp.bottom).offset(8)
         }
     }
     
     return view
 }
 
-private func lineView(color : UIColor) -> UIView {
+func lineView(color : UIColor) -> UIView {
     let view = UIView()
     view.backgroundColor = color
     return view

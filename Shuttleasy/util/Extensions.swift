@@ -248,6 +248,12 @@ extension UIView {
         overlay.alpha = alpha
         addSubview(overlay)
     }
+    
+    
+    func debugBorder() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.cgColor
+    }
 }
 
 extension UICollectionView {
@@ -287,3 +293,4 @@ extension Double {
         return String(format: "%.2f", self)
     }
 }
+

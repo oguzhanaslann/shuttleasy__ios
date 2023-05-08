@@ -15,6 +15,7 @@ class PickSessionsViewModel : ViewModel {
     private let companyRepository : CompanyRepository
     
     private let sessionModelListSubject : CurrentValueSubject<Pair<SessionPickOptions,Int?>, Never> = CurrentValueSubject(.init(first: [], second: nil))
+    
     let sessionModelListPublisher : AnyPublisher<Pair<[SessionPickListModel],Int?>, Never>
         
     let selectedSessionsPublisher : AnyPublisher<[SessionPickModel], Never>
@@ -33,8 +34,6 @@ class PickSessionsViewModel : ViewModel {
             .map { $0.flatMap { $0.sessionPickList } }
             .map { $0.filter { $0.isSelected } }
             .eraseToAnyPublisher()
-        
-        
     }
     
     func setSessionModels(_ models : [SessionPickListModel]) {
@@ -43,11 +42,11 @@ class PickSessionsViewModel : ViewModel {
         )
     }
     
-    func onSessionToggleReceive(pickModelIndex: Int, sessionIndex: Int) {
+    func onSessionToggleReceive(pickModelIndex: Int, sessionId: Int) {
         let currentList = sessionModelListSubject.value.first
         var newList = currentList
         let sessionList = newList[pickModelIndex]
-        let toggleReceivedItem = sessionList.sessionPickList[sessionIndex]
+        let toggleReceivedItem = sessionList.sessionPickList.first(where: { $0.sessionId == sessionId })!
         
         guard toggleReceivedItem.isEnabled else { return }
         
@@ -57,7 +56,8 @@ class PickSessionsViewModel : ViewModel {
                     sessionId: model.sessionId,
                     isSelected: !model.isSelected,
                     isEnabled: model.isEnabled,
-                    sessionTitle: model.sessionTitle
+                    sessionTitle: model.sessionTitle,
+                    isDeparture : model.isDeparture
                 )
             } else {
                 return model
@@ -82,22 +82,20 @@ class PickSessionsViewModel : ViewModel {
             .filter({ $0.isSelected })
             .map { $0.sessionId }
     }
-    
-    
-    
+
     func enrollUserToCompanySessions(
         pickUpLocation: CGPoint
     ) {
         Task.init {
-//            enrollEventSubject.send(.Loading)
+            enrollEventSubject.send(.Loading)
 
             let sessionIds:  [Int] = getSelectedSessionIds()
-            
+
             let enrollResult = await self.companyRepository.enrollUserTo(
                 sessions: sessionIds,
                 pickUpLocation: pickUpLocation
             )
-            
+
             enrollEventSubject.send(enrollResult.toUiDataState())
         }
     }

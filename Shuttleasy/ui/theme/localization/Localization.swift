@@ -50,6 +50,8 @@ enum Localization : String {
     case swipeBottomToDismiss = "swipeBottomToDismiss"
     case noResultFound = "noResultFound"
     case noSessionFound = "noSessionFound"
+    case departure = "departure"
+    case _return = "_return"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

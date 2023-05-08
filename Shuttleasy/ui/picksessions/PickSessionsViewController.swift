@@ -98,7 +98,7 @@ class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  
             at: IndexPath(row: updateIndex, section: 0)
         ) as? SessionListCell
         
-        let collectionView = cell?.sessionTimeCollectionView
+        let collectionView = cell?.departureSessionsTimeCollection
         let scrollState = collectionView?.contentOffset
         
         tableView.reloadRows(at: [IndexPath(row: updateIndex, section: 0)], with: .none)
@@ -179,9 +179,18 @@ class PickSessionsViewController: BaseViewController, SnackbarDismissDelegate,  
 extension PickSessionsViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SessionListCell.height
+        if hasDepartureAndResult(indexPath: indexPath) {
+            return SessionListCell.height()
+        } else {
+            return SessionListCell.singleListHeight()
+        }
     }
     
+    private func hasDepartureAndResult(indexPath : IndexPath) -> Bool {
+        return sessionPickModelList[indexPath.row].sessionPickList.filter({ $0.isDeparture }).count > 0 &&
+        sessionPickModelList[indexPath.row].sessionPickList.filter({ !$0.isDeparture }).count > 0 
+    }
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sessionPickModelList.count
     }
@@ -195,18 +204,18 @@ extension PickSessionsViewController : UITableViewDataSource {
         guard let statusCell = statusCell else {
             return UITableViewCell()
         }
-        
+
         statusCell.setDelegate(self, at: indexPath.row)
         statusCell.configure(
             with: sessionPickModelList[indexPath.row]
         )
-
+        
         return statusCell
     }
 }
 
 extension PickSessionsViewController: SessionListCellDelegate {
-    func didSelectSession(atRow: Int, atTablePosition: Int) {
-        viewModel.onSessionToggleReceive(pickModelIndex: atTablePosition, sessionIndex: atRow)
+    func didSelectSession(sessionId: Int, atTablePosition: Int) {
+        viewModel.onSessionToggleReceive(pickModelIndex: atTablePosition, sessionId: sessionId)
     }
 }
