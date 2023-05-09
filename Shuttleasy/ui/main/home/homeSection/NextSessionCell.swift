@@ -52,7 +52,6 @@ class NextSessionCell : BaseTableViewCell {
         return containerCard
     }()
     
-    
     func getBadgeView(with text : String) -> UIView{
         let badgeView = UIView()
         badgeView.backgroundColor = primaryContainer
@@ -76,7 +75,6 @@ class NextSessionCell : BaseTableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -97,40 +95,27 @@ class NextSessionCell : BaseTableViewCell {
             make.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(8)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(256)
+            make.height.equalTo(cardHeight())
         }
 
         contentView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.greaterThanOrEqualTo(16 + 28 + 256 + 12  )
+            make.height.greaterThanOrEqualTo(height())
         }
     }
     
-//    override func systemLayoutSizeFitting(
-//        _ targetSize: CGSize,
-//        withHorizontalFittingPriority _: UILayoutPriority,
-//        verticalFittingPriority _: UILayoutPriority
-//    ) -> CGSize {
-//        tableView.frame = CGRect(x: 0, y: 0, width: targetSize.width, height: 1000)
-//        tableView.reloadData()
-//        tableView.layoutIfNeeded()
-//
-//        let contentSize = tableView.contentSize
-//        collectionItemSize = contentSize.height
-//
-//        tableView.snp.updateConstraints {
-//            $0.top.leading.trailing.equalToSuperview()
-//            $0.bottom.equalTo(-16)
-//            $0.height.equalTo(self.collectionItemSize)
-//        }
-//
-//        return super.systemLayoutSizeFitting(
-//            targetSize,
-//            withHorizontalFittingPriority: .required,
-//            verticalFittingPriority: .fittingSizeLevel
-//        )
-//    }
+    private func height() -> Int {
+        return 16 + 28 + cardHeight() + 12
+    }
     
+    private func cardHeight() -> Int {
+        return 256 + 16
+    }
+
+    private func cardHeightWithoutPassengers() -> Int {
+        return cardHeight() - 48
+    }
+
     func configure(_ model : NextSessionModel) {
         let badgeView = getBadgeView(with: model.sessionBusPlateNumber)
         nextSessionCard.addSubview(badgeView)
@@ -183,6 +168,42 @@ class NextSessionCell : BaseTableViewCell {
             make.right.equalToSuperview().offset(-24)
             make.height.greaterThanOrEqualTo(34)
         }
+
+        putPassengerCountSection(model, viewAbove: startTime)
+    }
+
+    private func putPassengerCountSection(_ model : NextSessionModel, viewAbove : UIView) {
+        let isPassengerCountKnown: Bool = model.passengerCapacity != nil
+            && model.totalPassengers != nil
+        if isPassengerCountKnown {
+            let passengerCount = createCardSection(
+                title: "\(model.totalPassengers!) / \(model.passengerCapacity!)",
+                subtitle:Localization.fullness.localized,
+                resImageName: "icPeople"
+            )
+
+            nextSessionCard.addSubview(passengerCount)
+            passengerCount.snp.makeConstraints { make in
+                make.top.greaterThanOrEqualTo(viewAbove.snp.bottom).offset(16)
+                make.left.equalToSuperview().offset(24)
+                make.right.equalToSuperview().offset(-24)
+                make.height.greaterThanOrEqualTo(34)
+            }
+        
+            setCardConstraints(height: cardHeight())
+        } else {
+            setCardConstraints(height: cardHeightWithoutPassengers())
+        }
+    }
+    
+
+    private func setCardConstraints(height: Int){
+        nextSessionCard.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(8)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(height)
+        }
     }
     
     private func getPlateNumberLabel() -> UILabel? {
@@ -211,4 +232,6 @@ struct NextSessionModel {
     let startDate: Date
     let startLocation: CGPoint
     let destinationLocation: CGPoint
+    var totalPassengers: Int? = nil
+    var passengerCapacity : Int? = nil
 }

@@ -15,4 +15,6 @@ struct ActiveSession {
     let startLocation : CGPoint
     let endLocation : CGPoint
     let isReturn : Bool
+    var totalPassengers: Int? = nil
+    var passengerCapacity : Int? = nil
 }

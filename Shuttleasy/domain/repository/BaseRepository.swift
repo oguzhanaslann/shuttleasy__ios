@@ -233,4 +233,30 @@ extension BaseRepository {
             ),
         ]
     }
+    
+    
+    internal func getDriverDummyActiveSessions() -> [ActiveSession] {
+        return [
+            ActiveSession(
+                sessionId: 0,
+                plateNumber: "35SE3407",
+                destinationName: "Konak pier",
+                startDate: Date(),
+                startLocation: .init(),
+                endLocation: CGPoint(x: 38.4189, y: 27.1287),
+                isReturn: false,
+                totalPassengers: 10,
+                passengerCapacity: 20
+            ),
+            ActiveSession(
+                sessionId: 1,
+                plateNumber: "35SE3407",
+                destinationName: "Konak pier",
+                startDate: Date().addingTimeInterval(60*60*24),
+                startLocation: .init(),
+                endLocation: CGPoint(x: 38.4189, y: 27.1287),
+                isReturn: false
+            ),
+        ]
+    }
 }

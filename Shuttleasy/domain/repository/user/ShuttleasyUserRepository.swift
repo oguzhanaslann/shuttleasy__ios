@@ -231,7 +231,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     
     func getUserProfileType() async -> ProfileType {
         if (shouldUseDummyData()) {
-            return .passenger
+            return .driver
         } else {
             return await localDatasource.getUserProfileType(defaultValue: .passenger)
         }
@@ -239,41 +239,75 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     
     
     func getActiveSessions() async -> Result<[ActiveSession], Error> {
-       if shouldUseDummyData() {
-           return .success(getDummyActiveSessions())
-       } else {
-           return await getActiveSessionsFromNetwork()
-       }
+        let userProfileType = await getUserProfileType()
+        
+        switch userProfileType {
+            case .passenger:
+                return await getPassengerActiveSessions()
+            case .driver:
+                return await getDriverActiveSessions()
+        }
     }
     
-    private func getActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
+    private func getPassengerActiveSessions() async -> Result<[ActiveSession], Error> {
+        if shouldUseDummyData() {
+            return .success(getDummyActiveSessions())
+        } else {
+            return await getPassengerActiveSessionsFromNetwork()
+        }
+    }
+  
+    private func getPassengerActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
         do {
-            let activeSessionsDTO = try await networkDatasource.getActiveSessions()
-            
-            let activeSessions : [ActiveSession] = activeSessionsDTO.map { dto in
-                ActiveSession(
-                    sessionId: dto.id ?? 0 ,
-                    plateNumber: dto.licensePlate ?? "",
-                    destinationName: dto.destinationName ?? "",
-                    startDate: ShuttleasyDateFormatter.shared.tryParsingDateString(
-                        dateString: dto.startTime ?? ""
-                    ) ?? Date() ,
-                    startLocation: CGPoint(
-                        x: dto.latitudeStart?.toDoubleOrZero() ?? 0,
-                        y: dto.longitudeStart?.toDoubleOrZero() ?? 0
-                    ),
-                    endLocation: CGPoint(
-                        x: dto.latitudeFinal?.toDoubleOrZero() ?? 0  ,
-                        y: dto.longitudeFinal?.toDoubleOrZero() ?? 0
-                    ),
-                    isReturn: dto.isReturn ?? false
-                )
-            }
-            
+            let activeSessionsDTO = try await networkDatasource.getPassengerActiveSessions()
+            let activeSessions : [ActiveSession] = activeSessionsDTO.toActiveSessionList()
             return .success(activeSessions)
             
         } catch {
             return .failure(parseProcessError(error))
+        }
+    }
+    
+    private func getDriverActiveSessions() async -> Result<[ActiveSession], Error> {
+        if shouldUseDummyData() {
+            return .success(getDriverDummyActiveSessions())
+        } else {
+            return await getDriverActiveSessionsFromNetwork()
+        }
+    }
+    
+    private func getDriverActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
+        do {
+            let activeSessionsDTO = try await networkDatasource.getDriverActiveSessions()
+            let activeSessions : [ActiveSession] = activeSessionsDTO.toActiveSessionList()
+            return .success(activeSessions)
+            
+        } catch {
+            return .failure(parseProcessError(error))
+        }
+    }
+}
+
+extension ActiveSessionDTO {
+    func toActiveSessionList() -> [ActiveSession] {
+        return self.map { dto in
+            ActiveSession(
+                sessionId: dto.id ?? 0 ,
+                plateNumber: dto.licensePlate ?? "",
+                destinationName: dto.destinationName ?? "",
+                startDate: ShuttleasyDateFormatter.shared.tryParsingDateString(
+                    dateString: dto.startTime ?? ""
+                ) ?? Date() ,
+                startLocation: CGPoint(
+                    x: dto.latitudeStart?.toDoubleOrZero() ?? 0,
+                    y: dto.longitudeStart?.toDoubleOrZero() ?? 0
+                ),
+                endLocation: CGPoint(
+                    x: dto.latitudeFinal?.toDoubleOrZero() ?? 0  ,
+                    y: dto.longitudeFinal?.toDoubleOrZero() ?? 0
+                ),
+                isReturn: dto.isReturn ?? false
+            )
         }
     }
 }

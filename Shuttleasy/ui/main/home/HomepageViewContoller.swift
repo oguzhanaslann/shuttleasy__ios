@@ -84,11 +84,9 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
             )
     }
 
-
     private func addSection(_ section : HomeSection) {
         
         var newSection = self.sections
-        
         newSection.append(section)
         
         if newSection.contains(where: { return containsAnyUpcommingSession($0)}){
@@ -113,6 +111,7 @@ class HomepageViewContoller: BaseViewController, UITableViewDelegate {
             sections.removeAll(where: { $0 == .noSession })
         }
         
+
         sections.sort {
             $0.priority() < $1.priority()
         }
@@ -173,7 +172,9 @@ extension ActiveSession {
             destinationName: destinationName,
             startDate: startDate,
             startLocation: startLocation,
-            destinationLocation: endLocation
+            destinationLocation: endLocation,
+            totalPassengers: totalPassengers,
+            passengerCapacity: passengerCapacity
         )
     }
 

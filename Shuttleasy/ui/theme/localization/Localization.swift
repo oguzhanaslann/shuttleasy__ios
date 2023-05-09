@@ -52,6 +52,7 @@ enum Localization : String {
     case noSessionFound = "noSessionFound"
     case departure = "departure"
     case _return = "_return"
+    case fullness = "fullness"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")
