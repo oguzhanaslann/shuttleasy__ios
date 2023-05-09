@@ -30,6 +30,9 @@
 		01554F6729A7F8F200F16B51 /* SectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01554F6629A7F8F200F16B51 /* SectionViews.swift */; };
 		0159A22429C2DA1C00DD8C5E /* PickupSelectionArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */; };
 		0159A22629C2DA4000DD8C5E /* CompanyDetailArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */; };
+		016B216F2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */; };
+		016B21712A0A79FB00E9BAF0 /* PassengerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */; };
+		016B21742A0ADB5100E9BAF0 /* SessionPassenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */; };
 		016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B927429C3A3CC00207A38 /* MapExtensions.swift */; };
 		016FE6F629F6FE2E00A44034 /* ButtonColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F529F6FE2E00A44034 /* ButtonColors.swift */; };
 		016FE6F829F6FF1C00A44034 /* SessionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F729F6FF1C00A44034 /* SessionDetail.swift */; };
@@ -223,6 +226,9 @@
 		01554F6629A7F8F200F16B51 /* SectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViews.swift; sourceTree = "<group>"; };
 		0159A22329C2DA1C00DD8C5E /* PickupSelectionArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupSelectionArgs.swift; sourceTree = "<group>"; };
 		0159A22529C2DA4000DD8C5E /* CompanyDetailArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailArgs.swift; sourceTree = "<group>"; };
+		016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSessionDetailViewController.swift; sourceTree = "<group>"; };
+		016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerCell.swift; sourceTree = "<group>"; };
+		016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPassenger.swift; sourceTree = "<group>"; };
 		016B927429C3A3CC00207A38 /* MapExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
 		016FE6F529F6FE2E00A44034 /* ButtonColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColors.swift; sourceTree = "<group>"; };
 		016FE6F729F6FF1C00A44034 /* SessionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetail.swift; sourceTree = "<group>"; };
@@ -451,6 +457,35 @@
 			path = homeSection;
 			sourceTree = "<group>";
 		};
+		016B216C2A0A5C5100E9BAF0 /* driver */ = {
+			isa = PBXGroup;
+			children = (
+				016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */,
+				016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */,
+			);
+			path = driver;
+			sourceTree = "<group>";
+		};
+		016B216D2A0A5C9900E9BAF0 /* passenger */ = {
+			isa = PBXGroup;
+			children = (
+				01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */,
+				01BB6DA429F596F70067B417 /* SessionStateView.swift */,
+				01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */,
+				016FE6FE29F706DF00A44034 /* SessionDetailViewModel.swift */,
+				0152923829FB0570008E9DF0 /* SessionDetailArgs.swift */,
+			);
+			path = passenger;
+			sourceTree = "<group>";
+		};
+		016B21722A0ADB3F00E9BAF0 /* driver */ = {
+			isa = PBXGroup;
+			children = (
+				016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */,
+			);
+			path = driver;
+			sourceTree = "<group>";
+		};
 		016FE6F429F6FE1200A44034 /* button */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +499,7 @@
 		016FE6FD29F705F200A44034 /* detail */ = {
 			isa = PBXGroup;
 			children = (
+				016B21722A0ADB3F00E9BAF0 /* driver */,
 				016FE6F729F6FF1C00A44034 /* SessionDetail.swift */,
 				016FE6F929F6FFA200A44034 /* SessionDetailWithState.swift */,
 				016FE6FB29F6FFC900A44034 /* SessionState.swift */,
@@ -518,11 +554,8 @@
 		01AF343929EE4FA000BC4199 /* sessionDetail */ = {
 			isa = PBXGroup;
 			children = (
-				01AF343A29EE4FEA00BC4199 /* SessionDetailViewController.swift */,
-				01BB6DA429F596F70067B417 /* SessionStateView.swift */,
-				01BB6DA629F5BBD70067B417 /* SessionControlViewController.swift */,
-				016FE6FE29F706DF00A44034 /* SessionDetailViewModel.swift */,
-				0152923829FB0570008E9DF0 /* SessionDetailArgs.swift */,
+				016B216D2A0A5C9900E9BAF0 /* passenger */,
+				016B216C2A0A5C5100E9BAF0 /* driver */,
 			);
 			path = sessionDetail;
 			sourceTree = "<group>";
@@ -1366,6 +1399,7 @@
 				01B0AB3A29CF3917001341E1 /* CompanyDetailDTO.swift in Sources */,
 				D4D0650C29261431002991A1 /* SignInViewModel.swift in Sources */,
 				D41BE5BB292AB68000826640 /* Authenticator.swift in Sources */,
+				016B216F2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift in Sources */,
 				D4C1025F293B8C4C004812C1 /* UserAuthDTO.swift in Sources */,
 				D4F591E12921467C00125E90 /* UserRepository.swift in Sources */,
 				01431F4B29D2FF3F0069E3FC /* SectionUtil.swift in Sources */,
@@ -1392,6 +1426,7 @@
 				D41BE5C2292ABE0B00826640 /* UserAuthenticationModel.swift in Sources */,
 				D4C10261293B8C71004812C1 /* UserProfileDTO.swift in Sources */,
 				D40B27F0292A78C500140612 /* EmailPasswordResetController.swift in Sources */,
+				016B21742A0ADB5100E9BAF0 /* SessionPassenger.swift in Sources */,
 				D40B27F6292A8F2700140612 /* Snackbar.swift in Sources */,
 				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				0184228529D1D9BF00F0FF4D /* PickupArea.swift in Sources */,
@@ -1435,6 +1470,7 @@
 				D4816DB12920D40700ECB799 /* WindowDelegate.swift in Sources */,
 				016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */,
 				0152923929FB0570008E9DF0 /* SessionDetailArgs.swift in Sources */,
+				016B21712A0A79FB00E9BAF0 /* PassengerCell.swift in Sources */,
 				01A6393B29B6EFE00038B31A /* CompanyDetail.swift in Sources */,
 				D406C0CA2937C2B800BC5F0C /* BaseTabbarController.swift in Sources */,
 				D44F261F292014CF00CD5B85 /* Constants.swift in Sources */,

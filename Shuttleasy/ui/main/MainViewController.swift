@@ -64,6 +64,4 @@ class MainViewController: BaseTabBarController {
             self.initTabBar(profileType: profileType)
         }
     }
-
-
 }

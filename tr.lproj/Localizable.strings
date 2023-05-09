@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Shuttleasy
 
@@ -52,3 +52,4 @@
 "departure" = "Departure";
 "_return" = "Return";
 "fullness" = "Fullness";
+"startSession" = "Start Session";

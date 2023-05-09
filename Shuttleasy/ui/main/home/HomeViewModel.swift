@@ -60,4 +60,9 @@ class HomeViewModel : ViewModel {
             activeSessionsSubject.send(result.toUiDataState())
         }
     }
+
+    
+    func getCurrentProfile() -> UserProfile? {
+        return userProfileSubject.value.getDataContent()?.data
+    }
 }

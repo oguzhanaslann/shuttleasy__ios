@@ -53,6 +53,7 @@ enum Localization : String {
     case departure = "departure"
     case _return = "_return"
     case fullness = "fullness"
+    case startSession = "startSession"
 
     var localized: String {
         return NSLocalizedString(self.rawValue, comment: "")

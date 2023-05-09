@@ -23,7 +23,8 @@ enum Destination {
     case companyDetail(args: CompanyDetailArgs)
     case pickupSelection(args : PickupSelectionArgs)
     case picksessions(args: PickSessionsArgs)
-    case sessionDetail(args: SessionDetailArgs)
+    case passengerSessionDetail(args: SessionDetailArgs)
+    case driverSessionDetail
     case webContent(html: String)
 }
 
@@ -195,8 +196,10 @@ extension Destination {
                 return PickupSelectionViewController(args: args)
             case .picksessions(let args):
                 return PickSessionsViewController(args: args)
-            case .sessionDetail(let args):
+            case .passengerSessionDetail(let args):
                 return SessionDetailViewController(args: args)
+            case .driverSessionDetail:
+                return DriverSessionDetailViewController()
             case .webContent(let html):
                 return WebViewController(htmlString: html)
             default: 

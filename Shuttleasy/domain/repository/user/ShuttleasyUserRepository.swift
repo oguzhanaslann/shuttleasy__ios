@@ -140,6 +140,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         do {
             await getAndSaveProfileFromNetwork()
             let userProfile = try await localDatasource.getUserProfile()
+            print(userProfile)
             return .success(userProfile)
         } catch {
             return .failure(parseProcessError(error))
@@ -152,7 +153,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
 
             let userId = localDatasource.getUserId()
             if shouldUseDummyData() {
-                userProfileDTO = dummyUserProfileDto()
+                userProfileDTO = await dummyUserProfileDto()
             } else if let currentId = userId {
                 let userProfileType =  await localDatasource.getUserProfileType(defaultValue: .passenger)
                 userProfileDTO = try await networkDatasource.getUserProfile(userId: currentId, isDriver: userProfileType == .driver)
@@ -170,9 +171,9 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
         }
     }
 
-    func dummyUserProfileDto() -> UserProfileDTO {
+    func dummyUserProfileDto() async -> UserProfileDTO {
         return UserProfileDTO(
-            profileType: .passenger,
+            profileType: await getUserProfileType(),
             profileImageUrl: "",
             profileName: "Adam",
             profileSurname: "Smith",

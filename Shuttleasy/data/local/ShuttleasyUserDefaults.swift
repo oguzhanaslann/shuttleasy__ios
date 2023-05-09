@@ -86,6 +86,7 @@ class ShuttleasyUserDefaults {
         UserDefaults.standard.set(userProfile.profileImageUrl, forKey: ShuttleasyUserDefaults.USER_PROFILE_PIC_KEY)
         UserDefaults.standard.set(userProfile.profilePhone, forKey: ShuttleasyUserDefaults.USER_PHONE_NUMBER_KEY)
         UserDefaults.standard.set(userProfile.qrSeed, forKey: ShuttleasyUserDefaults.USER_QR_STRING_KEY)
+        UserDefaults.standard.set(userProfile.profileType.rawValue, forKey: ShuttleasyUserDefaults.USER_PROFILE_TYPE_KEY)
     }
     
     func getUserProfile() async throws -> UserProfile {

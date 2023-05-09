@@ -256,7 +256,26 @@ extension HomepageViewContoller : UITableViewDataSource {
         let section = sections[indexPath.row]
         switch section {
             case .nextSession(let nextSessionModel):
-            Navigator.shared.navigate(from: self, to: .sessionDetail(args: .init(sessionId: nextSessionModel.sessionId)))
+            
+                let userProfile = viewModel.getCurrentProfile()
+                let userProfileType = userProfile?.profileType
+                print( userProfileType)
+
+                if case .driver = userProfileType {
+                    Navigator.shared.navigate(
+                        from: self,
+                        to: .driverSessionDetail,
+                        clearBackStack: false,
+                        wrappedInNavigationController: true
+                    )
+                } else if case .passenger = userProfileType {
+                    Navigator.shared.navigate(
+                        from: self,
+                        to: .passengerSessionDetail(args: .init(sessionId: nextSessionModel.sessionId))
+                    )
+                } else {
+                    debugPrint("Unknown profile type \(userProfileType)")
+                }
             default:
                 break
         }

@@ -46,6 +46,7 @@ class SessionDetailViewController: BaseViewController {
     }()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = Localization.yourRide.localized
         viewModel.getSessionDetail(sessionId: args.sessionId)
         view.addSubview(sessionStateView)
