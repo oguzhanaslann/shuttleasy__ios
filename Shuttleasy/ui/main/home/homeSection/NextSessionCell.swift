@@ -97,15 +97,14 @@ class NextSessionCell : BaseTableViewCell {
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(cardHeight())
         }
-
-        contentView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.greaterThanOrEqualTo(height())
-        }
     }
     
     private func height() -> Int {
         return 16 + 28 + cardHeight() + 12
+    }
+    
+    private func heightWithoutPassengers() -> Int {
+        return height() - cardHeight() + cardHeightWithoutPassengers()
     }
     
     private func cardHeight() -> Int {
@@ -191,8 +190,10 @@ class NextSessionCell : BaseTableViewCell {
             }
         
             setCardConstraints(height: cardHeight())
+            setContentViewConstraints(height: height())
         } else {
             setCardConstraints(height: cardHeightWithoutPassengers())
+            setContentViewConstraints(height: heightWithoutPassengers())
         }
     }
     
@@ -203,6 +204,13 @@ class NextSessionCell : BaseTableViewCell {
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(height)
+        }
+    }
+
+    private func setContentViewConstraints(height: Int){
+        contentView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.greaterThanOrEqualTo(height)
         }
     }
     

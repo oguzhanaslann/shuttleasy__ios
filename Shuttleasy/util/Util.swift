@@ -146,3 +146,15 @@ func generateUniqueInt() -> Int {
     
     return uniqueInt
 }
+
+func callNumber(phoneNumber: String) {
+    do {
+        guard let url = URL(string: "telprompt://\(phoneNumber)"),
+            UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        try UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    } catch {
+        print("Error on calling phone number")
+    }
+}

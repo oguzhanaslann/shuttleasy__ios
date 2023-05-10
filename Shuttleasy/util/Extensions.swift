@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 import Combine
+import MessageUI
 
 extension UIScrollView {
     func scrollTo(horizontalPage : Int = 0, verticalPage: Int = 0, animated : Bool = true) {
@@ -172,6 +173,24 @@ extension UIViewController {
                 break
             }
     }
+    
+    
+    func sendEmail(
+        email : String,
+        delegate : MFMailComposeViewControllerDelegate? = nil
+    ) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            if let delegate = delegate {
+                mail.mailComposeDelegate = delegate
+            }
+            mail.setToRecipients([email])
+            present(mail, animated: true)
+        } else {
+            debugPrint("Mail services are not available")
+        }
+    }
+
 }
 
 extension UIImageView {

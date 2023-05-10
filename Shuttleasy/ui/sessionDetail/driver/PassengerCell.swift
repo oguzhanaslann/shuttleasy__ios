@@ -15,6 +15,10 @@ class PassengerCell : UICollectionViewCell {
 
     static let itemSize = CGSize(width: 252, height: 252)
     
+    var delegate : PassengerCellDelegate? = nil
+    
+    private var sessionPassenger: SessionPassenger? = nil
+    
     private lazy var profilePhoto: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .gray
@@ -43,16 +47,25 @@ class PassengerCell : UICollectionViewCell {
         }
         
         let leftView = UIView()
-        let rightView = UIView()
         container.addArrangedSubview(leftView)
         leftView.snp.makeConstraints { make in
             make.height.equalTo(58)
         }
+
+        // left view click listener
+        let tapGestureLeft = UITapGestureRecognizer(target: self, action: #selector(onLeftViewClick)) 
+        leftView.addGestureRecognizer(tapGestureLeft)
+        
+        let rightView = UIView()
         container.addArrangedSubview(rightView)
         rightView.snp.makeConstraints { make in
             make.height.equalTo(58)
         }
         
+        // right view click listener
+        let tapGestureRight = UITapGestureRecognizer(target: self, action: #selector(onRightViewClick))
+        rightView.addGestureRecognizer(tapGestureRight)
+
         let phoneOption = resImageView(name: "icPhone", tint: primaryColor)
         rightView.addSubview(phoneOption)
         phoneOption.snp.makeConstraints { make in
@@ -78,6 +91,18 @@ class PassengerCell : UICollectionViewCell {
         return container
     }()
     
+    @objc func onLeftViewClick() {
+        if let passenger = sessionPassenger {
+            delegate?.didClickedSendEmail(passenger: passenger)
+        }
+    }
+
+    @objc func onRightViewClick() {
+        if let passenger = sessionPassenger {
+            delegate?.didClickedCall(passenger: passenger)
+        }
+    }
+
     private let line = lineView(color: .lightGray)
     
     private let personNameLabel = BodySmall()
@@ -133,5 +158,11 @@ class PassengerCell : UICollectionViewCell {
         personNameLabel.text = passenger.passengerName
         personAddress.text = passenger.passengerAddress
         profilePhoto.load(url: passenger.profilePhoto)
+        self.sessionPassenger = passenger
     }
+}
+
+protocol PassengerCellDelegate {
+    func didClickedSendEmail(passenger: SessionPassenger)
+    func didClickedCall(passenger: SessionPassenger)
 }

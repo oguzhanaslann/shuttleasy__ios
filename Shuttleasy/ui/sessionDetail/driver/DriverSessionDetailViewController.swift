@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import MapKit
 import Combine
+import MessageUI
 
 struct DriverSessionDetailArgs {
     let sessionId : Int
@@ -72,6 +73,10 @@ class DriverSessionDetailViewController: BaseViewController {
             make.right.equalToSuperview()
                 .offset(-SpacingMedium)
             make.height.equalTo(largeButtonHeight)
+        }
+        
+        startSessionButton.setOnClickListener {
+//         TODO: Implement
         }
         
         view.addSubview(mapView)
@@ -170,6 +175,7 @@ extension DriverSessionDetailViewController: UICollectionViewDelegate, UICollect
             return UICollectionViewCell()
         }
 
+        cell.delegate = self
         cell.configure(with: passengerSessions[indexPath.row])
         return cell
     }
@@ -178,5 +184,25 @@ extension DriverSessionDetailViewController: UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let inset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         return inset
+    }
+}
+
+
+extension DriverSessionDetailViewController : PassengerCellDelegate {
+    func didClickedSendEmail(passenger: SessionPassenger) {
+        sendEmail(
+            email: passenger.passengerEmail,
+            delegate: self
+        )
+    }
+    
+    func didClickedCall(passenger: SessionPassenger) {
+        callNumber(phoneNumber: passenger.passengerPhone)
+    }
+}
+
+extension DriverSessionDetailViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }
