@@ -13,10 +13,16 @@ let RESET_PASSWORD_TOKEN_NIL = 1002
 class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     private let localDatasource : UserInfoLocalDataSource
     private let networkDatasource : UserNetworkDataSource
+    private let shuttleNetworkSource: ShuttleNetworkSource
 
-    init(userInfoLocalDataSource:UserInfoLocalDataSource, userNetworkDataSource: UserNetworkDataSource) {
+    init(
+        userInfoLocalDataSource:UserInfoLocalDataSource,
+        userNetworkDataSource: UserNetworkDataSource,
+        shuttleNetworkSource: ShuttleNetworkSource
+    ) {
         self.localDatasource = userInfoLocalDataSource
         self.networkDatasource = userNetworkDataSource
+        self.shuttleNetworkSource = shuttleNetworkSource
     }
 
     func setOnboardingAsSeen() {
@@ -260,7 +266,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
   
     private func getPassengerActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
         do {
-            let activeSessionsDTO = try await networkDatasource.getPassengerActiveSessions()
+            let activeSessionsDTO = try await shuttleNetworkSource.getPassengerActiveSessions()
             let activeSessions : [ActiveSession] = activeSessionsDTO.toActiveSessionList()
             return .success(activeSessions)
             
@@ -279,7 +285,7 @@ class ShuttleasyUserRepository: BaseRepository, UserRepository, Authenticator {
     
     private func getDriverActiveSessionsFromNetwork() async -> Result<[ActiveSession], Error> {
         do {
-            let activeSessionsDTO = try await networkDatasource.getDriverActiveSessions()
+            let activeSessionsDTO = try await shuttleNetworkSource.getDriverActiveSessions()
             let activeSessions : [ActiveSession] = activeSessionsDTO.toActiveSessionList()
             return .success(activeSessions)
             

@@ -33,6 +33,9 @@
 		016B216F2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */; };
 		016B21712A0A79FB00E9BAF0 /* PassengerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */; };
 		016B21742A0ADB5100E9BAF0 /* SessionPassenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */; };
+		016B21762A0AE41E00E9BAF0 /* DriverSessionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21752A0AE41E00E9BAF0 /* DriverSessionDetailViewModel.swift */; };
+		016B21792A0AF3D800E9BAF0 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B21782A0AF3D800E9BAF0 /* SessionRepository.swift */; };
+		016B217C2A0B741800E9BAF0 /* SessionPassengerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B217B2A0B741800E9BAF0 /* SessionPassengerDTO.swift */; };
 		016B927529C3A3CC00207A38 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B927429C3A3CC00207A38 /* MapExtensions.swift */; };
 		016FE6F629F6FE2E00A44034 /* ButtonColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F529F6FE2E00A44034 /* ButtonColors.swift */; };
 		016FE6F829F6FF1C00A44034 /* SessionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FE6F729F6FF1C00A44034 /* SessionDetail.swift */; };
@@ -229,6 +232,9 @@
 		016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSessionDetailViewController.swift; sourceTree = "<group>"; };
 		016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerCell.swift; sourceTree = "<group>"; };
 		016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPassenger.swift; sourceTree = "<group>"; };
+		016B21752A0AE41E00E9BAF0 /* DriverSessionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSessionDetailViewModel.swift; sourceTree = "<group>"; };
+		016B21782A0AF3D800E9BAF0 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
+		016B217B2A0B741800E9BAF0 /* SessionPassengerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionPassengerDTO.swift; sourceTree = "<group>"; };
 		016B927429C3A3CC00207A38 /* MapExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
 		016FE6F529F6FE2E00A44034 /* ButtonColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColors.swift; sourceTree = "<group>"; };
 		016FE6F729F6FF1C00A44034 /* SessionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetail.swift; sourceTree = "<group>"; };
@@ -462,6 +468,7 @@
 			children = (
 				016B216E2A0A5CEE00E9BAF0 /* DriverSessionDetailViewController.swift */,
 				016B21702A0A79FB00E9BAF0 /* PassengerCell.swift */,
+				016B21752A0AE41E00E9BAF0 /* DriverSessionDetailViewModel.swift */,
 			);
 			path = driver;
 			sourceTree = "<group>";
@@ -484,6 +491,22 @@
 				016B21732A0ADB5100E9BAF0 /* SessionPassenger.swift */,
 			);
 			path = driver;
+			sourceTree = "<group>";
+		};
+		016B21772A0AF3C900E9BAF0 /* session */ = {
+			isa = PBXGroup;
+			children = (
+				016B21782A0AF3D800E9BAF0 /* SessionRepository.swift */,
+			);
+			path = session;
+			sourceTree = "<group>";
+		};
+		016B217A2A0B6B1000E9BAF0 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */,
+			);
+			path = user;
 			sourceTree = "<group>";
 		};
 		016FE6F429F6FE1200A44034 /* button */ = {
@@ -699,10 +722,10 @@
 		D41BE5B4292AB53600826640 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				016B217A2A0B6B1000E9BAF0 /* user */,
 				D4BDA02029515E2E008118F5 /* networkUtil */,
 				D4C6F97029503FD400DAA1E7 /* shuttle */,
 				D4FD012529481814004F149E /* dto */,
-				D41BE5BC292ABA7800826640 /* UserNetworkDataSource.swift */,
 				D44D4D7329411CA90024D0AC /* ApiService.swift */,
 				D44D4D7929413CC50024D0AC /* ApiUrlManager.swift */,
 				D41F9C3D294E0D650079D2A6 /* ApiParameters.swift */,
@@ -1012,6 +1035,7 @@
 		D4F591DC2921465900125E90 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				016B21772A0AF3C900E9BAF0 /* session */,
 				01A6394229B6F2ED0038B31A /* company */,
 				D4C6F96D29503F9500DAA1E7 /* search */,
 				D4CFA0C2294CB25900C0F47E /* app */,
@@ -1078,6 +1102,7 @@
 				01B0AB3929CF3917001341E1 /* CompanyDetailDTO.swift */,
 				0184228229D1D63300F0FF4D /* SessionAreaDTO.swift */,
 				01431F4C29D306760069E3FC /* ActiveSessionDTO.swift */,
+				016B217B2A0B741800E9BAF0 /* SessionPassengerDTO.swift */,
 			);
 			path = dto;
 			sourceTree = "<group>";
@@ -1385,6 +1410,7 @@
 				D4816DB52920E64900ECB799 /* Extensions.swift in Sources */,
 				D48D8CE8293CD0AF00E72C0F /* ProfileEditViewModel.swift in Sources */,
 				D4CFA0C4294CB26B00C0F47E /* AppRepository.swift in Sources */,
+				016B21792A0AF3D800E9BAF0 /* SessionRepository.swift in Sources */,
 				D415A2D0294E412E00564E53 /* OtpConfirmDto.swift in Sources */,
 				013FF25529C795E90050C063 /* DestinationDTO.swift in Sources */,
 				D41BE5C6292ABFCC00826640 /* NetworkMapperExtensions.swift in Sources */,
@@ -1430,6 +1456,7 @@
 				D40B27F6292A8F2700140612 /* Snackbar.swift in Sources */,
 				D41BE5C8292ACADA00826640 /* Checkbox.swift in Sources */,
 				0184228529D1D9BF00F0FF4D /* PickupArea.swift in Sources */,
+				016B217C2A0B741800E9BAF0 /* SessionPassengerDTO.swift in Sources */,
 				D4F116F428F9210F0083C5EB /* AppDelegate.swift in Sources */,
 				D4F591D829212EE200125E90 /* Injector.swift in Sources */,
 				01D4FA8829CCDBC7009E9B61 /* BaseTableViewCell.swift in Sources */,
@@ -1464,6 +1491,7 @@
 				D4F116F628F9210F0083C5EB /* SceneDelegate.swift in Sources */,
 				D4F591E7292146C000125E90 /* UserInfoLocalSource.swift in Sources */,
 				D41F9C3E294E0D650079D2A6 /* ApiParameters.swift in Sources */,
+				016B21762A0AE41E00E9BAF0 /* DriverSessionDetailViewModel.swift in Sources */,
 				013FF25329C764A90050C063 /* RatingBadge.swift in Sources */,
 				D4816DB32920D5C300ECB799 /* BaseViewController.swift in Sources */,
 				016FE6FF29F706DF00A44034 /* SessionDetailViewModel.swift in Sources */,

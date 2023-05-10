@@ -23,6 +23,10 @@ protocol ShuttleNetworkSource {
         sessionIds : [Int]
     ) async throws -> SessionAreaDTO
     
+    func getPassengerActiveSessions() async throws -> ActiveSessionDTO
+    
+    func getDriverActiveSessions() async throws -> ActiveSessionDTO
+    func getDriverSessionPassengers(sessionId : Int) async throws -> SessionPassengersDTO
 }
 
 class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
@@ -104,4 +108,28 @@ class ShuttleNetworkSourceImpl : ShuttleNetworkSource {
         )
     }
 
+    func getPassengerActiveSessions() async throws -> ActiveSessionDTO {
+        return try await apiService.postRequestAsync(
+            type: ActiveSessionDTO.self,
+            url: ApiUrlManager.shared.getPassengerMyShuttleSessions()
+        )
+    }
+
+    func getDriverActiveSessions() async throws -> ActiveSessionDTO {
+        return  try await apiService.postRequestAsync(
+            type: ActiveSessionDTO.self,
+            url: ApiUrlManager.shared.getDriverMyShuttleSessions()
+        )
+    }
+    
+    func getDriverSessionPassengers(sessionId: Int) async throws -> SessionPassengersDTO {
+        let param = ApiParameters()
+            .id(sessionId)
+            .build()
+        
+        return  try await apiService.postRequestAsync(
+            type: SessionPassengersDTO.self,
+            url: ApiUrlManager.shared.getPassengers()
+        )
+    }
 }

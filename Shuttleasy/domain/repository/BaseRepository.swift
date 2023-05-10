@@ -259,4 +259,27 @@ extension BaseRepository {
             ),
         ]
     }
+    
+    func dummyDriverSessionDetail(sessionId :Int) -> DriverSessionDetail {
+       return DriverSessionDetail(
+           id: sessionId,
+           passengers: [
+               SessionPassenger(
+                   id: generateUniqueInt(),
+                   profilePhoto: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+                   passengerName: "Oğuzhan Aslan",
+                   passengerAddress: "İstanbul, Türkiye",
+                   passengerPhone: "+905555555555",
+                   passengerEmail: "sample@sample.com"
+               ),
+               SessionPassenger(
+                   id: generateUniqueInt(),
+                   profilePhoto: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+                   passengerName: "Oğuzhan Kapşan",
+                   passengerAddress: "İstanbul, Türkiye",
+                   passengerPhone: "+905555555555",
+                   passengerEmail: "sample@sample.com"
+               )
+           ])
+   }
 }

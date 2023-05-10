@@ -264,7 +264,7 @@ extension HomepageViewContoller : UITableViewDataSource {
                 if case .driver = userProfileType {
                     Navigator.shared.navigate(
                         from: self,
-                        to: .driverSessionDetail,
+                        to: .driverSessionDetail(args: .init(sessionId: nextSessionModel.sessionId)),
                         clearBackStack: false,
                         wrappedInNavigationController: true
                     )

@@ -137,3 +137,12 @@ func setNavBackButton(
     )
     navigationItem.leftBarButtonItem = dismissButton
 }
+
+
+func generateUniqueInt() -> Int {
+    let timestamp = Int(Date().timeIntervalSince1970 * 1000) // convert current time to milliseconds
+    let randomNumber = Int.random(in: 0..<1000) // generate a random number between 0 and 999
+    let uniqueInt = timestamp + randomNumber // add the random number to the timestamp
+    
+    return uniqueInt
+}

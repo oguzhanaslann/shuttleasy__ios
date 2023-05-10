@@ -128,7 +128,8 @@ class Injector {
             onRegisterNeeded: { resolver in
                 ShuttleasyUserRepository(
                     userInfoLocalDataSource: self.injectUserInfoLocalDataSource(),
-                    userNetworkDataSource: self.injectUserNetworkDataSource()
+                    userNetworkDataSource: self.injectUserNetworkDataSource(),
+                    shuttleNetworkSource: self.injectShuttleNetworkDataSource()
                 )
             }
         )
@@ -367,5 +368,31 @@ class Injector {
         )
         
         return container.resolve(SessionDetailViewModel.self)!
+    }
+
+    func injectDriverSessionDetailViewModel() -> DriverSessionDetailViewModel {
+        registerDependencyIfNotRegistered(
+            dependency: DriverSessionDetailViewModel.self,
+            onRegisterNeeded: { resolver in
+                DriverSessionDetailViewModel(
+                    sessionRepository: self.injectSesssionRepository()
+                )
+            }
+        )
+        
+        return container.resolve(DriverSessionDetailViewModel.self)!
+    }
+
+    private func injectSesssionRepository() -> SessionRepository {
+        registerDependencyIfNotRegistered(
+            dependency: SessionRepository.self,
+            onRegisterNeeded: { resolver in
+                SessionRepositoryImpl(
+                    shuttleNetworkSource: self.injectShuttleNetworkDataSource()
+                )
+            }
+        )
+        
+        return container.resolve(SessionRepository.self)!
     }
 }

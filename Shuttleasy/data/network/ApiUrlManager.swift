@@ -73,7 +73,6 @@ class ApiUrlManager {
         return baseApiUrl + "Company/GetCompany"
     }
 
-
     func enrollToSessions() -> String {
         return baseApiUrl + "ShuttleSession/EnrollPassengerMultipleSession"
     }
@@ -82,12 +81,15 @@ class ApiUrlManager {
         return baseApiUrl + "PickupArea/GetShuttlePickUpAreas"
     }
 
-
     func getPassengerMyShuttleSessions() -> String {
         return baseApiUrl + "Passenger/GetMyShuttleSessions"
     }
     
     func getDriverMyShuttleSessions() -> String {
         return baseApiUrl + "Driver/GetSessions"
+    }
+
+    func getPassengers() -> String {
+        return baseApiUrl + "Driver/GetPassengers"
     }
 }

@@ -33,8 +33,6 @@ protocol  UserNetworkDataSource {
     func getUserProfile(userId: Int,isDriver: Bool) async throws -> UserProfileDTO
     func editProfile(profileEdit: ProfileEdit, isDriver : Bool) async throws -> UserProfileDTO
     func deleteAccount(email: String, password: String) async throws -> Bool
-    func getPassengerActiveSessions() async throws -> ActiveSessionDTO
-    func getDriverActiveSessions() async throws -> ActiveSessionDTO
 }
 
 class UserNetworkDataSourceImpl : UserNetworkDataSource {
@@ -225,20 +223,6 @@ class UserNetworkDataSourceImpl : UserNetworkDataSource {
             parameters: ApiParameters().email(email).password(password).build()
         )
         return fallible
-    }
-    
-    func getPassengerActiveSessions() async throws -> ActiveSessionDTO {
-        return try await apiService.postRequestAsync(
-            type: ActiveSessionDTO.self,
-            url: ApiUrlManager.shared.getPassengerMyShuttleSessions()
-        )
-    }
-
-    func getDriverActiveSessions() async throws -> ActiveSessionDTO {
-        return  try await apiService.postRequestAsync(
-            type: ActiveSessionDTO.self,
-            url: ApiUrlManager.shared.getDriverMyShuttleSessions()
-        )
     }
 }
 

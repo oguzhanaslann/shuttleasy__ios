@@ -9,10 +9,18 @@ import Foundation
 import UIKit
 import SnapKit
 import MapKit
+import Combine
+
+struct DriverSessionDetailArgs {
+    let sessionId : Int
+}
 
 class DriverSessionDetailViewController: BaseViewController {
     
-    private let passengerSessions: [SessionPassenger] = []
+    private let viewModel = Injector.shared.injectDriverSessionDetailViewModel()
+    private var detailObserver : AnyCancellable? = nil
+        
+    private var passengerSessions: [SessionPassenger] = []
     
     private lazy var startSessionButton : UIButton = {
         let button = LargeButton(titleOnNormalState: Localization.startSession.localized)
@@ -36,10 +44,24 @@ class DriverSessionDetailViewController: BaseViewController {
         collectionViewLayout: .init()
     )
     
+    
+    private var args : DriverSessionDetailArgs
+    
+    init(args : DriverSessionDetailArgs){
+        self.args  = args
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init(coder : NSCoder){
+        fatalError()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Localization.yourRide.localized
         initViews()
+        subscribeObserves()
+        viewModel.getDetail(sessionId: args.sessionId)
     }
     
     private func initViews() {
@@ -70,6 +92,25 @@ class DriverSessionDetailViewController: BaseViewController {
         }
     }
     
+
+    private func subscribeObserves() {
+        detailObserver = viewModel.driverSessionDetailPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: {[weak self] completion in
+                    self?.handleCompletion(completion)
+                },
+                receiveValue: {[weak self] uiState in
+                    uiState.onSuccess { dataContent in
+                        let driverDetail = dataContent.data
+                        self?.passengerSessions = driverDetail.passengers
+                        self?.passengerCollectionView.reloadData()
+                    }.onError { error in
+                        self?.showErrorSnackbar(message: error)
+                    }
+                }
+            )
+    }
     
     private func initMapView() {
         view.addSubview(mapView)
